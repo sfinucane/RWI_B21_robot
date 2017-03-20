@@ -1,0 +1,19 @@
+* js_event_key js_event_abs js_event_rel
+* http://www.st-hans.de/N64.htm
+* Add full compatibility with new SNESKey and new DirectPad Pro
+* Extend joy-thrustmaster.c to handle Y-cabled and chained devices
+* Extend joy-creative.c to handle chained devices
+* make serport.c
+* lowlevel driver autoload support
+* Write manpages for jstest & jscal - any takers?
+* Minimize time spent with spinlocks locked
+* Check js_register_* returns at all places
+* Fix potential race when registering a port/device while other is being read
+* ALSA & Linux Sound + gameport.c implementation
+* Integrate http://rcswww.urz.tu-dresden.de/~thenlich/joystick/ to joy-db9
+* Gravis GrIP MultiPort ...
+* TM WCS (?)
+* Gravis Firebird (?)
+* Saitek X36 (?)
+* Saitek Cyborg ... 
+* Re-design PSX HW (?)

@@ -1,0 +1,635 @@
+#########################################################################
+# THIS IS A TABLE OF ALL SOUNDS ON OUR CD
+#
+# WAV nickname filename
+#
+# CD  nickname  starttrack startsec startframe endtrack endsec endframe
+#     startsec is relativ to the track
+#
+#########################################################################
+# 0     /* GONG */
+CD MSG_gong  1 0 0 1 1 0 
+# 1     /* Xylophon */
+CD MSG_xylophon  1 3 0 1 4 0 
+# 2     /* Windows-Tata */
+CD MSG_tata  1 7 0 1 8 0 
+# 3     /* Akkord */
+CD MSG_akkord  110 0 2 0 0 
+# 4     /* Cromwell-Fanfare */
+CD MSG_fanfare  2 0 0 2 3 0 
+# 5     /* Don't loose my number */
+CD MSG_dont_loose  2 2 0 2 7 0 
+# 6     /* Wau */
+CD MSG_wau  2 8 0 2 9 0 
+# 7     /* WauWau */
+CD MSG_wauwau  2 7 0 2 9 0 
+# 8     /* Groove */
+CD MSG_groove  2 9 0 2 18 0 
+# 9     /* We don't need no education */
+CD MSG_no_education  2 18 0 2 25 0 
+# 10    /* I quit! */
+CD MSG_i_quit  2 25 0 2 27 0 
+# 11    /* Lok */
+CD MSG_lok  2 30 0 2 32 0 
+# 12    /* Ruelps */
+CD MSG_ruelps  2 33 0 2 34 0 
+# 13    /* Lachen */
+CD MSG_lachen  2 34 0 2 39 0 
+# 14    /* Lachen 2 */
+CD MSG_lachen2  2 40 0 2 44 0 
+# 15    /* Pfeife */
+CD MSG_pfeife  2 45 0 2 46 0 
+# 16    /* Star-Wars */
+CD MSG_star_wars  2 50 0 2 52 0 
+# 17    /* Hallo, mein Name ist Rhino. Ich bin Ihr persoenlicher Diener */
+CD MSG_pers_diener  3 0 0 3 9 0 
+# 18    /* Ich werde Ihnen jetzt folgen */
+CD MSG_folgen  3 6 0 3 9 0 
+# 19    /* Ich werde jetzt Ihr Buero aufraeumen */
+CD MSG_buero_aufraeumen  3 11 0 3 13 0 
+# 20    /* Ich werde jetzt das Studio aufraeumen */
+CD MSG_studio_aufraeumen  3 14 0 3 18 0 
+# 21    /* Vielen Dank, Sie haben einen einfachen Roboter sehr gluecklich gemacht */
+CD MSG_roboter_gluecklich  3 18 0 3 27 0 
+# 22    /* Guten Abend meine sehr verehrten Damen und Herren */
+CD MSG_guten_abend  3 27 0 3 35 0 
+# 23    /* Objekt der Kategorie Abfall detektiert */
+CD MSG_objekt_abfall  3 35 0 3 41 0 
+# 24    /* Berechne Entfernung fuer genaue Annaeherung */
+CD MSG_berechne_entfernung  3 41 0 3 47 0 
+# 25    /* Objekt wird eingesammelt */
+CD MSG_objekt_eingesammelt  3 47 0 3 52 0 
+# 26    /* Objekt der Kategorie Muelleimer detektiert */
+CD MSG_objekt_muelleimer  3 52 0 3 58 0 
+# 27    /* Objekt wird entsorgt */
+CD MSG_objekt_entsorgt  3 58 0 3 62 0 
+# 28    /* Suche Objekte der Kategorie Abfall */
+CD MSG_suche_abfall  3 62 0 3 68 0 
+# 29    /* Suche Objekt der Kategorie Muelleimer */
+CD MSG_suche_muelleimer  3 68 0 3 73 0 
+# 30    /* Person im Blickfeld detektiert. Starte Verfolgungsmodus */
+CD MSG_person_detektiert  3 73 0 3 80 0 
+# 31    /* Person aus Blickfeld verloren */
+CD MSG_person_verloren  3 80 0 3 84 0 
+# 32    /* Person laeuft nach rechts aus dem Blickfeld. Korrigiere Richtung */
+CD MSG_person_rechts  3 84 0 3 91 0 
+# 33    /* Person laeuft nach links aus dem Blickfeld. Korrigiere Richtung */
+CD MSG_person_links  3 91 0 3 97 0 
+# 34    /* Neuer Zielpunkt empfangen */
+CD MSG_neuer_zielpunkt  3 97 0 3 10 10 
+# 35    /* Ich habe meine Aufgabe erfuellt */
+CD MSG_aufgabe_erfuellt  3 10 10 3 10 60 
+# 36    /* Wandorientierung der aktuellen Umgebung erkannt */
+CD MSG_wandorientierung_erkannt  3 10 60 3 11 00 
+# 37    /* Wechsle in Explorationsmodus */
+CD MSG_explorationsmodus  3 11 00 4 0 0 
+# 38    /* Ich habe ein Objekt gefunden */
+CD MSG_objekt_gefunden  4 1 0 4 3 0 
+# 39    /* Ich fahre zum Objekt */
+CD MSG_fahre_zu_objekt  4 5 0 4 7 0 
+# 40    /* Ich hebe das Objekt auf */
+CD MSG_hebe_objekt_auf  4 8 0 4 11 0 
+# 41    /* Ich habe einen Abfalleimer gefunden */
+CD MSG_abfalleimer_gefunden  4 12 0 4 15 0 
+# 42    /* Ich fahre zum Abfalleimer */
+CD MSG_fahre_zu_abfalleimer  4 16 0 4 19 0 
+# 43    /* Ich lasse das Objekt in den Abfalleimer fallen */
+CD MSG_lasse_objekt_fallen  4 20 0 4 24 0 
+# 44    /* Huch? */
+CD MSG_huch  4 26 0 4 27 0 
+# 45    /* Ich stecke fest */
+CD MSG_stecke_fest  4 27 0 4 31 0 
+# 46    /* Hui, jetzt wirds schnell */
+CD MSG_hui_schnell  4 31 0 4 35 0 
+# 47    /* Vorsicht, der Arm ist draussen */
+CD MSG_arm_draussen  4 40 0 4 44 0 
+# 48    /* Ich fahre ab sofort rueckwaerts */
+CD MSG_fahre_rueckwaerts  4 44 0 5 0 0 
+# 49    /* Darf ich mich vorstellen, ich heisse Rhino, ... */
+CD MSG_tv_rhino_diener  5 0 0 5 6 0 
+# 50    /* Wie sieht es denn hier aus */
+CD MSG_tv_unordnung  5 6 0 5 11 0 
+# 51    /* Sie spielen Tennis - und ich lach mich hier tot... */
+CD MSG_tv_lachen  5 11 0 5 18 0 
+# 52    /* Sie spielen Tennis und ich bin Ihr neuer Balljunge */
+CD MSG_tv_balljunge  5 18 0 6 0 0 
+# 53    /* Hi, ich bin Rhino */
+CD MSG_hi_rhino  6 0 0 6 3 0 
+# 54    /* Mein Name ist Rhino - Rhino-Vitorio, ich weiche nicht von Deiner Seite */
+CD MSG_rhino_007  6 3 0 6 11 0 
+# 55    /* Kannst Du nicht mal Ordnung halten */
+CD MSG_ordnung_halten  6 11 0 6 15 0 
+# 56    /* Hey, hier stimmt was nicht */
+CD MSG_stimmt_nicht  6 15 0 6 20 0 
+# 57    /* Bringt mir sofort meinen Muelleimer zurueck */
+CD MSG_muelleimer_zurueck  6 20 0 6 25 0 
+# 58    /* Computer, gehe in Verfolgungsmodus */
+CD MSG_computer_verfolgungsmodus  6 25 0 6 31 0 
+# 59    /* Computer, Gebiet scannen */
+CD MSG_computer_scannen  6 31 0 6 36 0 
+# 60    /* rot/gruen gefunden */
+CD MSG_rot_gruen  6 36 0 6 41 0 
+# 61    /* Hey ich hab Dich verloren */
+CD MSG_dich_verloren  6 41 0 6 46 0 
+# 62    /* Muell in Sicht */
+CD MSG_muell_in_sicht  6 46 0 6 50 0 
+# 63    /* Schalte auf Warp-Antrieb */
+CD MSG_warp_antrieb  6 50 0 6 53 0 
+# 64    /* Warp 9 */
+CD MSG_warp_9  6 53 0 6 56 0 
+# 65    /* Volle Kraft zurueck */
+CD MSG_volle_kraft_zurueck  6 56 0 6 60 0 
+# 66    /* Holt mich hier raus */
+CD MSG_holt_mich_raus  6 60 0 7 0 0 
+# 67    /* Hi there! */
+CD MSG_hi_there  7 0 0 7 3 0 
+# 68    /* Arm is ready */
+CD MSG_arm_ready  7 3 0 7 6 0 
+# 69    /* Base is ready */
+CD MSG_base_ready  7 6 0 7 9 0 
+# 70    /* Vision is ready */
+CD MSG_vision_ready  7 9 0 7 12 0 
+# 71    /* This is Rhino using precompiled Speech */
+CD MSG_precompiled_speech  7 12 0 7 17 0 
+# 72    /* I see some trash */
+CD MSG_see_trash  7 17 0 7 20 0 
+# 73    /* I see a trash-bin */
+CD MSG_see_trash_bin  7 20 0 7 24 0 
+# 74    /* How far is it away */
+CD MSG_how_far_away  7 24 0 7 26 0 
+# 75    /* Gotcha */
+CD MSG_gotcha  7 26 0 7 31 0 
+# 76    /* Doing Hyperjump! */
+CD MSG_hyperjump  7 31 0 8 0 0 
+# 77    /* Tach auch ich bin de Rhino */
+CD MSG_rhein_tach_auch  8 0 0 8 3 0 
+# 78    /* Wat soll denn de Driss he */
+CD MSG_rhein_driss_he  8 5 0 8 7 0 
+# 79    /* Wo Sie jrad sagen Muell */
+CD MSG_rhein_jrade_muell  8 9 0 8 12 0 
+# 80    /* Zement ens, ich hann keen Brill */
+CD MSG_rhein_zement_ens  8 13 0 8 16 0 
+# 81    /* Kenn mer nich, bruch mer nich, fott damit */
+CD MSG_rhein_fott_damit  8 16 0 9 0 0 
+# 82    /* SONG: Happy birthday (short version) */
+CD MSG_birthday_short  9 0 0 10 0 0 
+# 83    /* SONG: Happy birthday (long version) */
+CD MSG_birthday_long 10 0 0 11 0 0 
+# 84    /* Hello my name is Rhino */
+CD MSG_hello_rhino 12 0 0 12 4 0 
+# 85    /* Could I offer you a tour through the building */
+CD MSG_offer_tour 12 4 0 12 9 0 
+# 86    /* This is the classroom */
+CD MSG_is_classroom 12 9 0 12 12 0 
+# 87    /* The classroom is used to teach courses */
+CD MSG_classroom_teach 12 12 0 12 16 0 
+# 88    /* It is a large room and it is used frequently */
+CD MSG_class_used_frequent 12 16 0 12 21 0 
+# 89    /* This is our library, it is also the office of Erika Hoelzer */
+CD MSG_library_hoelzer 12 21 0 12 27 0 
+# 90    /* We have a total of 475.4 books in our libraray */
+CD MSG_amout_of_books 12 27 0 12 33 0 
+# 91    /* There is also a laser-printer */
+CD MSG_laser_printer 12 33 0 12 38 0 
+# 92    /* This is the office of Sebastin Thrun and my home */
+CD MSG_office_thrun 12 38 0 12 43 0 
+# 93    /* Sebastian is a wonderful guy, you should meet him */
+CD MSG_wonderful_guy 12 43 0 12 49 0 
+# 94    /* This is the office of Dieter Fox, ... */
+CD MSG_office_fox 12 49 0 12 58 0 
+# 95    /* You would be surprised who many people fit to one room */
+CD MSG_people_in_one_room 12 58 0 12 62 0 
+# 96    /* Press the red button */
+CD MSG_press_red_button 13 0 0 13 4 0 
+# 97    /* Press the yellow button */
+CD MSG_press_yellow_button 13 4 0 13 7 0 
+# 98    /* Press the green button */
+CD MSG_press_green_button 13 7 0 13 11 0 
+# 99    /* Press the blue button */
+CD MSG_press_blue_button 13 11 0 13 15 0 
+# 100   /* Press the red if you wanna have more information */
+CD MSG_red_for_information 13 15 0 13 22 0 
+# 101   /* Press the yellow button if you wanna continue the tour */
+CD MSG_yellow_for_continue 13 22 0 13 27 0 
+# 102   /* press the blue button if you wanna finish the tour */
+CD MSG_blue_for_finish 13 27 0 13 35 0 
+# 103   /* press the blue button if you're done with me */
+CD MSG_blue_for_done 13 35 0 13 42 0 
+# 104   /* press the flashing button if you wanna terminate the tour */
+CD MSG_flashing_terminate 13 42 0 13 49 0 
+# 105   /* press the red button if you wanna continue the tour */
+CD MSG_red_for_continue 13 49 0 13 55 0 
+# 106   /* press the green button if you wanna have more information */
+CD MSG_green_for_information 13 55 0 13 62 0 
+# 107   /* press the yellow if you want to have 10000 dollars */
+CD MSG_yellow_for_dollars 13 62 0 13 70 0 
+# 108   /* my battery level is low */
+CD MSG_battery_down 13 70 0 13 74 0 
+# 109   /* you need more information */
+CD MSG_need_more_info 13 74 0 13 78 0 
+# 110   /* get out of my way */
+CD MSG_get_out_of_way 13 78 0 13 82 0 
+# 111   /* please get out of my way */
+CD MSG_please_get_out 13 82 0 13 87 0 
+# 112   /* I can't reach my destination */
+CD MSG_cant_reach_dest 13 87 0 13 91 0 
+# 113   /* this door is closed */
+CD MSG_door_closed 13 91 0 13 94 0 
+# 114   /* this door is open */
+CD MSG_door_open 13 94 0 13 98 0 
+# 115   /* I cannot see the door */
+CD MSG_cant_see_door 13 98 0 13 101 0 
+# 116   /* i cannot see the door-label */
+CD MSG_cant_see_label 13 101 0 13 105 0 
+# 117   /* i cannot read the door-label */
+CD MSG_cant_read_label 13 105 0 13 109 0 
+# 118   /* i can see the door-label */
+CD MSG_can_see_label 13 109 0 13 112 0 
+# 119   /* i see the door */
+CD MSG_see_door 13 112 0 13 115 0 
+# 120   /* let me read the door-label for you */
+CD MSG_read_label 13 115 0 13 120 0 
+# 121   /* Hello my name is Rhino, are you interested in a tour today */
+CD MSG_hello_tour 14 0 0 14 7 0 
+# 122   /* This is the classroom */
+CD MSG_is_classroom2 14 7 0 14 10 0 
+# 123   /* The classroom is used heavily */
+CD MSG_class_used_heavily 14 10 0 14 13 0 
+# 124   /* He has about 30 chairs and a huge blackboard */
+CD MSG_class_30_chairs 14 13 0 14 18 0 
+# 125   /* It is used heavily throughout the semester ... */
+CD MSG_heavy_semester 14 18 0 14 27 0 
+# 126   /* Let's go to the next room */
+CD MSG_go_next_room 14 27 0 14 31 0 
+# 127   /* Get out of my way */
+CD MSG_get_out_of_way2 14 31 0 14 34 0 
+# 128   /* This is our library. It is also the office of Erika Hoelzer */
+CD MSG_library_hoelzer2 14 34 0 14 40 0 
+# 129   /* We have a total of about .... */
+CD MSG_have_a_total_of 14 40 0 14 45 0 
+# 130   /* The printer is also located in this library */
+CD MSG_printer_library 14 45 0 14 50 0 
+# 131   /* This is the office of Sebastian Thrun */
+CD MSG_office_thrun2 14 50 0 14 53 0 
+# 132   /* Sebastian is my master, he built most of my software */
+CD MSG_sebastian_master 14 53 0 14 59 0 
+# 133   /* Sebastian is currently teaching at Carnegie Mellon ... */
+CD MSG_sebastian_teach_cmu 14 59 0 14 66 0 
+# 134   /* Sebastian is a young blonde guy */
+CD MSG_sebastian_young_guy 14 66 0 14 70 0 
+# 135   /* This is also my home */
+CD MSG_my_home 14 70 0 14 73 0 
+# 136   /* This is my office, and my slave Sebastian Thrun lives here as well */
+CD MSG_my_office_slave 14 73 0 14 80 0 
+# 137   /* This is the office of myself and my assistant Sebastian Thrun */
+CD MSG_my_office_assist 14 80 0 14 87 0 
+# 138   /* This is the office of Dieter Fox,... */
+CD MSG_office_fox2 14 87 0 14 94 0 
+# 139   /* Dieter Fox is one of my masters */
+CD MSG_dieter_master 14 94 0 14 98 0 
+# 140   /* Dieter is responsible for my Colli... */
+CD MSG_dieter_colli 14 98 0 14 104 0 
+# 141   /* This is our classroom */
+CD MSG_classroom3 15 0 0 15 4 0 
+# 142   /* The classroom is used for teaching */
+CD MSG_classroom_teach2 15 4 0 15 7 0 
+# 143   /* It has about 30 chairs, fits 40 people, ... */
+CD MSG_class_30_chairs2 15 7 0 15 15 0 
+# 144   /* The classroom is used heavily throughout the semester ... */
+CD MSG_class_used_heavyly2 15 15 0 15 24 0 
+# 145   /* This is the office of Martin Breunig,... */
+CD MSG_office_breunig 15 24 0 15 30 0 
+# 146   /* Oleg is a scientist from the soviet union */
+CD MSG_oleg_soviet_union 15 30 0 15 38 0 
+# 147   /* I have no idea what these guys are working on, but ... */
+CD MSG_no_idea 15 38 0 15 50 0 
+# 148   /* This is the office of Prof. Buhmann */
+CD MSG_office_buhmann 15 50 0 15 54 0 
+# 149   /* Prof Buhmann is a young Prof in our department */
+CD MSG_buhmann 15 54 0 15 60 0 
+# 150   /* He is concerned with ... */
+CD MSG_buhmann_concerned 15 60 0 15 67 0 
+# 151   /* Prof Buhmann is responsible for some of my funding */
+CD MSG_buhmann_rhino 15 67 0 15 73 0 
+# 152   /* I am very grateful to Prof. Buhmann */
+CD MSG_buhmann_grateful 15 73 0 15 78 0 
+# 153   /* This is the office of Andreas Kusserow, ... */
+CD MSG_office_kusserow 16 0 0 16 8 0 
+# 154   /* Chandra Reddy is a sientist from India */
+CD MSG_ch_reddy_india 16 8 0 16 16 0 
+# 155   /* This is the office of Thorsten Froehlinghaus, ... */
+CD MSG_office_froehlingh 16 16 0 16 23 0 
+# 156   /* All three of these are working with J. Buhmann */
+CD MSG_working_with_jb 16 23 0 16 28 0 
+# 157   /* They're working on robot control ... */
+CD MSG_working_on_control 16 28 0 16 35 0 
+# 158   /* This is the office of Prof. Dieter Fellner */
+CD MSG_office_fellner 16 35 0 16 40 0 
+# 159   /* Dieter Fellner is a young Prof, who is concerned ... */
+CD MSG_dieter_fellner 16 40 0 16 50 0 
+# 160   /* Excuse me, excuse me, are you interested in a tour */
+CD MSG_excuse_me_tour 16 50 0 16 56 0 
+# 161   /* Excuse me, excuse me, my name is Rhino, are you interested ... */
+CD MSG_excuse_me_rhino 16 56 0 16 66 0 
+# 162   /* Excuse me */
+CD MSG_excuse_me 16 66 0 16 69 0 
+# 163   /* My name is Rhino, could I offer you a tour through the ... */
+CD MSG_rhino_tour 16 69 0 16 76 0 
+# 164   /* This is Computer Science Department 3, its chair is ABC */
+CD MSG_cs_iii_abc 16 76 0 16 84 0 
+# 165   /* The office of Armin Cremers is not in this corridor */
+CD MSG_office_abc 16 84 0 16 91 0 
+# 166   /* The office of Professor Cremers is located elsewhere */
+CD MSG_office_abc2 16 91 0 16 98 0 
+# 167   /* Let's go to the next room */
+CD MSG_go_next_room2 17 0 0 17 4 0 
+# 168   /* Let's go to the next object */
+CD MSG_go_next_object 17 4 0 17 8 0 
+# 169   /* Yes */
+CD MSG_yes 17 8 0 17 10 0 
+# 170   /* No */
+CD MSG_no 17 10 0 17 13 0 
+# 171   /* Press thred button in the next 5 seconds, 4 3 2 1 Your time is over */
+CD MSG_red_button_5_sec 17 13 0 17 23 0 
+# 172   /* I hope you enjoyed the tour */
+CD MSG_enjoyed_tour 17 23 0 17 27 0 
+# 173   /* This is the end of the tour, I hope you enjoyed the tour */
+CD MSG_end_of_tour 17 27 0 17 33 0 
+# 174   /* My name is Rhino I am a fully autonomous tour guide ... */
+CD MSG_auto_tour_guide 17 33 0 17 48 0 
+# 175   /* If you like the tour donate 10 DM to Sebastian Thrun */
+CD MSG_10_dm_to_sebastian 17 48 0 17 56 0 
+# 176   /* This is room 121 */
+CD MSG_room_121 17 56 0 17 60 0 
+# 177   /* This is room 120 */
+CD MSG_room_120 17 60 0 17 65 0 
+# 178   /* This is room 111 */
+CD MSG_room_111 17 65 0 17 70 0 
+# 179   /* This is room 120 */
+CD MSG_room_120_2 17 70 0 17 75 0 
+# 180   /* This is room 119 */
+CD MSG_room_119 17 75 0 17 79 0 
+# 181   /* This is room 112 */
+CD MSG_room_112 17 79 0 17 84 0 
+# 182   /* This is room 118 */
+CD MSG_room_118 17 84 0 17 88 0 
+# 183   /* This is room 114 */
+CD MSG_room_114 17 88 0 17 92 0 
+# 184   /* This is room 117 */
+CD MSG_room_117 17 92 0 17 96 0 
+# 185   /* There are more offices behind the glass-door */
+CD MSG_more_offices 17 96 0 17 100 0 
+# 186   /* The door is closed */
+CD MSG_door_closed2 17 100 0 17 103 0 
+# 187   /* The door is open */
+CD MSG_door_open2 17 103 0 17 106 0 
+# 188   /* I can't see you */
+CD MSG_cant_see_you 17 106 0 17 109 0 
+# 189   /* Where are you */
+CD MSG_where_are_you 17 109 0 17 113 0 
+# 190   /* Press the red button to indicate that you are still interested ... */
+CD MSG_red_button_interest 17 113 0 17 119 0 
+# 191   /* My sonar sensors are not working */
+CD MSG_no_sonar 18 0 0 18 3 0 
+# 192   /* My camera isn't working */
+CD MSG_no_camera 18 3 0 18 6 0 
+# 193   /* My infrared sensors are not working properly */
+CD MSG_no_ir 18 6 0 18 11 0 
+# 194   /* My tactile sensors are not working properly */
+CD MSG_no_tactile 18 11 0 18 16 0 
+# 195   /* My arm is deployed */
+CD MSG_arm_deployed 18 16 0 18 20 0 
+# 196   /* Map is up */
+CD MSG_map_up 18 20 0 18 22 0 
+# 197   /* Arm is up */
+CD MSG_arm_up 18 22 0 18 25 0 
+# 198   /* Map is ready */
+CD MSG_map_ready 18 25 0 18 27 0 
+# 199   /* Arm is ready */
+CD MSG_arm_ready2 18 27 0 18 30 0 
+# 200   /* Base is ready */
+CD MSG_base_ready2 18 30 0 18 33 0 
+# 201   /* Buttons is ready */
+CD MSG_buttons_ready 18 33 0 18 36 0 
+# 202   /* Controller is ready */
+CD MSG_contr_ready 18 36 0 18 39 0 
+# 203   /* Pantilt is ready */
+CD MSG_pantilt_ready 18 39 0 18 42 0 
+# 204   /* Plan is ready */
+CD MSG_plan_ready 18 42 0 18 45 0 
+# 205   /* Simulator is ready */
+CD MSG_simulator_ready 18 45 0 18 48 0 
+# 206   /* TCX is ready */
+CD MSG_tcx_ready 18 48 0 18 51 0 
+# 207   /* Sonarint is ready */
+CD MSG_sonarint_ready 18 51 0 18 54 0 
+# 208   /* Stereovision is ready */
+CD MSG_stereo_ready 18 54 0 18 58 0 
+# 209   /* Position-estimation is ready */
+CD MSG_pos_estimat_ready 18 58 0 18 63 0 
+# 210   /* This is my high-speed */
+CD MSG_this_is_high_speed 18 63 0 18 67 0 
+# 211   /* This is as fast as I can move */
+CD MSG_fast_as_i_can 18 67 0 18 70 0 
+# 212   /* Welcome to the tour */
+CD MSG_welcome_tour 19 0 0 19 3 0 
+# 213   /* This is the beginning of the tour */
+CD MSG_beginning_tour 19 3 0 19 7 0 
+# 214   /* You can now teach me positions, they will become part of the tour */
+CD MSG_teach_position 19 7 0 19 15 0 
+# 215   /* Press the red button to teach me a position */
+CD MSG_red_button_teach 19 15 0 19 19 0 
+# 216   /* Press the blue button to finish the tour */
+CD MSG_blue_button_finish 19 19 0 19 24 0 
+# 217   /* I will memorize this position */
+CD MSG_memorize_position 19 24 0 19 27 0 
+# 218   /* I will memorize the object in front of me */
+CD MSG_memorize_object 19 27 0 19 33 0 
+# 219   /* 1 */
+CD MSG_1 19 33 0 19 36 0 
+# 220   /* 2 */
+CD MSG_2 19 36 0 19 39 0 
+# 221   /* 3 */
+CD MSG_3 19 39 0 19 43 0 
+# 222   /* 4 */
+CD MSG_4 19 43 0 19 46 0 
+# 223   /* 5 */
+CD MSG_5 19 46 0 19 50 0 
+# 224   /* 6 */
+CD MSG_6 19 50 0 19 53 0 
+# 225   /* 7 */
+CD MSG_7 19 53 0 19 57 0 
+# 226   /* 8 */
+CD MSG_8 19 57 0 19 60 0 
+# 227   /* 9 */
+CD MSG_9 19 60 0 19 64 0 
+# 228   /* 10 */
+CD MSG_10 19 64 0 19 67 0 
+# 229   /* 11 */
+CD MSG_11 19 67 0 19 71 0 
+# 230   /* 12 */
+CD MSG_12 19 71 0 19 75 0 
+# 231   /* 13 */
+CD MSG_13 19 75 0 19 78 0 
+# 232   /* 14 */
+CD MSG_14 19 78 0 19 82 0 
+# 233   /* 15 */
+CD MSG_15 19 82 0 19 86 0 
+# 234   /* 16 */
+CD MSG_16 19 86 0 19 90 0 
+# 235   /* 17 */
+CD MSG_17 19 90 0 19 94 0 
+# 236   /* 18 */
+CD MSG_18 19 94 0 19 98 0 
+# 237   /* 19 */
+CD MSG_19 19 98 0 19 102 0 
+# 238   /* 20 */
+CD MSG_20 19 102 0 19 106 0 
+# 239   /* 21 */
+CD MSG_21 19 106 0 19 110 0 
+# 240   /* 22 */
+CD MSG_22 19 110 0 19 114 0 
+# 241   /* 23 */
+CD MSG_23 19 114 0 19 118 0 
+# 242   /* 24 */
+CD MSG_24 19 118 0 19 122 0 
+# 243   /* 25 */
+CD MSG_25 19 122 0 19 127 0 
+# 244   /* 26 */
+CD MSG_26 19 127 0 19 131 0 
+# 245   /* 27 */
+CD MSG_27 19 131 0 19 135 0 
+# 246   /* 28 */
+CD MSG_28 19 135 0 19 140 0 
+# 247   /* 29 */
+CD MSG_29 19 140 0 19 144 0 
+# 248   /* 30 */
+CD MSG_30 19 144 0 19 148 0 
+# 249   /* This is object number */
+CD MSG_onject_number 19 148 0 19 153 0 
+# 250   /* This is location number */
+CD MSG_location_number 19 153 0 19 158 0 
+# 251   /* This door number */
+CD MSG_door_number 19 158 0 19 163 0 
+# 252   /* This is person number */
+CD MSG_person_number 19 163 0 19 169 0 
+# 253   /* This is day number */
+CD MSG_day_number 19 169 0 19 174 0 
+# 254   /* Please follow me */
+CD MSG_follow_me 20 0 0 20 3 0 
+# 255   /* Would you please follow me */
+CD MSG_FOLLOW_me 20 3 0 20 7 0 
+# 256   /* Would you please FOLLOW me */
+CD MSG_please_FOLLOW 20 7 0 20 11 0 
+# 257   /* Open the door for me */
+CD MSG_open_door_for_me 20 11 0 20 14 0 
+# 258   /* Open the door */
+CD MSG_open_door 20 14 0 20 16 0 
+# 259   /* Would you please open the door */
+CD MSG_please_open_door 20 16 0 20 20 0 
+# 260   /* Do you want more information */
+CD MSG_want_more_info 20 20 0 20 24 0 
+# 261   /* I do not have more information */
+CD MSG_dont_have_more_info 20 24 0 20 28 0 
+# 262   /* This is all I know */
+CD MSG_all_i_know 20 28 0 20 31 0 
+# 263   /* No more information available */
+CD MSG_no_more_info 20 31 0 20 37 0 
+# 264   /* This is the beginning of the tour */
+CD MSG_beginning_tour2 20 37 0 20 41 0 
+# 265   /* Normally you will only be expected to press the red button */
+CD MSG_only_red_button 20 41 0 20 47 0 
+# 266   /* Press the yellow button for more information */
+CD MSG_yellow_information 20 47 0 20 51 0 
+# 267   /* Press the green button to repeat the information */
+CD MSG_green_repeat 20 51 0 20 56 0 
+# 268   /* Press the blue button to finish the tour */
+CD MSG_blue_for_finish2 20 56 0 20 60 0 
+# 269   /* Press the red button for more information */
+CD MSG_red_for_info2 20 60 0 20 67 0 
+# 270   /* Press the red button to move to the next station */
+CD MSG_red_for_next 20 67 0 20 73 0 
+# 271   /* Press the yellow button to move on to the next station */
+CD MSG_yellow_for_next 20 73 0 20 79 0 
+# 272   /* Where is the trash */
+CD MSG_where_trash 21 0 0 21 4 0 
+# 273   /* I see some trash */
+CD MSG_see_trash2 21 4 0 21 7 0 
+# 274   /* This is an object */
+CD MSG_an_object 21 7 0 21 10 0 
+# 275   /* This is trash */
+CD MSG_trash 21 10 0 21 12 0 
+# 276   /* This is a bottle */
+CD MSG_bottle 21 12 0 21 15 0 
+# 277   /* This is a paper-wad */
+CD MSG_paper_wad 21 15 0 21 18 0 
+# 278   /* This is a can */
+CD MSG_can 21 18 0 21 21 0 
+# 279   /* Picking up the trash */
+CD MSG_pick_up_trash 21 21 0 21 25 0 
+# 280   /* Raising the arm */
+CD MSG_raise_arm 21 25 0 21 29 0 
+# 281   /* Deploying the arm */
+CD MSG_deploy_arm 21 29 0 21 32 0 
+# 282   /* Where is the trash-bin */
+CD MSG_where_trash_bin 21 32 0 21 35 0 
+# 283   /* I see a trash-bin */
+CD MSG_see_trash_bin2 21 35 0 21 39 0 
+# 284   /* I will move to the trash-bin */
+CD MSG_move_to_bin 21 39 0 21 44 0 
+# 285   /* I will move to the trash */
+CD MSG_move_to_trash 21 44 0 21 47 0 
+# 286   /* I will dump the trash in the trash-bin */
+CD MSG_dump_trash 21 47 0 21 52 0 
+# 287   /* I will drop the trash */
+CD MSG_drop_trash 21 52 0 21 56 0 
+# 288   /* Cleaning operation successfully terminated (~) */
+CD MSG_cleaning_terminate 21 56 0 21 61 0 
+# 289   /* Cleaning operation successful */
+CD MSG_cleaning_success 21 61 0 21 66 0 
+# 290   /* Cleaning operation failed */
+CD MSG_cleaning_failed 21 66 0 21 70 0 
+# 291   /* I am unable to locate trash */
+CD MSG_unable_locate 21 70 0 21 73 0 
+# 292   /* I am going to */
+CD MSG_going_to 22 0 0 22 3 0 
+# 293   /* I am dropping off */
+CD MSG_dropping_off 22 3 0 22 6 0 
+# 294   /* I am picking up */
+CD MSG_picking_up 22 6 0 22 8 0 
+# 295   /* for */
+CD MSG_for 22 8 0 22 10 0 
+# 296   /* letter */
+CD MSG_letter 22 10 0 22 12 0 
+# 297   /* Dieter */
+CD MSG_dieter 22 12 0 22 14 0 
+# 298   /* Sebastian */
+CD MSG_sebastian 22 14 0 22 16 0 
+# 299   /* class-room */
+CD MSG_classroom 22 16 0 22 18 0 
+# 300   /* library */
+CD MSG_library 22 18 0 22 21 0 
+# 301   /* Do you want more information */
+CD MSG_want_more_info2 22 21 0 22 24 0 
+# 302   /* Do you still want more information */
+CD MSG_still_more_info 22 24 0 22 28 0 
+# 303   /* Press the red button for detailed information */
+CD MSG_red_for_detail 22 28 0 22 33 0 
+# 304   /* Press the green button for an overview */
+CD MSG_green_overview 22 33 0 22 38 0 
+# 305   /* Press no button for no information */
+CD MSG_no_button_for_no 22 38 0 22 42 0 
+# 306   /* Sebastian Thrun was born ... */
+CD MSG_sebastian_born 22 42 0 22 50 0 
+# 307   /* I am a robot manufactured by RWI */
+CD MSG_manufactured_rwi 22 50 0 22 55 0 
+# 308   /* I was born two years ago ... */
+CD MSG_i_was_born 22 55 0 22 58 0 
+# 309   /* Theme of James Bond */
+CD MSG_james_bond_theme 23  0 0 24  0 0 
+# 310   /* Jazz: Carmel (by Joe Sample) */
+CD MSG_jazz_carmel 24  0 0 25  0 0 
+# 311   /* Huldigungsmarsch (Grieg) */
+CD MSG_huldigungsmarsch 25  0 0 26  0 0 
+# 312   /* Vier Jahreszeiten, Spring, Allegro (Vivaldi) */
+CD MSG_4_jahreszeiten 26  0 0 27  0 0 

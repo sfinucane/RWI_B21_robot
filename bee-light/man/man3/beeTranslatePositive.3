@@ -1,0 +1,64 @@
+.TH BEETRANSLATEPOSITIVE 3 "April 2, 1999" "BeeSoft Light" "BeeSoft Light"
+.SH NAME
+beeTranslatePositive, beeTranslateNegative \- move a BeeSoft Light robot along a straight line
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "bool beeTranslatePositive(void);"
+
+.BI "bool beeTranslateNegative(void);"
+
+.SH DESCRIPTION
+.B "beeTranslatePositive()"
+moves a BeeSoft Light robot along a straight line. The line has the 
+same direction with the robot's current heading. Program can use
+.B "beeSetTransVelocity()" 
+and 
+.B "beeSetTransAcceleration()" 
+to control the robot. The robot keep moving ahead with the velocity and
+acceleration. The robot will not move around obstacle. It will stop.
+
+.B "beeTranslateNegative()"
+moves a BeeSoft Light robot along a straight line. The line has the 
+same direction with the robot's current heading. Program can use
+.B "beeSetTransVelocity()" 
+and 
+.B "beeSetTransAcceleration()" 
+to control the robot. The robot keep moving backward with the velocity and
+acceleration. The robot will not move around obstacle. It will stop.
+
+
+.SH "RETURN VALUE"
+On success, the function will return TRUE.  On error, FALSE is 
+returned.
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.B "tcxServer" 
+and
+.B "colliServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs 
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+before 
+.B "beeTransPositive()" 
+or
+.B "beeTransNegative()"
+function in your program. Otherwise, 
+the movement can not be executed and the function will return FALSE.
+Moreover, to let the robot move, you must first set the velocity with
+.B "beeSetTransVelocity()" 
+and 
+.BR "beeSetTransAcceleration()" .
+
+
+.SH SEE ALSO
+.BR "beeInitialize" (3),
+.BR "beeSetTransAcceleration" (3), 
+.BR "beeSetTransVelocity" (3),  
+.BR "beeStop(3).

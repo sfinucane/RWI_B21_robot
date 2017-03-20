@@ -1,0 +1,55 @@
+.TH BEEAPPROACHRELATIVE 3 "April 1, 1999" "BeeSoft Light" "BeeSoft Light" 
+.SH NAME
+beeApproachRelative \- move a BeeSoft Light robot to a relative position
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "bool beeApproachRelative(float " rel_target_x ", float " rel_target_y ");"
+
+.SH DESCRIPTION
+.B "beeApproachRelative()"
+moves a BeeSoft Light robot to a relative position in a 2-D Cartesian 
+coordinate system. The current heading is 
+the y axis. The right direction which is perpendicular to current heading 
+is the x axis. The 
+.I "rel_target_x" 
+and
+.I "rel_target_y"
+arguments specify the destination coordinates.
+The measure is 
+centimeter. The robot will 
+move to the expected point. The robot can
+do the collision avoidance and try to reach the destination. However,
+because this function does not communication with 
+.B "Planner"
+server module, it 
+can not plan its optimal route. You could use it to do simple local movements. 
+
+
+.SH "RETURN VALUE"
+On success, the function will return TRUE.  On error, FALSE is 
+returned.
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.B "tcxServer" 
+and
+.B "colliServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs 
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+before 
+.B "beeApproachRelative()" 
+function in your program. Otherwise, 
+the movement can not be executed and the function will return FALSE.
+
+
+.SH SEE ALSO
+.BR "beeInitialize" (3).
+
+

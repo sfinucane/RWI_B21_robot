@@ -1,0 +1,207 @@
+obj/io.o: io.c /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/bits/types.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/bits/stdio_lim.h \
+ /usr/include/stdlib.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/sys/sysmacros.h \
+ /usr/include/alloca.h /usr/include/string.h /usr/include/sys/ioctl.h \
+ /usr/include/bits/ioctls.h /usr/include/asm/ioctls.h \
+ /usr/include/asm/ioctl.h /usr/include/bits/ioctl-types.h \
+ /usr/include/sys/ttydefaults.h /usr/include/signal.h \
+ /usr/include/bits/signum.h /usr/include/bits/siginfo.h \
+ /usr/include/bits/sigaction.h /usr/include/bits/sigcontext.h \
+ /usr/include/asm/sigcontext.h /usr/include/bits/sigstack.h \
+ /usr/include/math.h /usr/include/bits/huge_val.h \
+ /usr/include/bits/mathdef.h /usr/include/bits/mathcalls.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/float.h \
+ /usr/include/sys/time.h /usr/include/bits/time.h \
+ /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+ /usr/include/bits/confname.h /usr/include/getopt.h \
+ ../../include/tcx.h /usr/include/netinet/in.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/limits.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/stdint.h \
+ /usr/include/bits/wordsize.h /usr/include/bits/socket.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm/sockios.h /usr/include/bits/in.h \
+ /usr/include/bits/byteswap.h ../../include/tcxP.h \
+ /usr/include/malloc.h ../../include/global.h /usr/include/ctype.h \
+ /usr/include/sys/timeb.h /usr/include/sys/socket.h \
+ /usr/include/netinet/tcp.h /usr/include/netdb.h \
+ /usr/include/rpc/netdb.h /usr/include/errno.h \
+ /usr/include/bits/errno.h /usr/include/linux/errno.h \
+ /usr/include/asm/errno.h ../../include/hash.h ../../include/lex.h \
+ ../../include/list.h ../../include/formatters.h \
+ ../../include/devUtils.h ../../include/Common.h \
+ ../../include/devNames.h mainlaser.h ../../include/handlers.h \
+ ../../include/bUtils.h /usr/include/termios.h \
+ /usr/include/bits/termios.h ../../include/bNetwork.h io.h
+obj/laserClient.o: laserClient.c /usr/include/stdio.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/bits/types.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/bits/stdio_lim.h \
+ /usr/include/stdlib.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/sys/sysmacros.h \
+ /usr/include/alloca.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+ /usr/include/getopt.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/float.h \
+ /usr/include/ctype.h /usr/include/sys/time.h /usr/include/bits/time.h \
+ ../../include/tcx.h /usr/include/netinet/in.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/limits.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/stdint.h \
+ /usr/include/bits/wordsize.h /usr/include/bits/socket.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm/sockios.h /usr/include/bits/in.h \
+ /usr/include/bits/byteswap.h ../../include/tcxP.h \
+ /usr/include/malloc.h ../../include/rai.h /usr/include/fcntl.h \
+ /usr/include/bits/fcntl.h ../../include/devUtils.h \
+ ../../include/Common.h ../../include/devNames.h \
+ ../../include/handlers.h io.h LASER_SERVER-messages.h laserClient.h \
+ ../../include/raiClient.h
+obj/laserExample.o: laserExample.c /usr/include/stdlib.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/include/sys/types.h /usr/include/bits/types.h \
+ /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/sys/sysmacros.h \
+ /usr/include/alloca.h ../../include/tcx.h /usr/include/netinet/in.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/limits.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/stdint.h \
+ /usr/include/bits/wordsize.h /usr/include/bits/socket.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm/sockios.h /usr/include/bits/in.h \
+ /usr/include/bits/byteswap.h ../../include/tcxP.h \
+ /usr/include/malloc.h ../../include/rai.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+ /usr/include/getopt.h /usr/include/sys/time.h \
+ /usr/include/bits/time.h /usr/include/stdio.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/bits/stdio_lim.h /usr/include/fcntl.h \
+ /usr/include/bits/fcntl.h ../../include/raiClient.h \
+ ../../include/bUtils.h /usr/include/termios.h \
+ /usr/include/bits/termios.h /usr/include/sys/ttydefaults.h \
+ ../../include/bNetwork.h /usr/include/signal.h \
+ /usr/include/bits/signum.h /usr/include/bits/siginfo.h \
+ /usr/include/bits/sigaction.h /usr/include/bits/sigcontext.h \
+ /usr/include/asm/sigcontext.h /usr/include/bits/sigstack.h \
+ laserClient.h ../../include/Common.h
+obj/laserHandlers.o: laserHandlers.c /usr/include/stdlib.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/include/sys/types.h /usr/include/bits/types.h \
+ /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/sys/sysmacros.h \
+ /usr/include/alloca.h /usr/include/stdio.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/bits/stdio_lim.h ../../include/rai.h \
+ /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+ /usr/include/bits/confname.h /usr/include/getopt.h \
+ /usr/include/sys/time.h /usr/include/bits/time.h /usr/include/fcntl.h \
+ /usr/include/bits/fcntl.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/limits.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h ../../include/bUtils.h \
+ /usr/include/termios.h /usr/include/bits/termios.h \
+ /usr/include/sys/ttydefaults.h ../../include/bNetwork.h \
+ /usr/include/netinet/in.h /usr/include/stdint.h \
+ /usr/include/bits/wordsize.h /usr/include/bits/socket.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm/sockios.h /usr/include/bits/in.h \
+ /usr/include/bits/byteswap.h ../../include/tcx.h \
+ ../../include/robot_specifications.h ../../include/tcxP.h \
+ /usr/include/malloc.h ../../include/global.h /usr/include/ctype.h \
+ /usr/include/signal.h /usr/include/bits/signum.h \
+ /usr/include/bits/siginfo.h /usr/include/bits/sigaction.h \
+ /usr/include/bits/sigcontext.h /usr/include/asm/sigcontext.h \
+ /usr/include/bits/sigstack.h /usr/include/sys/timeb.h \
+ /usr/include/sys/socket.h /usr/include/netinet/tcp.h \
+ /usr/include/netdb.h /usr/include/rpc/netdb.h /usr/include/errno.h \
+ /usr/include/bits/errno.h /usr/include/linux/errno.h \
+ /usr/include/asm/errno.h ../../include/hash.h ../../include/lex.h \
+ ../../include/list.h ../../include/formatters.h \
+ ../../include/devUtils.h ../../include/Common.h \
+ ../../include/devNames.h ../../include/handlers.h io.h \
+ LASER_SERVER-messages.h /usr/include/sys/mman.h \
+ /usr/include/bits/mman.h laserHandlers.h laserClient.h \
+ ../../include/beeSoftVersion.h ../../include/raiClient.h mainlaser.h \
+ ../../include/raiServer.h ../../include/baseMessages.h \
+ ../../include/mcpStatus.h
+obj/mainlaser.o: mainlaser.c /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/bits/types.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/bits/stdio_lim.h \
+ /usr/include/stdlib.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/sys/sysmacros.h \
+ /usr/include/alloca.h ../../include/rai.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+ /usr/include/getopt.h /usr/include/sys/time.h \
+ /usr/include/bits/time.h /usr/include/fcntl.h \
+ /usr/include/bits/fcntl.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/limits.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/string.h \
+ /usr/include/sys/ioctl.h /usr/include/bits/ioctls.h \
+ /usr/include/asm/ioctls.h /usr/include/asm/ioctl.h \
+ /usr/include/bits/ioctl-types.h /usr/include/sys/ttydefaults.h \
+ /usr/include/signal.h /usr/include/bits/signum.h \
+ /usr/include/bits/siginfo.h /usr/include/bits/sigaction.h \
+ /usr/include/bits/sigcontext.h /usr/include/asm/sigcontext.h \
+ /usr/include/bits/sigstack.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/float.h \
+ ../../include/tcx.h /usr/include/netinet/in.h /usr/include/stdint.h \
+ /usr/include/bits/wordsize.h /usr/include/bits/socket.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm/sockios.h /usr/include/bits/in.h \
+ /usr/include/bits/byteswap.h ../../include/tcxP.h \
+ /usr/include/malloc.h ../../include/global.h /usr/include/ctype.h \
+ /usr/include/sys/timeb.h /usr/include/sys/socket.h \
+ /usr/include/netinet/tcp.h /usr/include/netdb.h \
+ /usr/include/rpc/netdb.h /usr/include/errno.h \
+ /usr/include/bits/errno.h /usr/include/linux/errno.h \
+ /usr/include/asm/errno.h ../../include/hash.h ../../include/lex.h \
+ ../../include/list.h ../../include/formatters.h \
+ ../../include/bUtils.h /usr/include/termios.h \
+ /usr/include/bits/termios.h ../../include/bNetwork.h \
+ ../../include/Common.h ../../include/devUtils.h \
+ ../../include/devNames.h ../../include/EZX11.h /usr/include/strings.h \
+ /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+ /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+ /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h \
+ ../../include/o-graphics.h ../../include/handlers.h io.h mainlaser.h \
+ LASER_SERVER-messages.h laserHandlers.h ../../include/librobot.h

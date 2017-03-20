@@ -1,0 +1,95 @@
+.TH BEECAMERAREQUESTIMAGE 3 "April 27, 1999" "BeeSoft Light" "BeeSoft Light"
+
+.SH NAME
+beeCameraRequestImage \- request for an image captured from cameraServer 
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "CameraImageType* beeCameraRequestImage(int " numGrabber ", int " orig_image_xmin ", int " orig_image_ymin ", int " orig_image_xsize ", int " orig_image_ysize ", int " return_image_xsize ", int " return_image_ysize "); "
+
+.SH DESCRIPTION
+.B "beeCameraRequestImage()"
+requests for image captured from cameraServer. The meanings of the auguments 
+are: 
+
+.B "numGrabber" 
+specifies a grabber number you want to subscribe to. 
+
+.B "orig_image_xmin" 
+and 
+.B "orig_image_ymin"
+give an location of a block inside the image. They specify the x, y coordinate for the (0,0) of the block.
+
+.B "orig_image_xsize" 
+and
+.B "orig_image_ysize"
+give the size of a block inside the image. 
+
+.B "return_image_xsize"
+and 
+.B "return_image_ysize"
+give the size of a return image.  
+
+The function return a pointer to 
+.B "CameraImageType"
+data structure.
+
+typedef struct {
+
+  int                xsize, ysize; 
+
+  unsigned char     *red; 
+      
+  unsigned char     *green;
+
+  unsigned char     *blue;  
+
+  int                numGrabber; 
+
+} CameraImageType;
+
+.SH "RETURN VALUE"
+On success, the function will return a pointer to 
+.BR "CameraImageType".  
+On error, 
+.B "beeCameraRequestImage()"
+will return NULL.
+
+.SH "EXAMPLE"
+
+   CameraImageType * image ;
+
+   beeInitialize() ;
+
+   beeCameraConnect() ;
+
+   /* request for the block starting at (0,0) with size 320*240 */
+
+   /* return every 2-th pixel so that the return size is 160*120 */
+
+   image = beeCameraRequestImage(0, 2, 0, 0, 320, 240, 160, 120) ;
+
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.BI "tcxServer",
+.B "colliServer" 
+and
+.B "cameraServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs 
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+and
+.B "beeCameraConnect()"
+first in your program. Otherwise, the function will return NULL.
+
+.SH SEE ALSO
+.BR "beeInitialize" (3),
+.BR "beeCameraConnect" (3)
+
+

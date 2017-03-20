@@ -1,0 +1,322 @@
+obj/appl.o: appl.c /usr/include/ctype.h /usr/include/features.h \
+  /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+  /usr/include/bits/types.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stddef.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /usr/include/stdio.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stdarg.h \
+  /usr/include/bits/stdio_lim.h /usr/include/sys/time.h \
+  /usr/include/time.h /usr/include/bits/time.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  ../../include/bUtils.h /usr/include/termios.h \
+  /usr/include/bits/termios.h /usr/include/sys/ttydefaults.h \
+  ../../include/bNetwork.h /usr/include/sys/types.h \
+  /usr/include/sys/sysmacros.h /usr/include/netinet/in.h \
+  /usr/include/stdint.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/socket.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/limits.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/syslimits.h \
+  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h /usr/include/bits/sockaddr.h \
+  /usr/include/asm/socket.h /usr/include/asm/sockios.h \
+  /usr/include/bits/in.h /usr/include/bits/byteswap.h \
+  ../../include/EZX11.h /usr/include/stdlib.h /usr/include/alloca.h \
+  /usr/include/strings.h /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+  /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+  /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h \
+  ../../include/o-graphics.h dat.h global.h mem.h xtypes.h vars.h fa.h
+obj/dat.o: dat.c /usr/include/ctype.h /usr/include/features.h \
+  /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+  /usr/include/bits/types.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stddef.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /usr/include/stdio.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stdarg.h \
+  /usr/include/bits/stdio_lim.h /usr/include/sys/time.h \
+  /usr/include/time.h /usr/include/bits/time.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  ../../include/EZX11.h /usr/include/stdlib.h /usr/include/sys/types.h \
+  /usr/include/sys/sysmacros.h /usr/include/alloca.h \
+  /usr/include/strings.h /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+  /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+  /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h \
+  ../../include/o-graphics.h ../../include/robot_specifications.h dat.h
+obj/fa.o: fa.c /usr/include/ctype.h /usr/include/features.h \
+  /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+  /usr/include/bits/types.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stddef.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /usr/include/stdio.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stdarg.h \
+  /usr/include/bits/stdio_lim.h /usr/include/sys/time.h \
+  /usr/include/time.h /usr/include/bits/time.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  ../../include/bUtils.h /usr/include/termios.h \
+  /usr/include/bits/termios.h /usr/include/sys/ttydefaults.h \
+  ../../include/bNetwork.h /usr/include/sys/types.h \
+  /usr/include/sys/sysmacros.h /usr/include/netinet/in.h \
+  /usr/include/stdint.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/socket.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/limits.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/syslimits.h \
+  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h /usr/include/bits/sockaddr.h \
+  /usr/include/asm/socket.h /usr/include/asm/sockios.h \
+  /usr/include/bits/in.h /usr/include/bits/byteswap.h \
+  ../../include/EZX11.h /usr/include/stdlib.h /usr/include/alloca.h \
+  /usr/include/strings.h /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+  /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+  /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h \
+  ../../include/o-graphics.h dat.h global.h mem.h xtypes.h vars.h fa.h
+obj/global.o: global.c /usr/include/ctype.h /usr/include/features.h \
+  /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+  /usr/include/bits/types.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stddef.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /usr/include/stdio.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stdarg.h \
+  /usr/include/bits/stdio_lim.h /usr/include/sys/time.h \
+  /usr/include/time.h /usr/include/bits/time.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/signal.h /usr/include/bits/signum.h \
+  /usr/include/bits/siginfo.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/sigaction.h /usr/include/bits/sigcontext.h \
+  /usr/include/asm/sigcontext.h /usr/include/bits/sigstack.h \
+  /usr/include/bits/sigthread.h ../../include/EZX11.h \
+  /usr/include/stdlib.h /usr/include/sys/types.h \
+  /usr/include/sys/sysmacros.h /usr/include/alloca.h \
+  /usr/include/strings.h /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+  /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+  /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h \
+  ../../include/o-graphics.h ../../include/rai.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/limits.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/syslimits.h \
+  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h ../../include/devUtils.h \
+  ../../include/Common.h ../../include/devNames.h \
+  ../../include/raiClient.h ../../include/tcx.h /usr/include/netinet/in.h \
+  /usr/include/stdint.h /usr/include/bits/socket.h \
+  /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+  /usr/include/asm/sockios.h /usr/include/bits/in.h \
+  /usr/include/bits/byteswap.h ../../include/baseClient.h \
+  ../../include/sonarClient.h ../../include/bUtils.h \
+  /usr/include/termios.h /usr/include/bits/termios.h \
+  /usr/include/sys/ttydefaults.h ../../include/bNetwork.h \
+  ../../include/irClient.h ../../include/tactileClient.h \
+  ../../include/baseMessages.h ../../include/mcpStatus.h \
+  ../../include/odoClient.h ../../include/cameraClient.h \
+  ../../include/buttonClient.h ../../include/pantiltClient.h dat.h \
+  global.h mem.h xtypes.h vars.h fa.h
+obj/graphics.o: graphics.c /usr/include/ctype.h /usr/include/features.h \
+  /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+  /usr/include/bits/types.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stddef.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /usr/include/stdio.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stdarg.h \
+  /usr/include/bits/stdio_lim.h /usr/include/sys/time.h \
+  /usr/include/time.h /usr/include/bits/time.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  ../../include/bUtils.h /usr/include/termios.h \
+  /usr/include/bits/termios.h /usr/include/sys/ttydefaults.h \
+  ../../include/bNetwork.h /usr/include/sys/types.h \
+  /usr/include/sys/sysmacros.h /usr/include/netinet/in.h \
+  /usr/include/stdint.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/socket.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/limits.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/syslimits.h \
+  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h /usr/include/bits/sockaddr.h \
+  /usr/include/asm/socket.h /usr/include/asm/sockios.h \
+  /usr/include/bits/in.h /usr/include/bits/byteswap.h \
+  ../../include/EZX11.h /usr/include/stdlib.h /usr/include/alloca.h \
+  /usr/include/strings.h /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+  /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+  /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h \
+  ../../include/o-graphics.h dat.h mem.h global.h xtypes.h vars.h fa.h \
+  ../../include/robot_specifications.h ../../include/cameraClient.h \
+  ../../include/buttonClient.h ../../include/pantiltClient.h
+obj/io.o: io.c /usr/include/ctype.h /usr/include/features.h \
+  /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+  /usr/include/bits/types.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stddef.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /usr/include/stdio.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stdarg.h \
+  /usr/include/bits/stdio_lim.h /usr/include/sys/time.h \
+  /usr/include/time.h /usr/include/bits/time.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/signal.h /usr/include/bits/signum.h \
+  /usr/include/bits/siginfo.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/sigaction.h /usr/include/bits/sigcontext.h \
+  /usr/include/asm/sigcontext.h /usr/include/bits/sigstack.h \
+  /usr/include/bits/sigthread.h ../../include/EZX11.h \
+  /usr/include/stdlib.h /usr/include/sys/types.h \
+  /usr/include/sys/sysmacros.h /usr/include/alloca.h \
+  /usr/include/strings.h /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+  /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+  /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h \
+  ../../include/o-graphics.h ../../include/rai.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/limits.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/syslimits.h \
+  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h ../../include/devUtils.h \
+  ../../include/Common.h ../../include/devNames.h \
+  ../../include/raiClient.h ../../include/tcx.h /usr/include/netinet/in.h \
+  /usr/include/stdint.h /usr/include/bits/socket.h \
+  /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+  /usr/include/asm/sockios.h /usr/include/bits/in.h \
+  /usr/include/bits/byteswap.h ../../include/baseClient.h \
+  ../../include/sonarClient.h ../../include/bUtils.h \
+  /usr/include/termios.h /usr/include/bits/termios.h \
+  /usr/include/sys/ttydefaults.h ../../include/bNetwork.h \
+  ../../include/irClient.h ../../include/tactileClient.h \
+  ../../include/baseMessages.h ../../include/mcpStatus.h \
+  ../../include/odoClient.h ../../include/cameraClient.h \
+  ../../include/buttonClient.h ../../include/pantiltClient.h \
+  ../../include/robot_specifications.h ../../include/BASE-messages.h \
+  ../../include/LASER-messages.h dat.h mem.h global.h
+obj/main.o: main.c /usr/include/ctype.h /usr/include/features.h \
+  /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+  /usr/include/bits/types.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stddef.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /usr/include/stdio.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stdarg.h \
+  /usr/include/bits/stdio_lim.h /usr/include/sys/time.h \
+  /usr/include/time.h /usr/include/bits/time.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/signal.h /usr/include/bits/signum.h \
+  /usr/include/bits/siginfo.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/sigaction.h /usr/include/bits/sigcontext.h \
+  /usr/include/asm/sigcontext.h /usr/include/bits/sigstack.h \
+  /usr/include/bits/sigthread.h ../../include/EZX11.h \
+  /usr/include/stdlib.h /usr/include/sys/types.h \
+  /usr/include/sys/sysmacros.h /usr/include/alloca.h \
+  /usr/include/strings.h /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+  /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+  /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h \
+  ../../include/o-graphics.h ../../include/rai.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/limits.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/syslimits.h \
+  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h ../../include/devUtils.h \
+  ../../include/Common.h ../../include/devNames.h \
+  ../../include/raiClient.h ../../include/tcx.h /usr/include/netinet/in.h \
+  /usr/include/stdint.h /usr/include/bits/socket.h \
+  /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+  /usr/include/asm/sockios.h /usr/include/bits/in.h \
+  /usr/include/bits/byteswap.h ../../include/baseClient.h \
+  ../../include/sonarClient.h ../../include/bUtils.h \
+  /usr/include/termios.h /usr/include/bits/termios.h \
+  /usr/include/sys/ttydefaults.h ../../include/bNetwork.h \
+  ../../include/irClient.h ../../include/tactileClient.h \
+  ../../include/baseMessages.h ../../include/mcpStatus.h \
+  ../../include/odoClient.h ../../include/cameraClient.h \
+  ../../include/buttonClient.h ../../include/pantiltClient.h dat.h \
+  global.h mem.h xtypes.h vars.h fa.h
+obj/mem.o: mem.c /usr/include/ctype.h /usr/include/features.h \
+  /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+  /usr/include/bits/types.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stddef.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /usr/include/stdio.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stdarg.h \
+  /usr/include/bits/stdio_lim.h /usr/include/sys/time.h \
+  /usr/include/time.h /usr/include/bits/time.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  ../../include/bUtils.h /usr/include/termios.h \
+  /usr/include/bits/termios.h /usr/include/sys/ttydefaults.h \
+  ../../include/bNetwork.h /usr/include/sys/types.h \
+  /usr/include/sys/sysmacros.h /usr/include/netinet/in.h \
+  /usr/include/stdint.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/socket.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/limits.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/syslimits.h \
+  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h /usr/include/bits/sockaddr.h \
+  /usr/include/asm/socket.h /usr/include/asm/sockios.h \
+  /usr/include/bits/in.h /usr/include/bits/byteswap.h \
+  ../../include/EZX11.h /usr/include/stdlib.h /usr/include/alloca.h \
+  /usr/include/strings.h /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+  /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+  /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h \
+  ../../include/o-graphics.h dat.h mem.h global.h xtypes.h vars.h fa.h \
+  ../../include/robot_specifications.h
+obj/vars.o: vars.c /usr/include/ctype.h /usr/include/features.h \
+  /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+  /usr/include/bits/types.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stddef.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /usr/include/stdio.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/stdarg.h \
+  /usr/include/bits/stdio_lim.h /usr/include/sys/time.h \
+  /usr/include/time.h /usr/include/bits/time.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  ../../include/bUtils.h /usr/include/termios.h \
+  /usr/include/bits/termios.h /usr/include/sys/ttydefaults.h \
+  ../../include/bNetwork.h /usr/include/sys/types.h \
+  /usr/include/sys/sysmacros.h /usr/include/netinet/in.h \
+  /usr/include/stdint.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/socket.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/limits.h \
+  /usr/lib/gcc-lib/i386-redhat-linux/2.96/include/syslimits.h \
+  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h /usr/include/bits/sockaddr.h \
+  /usr/include/asm/socket.h /usr/include/asm/sockios.h \
+  /usr/include/bits/in.h /usr/include/bits/byteswap.h \
+  ../../include/EZX11.h /usr/include/stdlib.h /usr/include/alloca.h \
+  /usr/include/strings.h /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+  /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+  /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h \
+  ../../include/o-graphics.h dat.h global.h mem.h xtypes.h vars.h fa.h

@@ -1,0 +1,61 @@
+
+(grep for scout)
+
+- new robot type
+	colli/BASE.c (look for scout)
+	colli/collision.h (look for scout)
+	colli/server.c (look for scout)
+	localize/file.h (look for scout)
+	localize/laser.c (look for scout)
+	
+- laser coordinate:
+	colli/laser_interface.c
+		FRONT_LASER_OFFSET (both positive numbers)
+	localize/laser.h
+		LASER_OFFSET
+	localize/laser.c
+		LASER_OFFSET
+	laserint/laserint.ini
+		laser_offset (positive and negative)
+
+- robot size
+	colli/BASE.c
+		bParamList
+	** or **
+	colli/collision.h
+		ROB_RADIUS
+
+
+- sonar sensors:
+	colli/colliSonar.c
+
+==================== Data collection ====================
+
+use -B21 (or nothing) instead of -scout
+
+./tcxServer
+./colliServer +laserServer -scout
+./laserServer -scout
+./scout
+./COLLGRAPH
+
+==================== Localization ====================
+
+
+bee/data/localize/wean: ../../../bin/LOCALIZE scout.ini
+ln -s wean.laserDist.1.2000 wean.laserDist
+cd ../params
+ln -s laser-0.1.1000 laser-0.1.2000
+cd -
+
+==================== Display a Map ====================
+
+../../../bin/DISPLAYMAP wean.map
+
+==================== Filters ====================
+
+
+==================== Distance Server ====================
+
+cp wean.map wean.distmap
+data/localize/wean: ../../../bin/obstacleServer wean.distmap

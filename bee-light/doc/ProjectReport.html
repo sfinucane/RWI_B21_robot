@@ -1,0 +1,192 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Re-implementation of BeeSoft Light</TITLE>
+</HEAD>
+<BODY>
+
+<B><FONT SIZE=5><P ALIGN="CENTER">Re-implementation of BeeSoft Light<BR>
+</B></FONT><FONT SIZE=4>A distributed architecture for mobile robot navigation<BR>
+</P>
+<P ALIGN="CENTER">Jianjung Ying</P>
+</FONT><P ALIGN="CENTER">Information Networking Institute</P>
+<P ALIGN="CENTER">Carnegie Mellon University</P>
+<FONT SIZE=6><P ALIGN="CENTER"></P>
+</FONT><FONT SIZE=4><P>Introduction</P>
+</FONT><I><P>Re-implementation of BeeSoft Light</I> is one of the student projects of course 15-822, <BR>
+System Design &amp; Implementation Practicum, offered by Computer Science Department, at Carnegie Mellon University. The goal of this course is to provide a hands-on learning opportunity to acquire skills relevant to the design, implementation, evaluation and tuning of complex systems. This course is project-based, with each student doing a different project. The projects are &quot;real&quot; rather than contrived. Every project addresses the needs of some &quot;customers&quot;, which may be CS or Robotics research projects. Sebastian Thrun, assistant professor of Computer Science Department at CMU, sponsors <I>&quot;Re-implementation of BeeSoft Light&quot;</I> project. This project is to re-design and re-implement BeeSoft Light API library. Then his Robot Learning Laboratory can write programs to navigate their robots more easily than before.</P>
+
+<FONT SIZE=4><P>Architectural Overview </P>
+</FONT><P>The overall software architecture consists of several modules (processes) running in parallel on on-board laptops and off-board workstations. The software modules communicate using <I>TCX</I>, a centralized communication protocol for point-to point socket communication. The overall software architecture is showed below:</P>
+<P><IMG SRC="Image18.gif" WIDTH=560 HEIGHT=351></P>
+<P>This architecture of distributed module provides a robust solution to robot navigation. Time-critical software (e.g. all device drivers), and software that is important for the safety of the robot (e.g. collision avoidance in colliServer), are running on the robot’s on- board laptops. Higher-level software, such as the Planner and LOCALIZE is running on the off-board workstations. Even the communication links are not reliable and various events can temporarily delay the message flow or reduce the available computational time, the robot can always have robust behavior. Each module provides certain functionality, but not all modules are required to run:</P>
+
+
+<UL>
+<B><LI>tcxServer</B> (not shown in the diagram) coordinates communications among all other modules running on all computers in the robot system. TCX is a decentralized communication protocol for point-to-point socket communication. Processes invoke TCX API to communicate with each other.</LI>
+<B><LI>pioneer/baseServer</B> issues commands to the robot's wheeled base. It can move forwards and backwards, as well as rotational motion – clockwise and counterclockwise – around the robot’s center axis.</LI>
+<B><LI>laserServer</B> administrates the equipped laser device. </LI>
+<B><LI>cameraServer </B>administrates the equipped camera device.</LI>
+<B><LI>colliServer</B> sends commands to pioneer/baseServer in guarded motion mode, that is, incorporating built-in collision avoidance. You give the module a target point, either a relative target point or an absolute target point. The robot will try its best to avoid obstacles it can perceive. It uses sonar and laser devices to know the robot’s environment. It knows how far the obstacles are by emitting sonar and laser and then collecting the reflection. Other modules could also subscribe to those sensor values. Notice that <I>pioneer/baseServer</I> does not include automatic obstacle avoidance. They just order the robot to move.</LI>
+<B><LI>Planner</B> is the robot motion management and exploration software. It helps the robot plan globally optimal motion and optimal paths. When Planner receives a target, it will compute the optimal path and then give several intermediate goal points to the colliServer. Planner is running on an off-board workstation. While colliServer provides local collision avoidance, Planner provides global path finding. To do so, it needs a map of the robot’s environment.  We could use a program called Mapper to establish maps, but it is beyond the scope of this project.</LI>
+<B><LI>LOCALIZE </B>is a module which continuously estimates the robot’s position in x-y-<FONT FACE="Symbol">&#113;</FONT>
+ space, where x and y are the coordinates of the robot in a 2D Cartesian coordinate system and <FONT FACE="Symbol">&#113;</FONT>
+ is its orientation. colliServer has a base coordinate system which is different from map coordinate system. Moreover, robot may drift so that it will deviate from its target direction. LOCALIZE monitors the robot and keeps<B> </B>computing corrected<B> </B>coordinate parameters. It uses sensor readings from the robot’s sensors and actions commands to keep estimating positions. Then task planning modules, such as user modules, can use those parameters to transform map coordinates to robot’s base coordinates, which are colliServer’s acceptable command arguments.  </LI>
+<B><LI>SET_ROBOT </B>gives the robot an initial point in map coordinate system. Otherwise, LOCALIZE does not know where to locate the robot initially.</LI></UL>
+
+<FONT SIZE=6>
+</FONT><P>TCX grants the BeeSoft system scalability of adding more modules. BeeSoft package includes some other modules to administrate onboard devices, such as pantiltServer, armServer, speechServer. But not all of the robots have those devices. A programmer can write USER module to ask the robot to perform a task. This module also uses TCX mechanism to communicate with other modules. In this architecture, there could be many user modules running concurrently. Modules request for services by passing messages to the server modules and receive the reply messages. Each BeeSoft module defines a number of messages. Other modules could ask this module for services by sending messages through TCX API. BeeSoft API library encapsulates the details of the underlying communication infrastructure. You could write programs easily even if you do not know TCX.</P>
+
+<FONT SIZE=4><P>Goal of this project</P>
+</FONT>
+<P>The former section gives an overall concept of BeeSoft Light. A user module programmer needs to have an understanding of TCX communication mechanism. He needs to create a thread and write sensor callback functions to collect messages sent from other modules. He also needs to know the module messages to order the robot to perform desired actions.</P>
+<P>For a novice of BeeSoft Light, it takes long time to master TCX mechanism and those module messages. Even for a professional, it is time-consuming to write those required but always-the-same lines, such as message handlers and TCX initialization. </P>
+<P>This project is to re-design and re-implement BeeSoft Light API library to encapsulate TCX communication and message passing architecture. Then it offers robotics programmers ease of use, simplicity of architecture, and high degree of transparency. </P>
+<FONT SIZE=2>
+<P>&nbsp;</P>
+</FONT><FONT SIZE=4><P>BeeSoft Light API library functions</P>
+</FONT><FONT SIZE=2>
+</FONT><P>The new BeeSoft Light API library consists of those functions:</P>
+<FONT SIZE=2>
+</FONT><B><P>BeeSoft Application Initialization:</P>
+<OL>
+
+</B><LI>beeInitialize() - initializes a user module process. </LI>
+<LI>beeCameraConnect() - connects to cameraServer.</LI></OL>
+
+<FONT SIZE=2>
+</FONT><B><P>Motion functions: </B>functions that control the robot’s motion</P>
+<OL>
+
+<LI>beeTranslateBy() – robot moves forward or backward by a distance</LI>
+<LI>beeRotateBy()– robot rotates clockwise or counterclockwise by a degree</LI>
+<LI>beeTranslatePositive() – robot keeps moving forward </LI>
+<LI>beeTranslateNegative() – robot keeps moving backward</LI>
+<LI>beeRotatePositive() – robot keeps rotating clockwise</LI>
+<LI>beeRotateNegative() – robot keeps rotating counterclockwise </LI>
+<LI>beeStop() – robot stops</LI>
+<LI>beeSetTransVelocity()– robot sets translation velocity </LI>
+<LI>beeSetRotVelocity() – robot sets rotation velocity</LI>
+<LI>beeSetTransAcceleration() – robot sets translation acceleration</LI>
+<LI>beeSetRotAcceleration() – robot sets rotation acceleration</LI>
+<LI>beeGetCurrentPosition() – returns the current position of the robot</LI>
+<LI>beeGetCurrentSpeed() – returns the current speed of the robot</LI>
+<LI>beeApproachRelative() – robot tries to move to a position without optimal path finding </LI>
+<LI>beeApproachAbsolute() – robot tries to move to an absolute position without optimal path finding</LI>
+<LI>beeGotoRelative () – robot moves to a relative position with optimal path finding</LI>
+<LI>beeGotoAbsolute() – robot moves to an absolute position with optimal path finding</LI></OL>
+
+<B>
+<P>Sensor functions: </B>functions that retrieve the sensor readings</P>
+<OL>
+
+<LI>beeSonarStartRegularUpdate() - starts the subscription of sonar readings from the robot</LI>
+<LI>beeSonarStopRegularUpdate() - stops the subscription of sonar readings</LI>
+<LI>beeGetSonarValue() - retrieves an array of sonar readings</LI>
+<LI>The same groups of functions for other sensors: laser, infrared</LI></OL>
+
+
+<B><P>Camera Library: </B>functions that retrieve camera images</P>
+<OL>
+
+<LI>beeCameraSaveFile() - requests the cameraServer to capture and save images in local disk.</LI>
+<LI>beeCameraLoadFile()<B> - </B>requests the cameraServer to load images from a file.</LI>
+<LI>beeCameraRequestShmId() - requests the cameraServer to capture and put an image to a shared memory.</LI>
+<LI>beeCameraRequestImage() - requests the cameraServer to capture and transfer an image to the user module.</LI>
+<LI>beeCameraSubscribe() – subscribes to images captured from the cameraServer.</LI>
+<LI>beeCameraUnsubscribe()<B> - </B>unsubscribes frames from a cameraServer. </LI></OL>
+
+
+<B><P>Callback functions: </B>functions register callback functions</P>
+<OL>
+
+<LI>beeSonarRegisterCallback() – registers a callback function to process the sonar reading every time it is read</LI>
+<LI>beeIRRegisterCallback()<B> - </B> registers a callback function to process the infrared reading every time it is read. </LI>
+<LI>beeLaserRegisterCallback()<B> - </B>registers a callback function to process the laser reading every time it is read.</LI>
+<LI>beeCameraRegisterCallback – registers a callback function to process the camera image every time it is captured</LI></OL>
+
+
+<P>For a detailed of these functions, please refer to the user manual. </P>
+<FONT SIZE=4>
+<P>Schedule of the project</P>
+</FONT><FONT SIZE=2>
+
+<UL>
+</FONT><B><LI>Check point 1 goal : </B>Get familiar with the underlying message transfer infrastructure (TCX) and design the API library functions.</LI></UL>
+
+<B>
+
+<UL>
+<LI>Check point 2 goal :</B> Finish the implementation of the core functions, write Unix manual pages for the core functions. </LI></UL>
+
+
+
+<UL>
+<B><LI>Check point 3 goal :</B> Finish the whole implementation and prepare the demo programs which could run on robots.</LI></UL>
+
+
+<FONT SIZE=4><P>Experience learned from the project</P>
+</FONT><FONT SIZE=2>
+</FONT><P>The goal of this course is to provide a hands-on learning opportunity to acquire skills relevant to the design, implementation, evaluation and tuning of complex systems. From the project, I learned the following experience:</P>
+<FONT SIZE=2>
+
+<UL>
+</FONT><B><LI>More practice in programming</B>:</LI></UL>
+
+
+<P>This project used g++ compiler in Linux machines. I used g++ because I need to overload several functions of the same name. Each of them has different parameter list. But implementation of those functions was procedure-oriented, rather than object-oriented. I did not group those functions into object methods because it is easy to think of the robot as an object and those functions as robot’s methods. Programmers who are not familiar with object-oriented programming may code with the BeeSoft Light API library easily. </P>
+<P>In this project, I also had practice in thread creation and synchronization. Every module needs a background thread to keep polling the TCX mechanism to retrieve new-arrived TCX messages. It is not difficult to create a thread and run it. But it will be a problem that the foreground thread is retrieving the array of sensor readings while the background thread is updating it. I need to use some semaphore mechanisms to prevent data inconsistency.</P>
+<P>Several functions allow programmers to register new callback functions. Locations of those callback functions are stored and invoked every time the counterpart events are triggered. This is an advanced programming skill and I took one hour to find out a solution for C.</P>
+<P>I also learned more syntax of Makefile. I knew how to create a library file. </P>
+
+
+<UL>
+<B><LI>System architecture design</LI></UL>
+
+
+</B><P>This semester I took Architecture for Software Systems in Software Engineering Institute. I learned that a good architecture design could contribute a good solution to the problem. I learned an architecture model called Implicit-invocation and case study of mobile robot. The characteristics of implicit-invocation are its scalability and easy modification. It allows programmers to add more modules without modifying existing modules much. BeeSoft Light project is a good example of implicit-invocation model. The tcxServer is responsible to dispatch messages to modules that registered to listen to.</P>
+
+
+<UL>
+<B><LI>Documentation</LI></UL>
+
+
+</B><P>I did not have a good habit in documenting my code before this project. In my previous programming projects I documented only for those in which documentation was graded. In the first checkpoint I was recommended to write Unix manual pages. I consulted some Linux experts and knew the syntax of Unix manual pages. Because they structure what should be told to library users, they enable me to plan and write my documents easily.</P>
+
+
+<UL>
+<B><LI>Hands-on experience in mobile robots</LI></UL>
+
+
+</B><P>This is my first time to run mobile robots and program for them. There are many onboard devices on a robot, such as laser sensors, sonar sensors, camera device, radio transmitter and receiver. To run a robot, I need to take care of those devices. I need to remember to recharge the power of the robot. </P>
+<P>When designing the API library, I had to consider which primitive commands should be included in the library. I need to stand in the perspective of novice users in robotics programming. I finished the library design by the first checkpoint. But after that I made some additions and modifications. Through the process I got the experience to design a library of functions. The clues I learned are (1) naming the functions well to explain their functionality; (2) reducing the number of the arguments; (3) documenting the functions for easy reference. </P>
+<P> </P>
+
+<FONT SIZE=4><P>Troubles I had</P>
+
+<UL>
+</FONT><LI>Workload from other courses affects my project schedule. </LI>
+<LI>I relied too much on the Simulator. The Simulator does not simulate real interaction between the robot and its environment. So it may cause some false interactions between the environment and my test program. I had an experience in wasting an amount of time in finding a non-existing bug. </LI>
+<LI>Bugs: Two bugs were with me for more than one month. The first bug was that when the user module terminated, tcxServer and other modules terminated too. The second bug was that beeApproachRelative() did not perform as it was expected to be. I guessed those bugs resulted from some server modules. Finally in the last week of the third checkpoint I found out where the problems were. The first bug resulted from an uninitialized variable. The second bug resulted from misunderstanding the beeApproachRelative() function. </LI></UL>
+
+
+<FONT SIZE=4><P>Future work</P>
+</FONT><FONT SIZE=2>
+</FONT><P>This project includes library for robot navigation and camera. Some robots are equipped with more devices, such as tactile sensors (detecting bumps), speech device, pan/tilt head, and so forth. Another project could re-design and re-implement library functions for those device. There are also counterpart server modules managing those resources. User modules could also use TCX messages to communicate with those server modules. Client library functions hide the communication mechanisms and provide programmers higher-level view of robotics programming.</P>
+<P>Robot navigation has an important application in unattended automobile. This project could have similar and interesting application in &quot;attended robot&quot;. Since most of the robots are equipped with a camera, programmers can use camera functions in BeeSoft library to code their own &quot;attended robot&quot; project. In this project, users control the robot with a joystick. They can see what the camera is focusing on and change the robot’s motion speed and direction with the joystick. While a user push the joystick, the program executes a beeSetTransVelocity() function followed by a beeTranslatePositive() function. While a user pull the joystick, the program executes a beeSetTransVelocity() function followed by a beeTranslateNegative() function. Dragging the joystick left causes the counterclockwise rotation of the robot, while dragging the joystick right causes the clockwise rotation of the robot. </P>
+<P>This application is very attractive for entertainment purpose. If so, the baud rate for radio transmission needs to be taken care of. The workstation communicates with the robot through radio connection. Image streams will consume a large bandwidth and affect the quality of the video. Moreover, each robot is equipped with a battery. It needs to recharge frequently during a continuous use. The power consumed by the camera needs to be considered too.</P>
+
+<FONT SIZE=4><P>What could have I done to improve this project</P>
+</FONT><FONT SIZE=2>
+
+<UL>
+</FONT><B><LI>Got an early tutorial for this project</B>. I got a BeeSoft user manual in the first appointment with my sponsor. I also got a package of module programs to run a robot. There was a &quot;missing link&quot; between them so that I did not know how to start my project. I was taught how to run a robot in Simulator and some example programs in the second week. From then on I had stead progress. I think an early tutorial was important to me. And I hope the manual I developed could help future BeeSoft novices.</LI>
+<B><LI>Ran real robots early.</B>  I learned how to run real robots one week before my third checkpoint. Before that I used Simulator to test my library. I need to take care of many things in real robot, such as power, switches of onboard devices. I made a stupid mistake in the poster session. The robot could not run because I did not turn on a radio switch. I lacked the overall knowledge of the power system of the real robot because there is no instruction manual for those details. If I had more practice in running real robots, I might have met those problems early and have gotten the solution.</LI>
+<B><LI>Set sub-checkpoints between main checkpoints</B>. I did most of the work when a checkpoint approached. The characteristic of the course is flexibility in schedule – one meeting per month. Sub-checkpoints might help the project progress better.</LI></UL>
+
+
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P></BODY>
+</HTML>

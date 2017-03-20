@@ -1,0 +1,66 @@
+.TH BEEGETIRVALUE 3 "April 2, 1999" "BeeSoft Light" "BeeSoft Light"
+
+.SH NAME
+beeGetIRValue \- provide collected infrared readings of a BeeSoft Light robot
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "int * beeGetIRValue(int " rowno ", int * " number_or_reading ") ;"
+
+.SH DESCRIPTION
+.B "beeGetIRValue()"
+provides collected infrared readings of a BeeSoft Light robot. In the 
+.I "number_of_reading" 
+argument the programmer give a reference to an integer variable. This function provides
+valid return readings only after the program runs 
+.BR "beeIRStartRegularUpdate()". 
+A background thread will keep collecting infrared data messages sent from colliServer.
+Then
+.B "beeGetIRValue()" 
+returns an array of collected infrared readings. You can specify a row id of infrared
+sensors in the 
+.I "rowno" 
+argument. In "bee.h", 
+.BI "UPPERROW",  
+.BI "LOWERROW",
+.BI "DROW" 
+are already defined as three rows.
+
+.SH "RETURN VALUE"
+On success, the function will return a reference to the array of stored
+sonar readings, which is of "int" data type. The integer referenced by
+.I "number_of_reading" 
+will store the number of infrared readings of the specified row.
+The array 
+.B "beeGetIRValue()"
+returns is a clone of the space which the background thread keeps updating
+in. Those data will keep intact until next time
+.B "beeGetIRValue()"
+is invoked.
+Any attempt to free the space is not allowed.
+
+On error, 
+.B "beeGetIRValue()"
+will return NULL.
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.B "tcxServer" 
+and
+.B "colliServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs 
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+first in your program. Otherwise, the function will return NULL.
+
+.SH SEE ALSO
+.BR "beeInitialize" (3),
+.BR "beeIRStartRegularUpdate" (3),
+.BR "beeIRStopRegularUpdate", (3).
+
+

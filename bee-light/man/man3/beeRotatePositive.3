@@ -1,0 +1,52 @@
+.TH BEEROTATEPOSITIVE 3 "April 2, 1999" "BeeSoft Light" "BeeSoft Light"
+.SH NAME
+beeRotatePositive, beeRotateNegative \- rotate a BeeSoft Light' orientation
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "bool beeRotatePositive(void);"
+
+.BI "bool beeRotateNegative(void);"
+
+.SH DESCRIPTION
+.B "beeRotatePositive()"
+and 
+.B "beeRotateNegative()"
+rotate a BeeSoft Light robot's orientation. Program can use
+.B "beeSetRotVelocity()"
+and 
+.B "beeSetRotAcceleration()" 
+to control the robot. The robot keep rotating with the velocity and
+acceleration until next
+.BR "beeStop()" .
+
+.SH "RETURN VALUE"
+On success, the function will return TRUE.  On error, FALSE is 
+returned.
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.B "tcxServer" 
+and
+.B "colliServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs 
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+before 
+.B "beeRotatePositive()"
+or
+.B "beeRotateNegative()"
+function in your program. Otherwise, 
+the movement can not be executed and the function will return FALSE.
+
+
+.SH SEE ALSO
+.BR "beeInitialize" (3),
+.BR "beeSetRotAcceleration" (3), 
+.BR "beeSetRotVelocity" (3),  
+.BR "beeStop(3).

@@ -1,0 +1,1524 @@
+#!/bin/sh
+# the next line restarts using wish \
+exec wish "$0" "$@"
+
+set objects {}
+set num_obj 0
+set canvas_x    700
+set canvas_y    700
+set map_x1      0
+set map_y1      0
+set map_x2      1000
+set map_y2      1000
+set map_color   snow3
+
+set map_offh    0
+set map_offv    3000
+set sim_scale   2.0
+set exp_nr      1
+set exp_color   indianred1
+set place_nr    1
+set place_color lightblue2
+set modename Edit
+set mode 4
+set robot [list 0 0 0]
+set map [list 0 0 4000 4000]
+set posx 0
+set posy 0
+set scriptf 0
+set sposx 0
+set sposy 0
+set sposo 0
+set rposx 0
+set rposy 0
+set rposo 0
+set scanctr -1
+set jump 1
+set fscan 180
+set rscan 0
+
+
+###########################################################################
+# MAIN - WINDOW
+###########################################################################
+
+proc CreateMainWindow {} {
+    global canvas sim_scale modename posx posy typename scriptfile
+    wm title . "Simulator Editor"
+
+    ###########################################################################
+    # CANVAS OBJECTS
+    ###########################################################################
+    frame .c
+    frame .c.cvp
+    canvas .c.cvp.c \
+	    -width 500 \
+	    -height 500 \
+            -scrollregion {0 0 4000 4000} \
+	    -xscrollcommand ".c.scr set" \
+	    -yscrollcommand ".c.cvp.s set"
+    set canvas .c.cvp.c
+    bind $canvas <Motion> "SetPos %x %y"
+    $canvas bind scan <Motion> "SetPos %x %y"
+    canvas .c.c \
+	-scrollregion {0 0 10000 0} \
+	-width 400 -height 0 \
+	-highlightthickness 0 \
+	-xscrollcommand ".c.scr2 set"
+
+    scrollbar .c.cvp.s \
+	    -orient vertical \
+	    -command "$canvas yview"
+    frame .c.i
+    label .c.i.script \
+            -width 30 \
+	    -text "Script: "
+    label .c.i.pic \
+            -width 30 \
+	    -text "Picture: "
+    label .c.i.sim \
+            -width 30 \
+	    -text "Simulator File:"
+    scrollbar .c.scr \
+	    -orient horizont \
+	    -command "$canvas xview"
+    scrollbar .c.scr2 \
+	    -orient horizont \
+	    -command "RotateScan"
+    
+    frame .b \
+	    -relief ridge \
+	    -borderwidth 2
+    button .b.edi \
+	    -height 2 \
+	    -width 14 \
+	    -text "Edit" \
+            -command "EditMode"
+    button .b.help \
+	    -height 2 \
+	    -width 14 \
+	    -text "Help" \
+            -command "Help"
+    button .b.ins1 \
+	    -height 2 \
+	    -width 14 \
+	    -text "Insert\nCylinder" \
+            -command "InsertMode1"
+    button .b.ins2 \
+	    -height 2 \
+	    -width 14 \
+	    -text "Insert\nCube" \
+            -command "InsertMode2"
+    button .b.del \
+	    -height 2 \
+	    -width 14 \
+	    -text "Delete" \
+            -command "DeleteMode"
+    frame .b.f
+    button .b.f.scr \
+	    -height 2 \
+	    -width 14 \
+	    -text "Script" \
+            -command "ScriptMode"
+    frame .b.mode \
+            -borderwidth 2 \
+            -relief ridge
+    label .b.mode.name \
+            -width 16 \
+            -height 2 \
+            -fg red \
+            -textvariable modename
+    button .b.save \
+	    -height 2 \
+	    -width 14 \
+	    -text "Save" \
+            -command "SaveSim"
+    frame .b.sc \
+	    -borderwidth 2
+    frame .b.sc.ssc \
+	    -borderwidth 2 \
+	    -relief raised
+    label .b.sc.ssc.l \
+            -justify left \
+	    -text "Scale\n(cm/pxl)" \
+	    -font "6x10"
+    entry .b.sc.ssc.sc \
+	    -width 8
+    .b.sc.ssc.sc insert 0 $sim_scale
+    bind .b.sc.ssc.sc <Return> "ShowNewScale"
+    frame .b.in
+    frame .b.in.x \
+	    -borderwidth 2 \
+	    -relief raised
+    label .b.in.x.l1 \
+            -anchor center \
+	    -width 8 \
+	    -text "X:" \
+	    -font "6x10"
+    label .b.in.x.l2 \
+            -relief sunken \
+	    -textvariable posx \
+	    -font "6x10"
+    frame .b.in.y \
+	    -borderwidth 2 \
+	    -relief raised
+    label .b.in.y.l1 \
+            -anchor center \
+	    -width 8 \
+	    -text "Y:" \
+	    -font "6x10"
+    label .b.in.y.l2 \
+            -relief sunken \
+	    -textvariable posy \
+	    -font "6x10"
+    frame .b.in.type \
+	    -borderwidth 2 \
+	    -relief raised
+    label .b.in.type.l1 \
+            -anchor center \
+	    -width 8 \
+	    -text "Type:" \
+	    -font "6x10"
+    label .b.in.type.l2 \
+            -relief sunken \
+	    -textvariable typename \
+	    -font "6x10"
+
+    frame .b.in.d1 \
+	    -borderwidth 2 \
+	    -relief raised
+    label .b.in.d1.l \
+            -anchor center \
+	    -width 8 \
+	    -textvariable data1name \
+	    -font "6x10"
+    entry .b.in.d1.e \
+            -width 10 \
+            -relief sunken \
+	    -font "6x10"
+    bind .b.in.d1.e <Return> "SetNewData"
+    frame .b.in.d2 \
+	    -borderwidth 2 \
+	    -relief raised
+    label .b.in.d2.l \
+            -anchor center \
+	    -width 8 \
+	    -textvariable data2name \
+	    -font "6x10"
+    entry .b.in.d2.e \
+            -width 10 \
+            -relief sunken \
+	    -font "6x10"
+    bind .b.in.d2.e <Return> "SetNewData"
+    frame .b.in.d3 \
+	    -borderwidth 2 \
+	    -relief raised
+    label .b.in.d3.l \
+            -anchor center \
+	    -width 8 \
+	    -textvariable data3name \
+	    -font "6x10"
+    entry .b.in.d3.e \
+            -width 10 \
+            -relief sunken \
+	    -font "6x10"
+    bind .b.in.d3.e <Return> "SetNewData"
+    frame .b.in.d4 \
+	    -borderwidth 2 \
+	    -relief raised
+    label .b.in.d4.l \
+            -anchor center \
+	    -width 8 \
+	    -textvariable data4name \
+	    -font "6x10"
+    entry .b.in.d4.e \
+            -width 10 \
+            -relief sunken \
+	    -font "6x10"
+    bind .b.in.d4.e <Return> "SetNewData"
+    frame .b.in.d5 \
+	    -borderwidth 2 \
+	    -relief raised
+    label .b.in.d5.l \
+            -anchor center \
+	    -width 8 \
+	    -textvariable data5name \
+	    -font "6x10"
+    entry .b.in.d5.e \
+            -width 10 \
+            -relief sunken \
+	    -font "6x10"
+    bind .b.in.d5.e <Return> "SetNewData"
+    frame .b.in.d6 \
+	    -borderwidth 2 \
+	    -relief raised
+    label .b.in.d6.l \
+            -anchor center \
+	    -width 8 \
+	    -textvariable data6name \
+	    -font "6x10"
+    entry .b.in.d6.e \
+            -width 10 \
+            -relief sunken \
+	    -font "6x10"
+    bind .b.in.d6.e <Return> "SetNewData"
+    frame .b.in.d7 \
+	    -borderwidth 2 \
+	    -relief raised
+    label .b.in.d7.l \
+            -anchor center \
+	    -width 8 \
+	    -textvariable data7name \
+	    -font "6x10"
+    entry .b.in.d7.e \
+            -width 10 \
+            -relief sunken \
+	    -font "6x10"
+    bind .b.in.d7.e <Return> "SetNewData"
+    frame .b.in.d8 \
+	    -borderwidth 2 \
+	    -relief raised
+    label .b.in.d8.l \
+            -anchor center \
+	    -width 8 \
+	    -textvariable data8name \
+	    -font "6x10"
+    entry .b.in.d8.e \
+            -width 10 \
+            -relief sunken \
+	    -font "6x10"
+    bind .b.in.d8.e <Return> "SetNewSkip"
+    frame .b.in.d9 \
+	    -borderwidth 2 \
+	    -relief raised
+    label .b.in.d9.l \
+            -anchor center \
+	    -width 8 \
+	    -textvariable data9name \
+	    -font "6x10"
+    entry .b.in.d9.e \
+            -width 10 \
+            -relief sunken \
+	    -font "6x10"
+    bind .b.in.d9.e <Return> "SetNewNumber"
+    button .b.qui \
+	    -height 2 \
+	    -width 14 \
+	    -text "Quit" \
+	    -command "QuitEdit"
+    
+    ###########################################################################
+    # CANVAS PACKER
+    ###########################################################################
+    pack .c.cvp.c        -side right     -expand yes     -fill both
+    pack .c.cvp.s        -side left      -fill y
+    pack .c.cvp          -fill both      -expand yes     -side top
+    pack .c.c
+    pack .c.i.sim        -side left
+    pack .c.i.pic        -side left
+    pack .c.i.script     -side left
+    pack .c.i            -side bottom    -fill x
+    pack .c.scr          -side bottom    -fill x
+    pack .c              -side left      -expand yes     -fill both
+
+    pack .b.help
+    pack .b.edi
+    pack .b.ins1
+    pack .b.ins2
+    pack .b.del
+    pack .b.f
+    pack .b.mode.name
+    pack .b.mode
+    pack .b.save
+    pack .b.sc.ssc.l     -side left
+    pack .b.sc.ssc.sc    -side right
+    pack .b.sc.ssc       -fill x         -expand yes
+    pack .b.sc
+    pack .b.in.x.l1  	 -side left
+    pack .b.in.x.l2  	 -side right     -fill x         -expand yes
+    pack .b.in.x         -fill x
+    pack .b.in.y.l1  	 -side left
+    pack .b.in.y.l2      -side right     -fill x         -expand yes
+    pack .b.in.y         -fill x
+    pack .b.in.type.l1   -side left
+    pack .b.in.type.l2   -side right     -fill x         -expand yes
+    pack .b.in.type      -fill x
+    pack .b.in.d1.l      -side left
+    pack .b.in.d1.e      -side right     -fill x         -expand yes
+    pack .b.in.d1        -fill x
+    pack .b.in.d2.l      -side left
+    pack .b.in.d2.e      -side right     -fill x         -expand yes
+    pack .b.in.d2        -fill x
+    pack .b.in.d3.l      -side left
+    pack .b.in.d3.e      -side right     -fill x         -expand yes
+    pack .b.in.d3        -fill x
+    pack .b.in.d4.l      -side left
+    pack .b.in.d4.e      -side right     -fill x         -expand yes
+    pack .b.in.d4        -fill x
+    pack .b.in.d5.l      -side left
+    pack .b.in.d5.e      -side right     -fill x         -expand yes
+    pack .b.in.d5        -fill x
+    pack .b.in.d6.l      -side left
+    pack .b.in.d6.e      -side right     -fill x         -expand yes
+    pack .b.in.d6        -fill x
+    pack .b.in.d7.l      -side left
+    pack .b.in.d7.e      -side right     -fill x         -expand yes
+    pack .b.in.d7        -fill x
+    pack .b.in.d8.l      -side left
+    pack .b.in.d8.e      -side right     -fill x         -expand yes
+    pack .b.in.d8        -fill x
+    pack .b.in.d9.l      -side left
+    pack .b.in.d9.e      -side right     -fill x         -expand yes
+    pack .b.in.d9        -fill x
+    pack .b.in           -fill x
+    pack .b.qui          -side bottom
+    pack .b              -anchor n       -fill y         -side right
+
+    bind $canvas <ButtonPress-1> \
+		"CanvasButtonPress1 %x %y"
+    bind $canvas <ButtonRelease-1> \
+		"StopMoving"
+    bind $canvas <ButtonRelease-2> \
+		"StopScaling"
+    bind $canvas <ButtonPress-2> \
+		"CanvasButtonPress2 %x %y"
+    bind $canvas <ButtonRelease-3> \
+		"StopTurning"
+    bind $canvas <ButtonPress-3> \
+		"CanvasButtonPress3 %x %y"
+}
+
+###########################################################################
+# UTILS
+###########################################################################
+
+proc GetRotateX { angle x y } {
+    if { $angle != 0.0 } {
+	set x [expr int($x*[expr cos($angle)]-$y*[expr sin($angle)])] 
+    }
+    return $x
+}
+
+proc GetRotateY { angle x y } {
+    if { $angle != 0.0 } {
+	set y [expr int($x*[expr sin($angle)]+$y*[expr cos($angle)])]
+    }
+    return $y
+}
+
+proc GetRealX { CanvasX CanvasY } {
+    global map_offh map_offv sim_scale
+    return [expr ($CanvasY*$sim_scale)-$map_offh]
+}
+
+proc GetRealY { CanvasX CanvasY } {
+    global map_offh map_offv sim_scale
+    return [expr $map_offv-($CanvasX*$sim_scale)]
+}
+
+proc GetCanvasY { RealX RealY } {
+    global map_offh map_offv sim_scale
+    return [expr ($map_offv-$RealY)/$sim_scale]
+}
+
+proc GetCanvasX { RealX RealY } {
+    global map_offh map_offv sim_scale
+    return [expr ($map_offh+$RealX)/$sim_scale]
+}
+
+proc Help {} {
+    toplevel .help
+    wm title .help "Help"
+    label .help.text \
+	-justify left \
+        -text "EDIT MODE\n   Button-1:\t move object\n   Button-2:\t scale object\n   Button-3:\t rotate object\n\nINS. CYL. MODE\n   Button-1:\t insert cylinder\n   Button-2:\t -\n   Button-3:\t -\n\nINS. CUBE MODE\n   Button-1:\t insert cube\n   Button-2:\t -\n   Button-3:\t -\n\nDELETE MODE\n   Button-1:\t delete object\n   Button-2:\t delete object\n   Button-3:\t delete object\n\nSCRIPT MODE\n   Button-1:\t show next skipped scan\n   Button-2:\t set robot position\n   Button-3:\t show next scan"
+    button .help.b \
+        -text "OK" \
+	-command "destroy .help"
+    pack .help.text
+    pack .help.b \
+	-fill x
+}
+
+###########################################################################
+# READ SIMULATOR FILE
+###########################################################################
+
+proc ReadSimMap { filename } {
+    global num_obj canvas objects
+    set file [ open $filename r]
+    while { ![eof $file] } {
+	ScanSimLine [gets $file]
+    }
+    close $file
+}
+
+###########################################################################
+# PARSE ONE SIMULATOR LINE
+###########################################################################
+
+proc ScanSimLine { line } {
+    global canvas map_x1 map_x2 map_y1 map_y2 \
+	    map_color canvas_x canvas_y sim_scale \
+            map_offh map_offv num_obj objects data type robot
+    if { [scan $line "ROBOT %f %f %f" robot_x robot_y robot_o] == 3 } {
+        set robot [list $robot_x $robot_y $robot_o]
+    ###########################################################################
+    # MAP	
+    ###########################################################################
+    } elseif { [scan $line "MGAP %f %f %f %f" \
+	    map_x1 map_y1 map_x2 map_y2] == 4 } {
+	if { [expr $map_x2-$map_x1] < $canvas_x } {
+	    set map_dx [expr $map_x1+$canvas_x]
+	} else {
+	    set map_dx $canvas_x
+	}
+	if { [expr $map_y2-$map_y1] < $canvas_y } {
+	    set map_dy [expr $map_y1+$canvas_y]
+	} else {
+	    set map_dy $canvas_y
+	}
+	set l [list [expr $map_x1*$sim_scale] [expr $map_y1*$sim_scale] \
+		[expr $map_dx*$sim_scale] [expr $map_dy*$sim_scale]]
+	$canvas configure -scrollregion $l
+	set map_offh $map_x1
+	set map_offv $map_x2
+    ###########################################################################
+    # CYLINDER
+    ###########################################################################
+    } elseif { [scan $line "CYLINDER %f %f %f %f %f" \
+	    cyl_x cyl_y cyl_z cyl_r cyl_h] == 5 } {
+        incr num_obj
+        set data(obj$num_obj) [list $cyl_x $cyl_y $cyl_z $cyl_r $cyl_h]
+        set type(obj$num_obj) cylinder
+        lappend objects obj$num_obj
+        $canvas create oval \
+		[GetCanvasX [expr $cyl_x+$cyl_r] [expr $cyl_y+$cyl_r]] \
+		[GetCanvasY [expr $cyl_x+$cyl_r] [expr $cyl_y+$cyl_r]] \
+		[GetCanvasX [expr $cyl_x-$cyl_r] [expr $cyl_y-$cyl_r]] \
+		[GetCanvasY [expr $cyl_x-$cyl_r] [expr $cyl_y-$cyl_r]] \
+		-fill $map_color \
+		-tags [ list map cylinder obj$num_obj ]
+        $canvas bind obj$num_obj <Enter> \
+	        "ShowObject obj$num_obj cylinder"
+        $canvas bind obj$num_obj <Leave> \
+		"$canvas itemconfigure obj$num_obj -fill $map_color"
+        $canvas bind obj$num_obj <ButtonPress-1> \
+		"ButtonPress1 obj$num_obj %x %y cylinder"
+        $canvas bind obj$num_obj <Control-ButtonPress-1> \
+                "focus .b.in.d1.e"
+        $canvas bind obj$num_obj <ButtonPress-2> \
+		"ButtonPress2 obj$num_obj %x %y cylinder"
+        $canvas bind obj$num_obj <ButtonPress-3> \
+		"ButtonPress3 obj$num_obj %x %y cylinder"
+    ###########################################################################
+    # CUBE	
+    ###########################################################################
+    } elseif { [scan $line "CUBE %f %f %f %f %f %f %f" \
+	    cube_x cube_y cube_z cube_w cube_d cube_h cube_a] == 7 } {
+	set delta_x [expr $cube_w/2.0]
+	set delta_y [expr $cube_d/2.0]
+        incr num_obj 
+        set data(obj$num_obj) [list $cube_x $cube_y $cube_z $cube_w \
+				$cube_d $cube_h $cube_a]
+        set type(obj$num_obj) cube
+        lappend objects obj$num_obj
+	$canvas create polygon \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a  $delta_x  $delta_y]] \
+			    [expr $cube_y+[GetRotateY $cube_a  $delta_x  $delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a  $delta_x  $delta_y]] \
+			    [expr $cube_y+[GetRotateY $cube_a  $delta_x  $delta_y]]] \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a -$delta_x  $delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x  $delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a -$delta_x  $delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x  $delta_y]]] \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a -$delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x -$delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a -$delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x -$delta_y]]] \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a  $delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a  $delta_x -$delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a  $delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a  $delta_x -$delta_y]]] \
+		-fill $map_color \
+		-outline black \
+		-tags [ list map cube obj$num_obj ]
+        $canvas bind obj$num_obj <Enter> \
+	        "ShowObject obj$num_obj cube"
+        $canvas bind obj$num_obj <Leave> \
+		"$canvas itemconfigure obj$num_obj -fill $map_color"
+        $canvas bind obj$num_obj <ButtonPress-1> \
+		"ButtonPress1 obj$num_obj %x %y cube"
+        $canvas bind obj$num_obj <Control-ButtonPress-1> \
+                "focus .b.in.d1.e"
+        $canvas bind obj$num_obj <ButtonPress-2> \
+		"ButtonPress2 obj$num_obj %x %y cube"
+        $canvas bind obj$num_obj <ButtonPress-3> \
+		"ButtonPress3 obj$num_obj %x %y cube"
+    }
+}
+
+###########################################################################
+# SAVE SIMULATOR FILES
+###########################################################################
+
+proc SaveSim {} {
+  global data objects type simfile map_y1 map_x1 map_y2 map_x2 robot
+  set file [open $simfile "w"]
+  puts $file "MAP $map_y1 $map_x1 $map_y2 $map_x2"
+  puts $file "ROBOT [lindex $robot 0] [lindex $robot 1] [lindex $robot 2]"
+  foreach tag $objects {
+    if {$type($tag)=="cylinder"} {
+      puts $file "CYLINDER [lindex $data($tag) 0] [lindex $data($tag) 1] \
+	                   [lindex $data($tag) 2] [lindex $data($tag) 3] \
+			   [lindex $data($tag) 4]"
+    }
+    if {$type($tag)=="cube"} {
+      puts $file "CUBE [lindex $data($tag) 0] [lindex $data($tag) 1] \
+	               [lindex $data($tag) 2] [lindex $data($tag) 3] \
+		       [lindex $data($tag) 4] [lindex $data($tag) 5] \
+		       [lindex $data($tag) 6]"
+    }
+  }
+  close $file
+  tk_dialog .saved {Confirm Action} \
+	"   Map saved!   " {} 0 "  OK  "
+}
+
+###########################################################################
+# SHOW BACKGROUND PICTURES
+###########################################################################
+
+proc ShowPicture {} {
+  global canvas
+  $canvas create image 0 0 \
+	-image scanpic \
+	-tags scan \
+	-anchor nw
+  $canvas bind scan <ButtonPress-1> "PicMove scan %x %y"
+  $canvas lower scan
+}
+
+###########################################################################
+# SHOW NEW SCALE FACTOR
+###########################################################################
+
+proc ShowNewScale {} {
+  global sim_scale canvas scriptfile
+  set act_scale $sim_scale
+  set sim_scale [.b.sc.ssc.sc get]
+  if {$sim_scale<0.5} {
+    set sim_scale 0.5
+  } elseif {$sim_scale>20.0} {
+    set sim_scale 20.0
+  }
+  .b.sc.ssc.sc delete 0 end
+  .b.sc.ssc.sc insert 0 $sim_scale
+  set new_scale [expr $act_scale/$sim_scale]
+  $canvas scale map 0 0 [expr $new_scale] [expr $new_scale]
+  if {$scriptfile!="---"} {
+    ShowActualScan
+  }
+}
+
+###########################################################################
+# QUIT
+###########################################################################
+
+proc QuitEdit {} {
+  if {[tk_dialog .delete {Confirm Action} \
+	{Are you sure?} {} 0 "  No  " "  Yes "]==1} {
+    destroy .
+  }
+}
+
+###########################################################################
+# MODES
+###########################################################################
+
+proc InsertMode1 {} {
+  global modename mode
+  set mode 1
+  set modename "Insert\nCylinder"
+}
+
+proc InsertMode2 {} {
+  global modename mode
+  set mode 2
+  set modename "Insert\nCube"
+}
+
+proc DeleteMode {} {
+  global modename mode
+  set mode 3
+  set modename "Delete"
+}
+
+proc EditMode {} {
+  global modename mode
+  set mode 4
+  set modename "Edit"
+}
+
+proc ScriptMode {} {
+  global modename mode
+  set mode 5
+  set modename "Script"
+}
+
+###########################################################################
+# MODES (MOVING)
+###########################################################################
+
+proc PicMove {tag x y} {
+  global canvas ActPicX ActPicY
+  bind $canvas <Motion> "PicMoving $tag %x %y; SetPos %x %y"
+  set ActPicX $x
+  set ActPicY $y
+}
+
+proc PicMoving {tag x y} {
+  global canvas ActPicX ActPicY
+  set DiffX [expr $x-$ActPicX]
+  set DiffY [expr $y-$ActPicY]
+  $canvas move $tag $DiffX $DiffY
+  set ActPicX $x
+  set ActPicY $y
+}
+
+proc ButtonPress1 {tag x y type} {
+  global canvas ActPosX ActPosY mode objects num_obj
+  if {$mode==5} {
+    ShowSkippedScan
+  }
+  if {$mode==4} {
+    set ActPosX $x
+    set ActPosY $y
+    bind $canvas <Motion> "DoMoving $tag %x %y $type; SetPos %x %y"
+  }
+  if {$mode==3} {
+    $canvas delete $tag
+    set num [lsearch $objects $tag]
+    set objects [lreplace $objects $num $num]
+  }
+}
+
+proc DoMoving {tag x y type} {
+  global canvas ActPosX ActPosY sim_scale data
+  set DiffX [expr $x-$ActPosX]
+  set DiffY [expr $y-$ActPosY]
+  $canvas move $tag $DiffX $DiffY
+  if { $type=="cube" } {
+       set data($tag) \
+ 	  [list [expr [lindex $data($tag) 0]+($DiffX*$sim_scale)] \
+	        [expr [lindex $data($tag) 1]-($DiffY*$sim_scale)] \
+		[lindex $data($tag) 2] \
+		[lindex $data($tag) 3] \
+		[lindex $data($tag) 4] \
+		[lindex $data($tag) 5] \
+		[lindex $data($tag) 6] ]
+  } else {
+       set data($tag) \
+ 	  [list [expr [lindex $data($tag) 0]+($DiffX*$sim_scale)] \
+	        [expr [lindex $data($tag) 1]-($DiffY*$sim_scale)] \
+		[lindex $data($tag) 2] \
+		[lindex $data($tag) 3] \
+		[lindex $data($tag) 4] ]
+  }
+  set ActPosX $x
+  set ActPosY $y
+}
+
+proc StopMoving {} {
+  global canvas
+  bind $canvas <Motion> "SetPos %x %y"
+}
+
+###########################################################################
+# MODES (SCALING)
+###########################################################################
+
+proc ButtonPress2 {tag x y type} {
+  global canvas SclPosX SclPosY ActDist actobj data sim_scale mode objects
+  if {$mode==4} {
+    set actobj $tag
+    set SclPosX [expr [lindex $data($tag) 0]/$sim_scale]
+    set SclPosY [expr [lindex $data($tag) 1]/$sim_scale]
+    set ActDist [expr sqrt((($x-$SclPosX)*($x-$SclPosX))+\
+		(($y-$SclPosY)*($y-$SclPosY)))]
+    bind $canvas <Motion> "DoScaling $tag %x %y $type; SetPos %x %y"
+  }
+  if {$mode==3} {
+    $canvas delete $tag
+    set num [lsearch $objects $tag]
+    set objects [lreplace $objects $num $num]
+  }
+  if {$mode==5} {
+    SetRobotPos $x $y
+  }
+}
+
+proc DoScaling {tag x y type} {
+  global canvas SclPosX SclPosY ActDist data sim_scale map_color
+  set Dist [expr sqrt((($x-$SclPosX)*($x-$SclPosX))+\
+		(($y-$SclPosY)*($y-$SclPosY)))]
+  set Scale [expr 1.0+($Dist-$ActDist)/25.0]
+  if { $type=="cube" } {
+      set cube_x [lindex $data($tag) 0]
+      set cube_y [lindex $data($tag) 1]
+      set cube_z [lindex $data($tag) 2]
+      set cube_w [expr [lindex $data($tag) 3]*$Scale]
+      set cube_d [expr [lindex $data($tag) 4]*$Scale]
+      set cube_h [lindex $data($tag) 5]
+      set cube_a [lindex $data($tag) 6]
+      set delta_x [expr $cube_w/2.0]
+      set delta_y [expr $cube_d/2.0]
+      set data($tag) [list $cube_x $cube_y $cube_z $cube_w $cube_d $cube_h $cube_a]
+      $canvas delete $tag
+      $canvas create polygon \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a  $delta_x  $delta_y]] \
+			    [expr $cube_y+[GetRotateY $cube_a  $delta_x  $delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a  $delta_x  $delta_y]] \
+			    [expr $cube_y+[GetRotateY $cube_a  $delta_x  $delta_y]]] \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a -$delta_x  $delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x  $delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a -$delta_x  $delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x  $delta_y]]] \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a -$delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x -$delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a -$delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x -$delta_y]]] \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a  $delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a  $delta_x -$delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a  $delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a  $delta_x -$delta_y]]] \
+		-fill $map_color \
+		-outline black \
+		-tags [ list map cube $tag ]
+  } else {
+	set cyl_x [lindex $data($tag) 0]
+	set cyl_y [lindex $data($tag) 1]
+	set cyl_z [lindex $data($tag) 2]
+	set cyl_r [expr [lindex $data($tag) 3]*$Scale]
+	set cyl_h [lindex $data($tag) 4]
+  	set data($tag) [list $cyl_x $cyl_y $cyl_z $cyl_r $cyl_h]
+  	$canvas delete $tag
+        $canvas create oval \
+		[GetCanvasX [expr $cyl_x+$cyl_r] [expr $cyl_y+$cyl_r]] \
+		[GetCanvasY [expr $cyl_x+$cyl_r] [expr $cyl_y+$cyl_r]] \
+		[GetCanvasX [expr $cyl_x-$cyl_r] [expr $cyl_y-$cyl_r]] \
+		[GetCanvasY [expr $cyl_x-$cyl_r] [expr $cyl_y-$cyl_r]] \
+		-fill $map_color \
+		-tags [ list map cylinder $tag ]
+  }
+  set ActDist $Dist
+}
+
+proc StopScaling {} {
+  global canvas
+  bind $canvas <Motion> "SetPos %x %y"
+}
+
+###########################################################################
+# MODES (TURNING)
+###########################################################################
+
+proc ButtonPress3 {tag x y type} {
+  global canvas TrnPosX or data actobj mode objects
+  if {$mode==4} {
+    set actobj $tag
+    set TrnPosX $x
+    if { $type=="cube" } {
+      set or [lindex $data($tag) 6]
+    }
+    bind $canvas <Motion> "DoTurning $tag %x $type; SetPos %x %y"
+  }
+  if {$mode==3} {
+    $canvas delete $tag
+    set num [lsearch $objects $tag]
+    set objects [lreplace $objects $num $num]
+  }
+  if {$mode==5} {
+    ShowNextScan
+  }
+}
+
+proc DoTurning {tag x type} {
+  global canvas TrnPosX ActOr data map_color sim_scale or
+  if { $type=="cube" } {
+      set cube_x [lindex $data($tag) 0]
+      set cube_y [lindex $data($tag) 1]
+      set cube_z [lindex $data($tag) 2]
+      set cube_w [lindex $data($tag) 3]
+      set cube_d [lindex $data($tag) 4]
+      set cube_h [lindex $data($tag) 5]
+      set cube_a [lindex $data($tag) 6]
+      set delta_x [expr $cube_w/2.0]
+      set delta_y [expr $cube_d/2.0]
+      set cube_a [expr $cube_a+(2*3.1415*((fmod((($x-$TrnPosX)),500))/500.0))]
+      set data($tag) [list $cube_x $cube_y $cube_z $cube_w $cube_d $cube_h $cube_a]
+      set TrnPosX $x
+      $canvas delete $tag
+      $canvas create polygon \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a  $delta_x  $delta_y]] \
+			    [expr $cube_y+[GetRotateY $cube_a  $delta_x  $delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a  $delta_x  $delta_y]] \
+			    [expr $cube_y+[GetRotateY $cube_a  $delta_x  $delta_y]]] \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a -$delta_x  $delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x  $delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a -$delta_x  $delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x  $delta_y]]] \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a -$delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x -$delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a -$delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x -$delta_y]]] \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a  $delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a  $delta_x -$delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a  $delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a  $delta_x -$delta_y]]] \
+		-fill $map_color \
+		-outline black \
+		-tags [ list map cube $tag ]
+  }
+}
+
+proc StopTurning {} {
+  global canvas
+  bind $canvas <Motion> "SetPos %x %y"
+}
+
+###########################################################################
+# MODES
+###########################################################################
+
+proc CanvasButtonPress1 {x y} {
+  global canvas StartPosX StartPosY mode objects num_obj type sim_scale
+  set region [lindex [$canvas configure -scrollregion] 4]
+  set w [expr abs([lindex $region 0]-[lindex $region 2])]
+  set h [expr abs([lindex $region 1]-[lindex $region 3])]
+  set newx [expr (([lindex [.c.scr get] 0]*$w)+$x)]
+  set newy [expr (([lindex [.c.cvp.s get] 0]*$h)+$y)]
+  if {$mode==1} {
+    incr num_obj
+    set tag obj$num_obj
+    set type($tag) cylinder
+    set StartPosX $newx
+    set StartPosY $newy
+    lappend objects $tag
+    bind $canvas <Motion> "CreateCylinder $tag %x %y; SetPos %x %y"
+  }
+  if {$mode==2} {
+    incr num_obj
+    set tag obj$num_obj
+    set type($tag) cube
+    set StartPosX $newx
+    set StartPosY $newy
+    lappend objects $tag
+    bind $canvas <Motion> "CreateCube $tag %x %y; SetPos %x %y"
+  }
+  if {$mode==5} {
+    ShowSkippedScan
+  }
+}
+
+proc CanvasButtonPress2 {x y} {
+  global mode
+  if {$mode==5} {
+    SetRobotPos $x $y
+  }
+}
+
+proc CanvasButtonPress3 {x y} {
+  global mode
+  if {$mode==5} {
+    ShowNextScan
+  }
+}
+
+###########################################################################
+# CREATE A CYLINDER
+###########################################################################
+
+proc CreateCylinder {tag x y} {
+    global canvas StartPosX StartPosY sim_scale map_color data
+    set region [lindex [$canvas configure -scrollregion] 4]
+    set w [expr abs([lindex $region 0]-[lindex $region 2])]
+    set h [expr abs([lindex $region 1]-[lindex $region 3])]
+    set newx [expr (([lindex [.c.scr get] 0]*$w)+$x)]
+    set newy [expr (([lindex [.c.cvp.s get] 0]*$h)+$y)]
+    set Distance [expr sqrt((($newx-$StartPosX)*($newx-$StartPosX))+\
+	                    (($newy-$StartPosY)*($newy-$StartPosY)))]
+    set data($tag) [list [GetRealX $StartPosY $StartPosX] \
+      	                 [GetRealY $StartPosY $StartPosX] \
+			 150.0 \
+			 [expr $Distance*$sim_scale] \
+			 300.0]
+    $canvas delete $tag
+    set x1 [expr $StartPosX-($Distance*$sim_scale/2.0)]
+    set y1 [expr $StartPosY-($Distance*$sim_scale/2.0)]
+    set x2 [expr $StartPosX+($Distance*$sim_scale/2.0)]
+    set y2 [expr $StartPosY+($Distance*$sim_scale/2.0)]
+    $canvas create oval \
+	    $x1 $y1 $x2 $y2 \
+	    -fill $map_color \
+	    -tags [list map cylinder $tag]
+    $canvas bind $tag <Enter> \
+	    "ShowObject $tag cylinder"
+    $canvas bind $tag <Leave> \
+	    "$canvas itemconfigure $tag -fill $map_color"
+    $canvas bind $tag <ButtonPress-1> \
+	    "ButtonPress1 $tag %x %y cylinder"
+    $canvas bind $tag <Control-ButtonPress-1> \
+	    "focus .b.in.d1.e"
+    $canvas bind $tag <ButtonPress-2> \
+	    "ButtonPress2 $tag %x %y cylinder"
+    $canvas bind $tag <ButtonPress-3> \
+	    "ButtonPress3 $tag %x %y cylinder"
+}
+
+###########################################################################
+# CREATE A CUBE
+###########################################################################
+
+proc CreateCube {tag x y} {
+    global canvas StartPosX StartPosY sim_scale map_color data
+    set region [lindex [$canvas configure -scrollregion] 4]
+    set w [expr abs([lindex $region 0]-[lindex $region 2])]
+    set h [expr abs([lindex $region 1]-[lindex $region 3])]
+    set newx [expr (([lindex [.c.scr get] 0]*$w)+$x)]
+    set newy [expr (([lindex [.c.cvp.s get] 0]*$h)+$y)]
+    set PosX [expr $StartPosY+(($newy-$StartPosY)/2.0)]
+    set PosY [expr $StartPosX+(($newx-$StartPosX)/2.0)]
+    set PosD [expr abs(($newy-$StartPosY)*$sim_scale)]
+    set PosW [expr abs(($newx-$StartPosX)*$sim_scale)]
+    set data($tag) [list [GetRealX $PosX $PosY] \
+	                 [GetRealY $PosX $PosY] \
+                         150.0 \
+			 $PosW \
+			 $PosD \
+			 300.0 \
+			 0.0]
+    $canvas delete $tag
+    $canvas create rectangle \
+	    $StartPosX $StartPosY $newx $newy \
+	    -fill $map_color \
+	    -tags [list map cube $tag]
+    $canvas bind $tag <Enter> \
+	    "ShowObject $tag cube"
+    $canvas bind $tag <Leave> \
+	    "$canvas itemconfigure $tag -fill $map_color"
+    $canvas bind $tag <ButtonPress-1> \
+	    "ButtonPress1 $tag %x %y cube"
+    $canvas bind $tag <Control-ButtonPress-1> \
+	    "focus .b.in.d1.e"
+    $canvas bind $tag <ButtonPress-2> \
+	    "ButtonPress2 $tag %x %y cube"
+    $canvas bind $tag <ButtonPress-3> \
+	    "ButtonPress3 $tag %x %y cube"
+}
+
+###########################################################################
+# SHOW ACTUAL X/Y COORDS
+###########################################################################
+
+proc SetPos {x y} {
+  global posx posy sim_scale canvas
+  set region [lindex [$canvas configure -scrollregion] 4]
+  set w [expr abs([lindex $region 0]-[lindex $region 2])]
+  set h [expr abs([lindex $region 1]-[lindex $region 3])]
+  set py [expr (([lindex [.c.scr get] 0]*$w)+$x)]
+  set px [expr (([lindex [.c.cvp.s get] 0]*$h)+$y)]
+  set posx [GetRealX $px $py]
+  set posy [GetRealY $px $py]
+}
+
+###########################################################################
+# SHOW OBJECT DATA
+###########################################################################
+
+proc ShowObject {tag name} {
+  global atag canvas typename data data1name data2name \
+    data3name data4name data5name data6name data7name
+  $canvas itemconfigure $tag -fill red
+  set typename $name
+  set atag $tag
+  if {$name=="cube"} {
+    set data1name "X"
+    set data2name "Y"
+    set data3name "Z"
+    set data4name "Width"
+    set data5name "Length"
+    set data6name "Height"
+    set data7name "Angle"
+    .b.in.d1.e delete 0 end
+    .b.in.d1.e insert 0 [lindex $data($tag) 0]
+    .b.in.d2.e delete 0 end
+    .b.in.d2.e insert 0 [lindex $data($tag) 1]
+    .b.in.d3.e delete 0 end
+    .b.in.d3.e insert 0 [lindex $data($tag) 2]
+    .b.in.d4.e delete 0 end
+    .b.in.d4.e insert 0 [lindex $data($tag) 3]
+    .b.in.d5.e delete 0 end
+    .b.in.d5.e insert 0 [lindex $data($tag) 4]
+    .b.in.d6.e delete 0 end
+    .b.in.d6.e insert 0 [lindex $data($tag) 5]
+    .b.in.d7.e delete 0 end
+    .b.in.d7.e insert 0 [expr ([lindex $data($tag) 6]/3.1415)*180.0]    
+  } else {
+    set data1name "X"
+    set data2name "Y"
+    set data3name "Z"
+    set data4name "Radius"
+    set data5name "Height"
+    set data6name ""
+    set data7name ""
+    .b.in.d1.e delete 0 end
+    .b.in.d1.e insert 0 [lindex $data($tag) 0]
+    .b.in.d2.e delete 0 end
+    .b.in.d2.e insert 0 [lindex $data($tag) 1]
+    .b.in.d3.e delete 0 end
+    .b.in.d3.e insert 0 [lindex $data($tag) 2]
+    .b.in.d4.e delete 0 end
+    .b.in.d4.e insert 0 [lindex $data($tag) 3]
+    .b.in.d5.e delete 0 end
+    .b.in.d5.e insert 0 [lindex $data($tag) 4]
+    .b.in.d6.e delete 0 end
+    .b.in.d7.e delete 0 end
+  }
+}
+
+###########################################################################
+# CHANGE DATA
+###########################################################################
+
+proc ChangeData {tag} {
+  focus .b.in.d1.e
+}
+
+###########################################################################
+# STORE NEW DATA
+###########################################################################
+
+proc SetNewData {} {
+    global atag type data canvas map_color sim_scale
+    if {$type($atag)=="cube"} {
+	set l [list \
+		[.b.in.d1.e get] \
+		[.b.in.d2.e get] \
+		[.b.in.d3.e get] \
+		[.b.in.d4.e get] \
+		[.b.in.d5.e get] \
+		[.b.in.d6.e get] \
+		[expr ([.b.in.d7.e get]/180.0)*3.1415] ]
+	set cube_x [.b.in.d1.e get]
+	set cube_y [.b.in.d2.e get]
+	set cube_w [.b.in.d4.e get]
+	set cube_d [.b.in.d5.e get]
+	set cube_a [expr ([.b.in.d7.e get]/180.0)*3.1415]
+	set delta_x [expr $cube_w/2.0]
+	set delta_y [expr $cube_d/2.0]
+	
+	$canvas delete $atag
+	$canvas create polygon \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a  $delta_x  $delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a  $delta_x  $delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a  $delta_x  $delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a  $delta_x  $delta_y]]] \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a -$delta_x  $delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x  $delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a -$delta_x  $delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x  $delta_y]]] \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a -$delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x -$delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a -$delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a -$delta_x -$delta_y]]] \
+		[GetCanvasX [expr $cube_x+[GetRotateX $cube_a  $delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a  $delta_x -$delta_y]]] \
+		[GetCanvasY [expr $cube_x+[GetRotateX $cube_a  $delta_x -$delta_y]] \
+		            [expr $cube_y+[GetRotateY $cube_a  $delta_x -$delta_y]]] \
+		-fill $map_color \
+		-outline black \
+		-tags [ list map cube $atag ]
+	$canvas bind $atag <Enter> \
+		"ShowObject $atag cube"
+	$canvas bind $atag <Leave> \
+		"$canvas itemconfigure $atag -fill $map_color"
+	$canvas bind $atag <ButtonPress-1> \
+		"ButtonPress1 $atag %x %y cube"
+	$canvas bind $atag <Control-ButtonPress-1> \
+		"focus .b.in.d1.e"
+	$canvas bind $atag <ButtonPress-2> \
+		"ButtonPress2 $atag %x %y cube"
+	$canvas bind $atag <ButtonPress-3> \
+		"ButtonPress3 $atag %x %y cube"
+    } else {
+	set l [list \
+		[.b.in.d1.e get] \
+		[.b.in.d2.e get] \
+		[.b.in.d3.e get] \
+		[.b.in.d4.e get] \
+		[.b.in.d5.e get] ]
+	set cyl_x [.b.in.d1.e get]
+	set cyl_y [.b.in.d2.e get]
+	set cyl_r [.b.in.d4.e get]
+	$canvas delete $atag
+        $canvas create oval \
+		[GetCanvasX [expr $cyl_x+$cyl_r] [expr $cyl_y+$cyl_r]] \
+		[GetCanvasY [expr $cyl_x+$cyl_r] [expr $cyl_y+$cyl_r]] \
+		[GetCanvasX [expr $cyl_x-$cyl_r] [expr $cyl_y-$cyl_r]] \
+		[GetCanvasY [expr $cyl_x-$cyl_r] [expr $cyl_y-$cyl_r]] \
+		-fill $map_color \
+		-tags [ list map cylinder $atag ]
+	$canvas bind $atag <Enter> \
+		"ShowObject $atag cylinder"
+	$canvas bind $atag <Leave> \
+		"$canvas itemconfigure $atag -fill $map_color"
+	$canvas bind $atag <ButtonPress-1> \
+		"ButtonPress1 $atag %x %y cylinder"
+	$canvas bind $atag <Control-ButtonPress-1> \
+		"focus .b.in.d1.e"
+	$canvas bind $atag <ButtonPress-2> \
+		"ButtonPress2 $atag %x %y cylinder"
+	$canvas bind $atag <ButtonPress-3> \
+		"ButtonPress3 $atag %x %y cylinder"
+    }
+    set data($atag) $l
+}
+
+###########################################################################
+# OPEN SCRIPT FILE
+###########################################################################
+
+proc OpenScriptFile {filename} {
+    global scriptf
+    set scriptf [open $filename "r"]
+}
+
+###########################################################################
+# GET NEXT SCRIPTLINE
+###########################################################################
+
+proc NextScriptLine {skip} {
+    global scriptf sposx sposy sposo sdata rposx rposy rposo scanctr fscan rscan
+    set found 0
+    set counter 0
+    set nposx $sposx
+    set nposy $sposy
+    set nposo $sposo
+    while {$found==0} {
+	if {[eof $scriptf]!=1} {
+	    set line [gets $scriptf]
+	    if {[string match "#ROBOT*" $line]==1} {
+               set nposx [lindex $line 1]
+               set nposy [lindex $line 2]
+               set ndeg [lindex $line 3]
+               set nposo [expr -($ndeg/180.0)*3.1415]
+	    }
+	    if {[string match "#LASER*" $line]==1} {
+		if {$counter<$skip} {
+		    incr counter
+		} else {
+		    set found 1
+		}
+	    }
+	} else {
+	    return
+	}
+    }
+    set fscan [lindex $line 1]
+    set nscan [lindex $line 2]
+    set rscan [string range $nscan 0 [expr [string length $nscan]-2]]
+    for {set i 0} {$i<$fscan} {incr i} {
+	set sdata($i) [lindex $line [expr $i+3]]
+    }
+    for {set i $fscan} {$i<[expr $fscan+$rscan]} {incr i} {
+	set sdata($i) [lindex $line [expr $i+3]]
+    }
+    set diffl [movementBetweenPoints $sposx $sposy $sposo\
+	                             $nposx $nposy $nposo]
+    set nrl [endPoint $rposx $rposy $rposo \
+                      [lindex $diffl 0]\
+		      [lindex $diffl 1]\
+		      [lindex $diffl 2]]
+    set rposx [lindex $nrl 0]
+    set rposy [lindex $nrl 1]
+    set rposo [lindex $nrl 2]
+    set sposx $nposx
+    set sposy $nposy
+    set sposo $nposo
+    set scanctr [expr $scanctr+$skip+1]
+    .b.in.d9.e delete 0 end
+    .b.in.d9.e insert 0 $scanctr
+}    
+
+###########################################################################
+# DISPLAY ROBOT
+###########################################################################
+
+proc DisplayRobot {sx sy o} {
+    global canvas sim_scale
+    $canvas delete srobot
+    $canvas create oval [GetCanvasX [expr ($sx-25)] [expr ($sy-25)]] \
+	                [GetCanvasY [expr ($sx-25)] [expr ($sy-25)]] \
+	                [GetCanvasX [expr ($sx+25)] [expr ($sy+25)]] \
+			[GetCanvasY [expr ($sx+25)] [expr ($sy+25)]] \
+	    -fill yellow \
+	    -tag srobot
+    set elist [endPoint $sx $sy $o 25 0 0]
+    $canvas create line [GetCanvasX $sx $sy] \
+                        [GetCanvasY $sx $sy] \
+	                [GetCanvasX [expr [lindex $elist 0]] \
+			            [expr [lindex $elist 1]] ] \
+	                [GetCanvasY [expr [lindex $elist 0]] \
+			            [expr [lindex $elist 1]] ] \
+	    -fill black \
+	    -tag srobot
+}
+
+###########################################################################
+# UTILS FOR SCANS
+###########################################################################
+
+proc movementBetweenPoints { sx sy so ex ey eo } {
+    # compute forward and sideward sensing_MOVEMENT 
+    set dforw [expr ($ey-$sy)*sin($so)+\
+	    ($ex-$sx)*cos($so)]
+    set dside [expr ($ex-$sx)*sin($so)-\
+	    ($ey-$sy)*cos($so)]
+    set drot  [expr $eo-$so]
+    return [list $dforw $dside $drot]
+}
+
+proc endPoint { sx sy so mforw mside mrot } {
+    set cosRot [expr cos($so)]
+    set sinRot [expr sin($so)]
+    
+    if { ($mforw==0.0) & ($mside==0.0) & ($mrot==0.0) } {
+	return [list $sx $sy $so]
+    }
+    # Replaced cos(r-90) by sin(r) and sin(r-90) by -cos(r)
+    set ex [expr $sx + $cosRot*$mforw + $sinRot*$mside]
+    set ey [expr $sy + $sinRot*$mforw - $cosRot*$mside]
+    set eo [expr $so - $mrot]
+    return [list $ex $ey $eo]
+}
+
+###########################################################################
+# SHOW SCAN
+###########################################################################
+
+proc ShowActualScan {} {
+    global rposx rposy rposo sdata canvas sim_scale fscan rscan
+    set offset 0
+    set center [endPoint $rposx $rposy $rposo 5 0 0]
+    set centerx [lindex $center 0]
+    set centery [lindex $center 1]    
+    set centero [expr [lindex $center 2]-1.57]
+    set scanlist [list [GetCanvasX $centerx $centery] \
+                       [GetCanvasY $centerx $centery]]
+    for {set i 0} {$i<$fscan} {incr i} {
+	set scan [endPoint $centerx $centery [expr $centero+((179-$i)/180.0)*3.1415]\
+                           $sdata([expr 179-$i]) 0 0]
+	lappend scanlist [GetCanvasX [lindex $scan 0] [lindex $scan 1]] \
+	                 [GetCanvasY [lindex $scan 0] [lindex $scan 1]]
+	
+#	lappend scanlist [expr [lindex $scan 0]/$sim_scale]\
+#                         [expr [lindex $scan 1]/$sim_scale]
+    }
+    lappend scanlist [GetCanvasX $centerx $centery] \
+	             [GetCanvasY $centerx $centery]
+    $canvas delete scan 
+    eval $canvas create polygon $scanlist -fill dodgerblue3 -tag scan
+    if {($rscan>0)} {
+	set center [endPoint $rposx $rposy $rposo $offset 0 0]
+	set centerx [lindex $center 0]
+	set centery [lindex $center 1]    
+	set centero [expr [lindex $center 2]-1.57]
+        set scanlist [list [GetCanvasX $centerx $centery] \
+                           [GetCanvasY $centerx $centery]]
+	for {set i $fscan} {$i<[expr $fscan+$rscan]} {incr i} {
+	    set scan [endPoint $centerx $centery [expr $centero+(($i)/180.0)*3.1415]\
+		    $sdata($i) 0 0]
+  	    lappend scanlist [GetCanvasX [lindex $scan 0] [lindex $scan 1]] \
+	                     [GetCanvasY [lindex $scan 0] [lindex $scan 1]]
+	}
+        lappend scanlist [GetCanvasX $centerx $centery] \
+	                 [GetCanvasY $centerx $centery]
+	eval $canvas create polygon $scanlist -fill dodgerblue3 -tag scan
+    }
+    DisplayRobot $rposx $rposy $rposo
+}
+
+###########################################################################
+# SET ROBOT
+###########################################################################
+
+proc SetRobotPos {x y} {
+    global posx posy sim_scale canvas rposx rposy rposo scansx scansy
+    set region [lindex [$canvas configure -scrollregion] 4]
+    set w [expr abs([lindex $region 0]-[lindex $region 2])]
+    set h [expr abs([lindex $region 1]-[lindex $region 3])]
+    set sposx [expr (([lindex [.c.scr get] 0]*$w)+$x)]
+    set sposy [expr (([lindex [.c.cvp.s get] 0]*$h)+$y)]
+    set rposx [GetRealX $sposy $sposx]
+    set rposy [GetRealY $sposy $sposx]
+    DisplayRobot $rposx $rposy 0
+    ShowActualScan
+}
+
+###########################################################################
+# GET NEXT SCAN
+###########################################################################
+
+proc ShowNextScan {} {
+    global arposo
+    NextScriptLine 0
+    set arposo 0
+    .c.c xview moveto 0.5
+    ShowActualScan
+}
+
+proc ShowSkippedScan {} {
+    global jump arposo
+    NextScriptLine [expr $jump-1]
+    set arposo 0
+    .c.c xview moveto 0.5
+    ShowActualScan
+}
+
+proc SetNewNumber {} {
+    global scanctr
+    set num [.b.in.d9.e get]
+    if {$num>$scanctr} {
+	NextScriptLine [expr $num-($scanctr+1)]
+	ShowActualScan
+    } else {
+	.b.in.d9.e delete 0 end
+	.b.in.d9.e insert 0 $scanctr
+    }
+}
+proc SetNewSkip {} {
+    global jump
+    set num [.b.in.d8.e get]
+    if {$num<1} {
+	.b.in.d8.e delete 0 end
+	.b.in.d8.e insert 0 $jump
+    } else {
+	set jump $num
+    }
+}
+
+proc RotateScan args {
+    if {[lindex $args 0]=="moveto"} {
+      set nas [lindex $args 1]
+      RotateScan2 [expr ($nas-0.5)*6.283]
+      .c.c xview moveto $nas
+    }
+    if {[lindex $args 0]=="scroll"} {
+      if {[lindex $args 2]=="pages"} {
+        set aw [.c.scr2 get]
+	set nas [expr [lindex $aw 0]+\
+	          ([lindex $aw 1]-[lindex $aw 0])*[lindex $args 1]]
+        RotateScan2 [expr ($nas-0.5)*6.283]
+        .c.c xview moveto $nas
+      } elseif {[lindex $args 2]=="units"} {
+        set aw [.c.scr2 get]
+	set nas [expr [lindex $aw 0]+\
+	          ([lindex $aw 1]-[lindex $aw 0])*0.1*[lindex $args 1]]
+        RotateScan2 [expr ($nas-0.5)*6.283]
+        .c.c xview moveto $nas
+      }
+    }
+}
+
+proc RotateScan2 {arc} {
+   global canvas rposo arposo
+   set diff $arposo-$arc
+   set rposo [expr $rposo+$diff]
+   set arposo $arc
+   ShowActualScan
+}
+
+####################################################
+##                 MAIN                           ##
+####################################################
+
+set abort 0
+set simfile "---"
+set picfile "---"
+set scriptfile "---"
+
+if {$argc<1} {
+    set abort 1
+} else {
+    for {set i 0} {$i<[expr $argc-1]} {incr i} {
+	if {[lindex $argv $i]=="-picture"} {
+	    if {[expr $i+2]<$argc} {
+		incr i
+		set picfile [lindex $argv $i]
+	    } else {
+		set abort 1
+	    }
+	} elseif {[lindex $argv $i]=="-script"} {
+	    if {[expr $i+2]<$argc} {
+		incr i
+		set scriptfile [lindex $argv $i]
+	    } else {
+		set abort 1
+	    }
+	} else {
+	    set abort 1
+	}
+    }
+    set simfile [lindex $argv [expr $argc-1]]
+}
+
+if {$abort!=0} {
+  puts "\nUSAGE: $argv0 \[options\] <SIM-File>\n"
+  puts "       options:    -picture <PIC-File>"
+  puts "                   -script <SCRIPT-File>\n"
+  exit 0
+}
+
+CreateMainWindow
+
+.c.i.pic configure -text "Picture: [string range $picfile 0 15]"
+.c.i.sim configure -text "Simulator Map: [string range $simfile 0 15]"
+.c.i.script configure -text "Script: [string range $scriptfile 0 15]"
+ 
+if {$picfile!="---"} {
+    if {![file exists $picfile]} {
+	puts "there is no picture $picfile ..."
+	exit 0
+    } else {
+	image create photo scanpic \
+		-file $picfile
+        ShowPicture
+    }
+}
+
+if {$scriptfile!="---"} {
+  if {![file exists $scriptfile]} {
+      puts "there is no script $scriptfile ..."
+      exit 0
+  } else {
+      OpenScriptFile $scriptfile
+      NextScriptLine 0
+      set data8name "Skip:"
+      .b.in.d8.e delete 0 end
+      .b.in.d8.e insert 0 $jump
+      set data9name "Number:"
+      pack .c.scr2 -side bottom -fill x
+      pack .b.f.scr
+      set arposo 0
+      .c.c xview moveto 0.5
+      ShowActualScan
+  }
+}
+
+if {[file exists $simfile]} {
+    ReadSimMap $simfile
+} else {
+    close [open $simfile "w"]
+}
+

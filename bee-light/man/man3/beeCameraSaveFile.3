@@ -1,0 +1,54 @@
+.TH BEECAMERASAVEFILE 3 "April 27, 1999" "BeeSoft Light" "BeeSoft Light"
+
+.SH NAME
+beeCameraSaveFile \- request to cameraServer to save images in a file
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "int beeCameraSaveFile(int " numGrabber ", char * " filename ", int " num ");"
+
+.SH DESCRIPTION
+.B "beeCameraSaveFile()"
+requests to cameraServer to save images in a file. 
+.I "numGrabber" 
+specifies the grabber number. 
+.I "filename"
+specifies the name of file to which the images will save.
+And
+.I "num" 
+specifies the number of images which are requested. -1 means
+to save continuous images and 0 means to stop.
+The function requests to cameraServer and 
+then returns.
+
+
+.SH "RETURN VALUE"
+On success, the function will return TRUE.  On error, 
+.B "beeCameraSaveFile()"
+will return FALSE.
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.BI "tcxServer" ,
+.B "colliServer"
+and
+.B "cameraServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs 
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+and
+.B "beeCameraConnect()"
+first in your program. Otherwise, the function will return FALSE.
+
+.SH SEE ALSO
+.BR "beeInitialize" (3),
+.BR "beeCameraConnect" (3),
+.BR "beeCameraLoadFile" (3),
+.BR "beeCameraRequestShmId" (3)
+
+

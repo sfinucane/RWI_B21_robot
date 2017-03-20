@@ -1,0 +1,81 @@
+.TH BEEAPPROACHABSOLUTE 3 "April 2, 1999" "BeeSoft Light" "BeeSoft Light" 
+.SH NAME
+beeApproachAbsolute, beeGotoAbsolute \- move a BeeSoft Light robot to an absolute position
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "bool beeApproachAbsolute(float " target_x ", float " target_y ");"
+
+.BI "bool beeGotoAbsolute(float " target_x ", float " target_y ");"
+
+.SH DESCRIPTION
+
+.B "beeApproachAbsolute()"
+and 
+.B "beeGotoAbsolute()"
+move a BeeSoft Light robot to an absolute position. It is defined by
+a global map. The 
+.I "target_x" 
+and
+.I "target_y"
+arguments specify the coordinate of the destination. The measure is 
+centimeter. The robot will move to the expected point. The difference is that
+.B "beeGotoAbsolute()" 
+uses Planner server modules to compute the optimal route to the destination, 
+while 
+.B "beeApproachAbsoulte()" 
+uses only colliServer's collision avoidance function. 
+Planner server modules uses the loaded map and set some sub-goals 
+before the destination. Thus it help
+.B "beeGotoAbsolute()" 
+reach the destination in a short time.
+.B "beeApproachAbsolute()"
+does not use Planner to compute its route. It 
+merely uses colliServer's collision avoidance to route by obstacles
+before the destination. Because it does not have the information of global
+map, it can only use the local map established from collected sensor data.
+It can not work well for the case that the route to the destination is 
+complex. 
+
+The functions relies on 
+.B "LOCALIZE"
+to do the transformation between robot's base coordinate system and map
+coordinate system. You must run LOCALIZE first.
+
+.SH "RETURN VALUE"
+On success, the function will return TRUE.  On error, FALSE is 
+returned.
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.B "tcxServer" , 
+.B "colliServer" 
+and
+.B "LOCALIZE"
+first. 
+.B "beeGotoAbsolute()"
+also needs 
+.B "plan"
+(Planner server modules.)
+Moreover, your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs 
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+before 
+.B "beeGotoAbsolute()" 
+or
+.B "beeApproachAbsolute()"
+function in your program. Otherwise, 
+the movement can not be executed and the function will return FALSE.
+
+
+.SH SEE ALSO
+.BR "beeInitialize" (3),
+.BR "beeApproachRelative" (3),
+.BR "beeGotoRelative" (3).
+
+

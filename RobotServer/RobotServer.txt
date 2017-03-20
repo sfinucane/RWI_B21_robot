@@ -1,0 +1,121 @@
+Es gibt ein neues Modul im rhino-tree:
+
+Name:		  RobotServer
+
+Funktionalitaet:  Liefert die Information welche Robot aktiv sind.
+
+		  Der Name jedes aktiven Roboters wird dazu in eine Liste
+		  engetragen die der RobotServer verwaltet.
+
+		  Hierzu wird bei den Modulen baseServer oder pioneer
+		  der Kommandozeilenparameter > -RobotServer <
+		  benutzt. Das Modul meldet sich dann mit seinem Namen,
+		  entweder baseServer oder bei der Benutzung von 
+		  > -robot my_name < eben mit my_name, an.
+
+		  Das Modul RobotServer verwaltet die Liste aller aktiven
+		  Roboter. Diese Liste kann ueber eine einfache TCX-message
+		  abgefragt werden. Es steht auch eine auto_update
+		  Funktion zur Verfuegung die bei jeder Aenderung
+		  einen update sendet.
+		  Alle Aenderungen, also das beenden oder starten
+		  eines baseServer bzw. pioneer Moduls werden erkannt
+		  und die Liste entsprechend aktualisiert. 
+
+		  Die Liste besteht aus:
+		  einer message-ID: Dies ist immer der Zeitpunkt an dem
+				    sich der letzte Roboter Anmeldet hat.
+		  einem counter:    Die Anzahl der Roboter in der
+				    Liste.
+		  eine Liste:	    Die Liste der Roboternamen.
+
+
+		  Durch den RobotServer kann also jedes andere Modul
+		  erfahren welche Roboter ueberhaupt aktiv sind. Dies
+		  erlaubt es sich gezielt mit den entsprechenden
+		  Modulen (z.B. colli, base, map, laserint, plan oder
+		  was auch immer) zu verbinden. 
+
+
+Compiler usw.:	  cvs checkout bee/src/RobotServer
+		  cd bee/src/RobotServer
+		  make
+
+		  Fuer die anderen Module (baseServer und pioneer)
+		  kann ein cvs update bee/src/pioneer oder
+		  cvs bee/src/baseServer faellig sein.
+		  cd bee/src/{baseServer | pioneer)
+		  make
+
+
+Ablauf:
+		Der RobotServer wird einfach mit >./RobotServer
+		[-verbose]< gestartet.
+		Die Module baseServer oder pioneer mit >-RobotServer<
+		usw. starten.
+
+
+Abfrage der Liste:
+void RobotServer_query()
+{
+  RobotServer_query_type query;
+  char message[255];
+
+  gettimeofday(&query_time, NULL);
+
+  query.ID     = query_time.tv_sec;
+  query.type   = 0;       /* 0:get list of robots   1: get into list */
+  
+  if (RobotServerConnected) {
+    
+    strcpy(message, "RobotServer");
+    strcat(message, "_query");
+
+    tcxSendMsg(RobotServer, message, &query);
+  }
+  else {
+    fprintf(stderr, "\n\nRobotServer_query failed - RobotServer not connected\n\n");
+    exit(0);
+  }
+}
+
+
+Empfang der Liste:
+void RobotServer_reply_handler(TCX_REF_PTR ref, RobotServer_reply_ptr RS_module)
+{
+  unsigned int counter = 0;
+  char message[255];
+
+  if (verbose) {
+    for (counter = 0; counter < RS_module->counter; counter++) {
+      fprintf(stderr, "\nRobot >%s< is active", RS_module->robot_list[counter]);
+    }
+  }
+
+  strcpy(message, "RobotServer");
+  strcat(message, "_reply");
+
+  tcxFree( message, RS_module);
+}
+
+
+
+Ein Beispielprogramm >RobotServer_query_example.c< findet sich im
+Verzeichnis RobotServer.
+
+RobotServer_query_example [-get] [-add] [-sub] [-unsub] [-robot <name>]
+
+-get: gibt die aktuelle Liste aus
+
+-add: traegt sich in die Liste als (ge-fake-ter) aktiver Roboter ein
+
+-sub: auto_update eingeschaltet -> es wird jede Veraenderung der Liste
+      ausgegeben
+
+-robot: setzt den Name des Moduls/Roboters
+
+-unsub: keinen Effekt, nur der Vollstaendigkeit wegen :)
+
+
+Die Module sind getestet und laufen stabil. Bei Problemen oder
+Aenderungswuenschen e-mail ---> schneid1@cs.uni-bonn.de

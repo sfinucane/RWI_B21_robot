@@ -1,0 +1,160 @@
+
+
+(*
+  xw, yw = hinge point for the wall
+  lw, ww = length and width of wall
+  aw     = angle of wall
+
+  xr, yr, or = robot's pose
+  dr, ar     = distance and angle of measurement  
+
+  distexponent: determines type of distance
+                strictly speaking, we need to set it to 1 for 
+                Euclidean distance
+
+
+*)
+
+distexponent=0.5
+
+(*
+ * 
+ * Coordinates of the wall end points
+ *
+ *)
+
+wall1x1[xw_,yw_,lw_,ww_,aw_]:=xw
+wall1y1[xw_,yw_,lw_,ww_,aw_]:=yw
+wall1x2[xw_,yw_,lw_,ww_,aw_]:=xw+Cos[aw]*lw
+wall1y2[xw_,yw_,lw_,ww_,aw_]:=yw+Sin[aw]*lw
+wall1a[xw_,yw_,lw_,ww_,aw_]:=aw
+
+wall2x1[xw_,yw_,lw_,ww_,aw_]:=wall1x2[xw,yw,lw,ww,aw]
+wall2y1[xw_,yw_,lw_,ww_,aw_]:=wall1y2[xw,yw,lw,ww,aw]
+wall2x2[xw_,yw_,lw_,ww_,aw_]:=wall1x2[xw,yw,lw,ww,aw]-Sin[aw]*ww
+wall2y2[xw_,yw_,lw_,ww_,aw_]:=wall1y2[xw,yw,lw,ww,aw]+Cos[aw]*ww
+wall2a[xw_,yw_,lw_,ww_,aw_]:=aw+Pi/2
+
+wall3x1[xw_,yw_,lw_,ww_,aw_]:=wall2x2[xw,yw,lw,ww,aw]
+wall3y1[xw_,yw_,lw_,ww_,aw_]:=wall2y2[xw,yw,lw,ww,aw]
+wall3x2[xw_,yw_,lw_,ww_,aw_]:=xw-Sin[aw]*ww
+wall3y2[xw_,yw_,lw_,ww_,aw_]:=yw+Cos[aw]*ww
+wall3a[xw_,yw_,lw_,ww_,aw_]:=aw+Pi
+
+wall4x1[xw_,yw_,lw_,ww_,aw_]:=wall3x2[xw,yw,lw,ww,aw]
+wall4y1[xw_,yw_,lw_,ww_,aw_]:=wall3y2[xw,yw,lw,ww,aw]
+wall4x2[xw_,yw_,lw_,ww_,aw_]:=xw
+wall4y2[xw_,yw_,lw_,ww_,aw_]:=yw
+wall4a[xw_,yw_,lw_,ww_,aw_]:=aw+3*Pi/2
+
+(* nr is wall number *)
+
+wallx1[nr_,xw_,yw_,lw_,ww_,aw_]:=If[nr==1,wall1x1[xw,yw,lw,ww,aw],If[nr==2,wall2x1[xw,yw,lw,ww,aw],If[nr==3,wall3x1[xw,yw,lw,ww,aw],If[nr==4,wall4x1[xw,yw,lw,ww,aw],999999]]]]
+
+wallx2[nr_,xw_,yw_,lw_,ww_,aw_]:=If[nr==1,wall1x2[xw,yw,lw,ww,aw],If[nr==2,wall2x2[xw,yw,lw,ww,aw],If[nr==3,wall3x2[xw,yw,lw,ww,aw],If[nr==4,wall4x2[xw,yw,lw,ww,aw],999999]]]]
+
+wally1[nr_,xw_,yw_,lw_,ww_,aw_]:=If[nr==1,wall1y1[xw,yw,lw,ww,aw],If[nr==2,wall2y1[xw,yw,lw,ww,aw],If[nr==3,wall3y1[xw,yw,lw,ww,aw],If[nr==4,wall4y1[xw,yw,lw,ww,aw],999999]]]]
+
+wally2[nr_,xw_,yw_,lw_,ww_,aw_]:=If[nr==1,wall1y2[xw,yw,lw,ww,aw],If[nr==2,wall2y2[xw,yw,lw,ww,aw],If[nr==3,wall3y2[xw,yw,lw,ww,aw],If[nr==4,wall4y2[xw,yw,lw,ww,aw],999999]]]]
+
+walla[nr_,xw_,yw_,lw_,ww_,aw_]:=If[nr==1,wall1a[xw,yw,lw,ww,aw],If[nr==2,wall2a[xw,yw,lw,ww,aw],If[nr==3,wall3a[xw,yw,lw,ww,aw],If[nr==4,wall4a[xw,yw,lw,ww,aw],999999]]]]
+
+
+
+
+(*
+ * 
+ * Coordinates of the robot sensor measurement
+ *
+ *)
+
+robotsize=30
+
+sensx[xr_,yr_,or_,dr_,ar_]:=xr+(dr+robotsize)*Cos[or+ar]
+sensy[xr_,yr_,or_,dr_,ar_]:=yr+(dr+robotsize)*Sin[or+ar]
+sensa[xr_,yr_,or_,dr_,ar_]:=or+ar
+
+(*
+ * 
+ * Display
+ *
+ *
+ *)
+
+wallgraphics[xw_,yw_,lw_,ww_,aw_]:=Graphics[{RGBColor[1,0,0],Line[{{wall1x1[xw,yw,lw,ww,aw],wall1y1[xw,yw,lw,ww,aw]}, {wall2x1[xw,yw,lw,ww,aw],wall2y1[xw,yw,lw,ww,aw]}, {wall3x1[xw,yw,lw,ww,aw],wall3y1[xw,yw,lw,ww,aw]}, {wall4x1[xw,yw,lw,ww,aw],wall4y1[xw,yw,lw,ww,aw]}, {wall1x1[xw,yw,lw,ww,aw],wall1y1[xw,yw,lw,ww,aw]}}],Disk[{xw,yw},robotsize/3]}]
+
+robotgraphics[xr_,yr_,or_,dr_,ar_]:=Graphics[{RGBColor[0,1,0],Circle[{xr,yr},robotsize],Line[{{sensx[xr,yr,or,0,ar],sensy[xr,yr,or,0,ar]},{sensx[xr,yr,or,dr,ar],sensy[xr,yr,or,dr,ar]}}],Line[{{xr,yr},{sensx[xr,yr,or,0,0],sensy[xr,yr,or,0,0]}}]}]
+
+display[xw_,yw_,lw_,ww_,aw_,xr_,yr_,or_,dr_,ar_]:=Show[wallgraphics[xw,yw,lw,ww,aw],robotgraphics[xr,yr,or,dr,ar],AspectRatio->Automatic,PlotRange->All,DisplayFunction->Identity]
+
+
+(*--testing--testing--testing--testing--testing--testing--testing--*
+
+p=display[300,1000,1200,200,Pi/6, 400,300,Pi/4,500,Pi/6]
+Display["p.ps2",p]
+!psfix p.ps2 > p.ps
+!rm -f p.ps2
+!gv p.ps &
+
+*--testing--testing--testing--testing--testing--testing--testing--*)
+
+(*
+ * 
+ * Compute distance of point to line
+ *
+ *)
+
+
+distPointLineAux[x_,y_,x1_,y1_,x2_,y2_]:=Abs[(y2-y1)*(x-x1)-(x2-x1)*(y-y1)]/Sqrt[(x2-x1)^2+(y2-y1)^2]
+
+
+
+distPointLine[x_,y_,x1_,y1_,x2_,y2_]:=(If[(x2-x1)*(x-x1)+(y2-y1)*(y-y1)>0,If[(x1-x2)*(x-x2)+(y1-y2)*(y-y2)>0,distPointLineAux[x,y,x1,y1,x2,y2],Sqrt[(x-x2)^2+(y-y2)^2]],Sqrt[(x-x1)^2+(y-y1)^2]])^distexponent
+
+
+(*--testing--testing--testing--testing--testing--testing--testing--*
+
+p=ContourPlot[Sqrt[distPointLine[x,y,5,9,15,11]],{x,0,20},{y,0,20},DisplayFunction->Identity]
+Display["p.ps2",p]
+!psfix p.ps2 > p.ps
+!rm -f p.ps2
+!gv p.ps &
+
+*--testing--testing--testing--testing--testing--testing--testing--*)
+
+
+(*
+ * 
+ * Compute the distance of point to object
+ *
+ *)
+
+distPointWall[x_,y_,nr_,xw_,yw_,lw_,ww_,aw_]:=distPointLine[x,y,wallx1[nr,xw,yw,lw,ww,aw],wally1[nr,xw,yw,lw,ww,aw],wallx2[nr,xw,yw,lw,ww,aw],wally2[nr,xw,yw,lw,ww,aw]]
+
+distPointWallWithAngle[x_,y_,nr_,xw_,yw_,lw_,ww_,aw_,xr_,yr_,or_,dr_,ar_]:=If[(wally2[nr,xw,yw,lw,ww,aw]-wally1[nr,xw,yw,lw,ww,aw])*(sensx[xr,yr,or,dr,ar]-xr)-(wallx2[nr,xw,yw,lw,ww,aw]-wallx1[nr,xw,yw,lw,ww,aw])*(sensy[xr,yr,or,dr,ar]-yr)<=0,distPointWall[x,y,nr,xw,yw,lw,ww,aw],99999999]
+
+
+distPointToObj[x_,y_,xw_,yw_,lw_,ww_,aw_,xr_,yr_,or_,dr_,ar_]:=Min[Table[distPointWallWithAngle[x,y,nr,xw,yw,lw,ww,aw,xr,yr,or,dr,ar],{nr,1,4}]]
+
+
+(*
+ * 
+ * More display
+ *
+ *)
+
+jointDisplay[xw_,yw_,lw_,ww_,aw_,xr_,yr_,or_,dr_,ar_]:=Show[ContourPlot[distPointToObj[x,y,xw,yw,lw,ww,aw,xr,yr,or,dr,ar],{x,0,2000},{y,0,2000},DisplayFunction->Identity],display[xw,yw,lw,ww,aw,xr,yr,or,dr,ar]]
+
+
+(*--testing--testing--testing--testing--testing--testing--testing--*
+
+p=jointDisplay[300,1000,1200,300,Pi/6, 600,300,Pi/4,200,Pi/6]
+Display["p.ps2",p]
+!psfix p.ps2 > p.ps
+!rm -f p.ps2
+!gv p.ps &
+
+*--testing--testing--testing--testing--testing--testing--testing--*)
+
+
+

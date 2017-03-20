@@ -1,0 +1,438 @@
+% This file was converted from HTML to LaTeX with Nathan Torkington's
+% html2latex program
+% Version 0.9c
+\documentstyle{article}
+\begin{document}
+{\bf \par BeeSoft User's Guide and Software Reference\par }\par
+Jianjung Ying\par \par Robot Learning Laboratory\par \par Carnegie
+Mellon University\par \par \par \par Preface\par \par BeeSoft is the
+software that lets you navigate your robot. Each robot contains one or
+more onboard computers that control its resources, such as its mobile
+base, sonar, lasers, camera, pan/tilt head, and enable robot to move
+forward along a specific heading, detecting a nearby obstacle, and
+capture images from its camera.\par \par The overall software
+architecture consists of several modules (processes) running in
+parallel on on-board laptops and off-board workstations. Those server
+modules manage robot resources well, empowering you to control those
+resources as if they were local to your own program. The software
+modules communicate using {\it TCX}, a centralized communication
+protocol for point-to point socket communication. Your own user
+application program communicates with the server modules, and thus
+directs the robot's activities, via BeeSoft API (Application
+Programming Interface) function calls. For example, when you want to
+tell the robot to move forward a certain distance, you need only call
+the appropriate function in the client API library. The client API
+library function then determines which server modules should work
+together and then instructs base server to initiate forward
+motion.\par \par BeeSoft Architecture: the Server Modules\par
+\begin{itemize}{\bf \item tcxServer} coordinates communications among
+  all other modules running on all computers in the robot system. TCX
+  is a decentralized communication protocol for point-to-point socket
+  communication. Processes invoke TCX API to communicate with each
+  other.\item {\bf pioneer/baseServer} issues commands to the robot's
+  wheeled base. It can move forwards and backwards, as well as
+  rotational motion - clockwise and counterclockwise - around the
+  robot's center axis. You could run {\it pioneer} for little robots
+  Marion and Robin, or {\it baseServer} for Amelia and Xavier. \item
+  {\bf laserServer} administrates the equipped laser device. \item
+  {\bf cameraServer }administrates the equipped camera device.\item
+  {\bf colliServer} sends commands to {\it pioneer/baseServer} in
+  guarded motion mode, that is, incorporating built-in collision
+  avoidance. You give the module a target point, either a relative
+  target point or an absolute target point. The robot will try its
+  best to avoid obstacles it can perceive. It uses sonar and laser
+  devices to know the robot's environment. It knows how far the
+  obstacles are by emitting sonar and laser and then collecting the
+  reflection. Other modules could also subscribe to those sensor
+  readings. Notice that {\it pioneer/baseServer} do not include
+  automatic obstacle avoidance. They just order the robot to
+  move.\item {\bf Planner} is the robot motion management and
+  exploration software. It helps the robot plan optimal motion and
+  optimal paths. When Planner receives a target, it will compute the
+  best path and then give several intermediate goal points to the
+  colliServer. Planner is not necessary to run on an on-board laptop.
+  While colliServer provides local collision avoidance, Planner
+  provides global path finding. To do so, it needs a map of the
+  robot's environment.  We could use a program called Mapper to
+  establish maps, but it is beyond the scope of this document.\item
+  {\bf LOCALIZE }is a module which continuously estimates the robot's
+  position in x-y-q space, where x and y are the coordinates of the
+  robot in a 2D Cartesian coordinate system and q is its orientation.
+  colliServer has a base coordinate system which is different from map
+  coordinate system. Moreover, robot may drift so that it will deviate
+  from its target direction. LOCALIZE monitors the robot and keeps{\bf
+    }computing corrected{\bf }coordinate parameters. It uses sensor
+  readings and action commands to keep estimating positions. Then task
+  planning modules, such as user modules, can use those parameters to
+  transform map coordinates to robot's base coordinates, which are
+  accepted by colliServer.  \item {\bf SET\_ROBOT }gives the robot an
+  initial point in map coordinate system. Otherwise, LOCALIZE does not
+  know where to locate the robot initially.\end{itemize}\par TCX
+grants the BeeSoft system scalability of adding more modules. BeeSoft
+package includes some other modules to administrate onboard devices,
+such as pantiltServer, armServer, speechServer. But not all of the
+robots have those devices. A programmer can write a USER module to ask
+the robot to perform a task. This module also uses TCX mechanism to
+communicate with other modules. In this architecture, there could be
+many user modules running concurrently. Modules request for services
+by passing messages to the server modules and receive the reply
+messages. Each BeeSoft module defines a number of messages. Other
+modules could ask this module for services by sending messages through
+TCX API. BeeSoft API library encapsulates the details of the
+underlying communication infrastructure. You could write programs
+easily even if you do not know TCX.\par \par Running robot\par \par
+The following steps guide you to run your robot. In Robot Learning
+Laboratory, I assume that you are using the little robots, Marion or
+Robin. \par \begin{enumerate}\item Switch on main power, radio power,
+  laser power, and motor power. Please contact members in the lab. to
+  learn the location of those switches.  \item Run the following
+  programs in the robot's onboard laptops. Each program needs a shell
+  to run. You could use \&quot;ssh marion\&quot; or \&quot;ssh
+  robin\&quot; to login to the computers. Then remember to type
+  \&quot;setenv TCXHOST marion\&quot; or \&quot;setenv TCXHOST
+  robin\&quot; so that the server modules can locate the tcxServer.
+  \end{enumerate}\par Change to the beeSoft \&quot;bin\&quot;
+directory first. Then run:\par \begin{itemize}\item tcxServer 
+\item pioneer 
+\item laserServer -pioneer 
+\item colliServer +laserServer
+  -pioneer \end{itemize}\par After those server modules run, you
+could ask the robot to move locally without a map. Since you have not
+implemented any user module program yet, you could use colliServer
+commands to order the robot.\par \par In the colliServer shell, type
+\&quot;CTR 100 0\&quot;. You ask the robot to move one meter (100
+centimeters ahead).\par \par CTR stands for \&quot;control translation
+and rotation\&quot;. The first argument is the distance, in
+centimeters, you want the robot to move along its current heading: the
+heading towards which it is already pointed. A positive value in this
+argument sends the robot forward. The second argument is the distance,
+again in centimeters, that you want the robot to move perpendicular to
+its heading.\par \par Note that colliServer will attempt to move the
+robot to the point one meter directly ahead of itself, that is, one
+meter in the direction the robot is facing when you issue the CRT
+command. If that spot is blocked (occupied by an obstacle), the robot
+will continue maneuvering to try to reach that point.\par \par To ask
+your robot to go back, type \&quot;CTR -100 0\&quot;. \par \par Type
+\&quot;?\&quot; in colliServer shell to learn more commands.\par \par
+BeeSoft robot has a capability of optimal path finding. To do so, you
+need a map of the environment. You could use Mapper to establish the
+map, but it is beyond the scope of this document.\par \par To enable
+the optimal path finding functionality, run the following server
+modules as well. But they are not required to run in the robot's
+onboard laptop. You could run them in a remote workstation. You need
+an X-window workstation to display windows those processes create.
+Change to the \&quot;localize\&quot; directory first,\par \par \#cd
+(BeeSoft directory)/data/localize/localize\par \begin{itemize}\item
+  ../../../bin/LOCALIZE laser.ini  \item ../../../bin/plan 
+\item ../../../bin/DISPLAY\_LOCALIZE -gmap xxxx.map 
+\end{itemize}\par You should specify a map file in laser.ini and when
+you run DISPLAY\_LOCALIZE.\par \par To use camera service, you also
+need to run\par \begin{itemize}\item cameraServer  
+\end{itemize}\par Note that it needs a root shell to run
+cameraServer.\par \par Running on Simulator\par \par Running your
+robot is very interesting and exciting. Who do not like to watch the
+cute robot moving and dancing around? However, you might not want to
+always run your robotics programs while they are still in development
+and debugging stage. Simulator is a good program that allows you to
+test your program without running a real robot.\par \par Try the
+following procedure in an X-window workstation.\par
+\begin{itemize}\item tcxServer\item
+  simulator -map floor.sim\item  colliServer -noindex +simulator +laser\item LOCALIZE laser.ini\item plan\item SET\_ROBOT -gmap floor.map 
+\end{itemize}\par floor.sim should be in
+(YOUR\_BEE\_DIRECTORY)/data/localize/localize\par \par Robot
+programming\par \par There are several demo programs in
+BeeSoftAPI/example directory. Compile and run those programs as your
+first step in robot programming.\par \par Every program starts with
+beeInitialize() function. This function initializes connection with
+TCX server and registers message handlers for your user module
+application. Your BeeSoft program must also start with this
+function.\par \par The prototypes of those functions are defined in
+{\it bee.h}. Include the file in the beginning of your C program.\par
+\par To make your program, add -lpthread -lbee -ltcx into the library
+list.\par \par BeeSoft API library\par \par This section lists all of
+the BeeSoft API library functions with descriptions. Most of those
+functions return a \&quot;bool\&quot; (boolean) value. TRUE value
+means that this function has sent a message to a server module. It
+does not promise that the robot will execute the order. Those
+functions return FALSE when some required server modules are not
+running or connected. \par {\bf \par BeeSoft Application
+  Initialization:\par \begin{enumerate}\item void beeInitialize(char*
+    moduleName = \&quot;USER\&quot;) - initializes a BeeSoft user
+  process. The \&quot;{\it moduleName\&quot;} argument specifies the
+  name of your user process module. It will initialize tcx
+  communication, register call back functions, connect to TCX server
+  and colliServer, and try to connect to LOCALIZE and Planner. If you
+  do not provide the argument, the default module name is "USER". You
+  should give names if you have more than one user process running.
+  This function returns no value.\item {\bf bool
+    beeCameraConnect(void)} - connects to cameraServer. 
+\end{enumerate}{\bf \par Motion functions : }functions that control
+the robot's motion\par \begin{enumerate}{\bf \item bool
+    beeTranslateBy(float distance)} - moves a BeeSoft robot along a
+  straight line The line has the same direction with the robot's local
+  orientation. The {\it \&quot;distance"} argument specifies the
+  distance to move. The measure of distance is centimeter. Positive
+  value means forward movement, while negative value means backward
+  movement. The robot will then stop in expected point or less if it
+  meets an obstacle. This function does not make collision avoidance.
+  The robot can not move around an obstacle. It just moves a distance
+  ahead or backward. \item {\bf bool beeRotateBy(float degree)} -
+  rotates a BeeSoft robot's orientation The {\it \&quot;degree"}
+  argument specifies the degree to rotate. The measure is degree.
+  Positive value means clockwise rotation, while negative value means
+  counterclockwise rotation.\item {\bf bool beeTranslatePositive()} -
+  moves a BeeSoft robot along a straight line.  The line has the same
+  direction with the robot's local orientation. Program can use
+  "beeSetTransVelocity()" and "beeSetTransAcceleration()" to control
+  the robot. The robot keeps moving ahead with the velocity and
+  acceleration. The robot will not move around an obstacle. It will
+  stop.\item {\bf bool beeTranslateNegative()} - moves a BeeSoft robot
+  along a straight line.  The line has the same direction with the
+  robot's local orientation. Program can use "beeSetTransVelocity()"
+  and "beeSetTransAcceleration()" to control the robot. The robot
+  keeps moving backward with the velocity and acceleration. The robot
+  will not move around an obstacle. It will stop.\item {\bf bool
+    beeRotatePositive()} - rotates a BeeSoft robot's orientation
+  clockwise. Program can use "beeSetRotVelocity()" and
+  "beeSetRotAcceleration()" to control the robot. The robot keeps
+  rotating with the velocity and acceleration until next "beeStop()"
+  .\item {\bf bool beeRotateNegative()} - rotates a BeeSoft robot's
+  orientation counterclockwise. Program can use "beeSetRotVelocity()"
+  and "beeSetRotAcceleration()" to control the robot. The robot keeps
+  rotating with the velocity and acceleration until next "beeStop()"
+  .\item {\bf bool beeStop()} - stops a robot when it is moving or
+  rotating.\item {\bf bool beeSetTransVelocity(float velocity)} - sets
+  the translation velocity of a BeeSoft robot.  The {\it "velocity"}
+  argument specifies the velocity to set. The measure of velocity is
+  centimeter per second. Positive value means forward velocity, while
+  negative value means backward velocity. Programmer can then use
+  "beeTranslatePositive()" or "beeTranslateNegative()" to move the
+  robot. It will keep moving with the velocity. The velocity will
+  decrease to zero when it meets an obstacle and stops.\item {\bf bool
+    beeSetRotVelocity(float velocity)} - sets the rotation velocity of
+  a BeeSoft Light robot.  The {\it "velocity"} argument specifies the
+  velocity to set. The measure of velocity is degree per second.
+  Positive value means clockwise velocity, while negative value means
+  counterclockwise velocity. Programmer can then use
+  "beeRotatePositive()" or "beeRotateNegative()" to rotate the robot.
+  It will keep rotating with the velocity. The velocity will decrease
+  to zero in next "beeStop()".\item {\bf bool
+    beeSetTransAcceleration(float acceleration)} - sets the
+  translation acceleration of a BeeSoft robot.  The {\it
+    "acceleration"} argument specifies the acceleration to set. The
+  measure of acceleration is centimeter per square second. Positive
+  value means positive acceleration, while negative value means
+  negative acceleration.\item {\bf bool beeSetRotAcceleration(float
+    acceleration)} - sets the rotation acceleration of a BeeSoft
+  robot.  The {\it "acceleration"} argument specifies the acceleration
+  to set. The measure of acceleration is degree per square second.
+  Positive value means clockwise acceleration, while negative value
+  means counterclockwise acceleration.\item {\bf robot\_position *
+    beeGetCurrentPosition()} - returns current position of a BeeSoft
+  robot. The position is defined as the data structure: {\it typedef
+    struct \{    float pos\_x ; float pos\_y ; float orientation ; \}
+    robot\_position ;}beeGetCurrentPosition() returns a pointer to the
+  {\it robot\_position}, or NULL if an error occurs.\item {\bf
+    robot\_speed * beeGetCurrentSpeed()} - returns current speed of a
+  BeeSoft robot. The speed is defined as the data structure:{\it
+    typedef struct \{ float trans\_speed ; float rot\_speed ; \}
+    robot\_speed ;}beeGetCurrentSpeed() returns a pointer to the {\it
+    robot\_speed}, or NULL if an error occurs.\item {\bf bool
+    beeApproachRelative(float x, float y)} - moves a
+  BeeSoft robot to a relative position. The first argument is the
+  distance you want the robot to move perpendicular to its current
+  heading. The second argument is the distance you want the robot to
+  move along its current heading.  The measure is centimeter. 
+    The robot will move toward the expected point that you specify.
+  The robot can do the collision avoidance and try to reach the
+  destination. However, because this function does not communication
+  with Planner server, it can not plan its optimal route. You could
+  use it to do local movements. \item {\bf bool
+    beeApproachAbsolute(float x, float y) }- move a BeeSoft robot to
+  an absolute position. It is the position in the map coordinate
+  system. The {\it x} and {\it y} arguments specify the coordinates.
+  The measure is centimeter. The robot will move to the expected
+  point. The functions relies on LOCALIZE module to do the
+  transformation between the robot's base coordinate system and the
+  map coordinate system. You must run LOCALIZE first. \item {\bf bool
+    beeGotoRelative (float x, float y)} - moves a BeeSoft robot to a
+  relative position. The arguments {\it x} and {\it y} specify the
+  destination of relative coordinate. The measure is centimeter. The
+  robot will move to the expected point. With Planner running, the
+  robot can find out the optimal path to move. \item {\bf bool
+    beeGotoAbsolute(float x, float y)} - moves a BeeSoft robot to an
+  absolute position. beeGotoAbsolute() uses Planner to find out the
+  optimal path to the destination, while beeApproachAbsoulte() uses
+  only colliServer's collision avoidance function.
+\end{enumerate}{\bf \par Sensor functions: }functions that retrieve
+the sensor readings\par \begin{enumerate}{\bf \item bool
+    beeSonarStartRegularUpdate()} - triggers to regularly update sonar
+  readings of a BeeSoft robot. User process can register a call-back
+  function by beeSonarRegisterCallback() before the function. The
+  callback function will then be invoked regularly and get an array of
+  sonar readings as a parameter. Otherwise, sonar readings are
+  processed by BeeSoft default callback function without notifying
+  user programs. To get sonar data by invoking beeGetSonarValue(),
+  beeSonarStartRegularUpdate() must be executed first.\item {\bf bool
+    beeSonarStopRegularUpdate()} - stops the regular update operation.
+\item {\bf float * beeGetSonarValue(int * number\_of\_reading)} -
+  returns collected sonar readings of a BeeSoft robot. {\it
+    "number\_of\_reading"} argument specifies a reference to an
+  integer variable. The function returns readings only after the
+  program runs beeSonarStartRegularUpdate(). It returns NULL if an
+  error occurs. After the function, {\it
+    \&quot;number\_of\_reading\&quot;} will get the number of readings
+  in the returned array.\item {\bf bool beeIRStartRegularUpdate()} -
+  triggers to regularly update infrared readings of a BeeSoft robot.
+  User process can register a call-back function by
+  beeIRRegisterCallback() before the function. The callback function
+  will then be invoked regularly and get an array of infrared readings
+  as a parameter. Otherwise, infrared data are processed by BeeSoft
+  default callback function without notifying user program. To get
+  infrared data by invoking beeGetIRValue(), beeIRStartRegularUpdate()
+  must be executed first.\item {\bf bool beeIRStopRegularUpdate()} -
+  stops the regular update operations. \item {\bf int *
+    beeGetIRValue(int rowno , int * number\_or\_reading )} - returns
+  collected infrared readings of a BeeSoft robot. In the {\it
+    \&quot;number\_of\_reading"} argument the programmer give a
+  reference to an integer variable. This function returns readings
+  only after the program runs beeIRStartRegularUpdate().You can
+  specify a row of infrared sensors in the {\it "rowno"} argument. In
+  "bee.h", "UPPERROW", \&quot;LOWERROW", "DROW" are already defined as
+  three rows. The function returns NULL if an error occurs. After the
+  function, {\it \&quot;number\_of\_reading\&quot;} will get the
+  number of readings in the returned array.\item {\bf bool
+    beeLaserStartRegularUpdate()} - triggers to regularly update laser
+  data of a BeeSoft robot. User process can register a call-back
+  function by beeLaserRegisterCallback() before the function. The
+  callback function will then be invoked regularly and get an array of
+  laser readings as a parameter. Otherwise, laser data are processed
+  by system defined callback function without notifying user program.
+  To get laser data by invoking beeGetLaserValue(),
+  beeLaserStartRegularUpdate() must be executed first.\item {\bf bool
+    beeLaserStopRegularUpdate() - }stops the regular update operations
+\item {\bf int * beeGetLaserValue(int whichone , int *
+    number\_or\_reading )} - returns collected laser readings of a
+  BeeSoft robot. In the {\it \&quot;number\_of\_reading"} argument the
+  programmer give a reference to an integer variable. This function
+  returns valid readings only after the program runs
+  beeLaserStartRegularUpdate(). You can specify a row of laser sensors
+  in the {\it "whichone"} argument. In "bee.h", "FRONT\_LASER",
+  "BACK\_LASER" are already defined as front and back laser. The
+  function returns NULL if an error occurs. After the function, {\it
+    \&quot;number\_of\_reading\&quot;} will get the number of readings
+  in the returned array. \end{enumerate}{\bf \par Camera Library:
+  }functions that retrieve camera images\par \begin{enumerate}{\bf
+  \item bool beeCameraSaveFile(int numGrabber, char * filename , int
+    num )}- requests to cameraServer to save images in a file. {\it
+    "numGrabber"} specifies the grabber number.  {\it "filename"
+    }specifies the name of file to which the images will save. And
+  {\it "num"} specifies the number of images to request. -1 means to
+  save continuous images and 0 means to stop.\item {\bf bool
+    beeCameraLoadFile(int numGrabber , char * filename ) - }requests
+  to cameraServer to load images from a file. {\it "numGrabber"}
+  specifies the grabber number. {\it "filename" }specifies the name of
+  file from which the images will be retrieved. \item {\bf int
+    beeCameraRequestShmId(int numGrabber ) - }requests for an image
+  from cameraServer. {\it "numGrabber"} specifies the grabber number.
+  This function uses shared memory to load images. It requests to
+  cameraServer and blocks. cameraServer will load an{\bf }image in a
+  shared memory space and reply with a shared memory Id. The function
+  returns the shared memory id, or -1 if an error occurs. \item {\bf
+    CameraImageType* beeCameraRequestImage(int numGrabber , int
+    orig\_image\_xmin , int orig\_image\_ymin , int orig\_image\_xsize
+    , int orig\_image\_ysize , int return\_image\_xsize , int
+    return\_image\_ysize ) - }requests for images captured from
+  cameraServer. The meanings of the arguments are: {\it "numGrabber"}
+  specifies a grabber number.{\it "orig\_image\_xmin"} and {\it
+    "orig\_image\_ymin"} give an location of a block inside the image.
+  They specify the x, y coordinate for the (0,0) of the block. That
+  means you could request for only a fraction of a camera image
+  instead of a whole one.{\it \&quot;orig\_image\_xsize\&quot;} and
+  {\it "orig\_image\_ysize" }give the size of a block you want. {\it
+    "return\_image\_xsize"} and {\it "return\_image\_ysize"} give the
+  size of a return image, which could reduce the amount of data needed
+  to be transferred.  The function returns a pointer to
+  "CameraImageType" data structure.  typedef struct \{ int xsize,
+  ysize; unsigned char *red; unsigned char *green; unsigned char
+  *blue; int numGrabber; \} CameraImageType; The function will return
+  a pointer to CameraImageType, or NULL if an error occurs.\item {\bf
+    bool * beeCameraSubscribe(int numGrabber , int numberOfImage , int
+    image\_xmini , int image\_ymin , int image\_xsize , int
+    image\_ysize , int return\_image\_xsize , int
+    return\_image\_ysize)} - subscribes to images captured from the
+  cameraServer. The meanings of the arguments are: {\it "numGrabber"}
+  specifies a grabber number you want to subscribe to. {\it
+    "numberOfImage}" specifies the request for every n-th frames. {\it
+    "image\_xmin"} and {\it "image\_ymin"} give an location of a block
+  inside the image. They specify (0,0) of the block.{\it
+    "image\_xsize"} and {\it "image\_ysize"} give the size of a block
+  inside the image. {\it "return\_image\_xsize"} and {\it
+    "return\_image\_ysize"} give the size of a return image, which
+  could reduce the amount of data needed to be transferred.  After the
+  function is executed, a callback handler will be invoked when every
+  n-th frame is captured. Programmers can register their own callback
+  function by invoking beeCameraImageRegisterCallback().\item {\bf int
+    * beeCameraUnsubscribe(int numGrabber ) - }unsubscribes frames
+  from a cameraServer. \end{enumerate}{\bf \par Callback
+  functions: }functions register callback functions\par
+\begin{enumerate}{\bf \item bool beeSonarRegisterCallback(void (*
+    callbackHandler )(float*) = NULL)} - registers a callback function
+  to collect sonar readings of a BeeSoft robot.  {\it
+    "callbackHandler"} argument specifies the location of the callback
+  function. Then the program can run beeSonarStartRegularUpdate() to
+  activate the update operations. The callback handler should have the
+  signature:{\it void handler\_name(float * sonar );}Note that the
+  sonar data is an array of 24 float values. Programmers can use{\it
+    sonar[0-23]} inside the scope of callback handler to retrieve the
+  values. You do not need to and should not release the memory space
+  referenced by {\it sonar. }You can invoke beeSonarRegisterCallback()
+  without any argument to unregister your own callback handler.\item
+  {\bf bool beeIRRegisterCallback(void (* callbackHandler )(int*,
+    int*, int*) = NULL ) - } registers a callback function to collect
+  infrared readings of a BeeSoft robot. {\it "callbackHandler"}
+  argument specifies a reference to the callback function. Then the
+  program can run beeIRStartRegularUpdate() to activate the update
+  operations. The callback handler should have the signature: {\it
+    void handler\_name(int * irupperrow , int * irlowerrow , int *
+    irdrow );} Note that the infrared data are three arrays of integer
+  readings. Programmers can use {\it irupperrow[0-23],
+    irlowerrow[0-23], irdrow[0-7]} inside the scope of callback
+  handler to retrieve the values. You do not need to and should not
+  release the memory space referenced by the tree parameters. You can
+  invoke beeIRRegisterCallback() without any argument to unregister
+  your own callback handler.\item {\bf bool
+    beeLaserRegisterCallback(void (* callbackHandler )(int, float,
+    float, int*, int, float, float, int*) = NULL ) - }registers a
+  callback function to collect laser readings of a BeeSoft robot. {\it
+    "callbackHandler"} argument specifies a reference to the callback
+  function. After that, the program can run
+  beeLaserStartRegularUpdate() to activate the update operations. The
+  callback handler should have the signature:{\it void
+    handler\_name(int laser\_f\_numberOfReadings , float
+    laser\_f\_angleResolution , float laser\_f\_startAngle , int *
+    laser\_f\_reading , int laser\_r\_numberOfReadings , float
+    laser\_r\_angleResolution , float laser\_r\_startAngle , int *
+    laser\_r\_reading );}Note that the laser data are arrays of int
+  values. Programmers can use {\it laser\_f\_numberOfReadings} to get
+  the number of readings of front laser and {\it
+    laser\_r\_numberOfReadings} to get the number of readings of rear
+  laser; and then use {\it laser\_f\_reading[index]} and {\it
+    laser\_r\_reading[index]} inside the scope of callback handler to
+  retrieve the values. You do not need to and should not release the
+  memory space referenced by the laser\_f\_reading parameters. You can
+  invoke beeLaserRegisterCallback() without any argument to unregister
+  your own callback handler.\item {\bf bool
+    beeCameraRegisterCallback(void (* callbackHandler
+    )(cameraImageType *) = NULL) - }registers a callback function to
+  collect camera images from a BeeSoft camera server.{\it
+    \&quot;callbackHandler"} argument specifies a reference to the
+  callback function. After that, the program can run
+  beeCameraSubscribe() to activate the update operations.  The
+  callback handler should have the signature:{\it void
+    handler\_name(cameraImageType * image ); cameraImageType} is
+  defined in the description of beeCameraRequestImage(). You can
+  invoke beeCameraRegisterCallback() without any argument to
+  unregister your own callback handler.
+\end{enumerate}\end{document}
+

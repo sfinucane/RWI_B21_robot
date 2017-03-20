@@ -1,0 +1,49 @@
+.TH BEECAMERAREQUESTSHMID 3 "April 27, 1999" "BeeSoft Light" "BeeSoft Light"
+
+.SH NAME
+beeCameraRequestShmId \- request for an image from cameraServer 
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "int beeCameraRequestShmId(int " numGrabber " );"
+
+.SH DESCRIPTION
+.B "beeCameraRequestShmId()"
+requests for an image from cameraServer. 
+.I "numGrabber" 
+specifies the grabber number. 
+This function uses shared memory to load images. It requests to
+cameraServer and blocks. cameraServer will load an image in a
+shared memory space and reply with a shared memory Id. The function
+then returns the id to the invoking program.
+
+.SH "RETURN VALUE"
+On success, the function will return a shared memory id.  On error, 
+.B "beeCameraRequestShmId()"
+will return -1.
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.BI "tcxServer", 
+.B "colliServer"
+and
+.B "cameraServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs 
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+and
+.B "beeCameraConnect()"
+first in your program. Otherwise, the function will return FALSE.
+
+.SH SEE ALSO
+.BR "beeInitialize" (3),
+.BR "beeCameraConnect" (3),
+.BR "beeCameraLoadFile" (3),
+.BR "beeCameraSaveFile" (3)
+
+

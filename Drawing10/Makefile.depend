@@ -1,0 +1,114 @@
+obj/Cache.o: Cache.c /usr/include/X11/IntrinsicP.h \
+ /usr/include/X11/Intrinsic.h /usr/include/X11/Xlib.h \
+ /usr/include/sys/types.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/include/bits/types.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+ /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/sys/sysmacros.h \
+ /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+ /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+ /usr/include/X11/Xresource.h /usr/include/string.h \
+ /usr/include/xlocale.h /usr/include/X11/Core.h \
+ /usr/include/X11/Composite.h /usr/include/X11/Constraint.h \
+ /usr/include/X11/Object.h /usr/include/X11/RectObj.h \
+ /usr/include/X11/CoreP.h /usr/include/X11/CompositeP.h \
+ /usr/include/X11/ConstrainP.h /usr/include/X11/ObjectP.h \
+ /usr/include/X11/RectObjP.h Cache.h
+obj/Drawing.o: Drawing.c /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/bits/types.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/bits/sched.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/bits/stdio_lim.h \
+ /usr/include/math.h /usr/include/bits/huge_val.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/float.h \
+ /usr/include/X11/IntrinsicP.h /usr/include/X11/Intrinsic.h \
+ /usr/include/X11/Xlib.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/sys/sysmacros.h \
+ /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+ /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+ /usr/include/X11/Xresource.h /usr/include/string.h \
+ /usr/include/xlocale.h /usr/include/X11/Core.h \
+ /usr/include/X11/Composite.h /usr/include/X11/Constraint.h \
+ /usr/include/X11/Object.h /usr/include/X11/RectObj.h \
+ /usr/include/X11/CoreP.h /usr/include/X11/CompositeP.h \
+ /usr/include/X11/ConstrainP.h /usr/include/X11/ObjectP.h \
+ /usr/include/X11/RectObjP.h /usr/include/X11/StringDefs.h \
+ /usr/include/X11/Xaw/XawInit.h DrawingP.h Drawing.h Figure.h Cache.h \
+ /usr/include/X11/Xaw/SimpleP.h /usr/include/X11/Xaw/Simple.h \
+ /usr/include/X11/Xmu/Converters.h
+obj/Figure.o: Figure.c /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/bits/types.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/bits/sched.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/bits/stdio_lim.h \
+ /usr/include/X11/IntrinsicP.h /usr/include/X11/Intrinsic.h \
+ /usr/include/X11/Xlib.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/sys/sysmacros.h \
+ /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+ /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+ /usr/include/X11/Xresource.h /usr/include/string.h \
+ /usr/include/xlocale.h /usr/include/X11/Core.h \
+ /usr/include/X11/Composite.h /usr/include/X11/Constraint.h \
+ /usr/include/X11/Object.h /usr/include/X11/RectObj.h \
+ /usr/include/X11/CoreP.h /usr/include/X11/CompositeP.h \
+ /usr/include/X11/ConstrainP.h /usr/include/X11/ObjectP.h \
+ /usr/include/X11/RectObjP.h DrawingP.h Drawing.h Figure.h Cache.h \
+ /usr/include/X11/Xaw/SimpleP.h /usr/include/X11/Xaw/Simple.h \
+ /usr/include/X11/Xmu/Converters.h
+obj/Public.o: Public.c /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/bits/types.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/bits/sched.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/bits/stdio_lim.h \
+ /usr/include/math.h /usr/include/bits/huge_val.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/float.h \
+ /usr/include/string.h /usr/include/xlocale.h \
+ /usr/include/X11/IntrinsicP.h /usr/include/X11/Intrinsic.h \
+ /usr/include/X11/Xlib.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/sys/sysmacros.h \
+ /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+ /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+ /usr/include/X11/Xresource.h /usr/include/X11/Core.h \
+ /usr/include/X11/Composite.h /usr/include/X11/Constraint.h \
+ /usr/include/X11/Object.h /usr/include/X11/RectObj.h \
+ /usr/include/X11/CoreP.h /usr/include/X11/CompositeP.h \
+ /usr/include/X11/ConstrainP.h /usr/include/X11/ObjectP.h \
+ /usr/include/X11/RectObjP.h DrawingP.h Drawing.h Figure.h Cache.h \
+ /usr/include/X11/Xaw/SimpleP.h /usr/include/X11/Xaw/Simple.h \
+ /usr/include/X11/Xmu/Converters.h
+obj/demo.o: demo.c /usr/include/X11/Intrinsic.h /usr/include/X11/Xlib.h \
+ /usr/include/sys/types.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/include/bits/types.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+ /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/sys/sysmacros.h \
+ /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+ /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+ /usr/include/X11/Xresource.h /usr/include/string.h \
+ /usr/include/xlocale.h /usr/include/X11/Core.h \
+ /usr/include/X11/Composite.h /usr/include/X11/Constraint.h \
+ /usr/include/X11/Object.h /usr/include/X11/RectObj.h \
+ /usr/include/X11/StringDefs.h Drawing.h
+obj/libXdw.o: libXdw.c beeSoftVersion.h

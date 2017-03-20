@@ -1,0 +1,124 @@
+.TH BEEIRREGISTERCALLBACK 3 "April 2, 1999" "BeeSoft Light" "BeeSoft Light"
+
+.SH NAME
+beeSonarRegisterCallback, beeIRRegisterCallback, beeLaserRegisterCallback, 
+\- register a callback function to collect sensor data of a BeeSoft Light robot
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "bool beeSonarRegisterCallback(void (*" callbackHandler ")(float*) = NULL) ;"
+
+.BI "bool beeIRRegisterCallback(void (*" callbackHandler ")(int*, int*, int*) = NULL ) ; "
+
+.BI "bool beeLaserRegisterCallback(void (*" callbackHandler ")(int, float, float, int*, int, float, float, int*) = NULL ) ; " 
+
+
+.SH DESCRIPTION
+.B "beeSonarRegisterCallback()"
+registers a callback function to collect sonar data of a BeeSoft Light robot.
+.I "callbackHandler" 
+argument specifies a reference to the callback function. After that,
+the program can run 
+.B "beeSonarStartRegularUpdate()"
+to activate the update operations. 
+
+The callback handler should have the signature:
+
+.BI "void handler_name(float * " sonar ");"
+
+Note that the sonar data is an array of 24 
+.B "float"
+values. Programmers can use 
+.B "sonar[0-23]" 
+inside callback handler
+to retrieve the values. You
+do not need to and should not release the memory space referenced by
+.B "sonar"
+
+You can invoke 
+. B "beeSonarRegisterCallback()" 
+without any argument to unregister your own callback handler.
+
+.B "beeIRRegisterCallback()"
+registers a callback function to collect infrared data of a BeeSoft Light robot.
+.I "callbackHandler" 
+argument specifies a reference to the callback function. After that,
+the program can run 
+.B "beeIRStartRegularUpdate()"
+to activate the update operations. 
+
+The callback handler should have the signature:
+
+.BI "void handler_name(int * " irupperrow ", int * " irlowerrow " , int * " irdrow ");"
+
+Note that the infrared data is three arrays of 
+.B "integer"
+values. Programmers can use 
+.BR "irupperrow[0-23]",
+.BR "irlowerrow[0-23]",
+.B "irdrow[0-7]"
+inside callback handler
+to retrieve the values. You
+do not need to and should not release the memory space referenced by the tree parameters.
+
+You can invoke 
+. B "beeIRRegisterCallback()" 
+without any argument to unregister your own callback handler.
+
+.B "beeLaserRegisterCallback()"
+registers a callback function to collect laser data of a BeeSoft Light robot.
+.I "callbackHandler" 
+argument specifies a reference to the callback function. After that,
+the program can run 
+.B "beeLaserStartRegularUpdate()"
+to activate the update operations. 
+
+The callback handler should have the signature:
+
+.BI "void handler_name(int " laser_f_numberOfReadings ", float " laser_f_angleResolution ", float " laser_f_startAngle ", int * " laser_f_reading ", int " laser_r_numberOfReadings ", float " laser_r_angleResolution ", float " laser_r_startAngle ", int * " laser_r_reading " );"
+
+Note that the laser data are arrays of int values. Programmers can
+use 
+.B "laser_f_numberOfReadings" 
+to get the number of readings of front laser and
+.B "laser_r_numberOfReadings"
+to get the number of readings of rear laser.
+; and then use 
+.B "laser_f_reading[index]" 
+and 
+.B "laser_r_reading[index]"
+inside callback handler
+to retrieve the values. You
+do not need to and should not release the memory space referenced by the tree parameters.
+
+You can invoke 
+. B "beeLaserRegisterCallback()" 
+without any argument to unregister your own callback handler.
+
+.SH "RETURN VALUE"
+On success, the function will return TRUE.  On error, FALSE is 
+returned.
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.B "tcxServer" 
+and
+.B "colliServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs 
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+
+first in your program. Otherwise, the function will return FALSE.
+
+.SH SEE ALSO
+.BR "beeInitialize" (3),
+.BR "beeSonarStartRegularUpdate" (3),
+.BR "beeIRStartRegularUpdate" (3),
+.BR "beeGetLaserRegularValue" (3).
+
+

@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+#  This will call a program to check the base battery voltage and shutdown
+#  all computers if it is too low.  Letting the batteries run out not
+#  only crashes the operating system, the fluctating voltage freaks out
+#  the hard drives, which then trash the file system.
+#
+#  This program should of course be run on the computer which is
+#  hooked up to the base.  
+#
+#  This file should be in the same directory as the configuration file
+#  config.sh and the checkBattery executable
+#
+#  Put an entry in crontab for root, to be run this script every 15
+#  minutes or so.  If checkBattery detects low battery voltage, it
+#  will shutdown all the computers listed in config.sh
+#
+#  Such an entry in /var/spool/cron/crontabs/root would look like
+#  0,15,30,45 * * * *      /usr/local/rwi/bin/callCheckBattery
+#
+# The config file tells the executable the node names of your
+# computers, etc
+
+## These are set by the install rule of the Battery Makefile
+RWI=@@RWI@@
+
+source $RWI/config/local/config.sh                         
+cd $RWI/log
+touch ranBatteryCheck
+$RWI/bin/checkBattery -silent
+touch finishedBatteryCheck
+
+

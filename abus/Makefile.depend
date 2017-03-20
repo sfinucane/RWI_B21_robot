@@ -1,0 +1,257 @@
+obj/abus.o: abus.c /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/bits/types.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/stdio.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+ /usr/include/getopt.h /usr/include/stdlib.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/sys/sysmacros.h \
+ /usr/include/alloca.h /usr/include/string.h /usr/include/fcntl.h \
+ /usr/include/bits/fcntl.h /usr/include/netinet/in.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/limits.h \
+ /usr/include/stdint.h /usr/include/bits/wordsize.h \
+ /usr/include/bits/socket.h /usr/include/bits/sockaddr.h \
+ /usr/include/asm/socket.h /usr/include/asm/sockios.h \
+ /usr/include/bits/in.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/time.h acb/global.h acb/abus.h
+obj/abusd.o: abusd.c /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/bits/types.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/sys/sysmacros.h /usr/include/alloca.h \
+ /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+ /usr/include/bits/confname.h /usr/include/getopt.h \
+ /usr/include/sys/ioctl.h /usr/include/bits/ioctls.h \
+ /usr/include/asm/ioctls.h /usr/include/asm/ioctl.h \
+ /usr/include/bits/ioctl-types.h /usr/include/sys/ttydefaults.h \
+ /usr/include/ctype.h /usr/include/string.h /usr/include/fcntl.h \
+ /usr/include/bits/fcntl.h /usr/include/sys/time.h \
+ /usr/include/bits/time.h /usr/include/sys/stat.h \
+ /usr/include/bits/stat.h /usr/include/netinet/in.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/limits.h \
+ /usr/include/stdint.h /usr/include/bits/wordsize.h \
+ /usr/include/bits/socket.h /usr/include/bits/sockaddr.h \
+ /usr/include/asm/socket.h /usr/include/asm/sockios.h \
+ /usr/include/bits/in.h /usr/include/bits/byteswap.h \
+ /usr/include/errno.h /usr/include/bits/errno.h \
+ /usr/include/linux/errno.h /usr/include/asm/errno.h \
+ /usr/include/syslog.h /usr/include/sys/syslog.h acb/global.h \
+ acb/catc.h
+obj/abusk.o: abusk.c /usr/include/linux/config.h \
+ /usr/include/linux/autoconf.h /usr/include/linux/rhconfig.h \
+ /boot/kernel.h /usr/include/linux/version.h \
+ /usr/include/linux/module.h /usr/include/asm/atomic.h \
+ /usr/include/linux/modversions.h /usr/include/linux/modsetver.h \
+ /usr/include/linux/modules/8390.ver \
+ /usr/include/linux/modules/ac97_codec.ver \
+ /usr/include/linux/modules/ad1816.ver \
+ /usr/include/linux/modules/ad1848.ver \
+ /usr/include/linux/modules/af_ax25.ver \
+ /usr/include/linux/modules/af_ipx.ver \
+ /usr/include/linux/modules/af_netlink.ver \
+ /usr/include/linux/modules/agpgart_be.ver \
+ /usr/include/linux/modules/apm.ver \
+ /usr/include/linux/modules/arlan-proc.ver \
+ /usr/include/linux/modules/arlan.ver \
+ /usr/include/linux/modules/audio_syms.ver \
+ /usr/include/linux/modules/b1dma.ver \
+ /usr/include/linux/modules/b1.ver \
+ /usr/include/linux/modules/bsd_comp.ver \
+ /usr/include/linux/modules/capifs.ver \
+ /usr/include/linux/modules/capiutil.ver \
+ /usr/include/linux/modules/cdrom.ver \
+ /usr/include/linux/modules/config.ver \
+ /usr/include/linux/modules/console.ver \
+ /usr/include/linux/modules/context.ver \
+ /usr/include/linux/modules/cpia.ver \
+ /usr/include/linux/modules/cpuid.ver \
+ /usr/include/linux/modules/DAC960.ver \
+ /usr/include/linux/modules/ddp.ver \
+ /usr/include/linux/modules/dmi_scan.ver \
+ /usr/include/linux/modules/fatfs_syms.ver \
+ /usr/include/linux/modules/fbcmap.ver \
+ /usr/include/linux/modules/fbcon-cfb16.ver \
+ /usr/include/linux/modules/fbcon-cfb24.ver \
+ /usr/include/linux/modules/fbcon-cfb32.ver \
+ /usr/include/linux/modules/fbcon-cfb8.ver \
+ /usr/include/linux/modules/fbcon.ver \
+ /usr/include/linux/modules/fbmem.ver \
+ /usr/include/linux/modules/firewall.ver \
+ /usr/include/linux/modules/ftape_syms.ver \
+ /usr/include/linux/modules/gamma_drv.ver \
+ /usr/include/linux/modules/genhd.ver \
+ /usr/include/linux/modules/i2c-algo-bit.ver \
+ /usr/include/linux/modules/i2c-algo-pcf.ver \
+ /usr/include/linux/modules/i2c-core.ver \
+ /usr/include/linux/modules/i2c-old.ver \
+ /usr/include/linux/modules/i2o_block.ver \
+ /usr/include/linux/modules/i2o_config.ver \
+ /usr/include/linux/modules/i2o_core.ver \
+ /usr/include/linux/modules/i2o_pci.ver \
+ /usr/include/linux/modules/i2o_scsi.ver \
+ /usr/include/linux/modules/i386_ksyms.ver \
+ /usr/include/linux/modules/i810_drv.ver \
+ /usr/include/linux/modules/ide.ver \
+ /usr/include/linux/modules/input.ver \
+ /usr/include/linux/modules/ip_gre.ver \
+ /usr/include/linux/modules/ipip.ver \
+ /usr/include/linux/modules/ip_masq_app.ver \
+ /usr/include/linux/modules/ip_masq_mod.ver \
+ /usr/include/linux/modules/ip_masq.ver \
+ /usr/include/linux/modules/ip_vs.ver \
+ /usr/include/linux/modules/irmod.ver \
+ /usr/include/linux/modules/irport.ver \
+ /usr/include/linux/modules/isdn_common.ver \
+ /usr/include/linux/modules/joystick.ver \
+ /usr/include/linux/modules/kcapi.ver \
+ /usr/include/linux/modules/keyboard.ver \
+ /usr/include/linux/modules/ksyms.ver \
+ /usr/include/linux/modules/lapb_iface.ver \
+ /usr/include/linux/modules/ll_rw_blk.ver \
+ /usr/include/linux/modules/lockd_syms.ver \
+ /usr/include/linux/modules/loop.ver /usr/include/linux/modules/md.ver \
+ /usr/include/linux/modules/mga_drv.ver \
+ /usr/include/linux/modules/microcode.ver \
+ /usr/include/linux/modules/midi_syms.ver \
+ /usr/include/linux/modules/misc.ver \
+ /usr/include/linux/modules/mpu401.ver \
+ /usr/include/linux/modules/msdosfs_syms.ver \
+ /usr/include/linux/modules/msnd.ver \
+ /usr/include/linux/modules/msr.ver \
+ /usr/include/linux/modules/mtrr.ver \
+ /usr/include/linux/modules/netsyms.ver \
+ /usr/include/linux/modules/newport.ver \
+ /usr/include/linux/modules/nls_base.ver \
+ /usr/include/linux/modules/nm256_audio.ver \
+ /usr/include/linux/modules/nubus_syms.ver \
+ /usr/include/linux/modules/opl3.ver \
+ /usr/include/linux/modules/p8022.ver \
+ /usr/include/linux/modules/paride.ver \
+ /usr/include/linux/modules/parport_init.ver \
+ /usr/include/linux/modules/parport_probe.ver \
+ /usr/include/linux/modules/pcisyms.ver \
+ /usr/include/linux/modules/phonedev.ver \
+ /usr/include/linux/modules/ppp_deflate.ver \
+ /usr/include/linux/modules/ppp.ver \
+ /usr/include/linux/modules/procfs_syms.ver \
+ /usr/include/linux/modules/psnap.ver \
+ /usr/include/linux/modules/pty.ver \
+ /usr/include/linux/modules/r128_drv.ver \
+ /usr/include/linux/modules/sb_card.ver \
+ /usr/include/linux/modules/scsi_syms.ver \
+ /usr/include/linux/modules/sdladrv.ver \
+ /usr/include/linux/modules/selection.ver \
+ /usr/include/linux/modules/sensors.ver \
+ /usr/include/linux/modules/sequencer_syms.ver \
+ /usr/include/linux/modules/serial.ver \
+ /usr/include/linux/modules/signal.ver \
+ /usr/include/linux/modules/slhc.ver \
+ /usr/include/linux/modules/sound_core.ver \
+ /usr/include/linux/modules/soundlow.ver \
+ /usr/include/linux/modules/sound_syms.ver \
+ /usr/include/linux/modules/sunrpc_syms.ver \
+ /usr/include/linux/modules/syncppp.ver \
+ /usr/include/linux/modules/sysrq.ver \
+ /usr/include/linux/modules/tdfx_drv.ver \
+ /usr/include/linux/modules/uart401.ver \
+ /usr/include/linux/modules/usbserial.ver \
+ /usr/include/linux/modules/usb.ver \
+ /usr/include/linux/modules/vfatfs_syms.ver \
+ /usr/include/linux/modules/videodev.ver \
+ /usr/include/linux/modules/wanmain.ver \
+ /usr/include/linux/modules/xor.ver \
+ /usr/include/linux/modules/z85230.ver \
+ /usr/include/linux/modules/zftape_syms.ver \
+ /usr/include/linux/modules/zorrosyms.ver /usr/include/linux/types.h \
+ /usr/include/linux/posix_types.h /usr/include/linux/stddef.h \
+ /usr/include/asm/posix_types.h /usr/include/asm/types.h \
+ /usr/include/linux/sched.h /usr/include/asm/param.h \
+ /usr/include/linux/binfmts.h /usr/include/linux/ptrace.h \
+ /usr/include/asm/ptrace.h /usr/include/linux/capability.h \
+ /usr/include/linux/personality.h /usr/include/linux/linkage.h \
+ /usr/include/linux/tasks.h /usr/include/linux/kernel.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/linux/times.h /usr/include/linux/timex.h \
+ /usr/include/asm/timex.h /usr/include/asm/msr.h \
+ /usr/include/linux/time.h /usr/include/asm/system.h \
+ /usr/include/asm/segment.h /usr/include/asm/semaphore.h \
+ /usr/include/asm/spinlock.h /usr/include/asm/page.h \
+ /usr/include/asm/page_offset.h /usr/include/linux/smp.h \
+ /usr/include/linux/tty.h /usr/include/linux/fs.h \
+ /usr/include/linux/limits.h /usr/include/linux/wait.h \
+ /usr/include/linux/vfs.h /usr/include/asm/statfs.h \
+ /usr/include/linux/net.h /usr/include/linux/socket.h \
+ /usr/include/asm/socket.h /usr/include/asm/sockios.h \
+ /usr/include/linux/sockios.h /usr/include/linux/uio.h \
+ /usr/include/linux/kdev_t.h /usr/include/linux/ioctl.h \
+ /usr/include/asm/ioctl.h /usr/include/linux/list.h \
+ /usr/include/linux/dcache.h /usr/include/linux/stat.h \
+ /usr/include/asm/stat.h /usr/include/linux/bitops.h \
+ /usr/include/asm/bitops.h /usr/include/asm/cache.h \
+ /usr/include/asm/byteorder.h \
+ /usr/include/linux/byteorder/little_endian.h \
+ /usr/include/linux/byteorder/swab.h \
+ /usr/include/linux/byteorder/generic.h /usr/include/linux/pipe_fs_i.h \
+ /usr/include/linux/minix_fs_i.h /usr/include/linux/ext2_fs_i.h \
+ /usr/include/linux/hpfs_fs_i.h /usr/include/linux/ntfs_fs_i.h \
+ /usr/include/linux/msdos_fs_i.h /usr/include/linux/umsdos_fs_i.h \
+ /usr/include/linux/iso_fs_i.h /usr/include/linux/nfs_fs_i.h \
+ /usr/include/linux/nfs.h /usr/include/linux/sunrpc/msg_prot.h \
+ /usr/include/linux/sysv_fs_i.h /usr/include/linux/affs_fs_i.h \
+ /usr/include/linux/a.out.h /usr/include/asm/a.out.h \
+ /usr/include/linux/ufs_fs_i.h /usr/include/linux/efs_fs_i.h \
+ /usr/include/linux/coda_fs_i.h /usr/include/linux/coda.h \
+ /usr/include/linux/romfs_fs_i.h /usr/include/linux/smb_fs_i.h \
+ /usr/include/linux/hfs_fs_i.h /usr/include/linux/adfs_fs_i.h \
+ /usr/include/linux/qnx4_fs_i.h /usr/include/linux/qnxtypes.h \
+ /usr/include/linux/usbdev_fs_i.h /usr/include/linux/quota.h \
+ /usr/include/linux/errno.h /usr/include/asm/errno.h \
+ /usr/include/linux/mount.h /usr/include/linux/fcntl.h \
+ /usr/include/asm/fcntl.h /usr/include/linux/minix_fs_sb.h \
+ /usr/include/linux/ext2_fs_sb.h /usr/include/linux/hpfs_fs_sb.h \
+ /usr/include/linux/ntfs_fs_sb.h /usr/include/linux/msdos_fs_sb.h \
+ /usr/include/linux/fat_cvf.h /usr/include/linux/iso_fs_sb.h \
+ /usr/include/linux/nfs_fs_sb.h /usr/include/linux/in.h \
+ /usr/include/linux/sysv_fs_sb.h /usr/include/linux/affs_fs_sb.h \
+ /usr/include/linux/ufs_fs_sb.h /usr/include/linux/ufs_fs.h \
+ /usr/include/linux/efs_fs_sb.h /usr/include/linux/romfs_fs_sb.h \
+ /usr/include/linux/smb_fs_sb.h /usr/include/linux/smb.h \
+ /usr/include/linux/hfs_fs_sb.h /usr/include/linux/adfs_fs_sb.h \
+ /usr/include/linux/qnx4_fs_sb.h /usr/include/linux/qnx4_fs.h \
+ /usr/include/linux/usbdev_fs_sb.h /usr/include/linux/major.h \
+ /usr/include/linux/termios.h /usr/include/asm/termios.h \
+ /usr/include/asm/termbits.h /usr/include/asm/ioctls.h \
+ /usr/include/linux/tqueue.h /usr/include/linux/tty_driver.h \
+ /usr/include/linux/tty_ldisc.h /usr/include/linux/serialP.h \
+ /usr/include/linux/sem.h /usr/include/linux/ipc.h \
+ /usr/include/linux/signal.h /usr/include/asm/signal.h \
+ /usr/include/asm/sigcontext.h /usr/include/asm/siginfo.h \
+ /usr/include/linux/string.h /usr/include/asm/string.h \
+ /usr/include/linux/securebits.h /usr/include/linux/param.h \
+ /usr/include/linux/resource.h /usr/include/asm/resource.h \
+ /usr/include/linux/timer.h /usr/include/asm/processor.h \
+ /usr/include/asm/vm86.h /usr/include/asm/math_emu.h \
+ /usr/include/asm/current.h /usr/include/linux/malloc.h \
+ /usr/include/linux/slab.h /usr/include/linux/mm.h \
+ /usr/include/linux/wrapper.h /usr/include/linux/ioport.h \
+ /usr/include/linux/delay.h /usr/include/asm/delay.h \
+ /usr/include/asm/io.h /usr/include/linux/vmalloc.h \
+ /usr/include/asm/pgtable.h /usr/include/asm/fixmap.h \
+ /usr/include/asm/uaccess.h /usr/include/linux/poll.h \
+ /usr/include/asm/poll.h acb/global.h acb/catc.h

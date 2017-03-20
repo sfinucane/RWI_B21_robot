@@ -1,0 +1,23 @@
+/Makefile/1.1/Sun Sep 26 18:26:53 1999//
+/abterm.c/1.1/Sat Sep 14 15:44:08 2002//
+/abterm.h/1.1/Sat Sep 14 15:44:08 2002//
+/beeSoftVersion.h/1.1/Sat Sep 14 15:44:08 2002//
+/curses.h/1.1/Sat Sep 14 15:44:08 2002//
+/irCal.c/1.1/Sun Sep 26 18:26:53 1999//
+/libcurses.a.hide-from-make-clean/1.1/Sun Sep 26 18:26:53 1999//
+/libmsp.c/1.1/Sat Sep 14 15:44:08 2002//
+/libmsp.h/1.1/Sat Sep 14 15:44:08 2002//
+/libmspmodule.c/1.1/Sat Sep 14 15:44:08 2002//
+/libmspmodule.h/1.1/Sat Sep 14 15:44:08 2002//
+/msp.c/1.1/Sat Sep 14 15:44:08 2002//
+/msp.h/1.1/Sat Sep 14 15:44:08 2002//
+/mspmodule.c/1.1/Sat Sep 14 15:44:08 2002//
+/mspmodule.h/1.1/Sat Sep 14 15:44:08 2002//
+/mspterm.c/1.1/Sat Sep 14 15:44:08 2002//
+/mspterm.h/1.1/Sat Sep 14 15:44:08 2002//
+/msputils.h/1.1/Sat Sep 14 15:44:08 2002//
+/utils.c/1.1/Sat Sep 14 15:44:08 2002//
+/version.c/1.1/Sat Sep 14 15:44:08 2002//
+/version.date/1.1/Sun Sep 26 18:26:54 1999//
+/version.h/1.1/Sat Sep 14 15:44:08 2002//
+D

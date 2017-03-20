@@ -1,0 +1,34 @@
+.TH BEEINITIALIZE 3 "April 2, 1999" "BeeSoft Light" "BeeSoft Light"
+.SH NAME
+beeInitialize \- initialize a BeeSoft Light user process
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "void beeInitialize(char* " moduleName " = ""USER"");"
+
+.SH DESCRIPTION
+.B "beeInitialize()"
+initialize a BeeSoft Light user process. The 
+.I "moduleName" 
+argument specifies the name of your user process module. 
+It will initialize tcx communication, register call back functions,
+connect to TCX server and colliServer, and so forth. If you do not 
+provide the argument, the default modulename is "USER". You should 
+give names if you have more than one user processes running.
+
+.SH "RETURN VALUE"
+This function return no value. 
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.B "tcxServer" 
+and
+.B "colliServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs 
+.BR "tcxServer". 
+
+

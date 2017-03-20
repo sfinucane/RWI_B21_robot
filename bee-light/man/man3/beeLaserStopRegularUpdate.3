@@ -1,0 +1,102 @@
+.TH BEELASERSTOPREGULARUPDATD 3 "April 3, 1999" "BeeSoft Light" 
+.SH NAME
+beeSonarStartRegularUpdate, beeSonarStopRegularUpdate, beeIRStartRegularUpdate, 
+beeIRStopRegularUpdate, beeLaserStartRegularUpdate, beeLaserStopRegularUpdate
+\- start or stop to regularly update sensor data of a BeeSoft Light robot
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "bool beeSonarStartRegularUpdate();"
+
+.BI "bool beeSonarStopRegularUpdate();"
+
+.BI "bool beeIRStartRegularUpdate();"
+
+.BI "bool beeIRStopRegularUpdate();"
+
+.BI "bool beeLaserStartRegularUpdate();"
+
+.BI "bool beeLaserStopRegularUpdate();"
+
+
+.SH DESCRIPTION
+.B "beeSonarStartRegularUpdate()"
+triggers to regularly update sonar data of a BeeSoft Light robot.
+User process can register a call-back function by 
+.B "beeSonarRegisterCallback()"
+before the function. The call-back function will then be invoked regularly
+and get an array of sonar data as a parameter. Otherwise, 
+sonar data are handled by system defined callback function without notifying
+user program. 
+To get sonar data by invoking
+.BR "beeGetSonarValue()",
+.B "beeSonarStartRegularUpdate()"
+must be executed first.
+
+.B "beeSonarStopRegularUpdate()" 
+stops the regular update operations explained in 
+.BR "beeSonarStopRegularUpdate()".  
+
+.B "beeIRStartRegularUpdate()"
+triggers to regularly update infrared data of a BeeSoft Light robot. 
+User process can register a call-back function by 
+.B "beeIRRegisterCallback()"
+before the function. The call-back function will then be invoked regularly
+and get an array of infrared data as a parameter. Otherwise,
+infrared data are handled by system defined callback function without notifying
+user program.
+
+To get infrared data by invoking
+.BR "beeGetIRValue()",
+.B "beeIRStartRegularUpdate()"
+must be executed first.
+
+.B "beeIRStopRegularUpdate()" 
+stops the regular update operations explained in 
+.BR "beeIRStopRegularUpdate()".  
+
+.B "beeLaserStartRegularUpdate()"
+triggers to regularly update laser data of a BeeSoft Light robot. 
+User process can register a call-back function by 
+.B "beeLaserRegisterCallback()"
+before the function. The call-back function will then be invoked regularly
+and get an array of laser data as a parameter. Otherwise,
+laser data are handled by system defined callback function without notifying
+user program.
+
+To get laser data by invoking 
+.BR "beeGetLaserValue()",
+.B "beeLaserStartRegularUpdate()"
+must be executed first.
+
+.B "beeLaserStopRegularUpdate()" 
+stops the regular update operations explained in 
+.BR "beeLaserStopRegularUpdate()".  
+
+.SH "RETURN VALUE"
+On success, the function will return TRUE.  On error, FALSE is 
+returned.
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.B "tcxServer" 
+and
+.B "colliServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+first in your program. Otherwise, the function will return FALSE.
+
+
+.SH SEE ALSO
+.BR "beeInitialize" (3),
+.BR "beeGetSonarValue" (3),
+.BR "beeGetIRValue" (3),
+.BR "beeGetLaserValue" (3).
+
+

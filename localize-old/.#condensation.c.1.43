@@ -1,0 +1,1567 @@
+/***************************************************************************
+ ***************************************************************************
+ ***************************************************************************
+ *****
+ *****
+ ***** Welcome!
+ *****
+ ***** This file is part of the robot control software provided
+ ***** by Real World Interface Inc.
+ *****
+ ***** All copyrights are by Real World Interface Inc., Carnegie
+ ***** Mellon University, and the University of Bonn, Germany.
+ ***** Removing the copyright information is illegal. Please read
+ ***** and make sure you understand the disclaimer below.
+ *****
+ ***** Contact tyson@rwii.com if you have questions or would
+ ***** like to obtain further information.
+ *****
+ ***** We hope you enjoy working with this software package.
+ *****
+ *****                      Tyson D. Sawyer and Sebastian Thrun
+ *****
+ *****
+ ***************************************************************************
+ ***************************************************************************
+ ***************************************************************************
+ *****
+ ***** THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED
+ ***** BY APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING
+ ***** THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM
+ ***** "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
+ ***** IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ ***** OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE
+ ***** ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM
+ ***** IS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME
+ ***** THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+ *****
+ ***** IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN
+ ***** WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY
+ ***** MODIFY AND/OR REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE
+ ***** LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL,
+ ***** INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR
+ ***** INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO
+ ***** LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES
+ ***** SUSTAINED BY YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM
+ ***** TO OPERATE WITH ANY OTHER PROGRAMS OR FAILURE TO CONTROL A
+ ***** PHYSICAL DEVICE OF ANY TYPE), EVEN IF SUCH HOLDER OR OTHER
+ ***** PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+ *****
+ ***************************************************************************
+ ***************************************************************************
+ ***************************************************************************
+ *****
+ ***** Source file:     $Source: /home/rhino/rhino/CVS/bee/src/localize/condensation.c,v $
+ *****
+ ***** Created by:      $Author: fox $
+ *****
+ ***** Revision #:      $Revision: 1.43 $
+ *****
+ ***** Date of revision $Date: 1999/09/29 16:06:09 $
+ *****
+ ***************************************************************************
+ ***************************************************************************
+ ***************************************************************************
+ *
+ *                  ----- REVISION HISTORY -----
+ *
+ * $Log: condensation.c,v $
+ * Revision 1.43  1999/09/29 16:06:09  fox
+ * Should work.
+ *
+ * Revision 1.42  1999/09/26 21:20:56  fox
+ * Nothing special.
+ *
+ * Revision 1.41  1999/09/26 18:55:21  fox
+ * Added scout robot.
+ *
+ * Revision 1.40  1999/09/09 02:48:37  fox
+ * Final version before germany.
+ *
+ * Revision 1.39  1999/09/06 16:36:03  fox
+ * Many changes.
+ *
+ * Revision 1.38  1999/09/03 22:22:39  fox
+ * Changed hadnling of real time script. This version contains both.
+ *
+ * Revision 1.37  1999/09/03 13:43:35  fox
+ * Nothing special.
+ *
+ * Revision 1.36  1999/09/01 21:26:54  fox
+ * Works almost perfectly :-)
+ *
+ * Revision 1.35  1999/09/01 00:02:56  fox
+ * Getting closer. But still not close enough.
+ *
+ * Revision 1.34  1999/08/30 05:48:41  fox
+ * Doesn't work!!
+ *
+ * Revision 1.33  1999/08/27 22:22:32  fox
+ * Better communication for multi robot localization.
+ *
+ * Revision 1.32  1999/07/13 23:08:01  fox
+ * Some changes.
+ *
+ * Revision 1.31  1999/07/12 15:24:52  fox
+ * Minor changes in Texas.
+ *
+ * Revision 1.30  1999/06/25 19:48:11  fox
+ * Minor changs for the urbie.
+ *
+ * Revision 1.29  1999/06/24 00:21:49  fox
+ * Some changes for the urbies.
+ *
+ * Revision 1.28  1999/05/18 15:15:19  fox
+ * Added keywords to determine whether correction parameters should be sent to map and plan or not.
+ *
+ * Revision 1.27  1999/04/29 13:35:20  fox
+ * Further adaptation to make multi localize run.
+ *
+ * Revision 1.26  1999/04/29 00:58:28  fox
+ * Some minor changes for multi localize.
+ *
+ * Revision 1.25  1999/04/21 14:05:59  fox
+ * Just an intermediate version.
+ *
+ * Revision 1.24  1999/04/18 19:00:09  fox
+ * This is just to get the most recent version into the cmu bee tree. It shouldn't do any harm (hopefully!).
+ *
+ * Revision 1.23  1999/03/16 16:11:15  fox
+ * Added more information to sample set message and created a new subscription
+ * message for status, maps, robot position, and samples (maps and robot
+ * positions not implemented yet).
+ *
+ * Revision 1.22  1999/03/12 00:41:48  fox
+ * Minor changes.
+ *
+ * Revision 1.21  1999/02/17 19:42:22  fox
+ * Enhanced gif utilities.
+ *
+ * Revision 1.20  1999/02/05 23:02:42  fox
+ * Minor changes for samples.
+ *
+ * Revision 1.19  1999/02/01 21:52:22  fox
+ * Added support for dumping gif files.
+ *
+ * Revision 1.18  1999/01/22 18:10:39  fox
+ * Removed some hacks done for denver and the sampling paper.
+ *
+ * Revision 1.17  1999/01/22 17:48:01  fox
+ * Final version of sampling paper and denver demo.
+ *
+ * Revision 1.16  1999/01/22 00:34:56  wolfram
+ * Added database support in vision.c
+ *
+ * Revision 1.15  1999/01/14 23:39:29  wolfram
+ * Added sensorMaxRange and standardDeviaton to the sensor model for lasers
+ *
+ * Revision 1.14  1999/01/11 19:47:47  fox
+ * Added several parameters to sampling. Number of samples is not fixed any
+ * more.
+ *
+ * Revision 1.12  1999/01/08 22:28:43  wolfram
+ * Better integration of scanAlignment
+ *
+ * Revision 1.11  1998/11/24 23:05:25  fox
+ * Implemented furhter routines for condensation and vision.
+ *
+ * Revision 1.10  1998/11/24 18:42:10  fox
+ * First version of condensation with vision.
+ *
+ * Revision 1.9  1998/11/19 03:14:24  fox
+ * Newest version with integrated mapping and localization. If MAP is connected,
+ * then the correction parameters are NOT sent to PLAN.
+ * Furthermore, the size of the onlinemap adapts to the partial maps sent by MAP.
+ *
+ * Revision 1.8  1998/11/17 23:26:17  fox
+ * Incorporated the ability to localize the robot in maps that are changed
+ * on the fly. Had to make several changes.
+ * To perform online localization add command line parameter -mapping.
+ * If this option is used, all maps will be set to the online map received
+ * from the MAP module.
+ *
+ * Revision 1.7  1998/11/03 21:02:16  fox
+ * Lasers will not be integrated if the robot rotates faster than
+ * MAX_ROT_VEL_FOR_LASERS deg/sec.
+ *
+ * Revision 1.6  1998/10/29 03:44:59  fox
+ * Nothing special.
+ *
+ * Revision 1.5  1998/10/19 18:29:54  fox
+ * *** empty log message ***
+ *
+ * Revision 1.4  1998/10/02 15:16:36  fox
+ * Several improvements of condensation. Updated the function calls to the
+ * new version of the distancServer.
+ *
+ * Revision 1.3  1998/09/25 17:53:29  fox
+ * Improved version of condensation.
+ *
+ * Revision 1.2  1998/09/25 04:02:53  fox
+ * First version of CONDENSATION!!!!
+ *
+ * Revision 1.1  1998/09/18 17:24:42  fox
+ * Added skeleton files for condensation.
+ *
+ *
+ *
+ *
+ ***************************************************************************
+ ***************************************************************************
+ ***************************************************************************/
+
+
+
+#include <math.h>
+
+#include "general.h"
+#include "probGrid.h"
+#include "function.h"
+#include "file.h"
+#include "sonar.h"
+#include "laser.h"
+#include "movement.h"
+#include "angle.h"
+#include "graphic.h"
+#include "allocate.h"
+#include "script.h"
+#include "localTcx.h"
+#include "condensation.h"
+#include "proximityTools.h"
+#include "communication.h"
+#include "scanAlignment.h"
+
+#define NUMBER_OF_SAMPLES_TOKEN              0
+#define START_X_TOKEN                        1
+#define START_Y_TOKEN                        2
+#define START_ROT_TOKEN                      3
+#define SET_START_POS_TOKEN                  4
+#define SAMPLING_DISTANCE_NOISE_TOKEN        5
+#define SAMPLING_ANGLE_NOISE_TOKEN           6
+#define DUMP_SAMPLES_TOKEN                   7
+#define USE_POSITION_TOKEN                   8
+#define VARIABLE_SAMPLE_SIZE_TOKEN           9
+#define MIN_NUMBER_OF_SAMPLES_TOKEN         10
+#define SAMPLE_INTEGRATION_THRESHOLD_TOKEN  11
+#define FRACTION_OF_UNIFORM_SAMPLES_TOKEN   12
+#define LOAD_SAMPLES_FILE_TOKEN             13
+#define SAMPLES_FILE_TOKEN                  14
+#define SAMPLING_SIDE_DRIFT_TOKEN          15
+#define SAMPLING_ROT_DRIFT_TOKEN           16
+
+condensationParameters globalCondensationParameters;
+extern informationsFor_COMMUNICATION communicationInfo;
+
+#define NUMBER_KEY_WORD "#Number "
+#define DIMENSION_KEY_WORD "#Dimension "
+#define MIN_KEY_WORD "#Min "
+#define MAX_KEY_WORD "#Max "
+#define REF_POS_KEY_WORD "#RefPosition "
+#define TIME_STAMP_KEY_WORD "#Time "
+
+/********************************************************************
+ ********************************************************************
+ * Forward declarations of internal functions.
+ ********************************************************************
+ ********************************************************************/
+
+
+static sampleSet
+readSamples( char* fileName);
+
+static int
+binarySearch( double* values, double searchVal, int numberOfValues);
+
+static void
+sampleAccordingToDistribution( sampleSet* samples, probabilityGrid* aPrioriProbs);
+
+static void
+updateSampleInformation( actionInformation* info);
+
+static void
+dumpSamples( sampleSet* samples, char* robotName,
+	     int numberOfSamples, realPosition refPos);
+
+static void
+checkAllocationOfAuxiliaryVariables( sampleSet* samples);
+
+static void
+setUniformDistribution( sampleSet* samples, probabilityGrid* aPrioriProbs);
+
+static float
+normalizeWeights( sampleSet* samples);
+
+/**************************************************************************
+ **************************************************************************
+ * Mandatory functions.
+ **************************************************************************
+ **************************************************************************/
+
+void
+initialize_CONDENSATION( char* fileName,
+			 actionInformation* actionInfo,
+			 sensingActionMask* actionMask, int argc, char** argv)
+{
+  realPosition startPos;
+  int setStartPos = 0, z;
+
+  token tok[NUMBER_OF_CONDENSATION_PARAMETERS];
+  
+  /**********************************************************
+   * Initialize parameters
+   **********************************************************/
+  int numberOfSamples = 400;
+  float integrateThreshold = 0.3;
+  int variableSampleSize = FALSE;
+  int minNumberOfSamples = numberOfSamples;
+  float fractionOfUniformSamples = 0.0;
+  char samplesFile[MAX_STRING_LENGTH];
+  int loadSamplesFile = FALSE;
+  globalCondensationParameters.distanceNoise = 0.05;
+  globalCondensationParameters.angleNoise = 0.02;
+  globalCondensationParameters.sideDrift = 0.02;
+  globalCondensationParameters.rotDrift = 0.02;
+  globalCondensationParameters.dumpSamples = FALSE;
+  globalCondensationParameters.usePosition = TRUE;
+  
+  actionInfo->proximityIntegrated = FALSE;
+
+  setTokensInitialized( tok, NUMBER_OF_CONDENSATION_PARAMETERS);
+  
+  /**********************************************************
+   * Get the parameters from the file.
+   **********************************************************/
+    
+  tok[NUMBER_OF_SAMPLES_TOKEN].format   = INT_FORMAT;
+  tok[NUMBER_OF_SAMPLES_TOKEN].variable = &numberOfSamples;
+  tok[NUMBER_OF_SAMPLES_TOKEN].keyWord  = NUMBER_OF_SAMPLES_KEYWORD;
+  
+  tok[SET_START_POS_TOKEN].format   = INT_FORMAT;
+  tok[SET_START_POS_TOKEN].variable = &(setStartPos);
+  tok[SET_START_POS_TOKEN].keyWord  = SET_START_POS_KEYWORD;
+  
+  tok[USE_POSITION_TOKEN].format   = INT_FORMAT;
+  tok[USE_POSITION_TOKEN].variable = &(globalCondensationParameters.usePosition);
+  tok[USE_POSITION_TOKEN].keyWord  = USE_POSITION_KEYWORD;
+  
+  tok[START_X_TOKEN].format   = FLOAT_FORMAT;
+  tok[START_X_TOKEN].variable = &(startPos.x);
+  tok[START_X_TOKEN].keyWord  = START_X_KEYWORD;
+  
+  tok[START_Y_TOKEN].format   = FLOAT_FORMAT;
+  tok[START_Y_TOKEN].variable = &(startPos.y);
+  tok[START_Y_TOKEN].keyWord  = START_Y_KEYWORD;
+  
+  tok[START_ROT_TOKEN].format   = FLOAT_FORMAT;
+  tok[START_ROT_TOKEN].variable = &(startPos.rot);
+  tok[START_ROT_TOKEN].keyWord  = START_ROT_KEYWORD;
+  
+  tok[SAMPLING_DISTANCE_NOISE_TOKEN].format   = FLOAT_FORMAT;
+  tok[SAMPLING_DISTANCE_NOISE_TOKEN].variable =
+    &(globalCondensationParameters.distanceNoise);
+  tok[SAMPLING_DISTANCE_NOISE_TOKEN].keyWord  = SAMPLING_DISTANCE_NOISE_KEYWORD;
+  
+  tok[SAMPLING_ANGLE_NOISE_TOKEN].format   = FLOAT_FORMAT;
+  tok[SAMPLING_ANGLE_NOISE_TOKEN].variable =
+    &(globalCondensationParameters.angleNoise);
+  tok[SAMPLING_ANGLE_NOISE_TOKEN].keyWord  = SAMPLING_ANGLE_NOISE_KEYWORD;
+  
+  tok[SAMPLING_SIDE_DRIFT_TOKEN].format   = FLOAT_FORMAT;
+  tok[SAMPLING_SIDE_DRIFT_TOKEN].variable =
+    &(globalCondensationParameters.sideDrift);
+  tok[SAMPLING_SIDE_DRIFT_TOKEN].keyWord  = SAMPLING_SIDE_DRIFT_KEYWORD;
+  
+  tok[SAMPLING_ROT_DRIFT_TOKEN].format   = FLOAT_FORMAT;
+  tok[SAMPLING_ROT_DRIFT_TOKEN].variable =
+    &(globalCondensationParameters.rotDrift);
+  tok[SAMPLING_ROT_DRIFT_TOKEN].keyWord  = SAMPLING_ROT_DRIFT_KEYWORD;
+  
+  tok[DUMP_SAMPLES_TOKEN].format   = INT_FORMAT;
+  tok[DUMP_SAMPLES_TOKEN].variable = &(globalCondensationParameters.dumpSamples);
+  tok[DUMP_SAMPLES_TOKEN].keyWord  = DUMP_SAMPLES_KEYWORD;
+  
+  tok[VARIABLE_SAMPLE_SIZE_TOKEN].format   = INT_FORMAT;
+  tok[VARIABLE_SAMPLE_SIZE_TOKEN].variable = &variableSampleSize;
+  tok[VARIABLE_SAMPLE_SIZE_TOKEN].keyWord  = VARIABLE_SAMPLE_SIZE_KEYWORD;
+  
+  tok[MIN_NUMBER_OF_SAMPLES_TOKEN].format   = INT_FORMAT;
+  tok[MIN_NUMBER_OF_SAMPLES_TOKEN].variable = &minNumberOfSamples;
+  tok[MIN_NUMBER_OF_SAMPLES_TOKEN].keyWord  = MIN_NUMBER_OF_SAMPLES_KEYWORD;
+  
+  tok[SAMPLE_INTEGRATION_THRESHOLD_TOKEN].format   = FLOAT_FORMAT;
+  tok[SAMPLE_INTEGRATION_THRESHOLD_TOKEN].variable = &integrateThreshold;
+  tok[SAMPLE_INTEGRATION_THRESHOLD_TOKEN].keyWord  = SAMPLE_INTEGRATION_THRESHOLD_KEYWORD;
+
+  tok[FRACTION_OF_UNIFORM_SAMPLES_TOKEN].format   = FLOAT_FORMAT;
+  tok[FRACTION_OF_UNIFORM_SAMPLES_TOKEN].variable = &fractionOfUniformSamples;
+  tok[FRACTION_OF_UNIFORM_SAMPLES_TOKEN].keyWord  = FRACTION_OF_UNIFORM_SAMPLES_KEYWORD;
+
+  tok[SAMPLES_FILE_TOKEN].format   = STRING_FORMAT;
+  tok[SAMPLES_FILE_TOKEN].variable = samplesFile;
+  tok[SAMPLES_FILE_TOKEN].keyWord  = SAMPLES_FILE_KEYWORD;
+  
+  tok[LOAD_SAMPLES_FILE_TOKEN].format   = INT_FORMAT;
+  tok[LOAD_SAMPLES_FILE_TOKEN].variable = &loadSamplesFile;
+  tok[LOAD_SAMPLES_FILE_TOKEN].keyWord  = LOAD_SAMPLES_FILE_KEYWORD;
+  
+  readTokens( fileName, tok, NUMBER_OF_CONDENSATION_PARAMETERS, FALSE);
+
+  {
+    if ( argc == 7) {
+      fprintf(stderr, "WARNING: USE ALL SEVEN ARGUMENTS TO SET DEFAULT VALUES.\n");
+      setStartPos = atoi(argv[2]);
+      variableSampleSize = atoi(argv[3]);
+      minNumberOfSamples = atoi(argv[4]);
+      numberOfSamples    = atoi(argv[5]);
+      integrateThreshold = atof(argv[6]);
+    }
+  }
+  
+
+  /**********************************************************
+   * done.
+   **********************************************************/
+
+  if ( ! actionInfo->useProbGrid) {
+
+    /* Set some default values for the prob grid. */
+#define NUMBER_OF_DUMMY_PLANES 360
+    actionInfo->positionProbs.angleResolution = DEG_360 / NUMBER_OF_DUMMY_PLANES;
+    actionInfo->positionProbs.sizeX = 500;
+    actionInfo->positionProbs.sizeY = 500;
+    actionInfo->positionProbs.sizeZ = NUMBER_OF_DUMMY_PLANES;
+
+    actionInfo->positionProbs.summedMovementOfPlane = (realPosition*)
+      malloc( NUMBER_OF_DUMMY_PLANES * sizeof(realPosition));
+    for ( z = 0; z < NUMBER_OF_DUMMY_PLANES; z++)
+      actionInfo->positionProbs.summedMovementOfPlane[z].rot = deg2Rad(z);
+
+    /* If online mapping and the map is initialized (read from a file) then
+     * we can also set the position prob map. */
+    if ( actionInfo->onlineMapping && actionInfo->onlineMap.initialized) {
+      fprintf( stderr, "# Initialize a priori position probs with online map.\n");
+      writeLog( "# Initialize a priori position probs with online map.\n");
+      actionInfo->initialPositionProbs = invertedMap( &(actionInfo->onlineMap));
+      setFreeSpace( &(actionInfo->initialPositionProbs));
+    }
+
+    if ( ! loadSamplesFile) {
+      if ( actionMask->use[VISION]) {
+	actionInfo->samples = 
+	  initializedSamples( numberOfSamples,
+			     0.0, 0.0,
+			     actionInfo->visMap.maxRealX,
+			     actionInfo->visMap.maxRealY);
+      }
+      else 
+	actionInfo->samples = 
+	  initializedSamples( numberOfSamples, 
+			     0.0, 0.0, 
+			     actionInfo->map.maxRealX, 
+			     actionInfo->map.maxRealY);
+    }
+    else
+      actionInfo->samples = readSamples( samplesFile);
+      
+
+    actionInfo->tcxSamples.allocatedSamples = 0;
+    actionInfo->tcxSamples.sample = NULL;
+
+
+    actionInfo->samples.integrateThreshold = integrateThreshold;
+    actionInfo->samples.variableSampleSize = variableSampleSize;
+    if ( actionInfo->samples.variableSampleSize)
+      actionInfo->samples.minNumberOfSamples = minNumberOfSamples;
+    else
+      actionInfo->samples.minNumberOfSamples = actionInfo->samples.numberOfSamples;
+    actionInfo->samples.fractionOfUniformSamples = fractionOfUniformSamples;
+
+    gettimeofday( &(actionInfo->samples.timeStamp), NULL);
+    gettimeofday( &(actionInfo->samples.timeOfLastShift), NULL);
+
+    if ( ! loadSamplesFile)
+      setUniformDistribution( &(actionInfo->samples), 
+			    &(actionInfo->initialPositionProbs));
+			    
+    writeLog( "# Use [%d %d] samples with %.0f%% uniform samples.\n",
+	      actionInfo->samples.minNumberOfSamples,
+	      numberOfSamples,
+	      actionInfo->samples.fractionOfUniformSamples * 100.0);
+
+    writeLog( "# Dist noise %f, angle noise %f.\n",
+	      globalCondensationParameters.distanceNoise,
+	      globalCondensationParameters.angleNoise);
+
+    writeLog( "# Side driftd %f, rot drift %f.\n",
+	      globalCondensationParameters.sideDrift,
+	      globalCondensationParameters.rotDrift);
+
+    fprintf( stderr, "# Use [%d %d] samples with %.0f%% uniform samples.\n",
+	      actionInfo->samples.minNumberOfSamples,
+	      numberOfSamples,
+	      actionInfo->samples.fractionOfUniformSamples * 100.0);
+
+    fprintf( stderr, "# Dist noise %f, angle noise %f.\n",
+	      globalCondensationParameters.distanceNoise,
+	      globalCondensationParameters.angleNoise);
+
+    fprintf( stderr, "# Side driftd %f, rot drift %f.\n",
+	      globalCondensationParameters.sideDrift,
+	      globalCondensationParameters.rotDrift);
+
+    if ( setStartPos) {
+      fprintf(stderr, "# Sample start position: %f %f %f\n",
+	      startPos.x, startPos.y, startPos.rot);
+      writeLog("# Sample start position: %f %f %f\n",
+	       startPos.x, startPos.y, startPos.rot);
+      startPos.rot = deg2Rad( startPos.rot);
+      setSamplePosition( startPos, &(actionInfo->samples), 15.0);
+    }
+  }
+}
+
+/*****************************************************************************
+ * Checks what has to be done with the grid independently from what kind of
+ * sensings have been integrated.
+ *****************************************************************************/
+void
+checkWhichActionsToPerform_CONDENSATION( actionInformation* info,
+					 sensingActionMask* mask)
+{
+  mask->sampleDistribution = FALSE;
+
+  if ( ! info->useProbGrid) {
+
+    info->samples.replacedViaTcx = FALSE;
+    
+    if ( mask->consider[LASER] && mask->perform[LASER][INTEGRATE_LASER]) {
+      mask->sampleDistribution = TRUE;
+    }
+    if ( mask->consider[SONAR] && mask->perform[SONAR][INTEGRATE_SONAR]) {
+      mask->sampleDistribution = TRUE;
+    }
+    if ( mask->consider[MOVEMENT] && mask->perform[MOVEMENT][INTEGRATE_MOVEMENT]) {
+      mask->sampleDistribution = TRUE;
+    }
+  }
+}
+
+
+/*****************************************************************************
+ * This is mostly normalizing.
+ *****************************************************************************/
+void
+performActions_CONDENSATION( actionInformation* info, sensingActionMask* mask)
+{
+  if ( ! info->useProbGrid) {
+
+    if ( mask->sampleDistribution) {
+
+      info->samples.desiredNumberOfSamples =
+	info->samples.numberOfSamples;
+      
+      if ( ! info->samples.replacedViaTcx) {
+
+	updateSampleInformation( info);
+	
+	computeCorrectionParam( info->actualSensings.basePosition,
+				info->estimatedRobot.pos,
+				&(info->correctionParam));
+	
+	writeLog( "%.2f %f %f %f %d #corr\n",
+		  elapsedScriptTime,
+		  info->correctionParam.x,
+		  info->correctionParam.y,
+		  info->correctionParam.rot,
+		  info->correctionParam.type);
+	
+	writeLog( "%d #samples\n", info->samples.numberOfSamples);
+	
+	info->samples.alreadySampled = 3;
+	
+	if (1) displaySamples();
+	info->samples.alreadySampled = FALSE;
+      }
+      
+      sampleAccordingToDistribution( &(info->samples), &(info->initialPositionProbs));
+
+      /* Integrate the sample set into the history. */
+      //#define MULTI_LOCALIZE
+#ifdef MULTI_LOCALIZE
+      info->samples.numberOfSet = addSampleSetToHistory( &(info->samples),
+							 &(info->samplesHistory),
+							 MAX_NUMBER_OF_TCX_SAMPLES);
+#endif
+      
+      if ( globalCondensationParameters.dumpSamples != 0) 
+	dumpSamples( &(info->samples), info->robotName,
+		     globalCondensationParameters.dumpSamples,
+		     info->measuredRobotPosition);
+
+      /* Copy the sample set. */
+      copySamples( &(info->samples), &(info->tcxSamples));
+    }
+  }
+}
+
+
+/********************************************************************
+ ********************************************************************
+ * Global functions.
+ ********************************************************************
+ ********************************************************************/
+
+/* Shifts the samples according to the motion and to their probabilities. */
+void
+shiftSamples( sampleSet* samples, probabilityGrid* aPrioriProbs)
+{
+  int s;
+  float distanceDeviation = globalCondensationParameters.distanceNoise;
+  float angleDeviation = globalCondensationParameters.angleNoise;
+  float mapResolution = aPrioriProbs->resolution;
+  float sideDrift, rotDrift;
+  polarMovement movementSinceLastShift;
+
+  if ( samples->summedMovement.x == 0.0 &&
+       samples->summedMovement.y == 0.0 &&
+       samples->summedMovement.rot == 0.0) {
+    writeLog( "No motion.\n");
+    return;
+  }
+  
+  /* Motion of the robot since last integration of probabilities. */
+  movementSinceLastShift.distance =
+    sqrt( fSqr(samples->summedMovement.x) + fSqr(samples->summedMovement.y));
+  
+  movementSinceLastShift.angle = (float) atan2( samples->summedMovement.y,
+						samples->summedMovement.x);
+
+  movementSinceLastShift.rotation = normalizedAngle(samples->summedMovement.rot);
+  if ( movementSinceLastShift.rotation > DEG_180)
+    movementSinceLastShift.rotation -= DEG_360;
+  
+  writeLog( "\n%f %f %f #mot\n", movementSinceLastShift.distance,
+	    rad2Deg(movementSinceLastShift.angle),
+	    rad2Deg(movementSinceLastShift.rotation));
+
+  sideDrift = deg2Rad( movementSinceLastShift.distance * globalCondensationParameters.sideDrift);
+  rotDrift  = deg2Rad( movementSinceLastShift.distance * globalCondensationParameters.rotDrift);
+  
+  /* Consider the probability of the samples. */
+  sampleAccordingToDistribution( samples, aPrioriProbs);
+  
+  /* Add some noise to the motion invormation and shift the samples accordingly. */
+  for ( s = 0; s < samples->numberOfSamples; s++) {
+
+    polarMovement noisyMove = movementSinceLastShift;
+    
+    noisyMove.distance *= 1.0 + distanceDeviation * randomGauss();
+    noisyMove.angle    *= 1.0 + angleDeviation * randomGauss();
+    noisyMove.angle    += sideDrift * randomGauss();
+    noisyMove.rotation *= 1.0 + angleDeviation * randomGauss();
+    noisyMove.rotation += rotDrift * randomGauss();
+
+    samples->sample[s].pos = endPointOfPolar( samples->sample[s].pos,
+					      noisyMove);
+  }
+
+  for ( s = 0; s < samples->numberOfSamples; s++) {
+
+    /* Set the weight of all samples outside the map to zero. */
+    if ((samples->sample[s].pos.x >= samples->maxX ||
+	 samples->sample[s].pos.y >= samples->maxY)
+	|| ( samples->sample[s].pos.x < samples->minX ||
+	     samples->sample[s].pos.y < samples->minY))
+      samples->sample[s].weight = 0.0;
+    
+    /* Consider the occupancy information. */
+    else if ( globalCondensationParameters.usePosition && aPrioriProbs->initialized) {
+      int x = samples->sample[s].pos.x / mapResolution;
+      int y = samples->sample[s].pos.y / mapResolution;
+      
+      samples->sample[s].weight *= (double) aPrioriProbs->prob[x][y]; 
+    }
+  }
+
+  /* Reset the movement. */
+  samples->summedMovement.x = 0.0;
+  samples->summedMovement.y = 0.0;
+  samples->summedMovement.rot = 0.0;
+  samples->alreadySampled = 2;
+  samples->alreadyNormalized = TRUE;
+  samples->timeStamp = samples->timeOfLastShift;
+}
+
+
+
+/*****************************************************************************
+ * Initializes the samples with a Gaussian distribution around the center.
+ *****************************************************************************/
+void
+setSamplePosition( realPosition center,
+		   sampleSet* samples,
+		   float deviation)
+{
+  float rotDeviation = deg2Rad( deviation) / 10.0;
+  int s;
+
+  /* Set all values to min probability. */
+  for ( s = 0; s < samples->numberOfSamples; s++) {
+    samples->sample[s].pos = center;
+
+    /* x-deviation */
+    /* sebastian: added factor 3.0 for the initial x-y noise */
+    samples->sample[s].pos.x   += deviation    * 3.0 * randomGauss();
+    samples->sample[s].pos.y   += deviation    * 3.0 * randomGauss();
+    samples->sample[s].pos.rot += rotDeviation * randomGauss();
+  }
+}
+
+/*****************************************************************************
+ * Computes the mean of the samples by using their probabilities as weights.
+ *****************************************************************************/
+void
+setGlobalSampleMean( sampleSet* samples)
+{
+  int s;
+  double probSum = 0.0, distSum = 0.0;
+  float avgSin = 0.0, avgCos = 0.0;
+  double maxProb = 0.0;
+  int maxSample = 0;
+  
+  samples->mean.x = 0.0;
+  samples->mean.y = 0.0;
+  samples->mean.rot = 0.0;
+
+  for ( s = 0; s < samples->numberOfSamples; s++) {
+    double prob = samples->sample[s].weight;
+
+    probSum += prob;
+    samples->mean.x += (float) prob * samples->sample[s].pos.x;
+    samples->mean.y += (float) prob * samples->sample[s].pos.y;
+    
+    /* The angle is a bit more complicated. */
+    avgSin += (float) prob * sin( samples->sample[s].pos.rot);
+    avgCos += (float) prob * cos( samples->sample[s].pos.rot);
+        
+    if ( prob > maxProb) {
+      maxProb = prob;
+      maxSample = s;
+    }
+  }
+
+  if ( probSum > 0.0) {
+    samples->mean.rot = atan2( avgSin, avgCos);
+    samples->mean.x /= (float) probSum;
+    samples->mean.y /= (float) probSum;
+  }
+  else {
+    samples->mean.rot = 0.0;
+    samples->mean.x /= 0.0;
+    samples->mean.y /= 0.0;
+  }
+    
+  
+  /* Compute the standard deviation of the samples. */
+  for ( s = 0; s < samples->numberOfSamples; s++) {
+    distSum += (float) samples->sample[s].weight *
+      fSqr( distanceBetweenPoints( samples->mean, samples->sample[s].pos));
+  }
+
+  if ( probSum > 0.0)
+    distSum /= (float) probSum;
+  else
+    distSum = 0.0;
+
+  samples->stdDev = sqrt( distSum);
+
+  /* If the std deviation is too large, we don't use the mean of the positoins
+   * but the most likely position. */
+#define STDDEV_THRESHOLD 100.0
+  
+  if ( samples->stdDev > STDDEV_THRESHOLD) {
+    samples->mean = samples->sample[maxSample].pos;
+    
+    writeLog( "%f %f %f %f %f %f %d #meanMostLikely\n", elapsedScriptTime,
+              samples->mean.x, samples->mean.y, rad2Deg(samples->mean.rot),
+              samples->stdDev, probSum, samples->numberOfSamples);
+  }
+  else
+    writeLog( "%f %f %f %f %f %f %d #mean\n", elapsedScriptTime,
+              samples->mean.x, samples->mean.y, rad2Deg(samples->mean.rot),
+              samples->stdDev, probSum, samples->numberOfSamples);
+}
+
+
+
+
+void
+setLocalSampleMean( sampleSet* samples)
+{
+  static int firstTime = TRUE;
+  static float** maxWeight = NULL;
+  static realPosition** maxPos = NULL;
+  static float** sumOfWeights = NULL;
+
+#define CELL_SIZE 200.0
+  int x, y, s;
+  float maxCellWeight = 0.0;
+    
+  static float minX, minY;
+  static float sizeX, sizeY;
+  static int numX, numY;
+
+  if ( firstTime ||
+       (sizeX != (samples->maxX - samples->minX)) ||
+       (sizeY != (samples->maxY - samples->minY))) {
+
+    firstTime = FALSE;
+    
+    /* Reallocate the fields. */
+    if ( sumOfWeights != NULL) {
+      fprintf(stderr, "# Size has changed. Reallocate memory.\n");
+      free2D( (void**) maxWeight, numX, FLOAT);
+      free2D( (void**) maxPos, numX, FLOAT);
+      free2D( (void**) sumOfWeights, numX, FLOAT);
+    }
+      
+    /* Set the boarders. */
+    minX  = samples->minX;
+    minY  = samples->minY;
+    sizeX = samples->maxX - samples->minX;
+    sizeY = samples->maxY - samples->minY;
+    numX  = sizeX / CELL_SIZE + 1;
+    numY  = sizeY / CELL_SIZE + 1;
+
+    maxWeight    = (float**) allocate2D( numX, numY, FLOAT);
+    maxPos       = (realPosition**) allocate2D( numX, numY, REAL_POSITION);
+    sumOfWeights = (float**) allocate2D( numX, numY, FLOAT);
+  }
+
+  /* Reset all sums to zero. */
+  for ( x = 0; x < numX; x++)
+    for ( y = 0; y < numY; y++) {
+      maxWeight[x][y] = 0.0;
+      sumOfWeights[x][y] = 0.0;
+    }
+  
+  for ( s = 0; s < samples->numberOfSamples; s++) {
+
+    sampleType sample = samples->sample[s];
+    int x = ( sample.pos.x - minX) / CELL_SIZE;
+    int y = ( sample.pos.y - minY) / CELL_SIZE;
+
+    if ( x < numX && y < numY && x >= 0 && y >= 0) {
+      
+      /* Update the local information about samples within this cell. */
+      if ( sample.weight > maxWeight[x][y]) {
+	maxPos[x][y]    = sample.pos;
+	maxWeight[x][y] = sample.weight;
+      }
+      sumOfWeights[x][y] += sample.weight;
+    }
+  }
+
+  /* Now look for most likely cell. */
+  for ( x = 0; x < numX; x++)
+    for ( y = 0; y < numY; y++) 
+      if ( sumOfWeights[x][y] > maxCellWeight) {
+	samples->mean = maxPos[x][y];
+	maxCellWeight = sumOfWeights[x][y];
+      }
+  
+  samples->stdDev = 0.0;
+  
+  writeLog( "%f %f %f %f %f %d #bestGridCell\n", elapsedScriptTime,
+	    samples->mean.x, samples->mean.y, rad2Deg(samples->mean.rot),
+	    maxCellWeight, samples->numberOfSamples);
+
+  /* Now average over an area around this best position. */
+  { 
+#define AREA_SIZE 50.0
+    realPosition mean;
+    float avgSin = 0.0, avgCos = 0.0;
+    float probSum = 0.0;
+    
+    mean.x = mean.y = 0.0;
+    mean.rot = 0.0;
+
+    for (s = 0; s < samples->numberOfSamples; s++) {
+      
+      if (realPositionDistance(samples->sample[s].pos, samples->mean) < AREA_SIZE) {
+
+	double prob = samples->sample[s].weight;
+	
+        mean.x += prob * samples->sample[s].pos.x;
+        mean.y += prob * samples->sample[s].pos.y;
+	
+	/* The angle is a bit more complicated. */
+	avgSin += (float) prob * sin( samples->sample[s].pos.rot);
+	avgCos += (float) prob * cos( samples->sample[s].pos.rot);
+	probSum += prob;
+      }
+    }    
+    if (probSum > 0.0){
+      mean.x /= probSum;
+      mean.y /= probSum;
+      mean.rot = atan2( avgSin, avgCos);
+    }
+    
+    samples->mean = mean;
+    maxCellWeight = probSum;
+  }
+  
+  writeLog( "%f %f %f %f %f %d #localMean\n", elapsedScriptTime,
+	    samples->mean.x, samples->mean.y, rad2Deg(samples->mean.rot),
+	    maxCellWeight, samples->numberOfSamples);
+}
+
+
+
+/********************************************************************
+ ********************************************************************
+ ********************************************************************
+ * The local functions.
+ ********************************************************************
+ ********************************************************************
+ ********************************************************************/
+
+void
+deallocateSamples( sampleSet* samples)
+{
+  if ( samples->accumulatedProbs != NULL) 
+    free1D( samples->accumulatedProbs, FLOAT);
+  
+  if ( samples->tmpPositions != NULL) 
+    free1D( samples->tmpPositions, REAL_POSITION);
+
+  free( ( sampleType*) samples->sample);
+  free( ( sampleType*) samples->tmpSample);
+}
+
+sampleSet
+initializedSamples( int numberOfSamples,
+		    float minX, float minY,
+		    float maxX, float maxY)
+{
+  sampleSet samples;
+
+  samples.numberOfSamples = numberOfSamples;
+  samples.desiredNumberOfSamples = numberOfSamples;
+  samples.allocatedSamples = numberOfSamples;
+  
+  samples.maxX = maxX;
+  samples.maxY = maxY;
+  samples.minX = minX;
+  samples.minY = minY;
+  
+  samples.summedMovement.x   = 0.0;
+  samples.summedMovement.y   = 0.0;
+  samples.summedMovement.rot = 0.0;
+  
+  samples.sample = ( sampleType*) malloc( sizeof( sampleType) * numberOfSamples);
+  samples.tmpSample = ( sampleType*) malloc( sizeof( sampleType) * numberOfSamples);
+  if ( samples.sample == NULL || samples.tmpSample == NULL) {
+    fprintf( stderr,
+	     "Error! Not enough memory for allocating %d samples.\n",
+	     numberOfSamples);
+    exit(0);
+  }
+
+  writeLog( "# Bounding box: [%f : %f] : [%f : %f]\n", minX, maxX, minY, maxY);
+  
+  samples.accumulatedProbs = (double*) allocate1D( numberOfSamples, DOUBLE);
+  samples.tmpPositions     = (realPosition*) allocate1D( numberOfSamples, REAL_POSITION);
+  
+  return samples;
+}
+
+static sampleSet
+readSamples( char* fileName)
+{
+  sampleSet samples;
+  
+  FILE *ifp;
+    
+#define NUMBER_KEY_WORD    "#Number "
+#define DIMENSION_KEY_WORD "#Dimension "
+#define MIN_KEY_WORD       "#Min "
+#define MAX_KEY_WORD       "#Max "
+  
+  char line[BUFFLEN];
+  int numberOfReadSamples = 0;
+  int numberOfSamples = 0;
+  float minX, minY, maxX, maxY;
+  /* Scan for min and max values. */
+  if ((ifp = fopen( fileName, "r")) == NULL) {
+    fprintf(stderr, "Cannot open file %s.\n", fileName);
+    exit(0);
+  }
+
+
+  fgets(line, BUFFLEN,ifp);
+  if ( strncmp(line, NUMBER_KEY_WORD, strlen(NUMBER_KEY_WORD)) == 0) {
+    unsigned int markLength = strlen( NUMBER_KEY_WORD);
+    sscanf( &line[markLength], "%d", &numberOfSamples);
+    fprintf(stderr, "File should contain %d samples.\n", numberOfSamples);
+  }
+  else
+    fprintf( stderr, "Keyword %s expected.\n", NUMBER_KEY_WORD);
+  
+  fgets(line, BUFFLEN,ifp);
+  if ( strncmp(line, DIMENSION_KEY_WORD, strlen(DIMENSION_KEY_WORD)) == 0) {
+    unsigned int markLength = strlen( DIMENSION_KEY_WORD);
+    int dimension;
+    sscanf( &line[markLength], "%d", &dimension);
+    fprintf(stderr, "Samples have dimension %d.\n", dimension);
+    if ( dimension != 3) {
+      fprintf( stderr, "Cannot read samples with dimension not equal 3.\n");
+      exit(0);
+    }
+  }
+  else
+    fprintf( stderr, "Keyword %s expected.\n", DIMENSION_KEY_WORD);
+  
+  fgets(line, BUFFLEN,ifp);
+  if ( strncmp(line, MIN_KEY_WORD, strlen(MIN_KEY_WORD)) == 0) {
+    unsigned int markLength = strlen( MIN_KEY_WORD);
+    sscanf( &line[markLength], "%f %f",
+	    &minX, &minY);
+  }
+  else
+    fprintf( stderr, "Keyword %s expected.\n", MIN_KEY_WORD);
+  
+  fgets(line, BUFFLEN,ifp);
+  if ( strncmp(line, MAX_KEY_WORD, strlen(MAX_KEY_WORD)) == 0) {
+    unsigned int markLength = strlen( MAX_KEY_WORD);
+    sscanf( &line[markLength], "%f %f",
+	    &maxX, &maxY);
+  }
+  else
+    fprintf( stderr, "Keyword %s expected.\n", MAX_KEY_WORD);
+
+  samples = initializedSamples( numberOfSamples, minX, minY, maxX, maxY);
+  
+  fprintf(stderr, "Start reading samples ... ");
+
+  while (!feof(ifp) && (numberOfReadSamples < numberOfSamples)) {
+
+    float tmpWeight;
+
+    fgets(line, BUFFLEN,ifp);
+
+    /* This should be a sample.     */
+    if ( sscanf(line, "%f %f %f %f",
+		&(samples.sample[numberOfReadSamples].pos.x),
+		&(samples.sample[numberOfReadSamples].pos.y),
+		&(samples.sample[numberOfReadSamples].pos.rot),
+		&tmpWeight)  == 4){
+      samples.sample[numberOfReadSamples].pos.rot = deg2Rad(samples.sample[numberOfReadSamples].pos.rot);
+      samples.sample[numberOfReadSamples].weight = tmpWeight;
+      numberOfReadSamples++;
+    }
+    else
+      fprintf( stderr, "Error reading line %s", line);
+  }
+
+  fprintf(stderr, "done. Successfully read %d samples.\n", numberOfReadSamples);
+
+  fclose(ifp);
+  
+  
+  return samples;
+}
+
+
+/* Draw samples from the set according to the distribution and store
+ * them in the same set again. Consider size of the set as well. */
+static void
+sampleAccordingToDistribution( sampleSet* samples, probabilityGrid* aPrioriProbs)
+{
+  if ( ! samples->alreadySampled) {
+
+    double avgWeight;
+    int s;
+    float resolution = aPrioriProbs->resolution;
+    float xOffset = samples->minX + 0.5 * aPrioriProbs->resolution;
+    float yOffset = samples->minY + 0.5 * aPrioriProbs->resolution;
+    int numberOfSamples = samples->numberOfSamples;
+    
+    bool addUniformSamples = samples->fractionOfUniformSamples > 0.0;
+    float addUniformThreshold = 1.0 - samples->fractionOfUniformSamples;
+    
+    /* Set the new number of samples. */
+    samples->desiredNumberOfSamples = iMax( samples->desiredNumberOfSamples,
+					    samples->allocatedSamples);
+
+    /* Allocate memory for the temporary structures. */
+    checkAllocationOfAuxiliaryVariables( samples);
+
+    /* Normalize the weights of the samples. */
+    if ( normalizeWeights( samples) < 0.9) {
+      writeLog( "No valid samples. Reset samples.\n");
+      fprintf(stderr, "No valid samples. Reset samples.\n");
+      setUniformDistribution( samples, aPrioriProbs);
+      return;
+    };
+    
+    /* Accumulate the probabilities for sampling. This is the current number
+     * of active samples (samples->numberOfSamples). */
+    samples->accumulatedProbs[0] = samples->sample[0].weight;
+    for ( s = 1; s < samples->numberOfSamples; s++) {
+      samples->accumulatedProbs[s] =
+	samples->accumulatedProbs[s-1] + samples->sample[s].weight;
+    }
+
+    /* Now sample from the original samples according to the probabilities
+     * in the accumulated probs. The resulting number of samples should be
+     * samples->desiredNumberOfSamples. Store the result in the temporary struct. */
+    for ( s = 0; s < samples->desiredNumberOfSamples; s++) {
+
+      
+      /* We sample from a uniform distribution with probability addUniformThreshold. */
+      if ( addUniformSamples) {
+	
+	if ( RAND_ZERO_TO_ONE() > addUniformThreshold) {
+	  
+	  /* If the free space is defined as a list of cells then we sample from
+	   * this list. */
+	  if ( aPrioriProbs->freeSpace != NULL) {
+	    
+	    int index = RAND_ZERO_TO_ONE() * aPrioriProbs->numberOfFreeCells;
+
+	    samples->tmpPositions[s].x   = aPrioriProbs->freeSpace[index].x * resolution + xOffset;
+	    samples->tmpPositions[s].y   = aPrioriProbs->freeSpace[index].y * resolution + yOffset;
+	    samples->tmpPositions[s].rot = RAND_ZERO_TO_ONE() * DEG_360;
+	  }
+	  /* Otherwise we sample from the whole region. */
+	  else {
+	    
+	    static int first = TRUE;
+	    static float sizeX, sizeY;
+	    static float minX, minY;
+	    
+	    if ( first) {
+	      first = FALSE;
+	      sizeX = samples->maxX - samples->minX;
+	      sizeY = samples->maxY - samples->minY;
+	      minX  = samples->minX;
+	      minY  = samples->minY;
+	    }
+	    
+	    samples->tmpPositions[s].x   = minX + RAND_ZERO_TO_ONE() * sizeX;
+	    samples->tmpPositions[s].y   = minY + RAND_ZERO_TO_ONE() * sizeY;
+	    samples->tmpPositions[s].rot = RAND_ZERO_TO_ONE() * DEG_360;
+	  }
+	}
+	else {
+	  
+	  double randVal = RAND_ZERO_TO_ONE();
+	  int drawnSample = binarySearch( samples->accumulatedProbs, randVal,
+					  samples->numberOfSamples);
+	  samples->tmpPositions[s] = samples->sample[drawnSample].pos;
+	}
+      }
+      else {
+	
+	double randVal = RAND_ZERO_TO_ONE();
+	int drawnSample = binarySearch( samples->accumulatedProbs, randVal,
+					samples->numberOfSamples);
+	samples->tmpPositions[s] = samples->sample[drawnSample].pos;
+      }
+    }
+
+    /* Now copy the positions back. */
+    for ( s = 0; s < samples->desiredNumberOfSamples; s++) 
+      samples->sample[s].pos = samples->tmpPositions[s];
+
+    /* Everything is prepared. Set number of samples to desired. */
+    samples->numberOfSamples = samples->desiredNumberOfSamples;
+    
+    /* Reset probabilities. */
+    avgWeight = 1.0 / samples->numberOfSamples;
+    for ( s = 0; s < samples->numberOfSamples; s++) 
+      samples->sample[s].weight = avgWeight;
+
+    samples->alreadySampled = TRUE;
+
+    /* Set the desired number of samples back to the original size. */
+    samples->desiredNumberOfSamples = numberOfSamples;
+  }
+}
+
+/*****************************************************************************
+ * Samples according to the distribution of the src samples. Number of desired
+ * samples must already be set in the dest samples.
+ *****************************************************************************/
+void
+generateSample( sampleSet* sampleSrc, sampleSet* sampleDest)
+{
+  if (sampleDest->allocatedSamples == 0) {
+
+
+
+    *sampleDest = initializedSamples( sampleDest->allocatedSamples,
+				      sampleSrc->minX, sampleSrc->minY,
+				      sampleSrc->maxX, sampleSrc->maxY);
+  }
+  
+  if ( sampleSrc->alreadySampled) {
+    
+    int s;
+    
+    /* Uniform distribution. */
+    for ( s = 0; s < sampleDest->desiredNumberOfSamples; s++) {
+
+      int drawnSample = randMax( sampleSrc->numberOfSamples-1);
+      
+      sampleDest->sample[s] = sampleSrc->sample[drawnSample];
+    }      
+  }
+  else {
+    fprintf(stderr, "Shouldn't come here.\n");
+  }
+}
+
+
+
+/*****************************************************************************
+ * Set the region of the samples.
+ *****************************************************************************/
+void
+setSampleRegion( sampleSet* samples,
+		 float minX, float minY,
+		 float maxX, float maxY)
+{
+  samples->maxX = maxX;
+  samples->maxY = maxY;
+  samples->minX = minX;
+  samples->minY = minY;
+}
+
+
+/*****************************************************************************
+ * BinarySearch for smallest k for which c(k)>=r
+  *****************************************************************************/
+static int
+binarySearch( double* values, double searchVal, int numberOfValues)
+{
+  int left = 0, right = numberOfValues - 1;
+  int middle = numberOfValues / 2;
+  
+  if (values[left] > searchVal) return left;
+
+  while(1) {
+    if( values[middle] < searchVal) {
+      if((right - middle) == 1)
+	return right;
+      left = middle;
+      middle = middle + (right - middle) / 2;
+    }
+    else {
+      if((middle - left) == 1)
+	return values[left] < searchVal ? middle : left;
+      right = middle;
+      middle = middle - (middle - left) / 2;
+    }
+  }
+}
+
+static float averageSampleDistance( sampleSet* samples, realPosition refPos,
+				    float* rotDist)
+{
+  float dist = 0.0;
+  float sumOfWeights =0.0;
+  int s;
+  float refRot = refPos.rot;
+  
+  *rotDist = 0.0;
+  
+  for ( s = 0; s < samples->numberOfSamples; s++) {
+    sumOfWeights += samples->sample[s].weight;
+    dist += samples->sample[s].weight *
+      distanceBetweenPoints( samples->sample[s].pos, refPos);
+
+    *rotDist += angleDistance(samples->sample[s].pos.rot, refRot);
+
+  }
+
+  if ( sumOfWeights > 0) {
+    dist /= sumOfWeights;
+    *rotDist /= sumOfWeights;
+  }
+  else {
+    dist = 0.0;
+    *rotDist = 0.0;
+  }
+  
+  return dist;
+}
+
+
+static float probabilityOfPosition( sampleSet* samples, realPosition refPos,
+				    float maxXYDist, float maxRotDist)
+{
+  float prob = 0.0;
+  float sumOfWeights =0.0;
+  int s;
+
+  for ( s = 0; s < samples->numberOfSamples; s++) {
+    if ( ( distanceBetweenPoints( samples->sample[s].pos, refPos) < maxXYDist)
+	 &&
+	 ( angleDistance( samples->sample[s].pos.rot, refPos.rot) < maxRotDist)) {
+      prob += samples->sample[s].weight;
+    }
+/*     else { */
+/*       writeLog( "%f %f %f %f --> %f [%f %f] --> %f    %f %NOT\n", */
+/* 		samples->sample[s].pos.x, refPos.x,  */
+/* 		samples->sample[s].pos.y, refPos.y, */
+/* 		distanceBetweenPoints( samples->sample[s].pos, refPos), */
+/* 		samples->sample[s].pos.rot, refPos.rot, */
+/* 		angleDistance( samples->sample[s].pos.rot, refPos.rot), */
+/* 		samples->sample[s].weight); */
+/*     } */
+    sumOfWeights += samples->sample[s].weight;
+  }
+
+  if ( sumOfWeights > 0)
+    prob /= sumOfWeights;
+  else
+    prob = 0.0;
+  
+  return prob;
+}
+
+
+static void
+updateSampleInformation( actionInformation* info)
+{
+  unsigned int refPosFound;
+  realPosition refPos = measuredRobotPosition( elapsedScriptTime, &refPosFound);
+
+  normalizeWeights( &(info->samples));
+  
+  /* Set the estimated position of the robot to the mean of the
+   * samples. */
+  setLocalSampleMean( &(info->samples)); 
+
+  if ( info->measuredRobotPosition.x != 0.0 || info->measuredRobotPosition.y != 0.0 || info->measuredRobotPosition.rot != 0.0)
+    info->estimatedRobot.pos = info->measuredRobotPosition;
+  else
+    info->estimatedRobot.pos = info->samples.mean;
+    
+#define MAX_XY_DIST 100
+#define MAX_ROT_DIST (deg2Rad(10))
+
+  refPosFound = TRUE;
+  refPos = info->measuredRobotPosition;
+  
+  /* We got a reference position from a file. */
+  if ( refPosFound && (refPos.x != 0.0 || refPos.y != 0.0 || refPos.rot != 0.0)) {
+    float rotDist;
+    float avgDist = averageSampleDistance( &(info->samples), refPos, &rotDist);
+    float probOfRefPos = probabilityOfPosition( &(info->samples), refPos, MAX_XY_DIST, MAX_ROT_DIST);
+    writeLog( "%f %f %f %f #distances\n", elapsedScriptTime, avgDist, probOfRefPos,
+	      rad2Deg(rotDist));
+  }
+  
+  if (communicationInfo.scr->newMarker){
+    dumpDistanceToMarker( info->estimatedRobot.pos,
+			  communicationInfo.scr->markerCount);
+
+    if (info->simMap.initialized){
+      (info->estimatedRobot.pos) =
+	scanMatchingPosition(info->estimatedRobot.pos,
+			     &(info->simMap), info);
+      
+      dumpDistanceToMarker( info->estimatedRobot.pos,
+			    communicationInfo.scr->markerCount);
+    }
+  }
+}
+
+
+static void
+dumpSamples( sampleSet* samples, char* robotName,
+	     int numberOfSamples, realPosition refPos)
+{
+  char fileName[80];
+  FILE* fp;
+  int s;
+
+  if ( numberOfSamples < 0)
+    numberOfSamples = samples->numberOfSamples;
+  
+  fprintf( stderr, "Dump %d samples no %d\n", numberOfSamples,
+	   samples->numberOfSet);
+  writeLog( "Dump %d samples no %d\n", numberOfSamples,
+	    samples->numberOfSet);
+
+  sprintf(fileName, "%s.%d", robotName, samples->numberOfSet);
+  fp = fopen( fileName, "w");
+
+  fprintf( fp, "%s %d\n", NUMBER_KEY_WORD, numberOfSamples);
+  fprintf( fp, "%s 3\n", DIMENSION_KEY_WORD);
+  fprintf( fp, "%s %f %f %f\n", MIN_KEY_WORD,
+	   samples->minX, samples->minY, -DEG_360);
+  fprintf( fp, "%s %f %f %f\n", MAX_KEY_WORD,
+	   samples->maxX, samples->maxY, DEG_360);
+  fprintf( fp, "%s %f %f %f\n", REF_POS_KEY_WORD,
+	   refPos.x, refPos.y, refPos.rot);
+  fprintf( fp, "%s %ld %ld\n", TIME_STAMP_KEY_WORD,
+	   samples->timeStamp.tv_sec, samples->timeStamp.tv_usec);
+	   
+  for ( s = 0; s < numberOfSamples; s++)
+    fprintf( fp, "%f %f %f %f\n", 
+	     samples->sample[s].pos.x,
+	     samples->sample[s].pos.y,
+	     samples->sample[s].pos.rot,
+	     samples->sample[s].weight);
+  fclose ( fp);
+}
+  
+
+
+static void
+checkAllocationOfAuxiliaryVariables( sampleSet* samples)
+{
+  static int numberOfLocalSamples = 0;
+  
+  if ( numberOfLocalSamples < samples->desiredNumberOfSamples ||
+       numberOfLocalSamples < samples->numberOfSamples) {
+    
+    numberOfLocalSamples = iMax( samples->desiredNumberOfSamples,
+				 samples->numberOfSamples);
+    
+    writeLog( "# Reallocate %d samples (%d %d)\n", numberOfLocalSamples,
+	      samples->desiredNumberOfSamples, samples->numberOfSamples);
+
+    fprintf( stderr, "# Reallocate %d samples (%d %d)\n", numberOfLocalSamples,
+	      samples->desiredNumberOfSamples, samples->numberOfSamples);
+
+    if ( samples->accumulatedProbs != NULL) 
+      free1D( samples->accumulatedProbs, FLOAT);
+    
+    if ( samples->tmpPositions != NULL) 
+      free1D( samples->tmpPositions, REAL_POSITION);
+    
+    samples->accumulatedProbs = (double*)
+      allocate1D( numberOfLocalSamples, DOUBLE);
+
+    samples->tmpPositions = (realPosition*)
+      allocate1D( numberOfLocalSamples, REAL_POSITION);
+  }
+}
+
+static void
+setUniformDistribution( sampleSet* samples, probabilityGrid* aPrioriProbs)
+{
+  int s;
+  double avgWeight = 1.0 / samples->numberOfSamples;
+  float sizeX = samples->maxX - samples->minX;
+  float sizeY = samples->maxY - samples->minY;
+  float resolution = aPrioriProbs->resolution;
+  float xOffset = samples->minX + 0.5 * aPrioriProbs->resolution;
+  float yOffset = samples->minY + 0.5 * aPrioriProbs->resolution;
+  
+  /* Set uniform distribution. */
+  for ( s = 0; s < samples->numberOfSamples; s++) {
+
+    /* If the free space is defined as a list of cells then we sample from
+     * this list. */
+    if ( aPrioriProbs->freeSpace != NULL) {
+
+      int index = randMax( aPrioriProbs->numberOfFreeCells-1);
+
+      samples->sample[s].pos.x   = aPrioriProbs->freeSpace[index].x * resolution + xOffset;
+      samples->sample[s].pos.y   = aPrioriProbs->freeSpace[index].y * resolution + yOffset;
+      samples->sample[s].pos.rot = RAND_ZERO_TO_ONE() * DEG_360;
+      samples->sample[s].weight = avgWeight;
+    }
+    /* Otherwise we sample from the whole region. */
+    else {
+      
+      samples->sample[s].pos.x   = samples->minX + RAND_ZERO_TO_ONE() * sizeX;
+      samples->sample[s].pos.y   = samples->minY + RAND_ZERO_TO_ONE() * sizeY;
+      samples->sample[s].pos.rot = RAND_ZERO_TO_ONE() * DEG_360;
+      samples->sample[s].weight = avgWeight;
+    }
+  }
+  samples->alreadySampled = TRUE;
+  samples->alreadyNormalized = TRUE;
+}
+
+static float
+normalizeWeights( sampleSet* samples)
+{
+  if ( ! samples->alreadyNormalized) {
+
+    double sumOfWeights = 0.0;  
+    double normalizeFactor;
+    int s;
+
+    for ( s = 0; s < samples->numberOfSamples; s++) 
+      sumOfWeights += samples->sample[s].weight;
+
+    if ( sumOfWeights > 0.0) {
+      normalizeFactor = 1.0 / sumOfWeights;
+      for ( s = 0; s < samples->numberOfSamples; s++) 
+	samples->sample[s].weight *= normalizeFactor;
+    }
+
+    samples->alreadyNormalized = TRUE;
+
+    return sumOfWeights;
+  }
+  else {
+    return 1.0;
+  }
+}
+
+void
+copySamples( sampleSet* src, sampleSet* dest)
+{
+  int numberOfSamples = src->numberOfSamples;
+  int s;
+  
+  if ( dest->allocatedSamples < src->numberOfSamples) {
+
+    fprintf(stderr, "# Generate %d new samples.\n", numberOfSamples);
+    writeLog( "# Generate %d new samples.\n", numberOfSamples);
+    
+    if ( dest->sample != NULL)
+      free( ( sampleType*) dest->sample);
+
+    dest->sample = ( sampleType*) malloc( sizeof( sampleType) * numberOfSamples);
+    
+    if ( dest->sample == NULL) {
+      fprintf( stderr,
+	       "Error! Not enough memory for allocating %d samples.\n",
+	       numberOfSamples);
+      exit(0);
+    }
+    
+    dest->allocatedSamples = numberOfSamples;
+  }
+  
+  dest->numberOfSamples        = numberOfSamples;
+  dest->desiredNumberOfSamples = numberOfSamples;
+  dest->numberOfSet            = src->numberOfSet;
+  
+  dest->maxX = src->maxX;
+  dest->maxY = src->maxY;
+  dest->minX = src->minX;
+  dest->minY = src->minY;
+  
+  dest->summedMovement.x   = src->summedMovement.x;
+  dest->summedMovement.y   = src->summedMovement.y;
+  dest->summedMovement.rot = src->summedMovement.rot;
+
+  dest->timeStamp          = src->timeStamp;
+  
+  /* Copy the samples. */
+  for ( s = 0; s < numberOfSamples; s++) {
+    dest->sample[s].pos    = src->sample[s].pos;
+    dest->sample[s].weight = src->sample[s].weight;
+  }
+}

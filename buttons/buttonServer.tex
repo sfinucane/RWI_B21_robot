@@ -1,0 +1,153 @@
+%
+% $Id: buttonServer.tex,v 1.1 2002/09/14 15:44:40 rstone Exp $
+%
+\NeedsTeXFormat{LaTeX2e}
+
+\documentclass{article}
+
+\addtolength{\parskip}{1ex plus0.5ex minus0.2ex}
+
+\addtolength{\textwidth}{2cm}
+
+\begin{document}
+
+\section{The button server}
+
+Version of this document is
+\begin{verbatim}
+$Id: buttonServer.tex,v 1.1 2002/09/14 15:44:40 rstone Exp $
+\end{verbatim}
+ 
+\subsection{How the button server works} 
+ 
+A program dealing with the button server typically has four steps (take a look at
+\begin{center} 
+  \texttt{\~{}bee/src/buttons/example.c}
+\end{center}
+for an example):
+
+\begin{enumerate}
+  
+\item \texttt{buttonRegister( );} 
+  
+  Registers all new commands that we need for dealing with the button server.
+  
+\item \texttt{buttonConnect( 1 );} 
+  
+  Waits until we have connected to the button server.
+  
+\item \texttt{registerButtonStatusCallback( myButtonStatusCallback );} 
+  
+  Registers the function \texttt{myButtonStatusCallback}. The button server
+  calls this function once a button on the robot changes it's state.
+
+\item \texttt{buttonSubscribeStatus( 1 );}
+  
+  We subscribe to every status update of the button server. Every time a
+  button on the robot changes it's state, the button server calls our function
+  \texttt{myButtonStatusCallback}.
+
+\end{enumerate}
+ 
+If you want to use the button server, follow the above four steps, include
+\texttt{buttonClient.h} in your source and link with \texttt{-lbuttonClient}.
+
+\subsection{Commands for the button server}
+
+\begin{description}
+  
+\item \texttt{void buttonRegister( );}
+
+  Registers the button server.
+ 
+\item \texttt{int buttonConnect( int wait\_till\_established );} 
+  
+  Connects to the button server. If \texttt{wait\_till\_established} is
+  \texttt{1}, we wait until connection with the button server has been
+  established. Otherwise we proceed.
+ 
+\item \texttt{void registerButtonStatusCallback( buttonStatusCallbackType fcn
+    );} 
+  
+  Registers a function \texttt{fcn}. The button server calls this function
+  every time a button on the robot changes it's state.
+
+\item \texttt{void buttonSetButtons( int red\_light\_status,\\
+    int yellow\_light\_status,\\
+    int green\_light\_status,\\
+    int blue\_light\_status,\\
+    int left\_kill\_switch\_light\_status,\\
+    int right\_kill\_switch\_light\_status );}
+  
+  Changes the status of multiple buttons. Status for each button is one of\\
+  \texttt{BUTTON\_LIGHT\_STATUS\_OFF}, \texttt{BUTTON\_LIGHT\_STATUS\_ON},
+  \texttt{BUTTON\_LIGHT\_STATUS\_FLASHING},\\
+  \texttt{BUTTON\_LIGHT\_STATUS\_FLASHING\_TILL\_PRESSED},
+  \texttt{BUTTON\_LIGHT\_STATUS\_ON\_TILL\_PRESSED},
+  \texttt{BUTTON\_LIGHT\_STATUS\_OFF\_TILL\_PRESSED},
+  \texttt{BUTTON\_LIGHT\_STATUS\_TOGGLE\_ON},\\
+  \texttt{BUTTON\_LIGHT\_STATUS\_TOGGLE\_OFF} or
+  \texttt{BUTTON\_LIGHT\_STATUS\_DONT\_CHANGE}.
+
+\item \texttt{void buttonSetButton( int button, int status );}
+  
+  Sets the status of button \texttt{button} to status \texttt{status}.
+  \texttt{button} is one of \texttt{BUTTON\_LEFT\_KILL},
+  \texttt{BUTTON\_RIGHT\_KILL}, \texttt{BUTTON\_RED}, \texttt{BUTTON\_YELLOW},
+  \texttt{BUTTON\_GREEN} or \texttt{BUTTON\_BLUE}. For \texttt{status} see
+  \texttt{buttonSetButtons(\dots)}.
+
+\item \texttt{void buttonStartCuteThing( );}
+  
+  Flashes the red, yellow, green and blue button.
+
+\item \texttt{void buttonRequestStatus( );}
+  
+  Requests a button status. The button server calls the function \texttt{fcn}
+  that was previously registered with
+  \texttt{registerButtonStatusCallback(\dots)}.
+
+\item \texttt{void buttonSubscribeStatus( int number );}
+  
+  If \texttt{number} is not zero, subscribe to every \texttt{number}-th status
+  update from the button server. Every time a button on the robot changes it's
+  state, the button server calls the function \texttt{fcn} that was previously
+  registered with \texttt{registerButtonStatusCallback(\dots)}.
+
+\end{description}
+
+\subsection{Parameters for the button server}
+
+\begin{description}
+
+\item \texttt{-test=0}
+  
+  Do not test the buttons. This is the default.
+
+\item \texttt{-test=1}
+  
+  Test the buttons. Flash the red, yellow, green and blue button. Does not use
+  TCX.
+
+\item \texttt{-simulator=0}
+  
+  Process TCX commands immediately. This is the default.
+
+\item \texttt{-simulator=1}
+
+  Wait for a TCX command. Probably.
+
+\end{description}
+ 
+\subsection{The example program \texttt{buttonExample}}
+ 
+Start \texttt{tcxServer} and \texttt{buttonServer} (the button server of
+course on the machine that has control over the buttons). Now start the program
+\texttt{buttonExample}.
+
+\texttt{buttonExample} will connect to the button server, register a status
+callback function (in which you can see how the buttons changed their state)
+and subscribe to the status update. It then flashes the red, yellow, green and
+blue button with \texttt{buttonStartCuteThing( )}.
+
+\end{document}

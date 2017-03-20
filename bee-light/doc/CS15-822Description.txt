@@ -1,0 +1,103 @@
+15-822: System Design & Implementation Practicum
+
+Spring 1999
+M. Satyanarayanan
+
+Information source:
+http://www.cs.cmu.edu/afs/cs/user/satya/Web/sdipracticum.html
+
+Goal
+
+Provide hands-on learning of skills relevant to the design, implementation, 
+evaluation and tuning of complex systems. 
+
+These skills cannot be acquired through lectures or independent readings. 
+Further, their acquisition cannot be satisfactorily evaluated through 
+conventional means such as written or oral examinations and homework 
+assignments. 
+
+Format
+
+The course is project-based, with each student doing a different project. 
+The projects share two unifying characteristics. 
+
+First, there will be a substantial implementation component to each project, 
+even though the relative balance between design, implementation, evaluation 
+and tuning may vary from project to project. In some cases, the implementation 
+may be of tools or instrumentation for evaluation of a system. Analysis or 
+critique of a system by just studying its design or source code does not
+meet these criteria. 
+
+Second, the projects will be "real" rather than contrived. In other words, 
+every project will address the needs of some "customer". A "customer" might 
+be a CS or Robotics research project, SCS facilities, or a group outside SCS 
+like ECE or INI. One can even conceive of projects in which the beneficiary is 
+outside CMU, such as Fore or Transarc. 
+
+The sponsor of a project (i.e., the "customer") is expected to contribute 
+substantially toward the educational process by helping the student come up 
+to speed on project-specific context and providing resources such as 
+specialized equipment. Most importantly each sponsor will provide a mentor 
+who will be generous with his time and to whom the student can turn to for 
+advice and guidance. The mentor will also play a role in evaluating the 
+student's work. 
+
+To avoid conflicts of interest, a student cannot take a project sponsored by 
+his advisor. 
+
+Organization
+
+Some time before the course begins, I will publicize it to potential sponsors 
+and solicit projects. I will then select a subset of the projects based on a 
+variety of factors such as their size and scope (to ensure they are not too 
+large or too small), the likelihood that they will lead to effective learning, 
+and the presence of effective and enthusiastic mentors. 
+
+Students will be matched to projects at the beginning of the course. The 
+matches will, of course, be customized: i.e., a student's particular level of 
+skill and knowledge will be taken into account. A project that may be valuable 
+to one student's learning may be not be useful in this respect to another 
+student. 
+
+Once students are assigned projects, most of the interaction will take place 
+between mentors and students. My primary responsibility will be to oversee the 
+process, not to micromanage it.  To ensure quality control and to detect 
+problem situations early, I will meet with the class regularly. There will be 
+a weekly class slot reserved (3:00 - 6:00 on Tuesdays for Spring 1999),
+though actual class meetings may be less frequent. An important use of class 
+time will be to obtain status reports of all the projects. 
+
+Evaluation
+
+Besides the actual project, a student must write a short report (5 to 8 pages) 
+that describes the goal of the project, a brief description of the technical 
+approach, and a candid assessment of how well the project turned out. Most 
+importantly, the student should reflect on what new skills he learned or 
+substantially enhanced, and what surprises he encountered. He should
+also briefly describe what he would do differently if he were to repeat the 
+project with the benefit of hindsight. 
+
+At the end of the semester, the course will hold a poster session in which 
+each student will present a poster describing his work and copies of his 
+report. In addition, unless logistically difficult, each student will offer 
+a demo of his work. All faculty and students will be encouraged to visit this 
+poster session. The DRC, in particular, will visit the session to ensure 
+quality control 
+
+The grade a student receives will factor in a number of components: 
+
+primarily, the quality of his project execution (with input from his mentor 
+playing an important part in this assessment). 
+secondarily, the quality of his report, poster and demo 
+
+Credits
+
+This course is for 12 units.  CS PhD students may take it as one of their 
+electives. 
+
+Enrollment
+
+Note that enrollment in this course is limited to about a dozen students. 
+
+Permission of the instructor is required to enroll --- send me mail or come by 
+and talk to me so I can determine if this course is appropriate for you. 

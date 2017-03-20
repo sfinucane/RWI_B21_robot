@@ -1,0 +1,95 @@
+.TH BEECAMERASUBSCRIBE 3 "April 27, 1999" "BeeSoft Light" "BeeSoft Light"
+
+.SH NAME
+beeCameraSubscribe \- subscribe for frames captured from cameraServer 
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "int * beeCameraSubscribe(int " numGrabber ", int " numberOfImage ", int " image_xmini ", int " image_ymin ", int " image_xsize ", int " image_ysize ", int " return_image_xsize ", int " return_image_ysize "); "
+
+.SH DESCRIPTION
+.B "beeCameraSubscribe()"
+provides captured frames from a camera. The meanings of the auguments are: 
+
+.B "numGrabber" 
+specifies a grabber number you want to subscribe to. 
+
+.B "numberOfImage"
+specifies the request for every n-th frames.
+
+.B "image_xmini" 
+and 
+.B "image_ymini"
+give an location of a block inside the image. They specify (0,0) of the block.
+
+.B "image_xsize" 
+and
+.B "image_ysize"
+give the size of a block inside the image. 
+
+.B "return_image_xsize"
+and 
+.B "return_image_ysize"
+give the size of a return image, which could reduce the amount of data needed to
+be transfered.
+
+After the function is executed, a callback handler will be invoked
+when every n-th frame is captured
+Programmers can register
+their own callback function by invoking
+.B "beeCameraImageRegisterCallback().
+
+.SH "RETURN VALUE"
+On success, the function will return TRUE.  On error, 
+.B "beeCameraSubscribe()"
+will return FALSE.
+
+.SH "EXAMPLE"
+
+#include <stdio.h>
+
+void mycallback(CameraImageType * image) 
+  {
+
+   ...
+
+  }
+
+int main()
+  {
+   int returnval ;
+   CameraImageType * image ;
+   beeInitialize() ;
+   beeCameraConnect() ;
+   beeCameraImageRegisterCallback( mycallback) ;  
+   beeCameraSubscribe(0, 2, 0, 0, 320, 240, 160, 120) ;
+  }
+
+.SH "NOTES"
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.BI "tcxServer" ,
+.B "colliServer"
+and
+.B "cameraServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs 
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+and
+.B "beeCameraConnect()"
+first in your program. Otherwise, the function will return FALSE.
+Another note is that when the augument 
+.I "numOfImage"
+is given 0, the function has the same effect as 
+.B beeCameraUnsubscribe() 
+
+.SH SEE ALSO
+.BR "beeInitialize" (3),
+.BR "beeCameraConnect" (3),
+.BR "beeCameraUnSubscribe"
+
+

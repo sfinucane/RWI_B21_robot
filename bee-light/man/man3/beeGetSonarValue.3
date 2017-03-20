@@ -1,0 +1,57 @@
+.TH BEEGETSONARVALUE 3 "April 2, 1999" "BeeSoft Light" "BeeSoft Light"
+
+.SH NAME
+beeGetSonarValue \- provide collected sonar readings of a BeeSoft Light robot
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "float * beeGetSonarValue(int * " number_of_reading ") ;"
+
+.SH DESCRIPTION
+.B "beeGetSonarValue()"
+provides collected sonar readings of a BeeSoft Light robot.
+.I "number_of_reading" 
+argument specifies a reference to an integer variable. After user program
+runs 
+.BR "beeSonarStartRegularUpdate()", 
+a thread keeping collecting sonar value. And then
+.B "beeGetSonarValue()" 
+could retrieve an valid array of collected sonar readings.
+
+.SH "RETURN VALUE"
+On success, the function will return a reference to the array of stored
+sonar readings, which is "float" data type. The integer referenced by
+.I "number_of_reading" 
+will store the number of sonar readings.
+The array 
+.B "beeGetSonarValue()"
+returns is a clone of the space which the background thread keeps updating
+in. Those data will keep intact until next time
+.B "beeGetSonarValue()"
+is invoked.
+Any attempt to free the space is not allowed.
+On error, 
+.B "beeGetSonarValue()"
+will return NULL.
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.B "tcxServer" 
+and
+.B "colliServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs 
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+first in your program. Otherwise, the function will return NULL.
+
+.SH SEE ALSO
+.BR "beeInitialize" (3),
+.BR "beeSonarStartRegularUpdate" (3),
+.BR "beeSonarStopRegularUpdate", (3).
+
+

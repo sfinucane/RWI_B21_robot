@@ -1,0 +1,61 @@
+.TH BEEGETCURRENTPOSITION 3 "April 2, 1999" "BeeSoft Light" "BeeSoft Light" 
+.SH NAME
+beeGetCurrentPosition \- provide current position of a BeeSoft Light robot
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "robot_position* beeGetCurrentPosition();"
+
+.SH DESCRIPTION
+.B "beeGetCurrentPosition()"
+provides current position of a BeeSoft Light robot. The position is 
+defined as the data structure: 
+
+.BI "typedef struct { "
+
+.BI "		float " pos_x ";"
+
+.BI "		float " pos_y ";"
+
+.BI "		float " orientation ";"
+
+.BI "} robot_position;"
+
+
+After the user process executes 
+.BR "beeInitialize()",
+it will keep updating the current position in private variables.
+The operations are running in a separate thread and running concurrently
+with user process.
+Then user process can get the up-to-second data every time it invokes
+.BR "beeGetCurrentPosition()".
+
+
+.SH "RETURN VALUE"
+On success, the function will return a location value which points a data
+structure defined as 
+.BR "robot_position". 
+On error, NULL is returned. 
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.B "tcxServer" 
+and
+.B "colliServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs 
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+before 
+.B "beeGetCurrentPosition()" 
+function in your program. Otherwise, the function will return NULL.
+
+
+.SH SEE ALSO
+.BR "beeInitialize" (3).
+
+

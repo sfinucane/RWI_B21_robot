@@ -1,0 +1,209 @@
+obj/PLAN.o: PLAN.c /usr/include/ctype.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/include/bits/types.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/float.h \
+ /usr/include/stdio.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/bits/stdio_lim.h /usr/include/malloc.h \
+ /usr/include/sys/time.h /usr/include/time.h /usr/include/bits/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h ../../include/bUtils.h \
+ /usr/include/termios.h /usr/include/bits/termios.h \
+ /usr/include/sys/ttydefaults.h ../../include/bNetwork.h \
+ /usr/include/sys/types.h /usr/include/sys/sysmacros.h \
+ /usr/include/netinet/in.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/limits.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/stdint.h \
+ /usr/include/bits/wordsize.h /usr/include/bits/socket.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm/sockios.h /usr/include/bits/in.h \
+ /usr/include/bits/byteswap.h ../../include/tcx.h \
+ ../../include/o-graphics.h ../../include/EZX11.h \
+ /usr/include/stdlib.h /usr/include/alloca.h /usr/include/strings.h \
+ /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+ /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+ /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h PLAN-messages.h \
+ ../../include/COLLI-messages.h ../../include/MAP-messages.h \
+ ../../include/BASE-messages.h ../../include/SONAR-messages.h PLAN.h
+obj/file.o: file.c /usr/include/ctype.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/include/bits/types.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/float.h \
+ /usr/include/stdio.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/bits/stdio_lim.h /usr/include/sys/time.h \
+ /usr/include/time.h /usr/include/bits/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h ../../include/tcx.h \
+ /usr/include/sys/types.h /usr/include/sys/sysmacros.h \
+ /usr/include/netinet/in.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/limits.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/stdint.h \
+ /usr/include/bits/wordsize.h /usr/include/bits/socket.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm/sockios.h /usr/include/bits/in.h \
+ /usr/include/bits/byteswap.h PLAN-messages.h \
+ ../../include/COLLI-messages.h ../../include/MAP-messages.h \
+ ../../include/BASE-messages.h ../../include/SONAR-messages.h PLAN.h \
+ ../../include/o-graphics.h ../../include/EZX11.h \
+ /usr/include/stdlib.h /usr/include/alloca.h /usr/include/strings.h \
+ /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+ /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+ /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h \
+ ../../include/bUtils.h /usr/include/termios.h \
+ /usr/include/bits/termios.h /usr/include/sys/ttydefaults.h \
+ ../../include/bNetwork.h
+obj/file2.o: file2.c /usr/include/ctype.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/include/bits/types.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/float.h \
+ /usr/include/stdio.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/bits/stdio_lim.h /usr/include/sys/time.h \
+ /usr/include/time.h /usr/include/bits/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h ../../include/tcx.h \
+ /usr/include/sys/types.h /usr/include/sys/sysmacros.h \
+ /usr/include/netinet/in.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/limits.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/stdint.h \
+ /usr/include/bits/wordsize.h /usr/include/bits/socket.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm/sockios.h /usr/include/bits/in.h \
+ /usr/include/bits/byteswap.h PLAN-messages.h \
+ ../../include/COLLI-messages.h ../../include/MAP-messages.h \
+ ../../include/BASE-messages.h ../../include/SONAR-messages.h PLAN.h \
+ ../../include/o-graphics.h ../../include/EZX11.h \
+ /usr/include/stdlib.h /usr/include/alloca.h /usr/include/strings.h \
+ /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+ /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+ /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h \
+ ../../include/bUtils.h /usr/include/termios.h \
+ /usr/include/bits/termios.h /usr/include/sys/ttydefaults.h \
+ ../../include/bNetwork.h
+obj/goals.o: goals.c /usr/include/ctype.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/include/bits/types.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/float.h \
+ /usr/include/stdio.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/bits/stdio_lim.h /usr/include/malloc.h \
+ /usr/include/sys/time.h /usr/include/time.h /usr/include/bits/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h ../../include/tcx.h \
+ /usr/include/sys/types.h /usr/include/sys/sysmacros.h \
+ /usr/include/netinet/in.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/limits.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/stdint.h \
+ /usr/include/bits/wordsize.h /usr/include/bits/socket.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm/sockios.h /usr/include/bits/in.h \
+ /usr/include/bits/byteswap.h ../../include/o-graphics.h \
+ ../../include/EZX11.h /usr/include/stdlib.h /usr/include/alloca.h \
+ /usr/include/strings.h /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+ /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+ /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h PLAN-messages.h \
+ ../../include/COLLI-messages.h ../../include/MAP-messages.h \
+ ../../include/BASE-messages.h ../../include/SONAR-messages.h PLAN.h
+obj/graphics.o: graphics.c /usr/include/ctype.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/include/bits/types.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/float.h \
+ /usr/include/stdio.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/bits/stdio_lim.h /usr/include/malloc.h \
+ /usr/include/sys/time.h /usr/include/time.h /usr/include/bits/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h ../../include/tcx.h \
+ /usr/include/sys/types.h /usr/include/sys/sysmacros.h \
+ /usr/include/netinet/in.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/limits.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/stdint.h \
+ /usr/include/bits/wordsize.h /usr/include/bits/socket.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm/sockios.h /usr/include/bits/in.h \
+ /usr/include/bits/byteswap.h ../../include/o-graphics.h \
+ ../../include/EZX11.h /usr/include/stdlib.h /usr/include/alloca.h \
+ /usr/include/strings.h /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+ /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+ /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h PLAN-messages.h \
+ ../../include/COLLI-messages.h ../../include/MAP-messages.h \
+ ../../include/BASE-messages.h ../../include/SONAR-messages.h PLAN.h
+obj/handlers.o: handlers.c /usr/include/ctype.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h \
+ /usr/include/bits/types.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stddef.h \
+ /usr/include/endian.h /usr/include/bits/endian.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/float.h \
+ /usr/include/stdio.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/stdarg.h \
+ /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/bits/stdio_lim.h /usr/include/malloc.h \
+ /usr/include/sys/time.h /usr/include/time.h /usr/include/bits/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h ../../include/tcx.h \
+ /usr/include/sys/types.h /usr/include/sys/sysmacros.h \
+ /usr/include/netinet/in.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/limits.h \
+ /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/stdint.h \
+ /usr/include/bits/wordsize.h /usr/include/bits/socket.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm/sockios.h /usr/include/bits/in.h \
+ /usr/include/bits/byteswap.h ../../include/tcxP.h \
+ ../../include/o-graphics.h ../../include/EZX11.h \
+ /usr/include/stdlib.h /usr/include/alloca.h /usr/include/strings.h \
+ /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+ /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+ /usr/include/X11/Xatom.h /usr/include/X11/Xutil.h \
+ ../../include/bUtils.h /usr/include/termios.h \
+ /usr/include/bits/termios.h /usr/include/sys/ttydefaults.h \
+ ../../include/bNetwork.h PLAN-messages.h \
+ ../../include/COLLI-messages.h ../../include/MAP-messages.h \
+ ../../include/BASE-messages.h ../../include/SONAR-messages.h PLAN.h \
+ beeSoftVersion.h ../../include/libbUtils.h ../../include/librobot.h \
+ ../../include/libezx.h

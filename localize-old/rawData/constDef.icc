@@ -1,0 +1,133 @@
+// Time-stamp: <98/02/12 16:04:39 derr>
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+/////
+///// File name:                   constDef.ic
+/////
+///// Part of:                     RHINO SOFTWARE
+/////
+///// Creator:                     Andreas Derr, University of Bonn
+/////
+///// Date of creation:            Oct 1997
+/////
+///// Purpose:                     const definitions (global variables)
+/////                              of class rawData
+/////
+/////                              ///////////////////////////////////
+/////                              !!! INCLUDE THIS FILE IN rawData.cc
+/////                              ///////////////////////////////////
+/////
+/////
+///// $Source: /usr/local/cvs/bee/src/localize/rawData/constDef.icc,v $
+/////
+///// $Revision: 1.1 $
+/////
+///// $Date: 2002/09/14 17:06:31 $
+/////
+///// $Author: rstone $
+/////
+/////
+/////
+///// Contact derr@informatik.uni-bonn.de
+/////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+/////
+///// THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY
+///// APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE
+///// COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM "AS IS"
+///// WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED,
+///// INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+///// MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE
+///// RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.
+///// SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
+///// NECESSARY SERVICING, REPAIR OR CORRECTION.
+/////
+///// IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN
+///// WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY
+///// MODIFY AND/OR REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE
+///// LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL,
+///// INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR
+///// INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF
+///// DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU
+///// OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY
+///// OTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN
+///// ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+/////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+//
+//
+//                  ----- REVISION HISTORY -----
+//
+// $Log: constDef.icc,v $
+// Revision 1.1  2002/09/14 17:06:31  rstone
+// *** empty log message ***
+//
+// Revision 1.1  1998/02/12 18:13:59  derr
+// Added library for reading laserint- sonarint- and 'new'-scripts.
+//
+// Revision 1.1  1998/02/12 15:59:48  derr
+// New library librawData for reading laserint-, sonarint and 'new'-script.
+// Will replace bee/src/localize/script.c.
+//
+//
+//
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+#ifndef CONST_DEF_OF_RAW_DATA_INCLUDE
+#define CONST_DEF_OF_RAW_DATA_INCLUDE
+
+#include <math.h>
+const char *ORIG_MARKERSCRIPTMARK       = "#MARKER:";
+// const char *ORIG_SCRIPTLASERMARK        = "#LASER 360:";
+const char *ORIG_SCRIPTLASERMARK        = "#LASER";
+const char *ORIG_SCRIPTPOSMARK          = "#ROBOT";
+const char *ORIG_SCRIPTSONARMARK        = "#SONAR 24:";
+const char *ORIG_SCRIPTNAMEMARK         = "#SCRIPTNAME:";
+const char *ORIG_SCRIPTDESCRIPTIONMARK  = "#SCRIPTDESCRIPTION:";
+const char *ORIG_TIMEMARK               = "@SENS";
+
+const char *SECOND_SCRIPT_START             = "begin(patternset)";
+const char *SECOND_SCRIPT_NAME_STR          = "name:";
+const char *SECOND_SCRIPT_TYPE_STR          = "type:";
+const char *SECOND_SCRIPT_END               = "end(patternset)";
+
+const char *SECOND_SCRIPT_PAT_START     = "begin(pattern)";
+const char *SECOND_SCRIPT_PAT_BUTTON    = "buttons: ";
+const char *SECOND_SCRIPT_PAT_INFRARED  = "infrareds ";
+const char *SECOND_SCRIPT_PAT_LASER     = "lasers ";
+const char *SECOND_SCRIPT_PAT_MARKER    = "marker ";
+const char *SECOND_SCRIPT_PAT_NAME      = "name: ";
+const char *SECOND_SCRIPT_PAT_POSITION  = "position: ";
+const char *SECOND_SCRIPT_PAT_SONAR     = "sonars ";
+const char *SECOND_SCRIPT_PAT_TACTILE   = "tactiles ";
+const char *SECOND_SCRIPT_PAT_TIME      = "time: ";
+const char *SECOND_SCRIPT_PAT_END       = "end(pattern)";
+
+const char *SECOND_SCRIPT_PAT_TYPE_BUTTON    = "buttons";
+const char *SECOND_SCRIPT_PAT_TYPE_INFRARED  = "infrared";
+const char *SECOND_SCRIPT_PAT_TYPE_LASER     = "laser";
+const char *SECOND_SCRIPT_PAT_TYPE_MARKER    = "marker";
+const char *SECOND_SCRIPT_PAT_TYPE_SONAR     = "sonar";
+const char *SECOND_SCRIPT_PAT_TYPE_TACTILE   = "tactile";
+
+// for d. fox addNoise
+const char *SCRIPTBUMPERMARK                 = "#BUMP";
+
+
+const char  END_OF_LINE              = '\n'; // one char only!
+
+
+const double DEG_360                 = (M_PI + M_PI);
+
+const char *STDIN_SCRIPT_NAME        = "STDIN";
+// const float ROB_RADIUS               = 26.7;
+
+#endif
+// End of CONST_DEF_OF_RAW_DATA_HEADER
+

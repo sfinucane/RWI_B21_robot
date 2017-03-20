@@ -1,0 +1,22 @@
+/Makefile/1.1/Sun Sep 26 18:26:47 1999//
+/base.c/1.1/Sat Sep 14 16:03:25 2002//
+/base.h/1.1/Sat Sep 14 16:03:25 2002//
+/baseClient.c/1.1/Sat Sep 14 16:03:25 2002//
+/baseClient.h/1.1/Sat Sep 14 16:03:25 2002//
+/baseMessages.h/1.1/Sat Sep 14 16:03:25 2002//
+/baseOpcodes.h/1.1/Sat Sep 14 16:03:25 2002//
+/baseServer.c/1.1/Sat Sep 14 16:03:25 2002//
+/baseServer.h/1.1/Sat Sep 14 16:03:25 2002//
+/beeSoftVersion.h/1.1/Sat Sep 14 16:03:25 2002//
+/irClient.h/1.1/Sat Sep 14 16:03:25 2002//
+/libbase.c/1.1/Sat Sep 14 16:03:25 2002//
+/libbase.h/1.1/Sat Sep 14 16:03:25 2002//
+/libbaseClient.c/1.1/Sat Sep 14 16:03:25 2002//
+/libbaseClient.h/1.1/Sat Sep 14 16:03:25 2002//
+/odoClient.h/1.1/Sat Sep 14 16:03:25 2002//
+/sensorMessages.h/1.1/Sat Sep 14 16:03:25 2002//
+/sonarClient.h/1.1/Sat Sep 14 16:03:25 2002//
+/statusReport.c/1.1/Sat Sep 14 16:03:25 2002//
+/statusReport.h/1.1/Sat Sep 14 16:03:25 2002//
+/tactileClient.h/1.1/Sat Sep 14 16:03:25 2002//
+D

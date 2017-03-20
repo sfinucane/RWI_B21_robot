@@ -1,0 +1,60 @@
+.TH BEESETROTACCELERATION 3 "April 2, 1999" "BeeSoft Light" "BeeSoft Light"
+.SH NAME
+beeSetTransAcceleration, beeSetRotAcceleration \- set the acceleration of a BeeSoft Light robot 
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "bool beeSetTransAcceleration(float " acceleration ");"
+
+.BI "bool beeSetRotAcceleration(float " acceleration ");"
+
+.SH DESCRIPTION
+.B "beeSetTransAcceleration()"
+sets the translation acceleration of a BeeSoft Light robot.  
+The 
+.I "acceleration" 
+argument specifies the acceleration to set. The measure of acceleration is 
+centimeter per square second. Positive value means positive acceleration, 
+while negative value means negative acceleration. 
+
+.B "beeSetRotAcceleration()"
+sets the rotation acceleration of a BeeSoft Light robot.  
+The 
+.I "acceleration" 
+argument specifies the acceleration to set. The measure of acceleration is 
+degree per square second. Positive value means clockwise acceleration, while negative 
+value means counterclockwise acceleration. 
+
+.SH "RETURN VALUE"
+On success, the function will return TRUE.  On error, FALSE is 
+returned.
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.B "tcxServer" 
+and
+.B "colliServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+before 
+.B "beeSetTransAcceleration()"
+or
+.B "beeSetRotAcceleration()"
+function in your program. Otherwise, 
+the function will return FALSE.
+
+
+.SH SEE ALSO
+.BR "beeTranslatePositive" (3),    
+.BR "beeTranslateNegative" (3),    
+.BR "beeRotPositive" (3),  
+.BR "beeRotNegative", (3),
+.BR "beeInitialize" (3),
+.BR "beeStop" (3). 
+

@@ -1,0 +1,49 @@
+.TH BEECAMERALOADFILE 3 "April 27, 1999" "BeeSoft Light" "BeeSoft Light"
+
+.SH NAME
+beeCameraLoadFile \- request to cameraServer to load images in a file
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "bool beeCameraLoadFile(int " numGrabber ", char * " filename ");"
+
+.SH DESCRIPTION
+.B "beeCameraLoadFile()"
+requests to cameraServer to load images from a file. 
+.I "numGrabber" 
+specifies the grabber number. 
+.I "filename"
+specifies the name of file from which the images will be retrieved.
+And
+The function requests to cameraServer and then returns. 
+
+.SH "RETURN VALUE"
+On success, the function will return TRUE.  On error, 
+.B "beeCameraLoadFile()"
+will return FALSE.
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least run 
+.BI "tcxServer",
+.B "colliServer" 
+and
+.B "cameraServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which runs 
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+and
+.B "beeCameraConnect()"
+first in your program. Otherwise, the function will return FALSE.
+
+.SH SEE ALSO
+.BR "beeInitialize" (3),
+.BR "beeCameraConnect" (3),
+.BR "beeCameraSaveFile" (3),
+.BR "beeCameraRequestShmId" (3)
+
+

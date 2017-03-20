@@ -1,0 +1,156 @@
+
+                               The button server
+                                       
+   Version of this document is
+$Id: README,v 1.1 2002/09/14 15:44:40 rstone Exp $
+
+How the button server works
+
+   A program dealing with the button server typically has four steps
+   (take a look at
+   
+                         ~bee/src/buttons/example.c
+                                      
+   for an example):
+   
+    1. buttonRegister( );
+       Registers all new commands that we need for dealing with the
+       button server.
+    2. buttonConnect( 1 );
+       Waits until we have connected to the button server.
+    3. registerButtonStatusCallback( myButtonStatusCallback );
+       Registers the function myButtonStatusCallback. The button server
+       calls this function once a button on the robot changes it's state.
+    4. buttonSubscribeStatus( 1 );
+       We subscribe to every status update of the button server. Every
+       time a button on the robot changes it's state, the button server
+       calls our function myButtonStatusCallback.
+       
+   If you want to use the button server, follow the above four steps,
+   include buttonClient.h in your source and link with -lbuttonClient.
+   
+Commands for the button server
+
+   
+          void buttonRegister( );
+          
+          Registers the button server.
+          
+   
+          int buttonConnect( int wait_till_established );
+          
+          Connects to the button server. If wait_till_established is 1,
+          we wait until connection with the button server has been
+          established. Otherwise we proceed.
+          
+   
+          void registerButtonStatusCallback( buttonStatusCallbackType fcn
+          );
+          
+          Registers a function fcn. The button server calls this function
+          every time a button on the robot changes it's state.
+          
+   
+          void buttonSetButtons( int red_light_status,
+          int yellow_light_status,
+          int green_light_status,
+          int blue_light_status,
+          int left_kill_switch_light_status,
+          int right_kill_switch_light_status );
+          
+          Changes the status of multiple buttons. Status for each button
+          is one of
+          BUTTON_LIGHT_STATUS_OFF, BUTTON_LIGHT_STATUS_ON,
+          BUTTON_LIGHT_STATUS_FLASHING,
+          BUTTON_LIGHT_STATUS_FLASHING_TILL_PRESSED,
+          BUTTON_LIGHT_STATUS_ON_TILL_PRESSED,
+          BUTTON_LIGHT_STATUS_OFF_TILL_PRESSED,
+          BUTTON_LIGHT_STATUS_TOGGLE_ON,
+          BUTTON_LIGHT_STATUS_TOGGLE_OFF or
+          BUTTON_LIGHT_STATUS_DONT_CHANGE.
+          
+   
+          void buttonSetButton( int button, int status );
+          
+          Sets the status of button button to status status. button is
+          one of BUTTON_LEFT_KILL, BUTTON_RIGHT_KILL, BUTTON_RED,
+          BUTTON_YELLOW, BUTTON_GREEN or BUTTON_BLUE. For status see
+          buttonSetButtons(...).
+          
+   
+          void buttonStartCuteThing( );
+          
+          Flashes the red, yellow, green and blue button.
+          
+   
+          void buttonRequestStatus( );
+          
+          Requests a button status. The button server calls the function
+          fcn that was previously registered with
+          registerButtonStatusCallback(...).
+          
+   
+          void buttonSubscribeStatus( int number );
+          
+          If number is not zero, subscribe to every number-th status
+          update from the button server. Every time a button on the robot
+          changes it's state, the button server calls the function fcn
+          that was previously registered with
+          registerButtonStatusCallback(...).
+          
+Parameters for the button server
+
+   
+          -test=0
+          
+          Do not test the buttons. This is the default.
+          
+   
+          -test=1
+          
+          Test the buttons. Flash the red, yellow, green and blue button.
+          Does not use TCX.
+          
+   
+          -simulator=0
+          
+          Process TCX commands immediately. This is the default.
+          
+   
+          -simulator=1
+          
+          Wait for a TCX command. Probably.
+          
+The example program buttonExample
+
+   Start tcxServer and buttonServer (the button server of course on the
+   machine that has control over the buttons). Now start the program
+   buttonExample.
+   
+   buttonExample will connect to the button server, register a status
+   callback function (in which you can see how the buttons changed their
+   state) and subscribe to the status update. It then flashes the red,
+   yellow, green and blue button with buttonStartCuteThing( ).
+   
+                            About this document ...
+                                       
+   __This document was generated using the [1]LaTeX2HTML translator
+   Version 96.1-h (September 30, 1996) Copyright © 1993, 1994, 1995,
+   1996, [2]Nikos Drakos, Computer Based Learning Unit, University of
+   Leeds.
+   
+   The command line arguments were:
+   _latex2html_ -split 0 -dir /tmp/oxo -no_navigation buttonServer.tex.
+   
+   The translation was initiated by Stefan Waldherr on Fri Nov 21
+   11:21:14 EST 1997
+     _________________________________________________________________
+                                      
+   
+    _Stefan Waldherr
+    Fri Nov 21 11:21:14 EST 1997_
+
+References
+
+   1. http://www-dsed.llnl.gov/files/programs/unix/latex2html/manual/
+   2. http://cbl.leeds.ac.uk/nikos/personal.html

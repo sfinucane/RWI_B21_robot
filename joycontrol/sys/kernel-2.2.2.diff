@@ -1,0 +1,6181 @@
+diff -urN linux-2.2.2/Documentation/Configure.help linux-2.2.2-joystick/Documentation/Configure.help
+--- linux-2.2.2/Documentation/Configure.help	Mon Mar  8 14:49:28 1999
++++ linux-2.2.2-joystick/Documentation/Configure.help	Mon Mar  8 14:49:31 1999
+@@ -8785,67 +8785,86 @@
+ 
+ Joystick support
+ CONFIG_JOYSTICK
+-  If you have a joystick, you can say Y here to enable generic
+-  joystick support. You will also need to say Y or M to at least one
+-  of the hardware specific joystick drivers. This will make the
+-  joysticks available as /dev/jsX devices. Please read the file
+-  Documentation/joystick.txt which contains more information and the
+-  location of the joystick package that you'll need.
+-
+-  This driver is also available as a module ( = code which can be
+-  inserted in and removed from the running kernel whenever you want).
+-  The module will be called joystick.o. If you want to compile it as a
+-  module, say M here and read Documentation/modules.txt.
++  If you have a joystick, 6dof controller, gamepad, steering wheel,
++  weapon control system or something like that you can say Y here to
++  enable generic support for these controllers. You will also need to
++  say Y or M to at least one of the hardware specific drivers. This
++  will make the controllers available as /dev/jsX devices. Please read
++  the file Documentation/joystick.txt which contains more information
++  and the location of the joystick package that you'll need.
+ 
+-Classic PC analog joysticks and gamepads
++Classic PC analog
+ CONFIG_JOY_ANALOG
+-  Say Y here if you have an analog joystick or gamepad that connects
+-  to the PC gameport. This supports many different types, including
+-  joysticks with throttle control, with rudders, or with extensions
+-  like additional hats and buttons compatible with CH Flightstick Pro,
++  Say Y here if you have a controller that connects to the PC
++  gameport. This supports many different types, including joysticks
++  with throttle control, with rudders, or with extensions like
++  additional hats and buttons compatible with CH Flightstick Pro,
+   ThrustMaster FCS or 6 and 8 button gamepads. For more information on
+   how to use the driver please read Documentation/joystick.txt
+ 
+-FPGaming and MadCatz A3D controllers
+-CONFIG_JOY_ASSASIN
+-  Say Y here if you have an FPGaming Assasin 3D, MadCatz Panther or
+-  MadCatz Panther XL. For more information on how to use the driver
+-  please read Documentation/joystick.txt
++FPGaming and MadCatz A3D
++CONFIG_JOY_ASSASSIN
++  Say Y here if you have an FPGaming or MadCatz controller using the
++  A3D protocol over the PC gameport. For more information on how to
++  use the driver please read Documentation/joystick.txt
+ 
+-Gravis GrIP joysticks and gamepads
++Gravis GrIP
+ CONFIG_JOY_GRAVIS
+-  Say Y here if you have a Gravis GamePad Pro, Gravis Xterminator or
+-  Gravis Blackhawk Digital. For more information on how to use the
+-  driver please read Documentation/joystick.txt
++  Say Y here if you have a Gravis controller using the GrIP protocol
++  over the PC gameport. For more information on how to use the driver
++  please read Documentation/joystick.txt
+ 
+-PDPI Lightning 4 gamecards
++PDPI Lightning 4 card
+ CONFIG_JOY_LIGHTNING
+   Say Y here if you have a PDPI Lightning 4 gamecard and an analog
+   joystick or gamepad connected to it. For more information on how to
+   use the driver please read Documentation/joystick.txt
+ 
+-Logitech Digital joysticks and gamepads
++Logitech ADI
+ CONFIG_JOY_LOGITECH
+-  Say Y here if you have a Logitech WingMan Extreme Digital,
+-  Logitech ThunderPad Digital or Logitech CyberMan 2. For more
++  Say Y here if you have a Logitech controller using the ADI
++  protocol over the PC gameport. For more information on how to use
++  the driver please read Documentation/joystick.txt
++
++Microsoft and Genius Digital Overdrive
++CONFIG_JOY_SIDEWINDER
++  Say Y here if you have a Microsoft controller using the Digital
++  Overdrive protocol over PC gameport. For more information on how to
++  use the driver please read Documentation/joystick.txt
++
++ThrustMaster DirectConnect (BSP)
++CONFIG_JOY_THRUSTMASTER
++  Say Y here if you have a ThrustMaster controller using the
++  DirectConnect (BSP) protocol over the PC gameport. For more
+   information on how to use the driver please read
+   Documentation/joystick.txt
+ 
+-Microsoft SideWinder, Genius Digital joysticks and gamepads
+-CONFIG_JOY_SIDEWINDER
+-  Say Y here if you have a Microsoft SideWinder 3d Pro, Microsoft
+-  SideWinder Precision Pro, Microsoft SideWinder Force Feedback Pro,
+-  Microsoft Sidewinder GamePad or Genius Flight2000 F-23 Digital. For
+-  more information on how to use the driver please read
++Creative Labs Blaster
++CONFIG_JOY_CREATIVE
++  Say Y here if you have a Creative Labs controller using the
++  Blaster protocol over the PC gameport. For more information on how
++  to use the driver please read Documentation/joystick.txt
++
++Magellan and Space Mouse
++CONFIG_JOY_MAGELLAN
++  Say Y here if you have a Magellan or Space Mouse 6DOF controller
++  connected to your computer's serial port.  For more information on
++  how to use the driver please read Documentation/joystick.txt
++
++SpaceTec SpaceOrb 360 and SpaceBall Avenger
++CONFIG_JOY_SPACEORB
++  Say Y here if you have a SpaceOrb 360 or SpaceBall Avenger 6DOF
++  controller connected to your computer's serial port.  For more
++  information on how to use the driver please read
+   Documentation/joystick.txt
+ 
+-ThrustMaster DirectConnect joysticks and gamepads
+-CONFIG_JOY_THRUSTMASTER
+-  Say Y here if you have a ThrustMaster Millenium 3D Inceptor or a
+-  ThrustMaster 3D Rage Pad. For more information on how to use the
+-  driver please read Documentation/joystick.txt
++Logitech WingMan Warrior
++CONFIG_JOY_WARRIOR
++  Say Y here if you have a Logitech WingMan Warrior controller
++  connected to your computer's serial port.  For more information on
++  how to use the driver please read Documentation/joystick.txt
+ 
+-NES, SNES, PSX, Multisystem joysticks and gamepads
++NES, SNES, PSX, Multi
+ CONFIG_JOY_CONSOLE
+   Say Y here if you have a Nintendo Entertainment System gamepad,
+   Super Nintendo Entertainment System gamepad, Sony PlayStation
+@@ -8853,7 +8872,7 @@
+   joystick. For more information on how to use the driver please read
+   Documentation/joystick.txt and Documentation/joystick-parport.txt
+ 
+-Sega, Multisystem joysticks and gamepads
++Sega, Multi
+ CONFIG_JOY_DB9
+   Say Y here if you have a Sega Master System gamepad, Sega Genesis
+   gamepad, Sega Saturn gamepad, or a Multisystem -- Atari, Amiga,
+@@ -8861,7 +8880,7 @@
+   the driver please read Documentation/joystick.txt and
+   Documentation/joystick-parport.txt
+ 
+-TurboGraFX Multisystem joystick interface
++TurboGraFX interface
+ CONFIG_JOY_TURBOGRAFX
+   Say Y here if you have the TurboGraFX interface by Steffen Schwenke,
+   and want to use it with Multiststem -- Atari, Amiga, Commodore,
+diff -urN linux-2.2.2/Documentation/joystick-api.txt linux-2.2.2-joystick/Documentation/joystick-api.txt
+--- linux-2.2.2/Documentation/joystick-api.txt	Wed Oct 21 17:43:33 1998
++++ linux-2.2.2-joystick/Documentation/joystick-api.txt	Mon Feb 22 00:33:42 1999
+@@ -112,6 +112,7 @@
+ 
+ 2.4 js_event.time
+ ~~~~~~~~~~~~~~~~~
++
+ The time an event was generated is stored in ``js_event.time''. It's a time
+ in miliseconds since ... well, since sometime in the past.  This eases the
+ task of detecting double clicks, figuring out if movement of axis and button
+@@ -296,7 +297,7 @@
+ center, and 255 maximum value.
+ 
+ The v0.8.0.2 driver also had an interface for 'digital joysticks', (now
+-called Multisystem joystick in this driver), under /dev/djsX. This driver
++called Multisystem joysticks in this driver), under /dev/djsX. This driver
+ doesn't try to be compatible with that interface.
+ 
+ 6. Final Notes
+diff -urN linux-2.2.2/Documentation/joystick-parport.txt linux-2.2.2-joystick/Documentation/joystick-parport.txt
+--- linux-2.2.2/Documentation/joystick-parport.txt	Wed Dec  2 04:05:05 1998
++++ linux-2.2.2-joystick/Documentation/joystick-parport.txt	Mon Mar  8 14:51:00 1999
+@@ -1,5 +1,5 @@
+ 		  Linux Joystick parport drivers v1.2 BETA
+-		  (c) 1998 Vojtech Pavlik <vojtech@ucw.cz>
++	       (c) 1998-1999 Vojtech Pavlik <vojtech@ucw.cz>
+ 	       (c) 1998 Andree Borrmann <a.borrmann@tu-bs.de>
+ ----------------------------------------------------------------------------
+ 
+@@ -44,7 +44,8 @@
+   The main problem with PC parallel ports is that they don't have +5V power
+ source on any of their pins. So, if you want a reliable source of power
+ for your pads, use either keyboard or joystick port, and make a pass-through
+-cable.
++cable. You can also pull the power directly from the power supply (the red
++wire is +5V).
+ 
+   If you want to use the parallel port only, you can take the power is from
+ some data pin. For most gamepad and parport implementations only one pin is
+@@ -501,6 +502,7 @@
+     v0.4V: Switched to EXCL mode
+            Removed wakeup
+     v0.5V: Added 0.8.0.2 HW compatibility for Multi sticks
++    v0.6V: Better timing for Genesis 6
+ 
+ 3.3 joy-turbografx.c
+ ~~~~~~~~~~~~~~~~~~~~
+@@ -519,6 +521,27 @@
+ use js_tg_2 and js_tg_3 as additional command line parameters for two more
+ interfaces.
+ 
+-3.4 End
++3.4 PC parallel port pinout
++~~~~~~~~~~~~~~~~~~~~~~~~~~~
++		  .----------------------------------------.
++   At the PC:     \ 13 12 11 10  9  8  7  6  5  4  3  2  1 /
++                   \  25 24 23 22 21 20 19 18 17 16 15 14 /
++                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++	  Pin | Name    | Description
++	~~~~~~|~~~~~~~~~|~~~~~~~~~~
++	    1 | /STROBE | Strobe
++	  2-9 | D0-D7   | Data Bit 0-7
++	   10 | /ACK    | Acknowledge
++	   11 | BUSY    | Busy
++	   12 | PE      | Paper End
++	   13 | SELIN   | Select In
++	   14 | /AUTOFD | Autofeed
++	   15 | /ERROR  | Error
++	   16 | /INIT   | Initialize
++	   17 | /SEL    | Select
++	18-25 | GND     | Signal Ground
++
++3.5 End
+ ~~~~~~~
+   That's all, folks! Have fun!
+diff -urN linux-2.2.2/Documentation/joystick.txt linux-2.2.2-joystick/Documentation/joystick.txt
+--- linux-2.2.2/Documentation/joystick.txt	Wed Dec  2 04:05:05 1998
++++ linux-2.2.2-joystick/Documentation/joystick.txt	Mon Mar  8 15:20:58 1999
+@@ -1,5 +1,5 @@
+-		     Linux Joystick driver v1.2.13
+-	       (c) 1996-1998 Vojtech Pavlik <vojtech@ucw.cz>
++		     Linux Joystick driver v1.2.14
++	       (c) 1996-1999 Vojtech Pavlik <vojtech@ucw.cz>
+ ----------------------------------------------------------------------------
+ 
+ 0. Disclaimer
+@@ -49,7 +49,7 @@
+ PSX NegCon and others might be added later.
+ 
+   Last, but not least there is also native Amiga joystick support for the
+-Amiga linux port.
++Amiga Linux port.
+ 
+   Should you encounter any problems while using the driver, or joysticks
+ this driver can't make complete use of, I'm very interested in hearing about
+@@ -92,7 +92,21 @@
+   To compile the utilities in the joystick package, and the driver itself,
+ as a standalone module, you first unpack the package, and then edit the
+ Makefile to meet your needs (namely whether are you using versioned
+-modules). Then you compile it
++modules). You will also need an unpacked and configured
++
++	make config
++
++kernel in
++	
++	/usr/src/linux
++
++Furthermore, if you're using versioned modules, you'll also need
++
++	make dep
++
++done on the kernel, to create some needed files.
++
++After that, you compile the joystick driver
+ 
+ 	make
+ 
+@@ -197,14 +211,14 @@
+ calibration using the jstest command, and if you do, you then can save the
+ correction coefficients into a file
+ 
+-	jscal -s /dev/js0 > /etc/joystick.cal
++	jscal -p /dev/js0 > /etc/joystick.cal
+ 
+   And add a line to your rc script executing that file
+ 
+ 	source /etc/joystick.cal
+ 
+   This way, after the next reboot your joystick will remain calibrated. You
+-can also add the jscal -s line to your shutdown script.
++can also add the jscal -p line to your shutdown script.
+ 
+ 
+ 3. HW specific driver information
+@@ -304,51 +318,65 @@
+ 
+ 3.2 Microsoft SideWinder and Genius Digital joysticks
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-  SideWinder and Genius Digital joysticks are supported by the
++  Microsoft and Genius 'Digital Overdrive' protocol is supported by the
+ joy-sidewinder.c module. All currently supported joysticks:
+ 
+-* SideWinder 3d Pro
+-* SideWinder Precision Pro 
+-* SideWinder Force Feedback Pro
+-* SideWinder Game Pad (up to four, chained together)
+ * Genius Flight2000 Digital F-23
++* SideWinder 3D Pro
++* SideWinder Force Feedback Pro
++* SideWinder Force Feedback Wheel
++* SideWinder FreeStyle Pro
++* SideWinder GamePad (up to four, chained together)
++* SideWinder Precision Pro 
+ 
+   are autodetected, and thus no module parameters are needed.
+ 
++  There is one caveat with the 3D Pro and the F-23 models. There are 9
++buttons reported, although the joystick has only 8. The 9th button is the
++mode switch on the rear side of the joystick. However, moving it, you'll
++reset the joystick, and make it unresponsive for about a one third of a
++second. Furthermore, the joystick will also re-center itself, taking the
++position it was in during this time as a new center position. Use it if
++you want, but think first.
++
+   The SideWinder Standard is not a digital joystick, and thus is supported
+-by the analog driver described above. SideWinder FreeStyle Pro and
+-SideWinder Force Feedback Wheel are not supported yet.
++by the analog driver described above. 
+ 
+-3.3 Logitech Digital joysticks
+-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-  Logitech Digital joysticks are supported by the joy-logitech.c module. It
+-currently supports these devices:
++3.3 Logitech ADI devices
++~~~~~~~~~~~~~~~~~~~~~~~~
++  Logitech ADI protocol is supported by the joy-logitech.c module. It should
++support any Logitech device using this protocol. This includes, but is not
++limited to:
+ 
+-* Logitech Wingman Extreme Digital
+ * Logitech CyberMan 2
+ * Logitech ThunderPad Digital
+-
+-  All three are autodetected, and thus no parameters to the module are
+-needed.
+-
+-  Logitech Wingman is not a digital joystick and is handled by the analog
+-driver described above. Logitech Wingman Warrior communicates through a
+-serial port and is not supported yet. Logitech Wingman Force, Wingman
+-Formula, Wingman Formula Force, Wingman Gamepad, Wingman Interceptor are USB
+-joysticks, with optional serial port connection, and are not supported yet.
++* Logitech WingMan Extreme Digital
++* Logitech WingMan Formula
++* Logitech WingMan GamePad
++* Logitech WingMan Interceptor
++
++  ADI devices are autodetected, and the driver supports up to two (any
++combination of) devices on a single gameport, using an Y-cable or chained
++together.
++
++  Logitech WingMan Joystick, Logitech WingMan Extreme and Logitech
++ThunderPad are not digital joysticks and are handled by the analog driver
++described above. Logitech WingMan Warrior and Logitech Magellan are
++supported by serial drivers described below. Logitech CyberMan, Logitech
++WingMan Force and Logitech WingMan Formula Force are not supported yet.
+ 
+ 3.4 Gravis GrIP
+ ~~~~~~~~~~~~~~~
+-  Gravis GrIP gamepads are supported by the joy-gravis.c module. It
++  Gravis GrIP protocol is supported by the joy-gravis.c module. It
+ currently supports:
+ 
+ * Gravis GamePad Pro
+ * Gravis Xterminator
+-* Gravis Blackhawk Digital
++* Gravis BlackHawk Digital
+ 
+-  All these pads are autodetected, and you can even use any combination of
+-up to two of these pads either chained together or using an Y-cable on a single
+-gameport.
++  All these devices are autodetected, and you can even use any combination
++of up to two of these pads either chained together or using an Y-cable on a
++single gameport.
+ 
+ GrIP MultiPort support is in the works. Gravis Xcalibur, ArcadeXtreme,
+ GamePad Pro/M are joysticks/pads that probably never reached mass
+@@ -357,15 +385,15 @@
+ 
+ 3.5 FPGaming A3D and MadCatz A3D
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-  The Assasin 3D protocol created by FPGaming, is used both by FPGaming
++  The Assassin 3D protocol created by FPGaming, is used both by FPGaming
+ themselves and is licensed to MadCatz. A3D devices are supported by the
+-joy-assasin.c module. It currently supports:
++joy-assassin.c module. It currently supports:
+ 
+-* FPGaming Assasin 3D
++* FPGaming Assassin 3D
+ * MadCatz Panther
+ * MadCatz Panther XL
+ 
+-  All these devices are autodetected. Because the Assasin 3D and the Panther
++  All these devices are autodetected. Because the Assassin 3D and the Panther
+ allow connecting analog joysticks to them, these are supported in this
+ driver, too. The driver uses the js_as parameter for the analog joysticks,
+ which has the same syntax as js_an for the analog driver.
+@@ -376,19 +404,32 @@
+ 3.6 ThrustMaster DirectConnect (BSP)
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   The TM DirectConnect (BSP) protocol is supported by the joy-thrustmaster.c
+-module. It currently supports:
++module. This includes, but is not limited to:
+ 
+ * ThrustMaster Millenium 3D Inceptor
+ * ThrustMaster 3D Rage Pad
+ 
+-  Both these drvices are autodetected, and thus no parameters to the module
++  Devices not directly supported, but hopefully working are:
++
++* ThrustMaster FragMaster
++* ThrustMaster Fusion Digital Game Pad
++* ThrustMaster Attack Throttle
++
++  If you have one of these, contact me.
++
++  BSP devices are autodetected, and thus no parameters to the module
+ are needed.
+ 
+-  The Millenium and Rage Pad should work fine now. TM WCS III won't work,
+-because important parts of code for that are missing. I'm not sure if it was
+-ever mass produced.
++3.7 Creative Labs Blaster
++~~~~~~~~~~~~~~~~~~~~~~~~~
++  The Blaster protocol is supported by the joy-creative.c module. It
++currently supports only the:
++
++* Creative Blaster GamePad Cobra
++
++  Up to two of these can be used on a single gameport, using an Y-cable.
+ 
+-3.7 PDPI Lightning 4 gamecards
++3.8 PDPI Lightning 4 gamecards
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   PDPI Lightning 4 gamecards are supported by the joy-lightning.c module.
+ This driver is only for analog joysticks connected to the card - if you want
+@@ -420,7 +461,7 @@
+   See the description of analog joystick driver for explanations of m0 and
+ n0 values.
+ 
+-3.8 Amiga
++3.9 Amiga
+ ~~~~~~~~~
+   Amiga joysticks, connected to an Amiga, are supported by the joy-amiga.c
+ driver. Since they can't be autodetected, the driver has a command line.
+@@ -438,10 +479,67 @@
+   No more joystick types are supported now, but that should change in the
+ future if I get an Amiga in the reach of my fingers.
+ 
+-3.9 Game console and 8-bit pads and joysticks
+-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++3.10 Game console and 8-bit pads and joysticks
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ See joystick-parport.txt for more info.
+ 
++3.11 SpaceTec devices
++~~~~~~~~~~~~~~~~~~~~~
++  SpaceTec serial devices communicate using the SpaceWare protocol. It is
++supported by the joy-spaceorb driver. The devices currently supported are:
++
++* SpaceTec SpaceBall Avenger
++* SpaceTec SpaceOrb 360
++
++  In addition to having the joy-spaceorb module in the kernel, you also need
++to attach a serial port to it. to do that, run the jsattach program:
++
++	jsattach --spaceorb /dev/ttySx &
++
++where /dev/ttySx is the serial port which the device is connected to. After
++doing this, the device will be reported and will start working.
++
++  There is one caveat with the SpaceOrb. The button #6, the on the bottom
++side of the orb, although reported as an ordinary button, causes internal
++recentering of the spaceorb, moving the zero point to the position in which
++the ball is at the moment of pressing the button. So, think first before
++you bind it to some other function.
++
++SpaceTec SpaceBall 2003 FLX and 3003 FLX are not supported yet. 
++
++3.12 Logitech SWIFT devices
++~~~~~~~~~~~~~~~~~~~~~~~~~~~
++  The SWIFT serial protocol is supported by the joy-warrior module. It
++currently supports only the:
++
++* Logitech WingMan Warrior
++
++but in the future, Logitech CyberMan (the original one, not CM2) could be
++supported as well. To use the module, you need to run jsattach after you
++insert/compile the module into your kernel:
++
++	jsattach --warrior /dev/ttySx &
++
++ttySx is the serial port your Warrior is attached to.
++
++3.13 Magellan / Space Mouse
++~~~~~~~~~~~~~~~~~~~~~~~~~~~
++  The Magellan (or Space Mouse), manufactured by LogiCad3d (formerly Space
++Systems), for many other companies (Logitech, HP, ...) is supported by the
++joy-magellan module. It currently supports only the:
++
++* Magellan 3D
++* Space Mouse
++
++models, the additional buttons on the 'Plus' versions are not supported yet.
++
++  To use it, you need to attach the serial port to the driver using the
++
++	jsattach --magellan /dev/ttySx &
++
++command. After that the Magellan will be detected, initialized, will beep,
++and the /dev/jsX device should become useable.
++
+ 4. Troubleshooting
+ ~~~~~~~~~~~~~~~~~~
+   There is quite a high probability that you run into some problems. For
+@@ -452,9 +550,10 @@
+ 	jstest --normal /dev/js0
+ 	jstest --old    /dev/js0
+ 
+-  If your trouble stems from the fact the drivers can't detect the attached
+-joystick, and/or you decide you need my help (which I will gladly provide),
+-please use the joydump utility first. It's created just by typing
++  If your trouble stems from the fact the drivers can't detect the joystick
++attached to your gameport, and you decide you need my help (which I will
++gladly provide), please use the joydump utility first. It's created just by
++typing
+ 
+ 	make joydump.o
+ 
+@@ -472,57 +571,61 @@
+ 
+ 5. FAQ
+ ~~~~~~
+- Q: The driver doesn't find any joysticks connected to my soundcard with the
+-message "joy-something: no joysticks found" and "joy-something.o:
+-init_module: Device or resource busy." or "Initialization of joy-something
+-failed"  What could be the cause?
+-  A: The most common cause is that the joystick port on your soundcard is
+-not enabled. If it is an ISA PnP card, you'll need isapnptools to configure
+-the gameport. Non-PnP cards usually use some option to the sound driver -
+-see the sound driver docs and source and enable the port.
+-
+-  Q: Any access to the joystick devices gives me "Operation not supported by
+-device". What am I doing wrong?
+-  A: You're running a 2.0 kernel and you forgot to insmod the hardware
+-specific module. You not only need the joystick.o, but also one of the other
+-joy-*.o files (most usually joy-analog.o), as described in this document,
+-section 2. If you are not using modules, then you didn't say 'Y' to any of
+-the hardware-specific questions. Again, see section 2. If you did select
+-the specific support, and you still get this message, check that you
+-selected the right one, and if it still doesn't work, go to the previous
+-FAQ.
+-
+-  Q: Everything is fine, except I get "No such device" error when I try to
+-do anything with /dev/js0. What's the cause?
+-  A: You're running a 2.1 kernel and you want to read the previous FAQ.
+-
+-  Q: Upon 'insmod joystick.o' I get a LOT of unresolved symbols, including
+-printk and others. Why?
+-  A: You either don't have your kernel compiled with module support. If
+-that's the cause, re-compile your kernel with module support switched on.
+-Or, you use versioned symbols, and don't have -DMODVERSIONS in the joystick
+-driver Makefile, or vice versa. Correct the situation by either removing or
+-adding -DMODVERSIONS to the Makefile.
+-
+-  Q: Running 'jstest 1' or 'jscal 1' doesn't work, and returns with "File
+-not found" error. What is the problem?
+-  A: The command line interface for these tools is different from what
+-version 0.8.0 used. You have to specify the whole device name, eg. 'jstest
+-/dev/js0'.
+-
+-  Q: Running 'jstest /dev/js0' results in "File not found" error. What's the
+-cause?
+-  A: The device files don't exist. Run 'make devs'.
+-
+-  Q: Is it possible to connect my old Atari/Commodore/Amiga/console joystick
+-or pad that uses a 9-pin D-type cannon connector to the serial port of my
+-PC?
+-  A: Yes, it is possible, but it'll burn your serial port or the pad. It
+-won't work, of course.
+-
+-  Q: My joystick doesnt work with Quake / Quake 2. What's the cause?
+-  A: Quake / Quake 2 don't support joystick. Use joy2key to simulate keypresses
+-for them.
++Q: The driver doesn't find any joysticks connected to my soundcard with the
++   message "joy-something: no joysticks found" and "joy-something.o:
++   init_module: Device or resource busy." or "Initialization of joy-something
++   failed"  What could be the cause?
++A: The most common cause is that the joystick port on your soundcard is
++   not enabled. If it is an ISA PnP card, you'll need isapnptools to configure
++   the gameport. Non-PnP cards usually use some option to the sound driver -
++   see the sound driver docs and source and enable the port.
++
++Q: Any access to the joystick devices gives me "Operation not supported by
++   device". What am I doing wrong?
++A: You're running a 2.0 kernel and you forgot to insmod the hardware
++   specific module. You not only need the joystick.o, but also one of the other
++   joy-*.o files (most usually joy-analog.o), as described in this document,
++   section 2. If you are not using modules, then you didn't say 'Y' to any of
++   the hardware-specific questions. Again, see section 2. If you did select
++   the specific support, and you still get this message, check that you
++   selected the right one, and if it still doesn't work, go to the previous
++   FAQ.
++
++Q: Everything is fine, except I get "No such device" error when I try to
++   do anything with /dev/js0. What's the cause?
++A: You're running a 2.1 or 2.2. kernel and you want to read the previous FAQ.
++
++Q: Upon 'insmod joystick.o' I get a LOT of unresolved symbols, including
++   'printk' and others. Why?
++A: You either don't have your kernel compiled with module support. If
++   that's the cause, re-compile your kernel with module support switched on.
++   Or, you use versioned symbols, and don't have -DMODVERSIONS in the joystick
++   driver Makefile, or vice versa. Correct the situation by either removing or
++   adding -DMODVERSIONS to the Makefile.
++
++Q: Upon 'insmod joy-something' I get a bunch of unresolved symbols, like
++   'js_register_port, js_unregister device' and others. What's wrong?
++A: You need to 'insmod joystick.o' first.
++
++Q: Running 'jstest 1' or 'jscal 1' doesn't work, and returns with "File
++   not found" error. What is the problem?
++A: The command line interface for these tools is different from what
++   version 0.8.0 used. You have to specify the whole device name, eg. 'jstest
++   /dev/js0'.
++
++Q: Running 'jstest /dev/js0' results in "File not found" error. What's the
++   cause?
++A: The device files don't exist. Run 'make devs'.
++
++Q: Is it possible to connect my old Atari/Commodore/Amiga/console joystick
++   or pad that uses a 9-pin D-type cannon connector to the serial port of my
++   PC?
++A: Yes, it is possible, but it'll burn your serial port or the pad. It
++   won't work, of course.
++
++Q: My joystick doesn't work with Quake / Quake 2. What's the cause?
++A: Quake / Quake 2 don't support joystick. Use joy2key to simulate keypresses
++   for them.
+ 
+ 6. Programming Interface
+ ~~~~~~~~~~~~~~~~~~~~~~~~
+@@ -565,23 +668,26 @@
+ 	Brian Gerst		<bgerst@quark.vpplus.com>
+ 	Andree Borrmann		<a.borrmann@tu-bs.de>
+ 	Martin Giguere		<zefrench@hotmail.com>
++	David Thompson		<dcthomp@mail.utexas.edu>
++	Justin Wake		<spectre@telefragged.com>
++	Benoit Triquet		<benoit@adsl-216-100-248-201.dsl.pacbell.net>
+ 
+   If you think you should be in this list and are not, it's possible that
+ I forgot to include you - contact me and I'll correct the error. :)
+ 
+   Thanks to KYE Systems Europe, who provided me with driver sources for the
+-Genius Flight2000 Digital F-23, which happens to be compatible with
+-Microsoft SideWinder 3d Pro.
++Genius Flight2000 Digital F-23, which happens to be identical (in software)
++to Microsoft SideWinder 3D Pro.
+ 
+   Thanks to ThrustMaster Inc. who provided me with docs for their digital
+-protocol, and to Trystan A Larey-williams <axe@mail.wsu.edu>, who wrote an
+-attempt of a driver for them.
++protocol specifications, and to Trystan A Larey-Williams <axe@mail.wsu.edu>,
++who wrote an attempt of a driver for them.
+ 
+   Thanks to Creative Labs Europe, and Ifor Powell <ipowell@cle.creaf.com>,
+-who provided me with docs for their first generation gamepad.
++who provided me with docs for their first generation Blaster GamePad.
+ 
+   Special thanks go to FP-Gaming, Inc. and James C Barnes <james@fpgaming.com>,
+-who provided me with help and detailed information about the Assasin 3D
++who provided me with help and detailed information about the Assassin 3D
+ protocol and devices, and even sent me a Panther and Panther XL for testing,
+ along with cool T-shirts.
+ 
+@@ -590,10 +696,20 @@
+ code for their L4 gamecard, and sending me the card to test my driver with
+ it.
+ 
++  Thanks to LogiCad3D for their support, for having the specifications
++online and for the nice music on their telephone.
++
++  Special thanks to Logitech, Jerry de Raad <Jerry_de_Raad@logitech.com>,
++Thomas Burgel <Thomas_Burgel@logitech.com>, Avinash Shinde
++<Avinash_Shinde@logitech.com> for providing me with a lot of documentation
++for their devices, and also for a big box, containing a CyberMan2, Wingman
++Extreme, Magellan, Wingman Warrior, two MouseMan mice, and a NewTouch
++keyboard.
++
+   Thanks to everyone else who helped me develop this package of drivers!
+ 
+-  No thanks to Microsoft, Logitech, and Gravis, who don't release a word
+-about their hardware .... :(
++  No thanks to Microsoft and Gravis, who don't release a word about their
++hardware .... :(
+ 
+ 8. ChangeLog
+ ~~~~~~~~~~~~
+@@ -602,50 +718,3 @@
+ 9. To do
+ ~~~~~~~~
+   See the TODO file for the list of things planned.
+-
+-10. Current driver status
+-~~~~~~~~~~~~~~~~~~~~~~~~~
+-  OK means tested and not touched till this driver revision, unknown means
+-that the driver was changed since last test, broken means doesn't work,
+-incomplete means can't work, because vital parts of support are missing.
+-
+-joystick.c:		2.1.x kernel interface	- OK
+-joy-amiga.c:		Multi1 stick		- unknown
+-joy-analog.c:		standard joysticks	- OK
+-			FCS hats		- OK
+-			CHF hats & buttons	- OK
+-			XY buttons		- OK
+-			UV buttons		- OK
+-joy-assasin.c:		MadCatz Panther XL	- OK
+-			MadCatz PXL rudder	- OK
+-			MadCatz Panther		- OK
+-			FPG Assasin 3D		- OK
+-joy-console.c:		NES pad			- OK
+-			SNES pad		- OK
+-			Multi1 stick		- OK
+-			Multi2 stick		- OK
+-			PSX			- SW OK, HW unreliable
+-joy-db9.c:		Multi1 stick		- OK
+-			Multi2 stick		- OK
+-			Sega Genesis pad	- OK
+-			Sega Genesis 5 pad	- OK
+-			Sega Genesis 6 pad	- OK
+-			Sega Saturn pad		- unknown
+-joy-gravis.c		Gravis GamePad Pro	- OK
+-			Gravis Xterminator	- OK
+-			Gravis Blackhawk Digital- OK
+-joy-lightning.c		PDPI Lightning 4	- OK
+-joy-logitech.c		WingMan Extreme Digital	- OK
+-			CyberMan 2		- OK
+-			Thunder Pad Digital	- unknown
+-joy-sidewinder.c	SW 3D Pro		- OK
+-			Genius F-23		- OK
+-			SW GP			- OK
+-			SW PP			- OK
+-			SW FFP			- OK
+-joy-thrustmaster.c	Millenium 3D Inceptor	- OK
+-			3D-Rage Pad		- OK
+-joy-turbografx.c	Multi1 stick		- OK
+-
+-Please help me and send me success / failure reports for the drivers,
+-I need to know what works, and what needs to be debugged. Thank you.
+diff -urN linux-2.2.2/drivers/char/joystick/Config.in linux-2.2.2-joystick/drivers/char/joystick/Config.in
+--- linux-2.2.2/drivers/char/joystick/Config.in	Wed Dec 16 22:38:18 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/Config.in	Mon Mar  8 14:49:31 1999
+@@ -2,17 +2,21 @@
+ # Joystick lowlevel driver configuration
+ #
+ 
+-dep_tristate '   Classic PC analog joysticks and gamepads' CONFIG_JOY_ANALOG $CONFIG_JOYSTICK
+-dep_tristate '   FPGaming and MadCatz A3D controllers' CONFIG_JOY_ASSASIN $CONFIG_JOYSTICK
+-dep_tristate '   Gravis GrIP joysticks and gamepads' CONFIG_JOY_GRAVIS $CONFIG_JOYSTICK
+-dep_tristate '   Logitech Digital joysticks and gamepads' CONFIG_JOY_LOGITECH $CONFIG_JOYSTICK
+-dep_tristate '   Microsoft SideWinder, Genius Digital joysticks and gamepads' CONFIG_JOY_SIDEWINDER $CONFIG_JOYSTICK
+-dep_tristate '   ThrustMaster DirectConnect joysticks and gamepads' CONFIG_JOY_THRUSTMASTER $CONFIG_JOYSTICK
++dep_tristate '   Classic PC analog' CONFIG_JOY_ANALOG $CONFIG_JOYSTICK
++dep_tristate '   FPGaming and MadCatz A3D' CONFIG_JOY_ASSASSIN $CONFIG_JOYSTICK
++dep_tristate '   Gravis GrIP' CONFIG_JOY_GRAVIS $CONFIG_JOYSTICK
++dep_tristate '   Logitech ADI' CONFIG_JOY_LOGITECH $CONFIG_JOYSTICK
++dep_tristate '   Microsoft and Genius Digital Overdrive' CONFIG_JOY_SIDEWINDER $CONFIG_JOYSTICK
++dep_tristate '   ThrustMaster DirectConnect (BSP)' CONFIG_JOY_THRUSTMASTER $CONFIG_JOYSTICK
++dep_tristate '   Creative Labs Blaster' CONFIG_JOY_CREATIVE $CONFIG_JOYSTICK
+ dep_tristate '   PDPI Lightning 4 gamecards' CONFIG_JOY_LIGHTNING $CONFIG_JOYSTICK
++dep_tristate '   Magellan and Space Mouse' CONFIG_JOY_MAGELLAN $CONFIG_JOYSTICK
++dep_tristate '   SpaceTec SpaceOrb 360 and SpaceBall Avenger' CONFIG_JOY_SPACEORB $CONFIG_JOYSTICK
++dep_tristate '   Logitech WingMan Warrior' CONFIG_JOY_WARRIOR $CONFIG_JOYSTICK
+ if [ "$CONFIG_PARPORT" != "n" ]; then
+-  dep_tristate '   NES, SNES, PSX, Multisystem joysticks and gamepads' CONFIG_JOY_CONSOLE $CONFIG_JOYSTICK $CONFIG_PARPORT
+-  dep_tristate '   Sega, Multisystem joysticks and gamepads' CONFIG_JOY_DB9 $CONFIG_JOYSTICK $CONFIG_PARPORT
+-  dep_tristate '   TurboGraFX Multisystem joystick interface' CONFIG_JOY_TURBOGRAFX $CONFIG_JOYSTICK $CONFIG_PARPORT
++  dep_tristate '   NES, SNES, PSX, Multi' CONFIG_JOY_CONSOLE $CONFIG_JOYSTICK $CONFIG_PARPORT
++  dep_tristate '   Sega, Multi' CONFIG_JOY_DB9 $CONFIG_JOYSTICK $CONFIG_PARPORT
++  dep_tristate '   TurboGraFX interface' CONFIG_JOY_TURBOGRAFX $CONFIG_JOYSTICK $CONFIG_PARPORT
+ fi  
+ if [ "$CONFIG_AMIGA" = "y" ]; then
+   dep_tristate '   Amiga joysticks' CONFIG_JOY_AMIGA $CONFIG_JOYSTICK
+diff -urN linux-2.2.2/drivers/char/joystick/Makefile linux-2.2.2-joystick/drivers/char/joystick/Makefile
+--- linux-2.2.2/drivers/char/joystick/Makefile	Fri Oct  9 02:25:16 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/Makefile	Mon Mar  8 14:49:31 1999
+@@ -37,11 +37,11 @@
+   endif
+ endif
+ 
+-ifeq ($(CONFIG_JOY_ASSASIN),y)
+-O_OBJS += joy-assasin.o
++ifeq ($(CONFIG_JOY_ASSASSIN),y)
++O_OBJS += joy-assassin.o
+ else
+-  ifeq ($(CONFIG_JOY_ASSASIN),m)
+-  M_OBJS += joy-assasin.o
++  ifeq ($(CONFIG_JOY_ASSASSIN),m)
++  M_OBJS += joy-assassin.o
+   endif
+ endif
+ 
+@@ -53,6 +53,14 @@
+   endif
+ endif
+ 
++ifeq ($(CONFIG_JOY_CREATIVE),y)
++O_OBJS += joy-creative.o
++else
++  ifeq ($(CONFIG_JOY_CREATIVE),m)
++  M_OBJS += joy-creative.o
++  endif
++endif
++
+ ifeq ($(CONFIG_JOY_DB9),y)
+ O_OBJS += joy-db9.o
+ else
+@@ -85,6 +93,14 @@
+   endif
+ endif
+ 
++ifeq ($(CONFIG_JOY_MAGELLAN),y)
++O_OBJS += joy-magellan.o
++else
++  ifeq ($(CONFIG_JOY_MAGELLAN),m)
++  M_OBJS += joy-magellan.o
++  endif
++endif
++
+ ifeq ($(CONFIG_JOY_SIDEWINDER),y)
+ O_OBJS += joy-sidewinder.o
+ else
+@@ -93,6 +109,14 @@
+   endif
+ endif
+ 
++ifeq ($(CONFIG_JOY_SPACEORB),y)
++O_OBJS += joy-spaceorb.o
++else
++  ifeq ($(CONFIG_JOY_SPACEORB),m)
++  M_OBJS += joy-spaceorb.o
++  endif
++endif
++
+ ifeq ($(CONFIG_JOY_THRUSTMASTER),y)
+ O_OBJS += joy-thrustmaster.o
+ else 
+@@ -106,6 +130,14 @@
+ else 
+   ifeq ($(CONFIG_JOY_TURBOGRAFX),m)
+   M_OBJS += joy-turbografx.o
++  endif
++endif
++
++ifeq ($(CONFIG_JOY_WARRIOR),y)
++O_OBJS += joy-warrior.o
++else
++  ifeq ($(CONFIG_JOY_WARRIOR),m)
++  M_OBJS += joy-warrior.o
+   endif
+ endif
+ 
+diff -urN linux-2.2.2/drivers/char/joystick/joy-amiga.c linux-2.2.2-joystick/drivers/char/joystick/joy-amiga.c
+--- linux-2.2.2/drivers/char/joystick/joy-amiga.c	Wed Dec  2 04:05:05 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-amiga.c	Mon Mar  8 15:39:44 1999
+@@ -1,7 +1,7 @@
+ /*
+  *  joy-amiga.c  Version 1.2
+  *
+- *  Copyright (c) 1998 Vojtech Pavlik
++ *  Copyright (c) 1998-1999 Vojtech Pavlik
+  */
+ 
+ /*
+@@ -42,7 +42,7 @@
+ MODULE_AUTHOR("Vojtech Pavlik <vojtech@ucw.cz>");
+ MODULE_PARM(js_am, "1-2i");
+ 
+-static int js_am[]={0,0};
++static int __initdata js_am[] = { 0, 0 };
+ 
+ /*
+  * js_am_read() reads and Amiga joystick data.
+@@ -69,7 +69,7 @@
+ 
+ 	axes[0][0] = ((data >> 1) & 1) - ((data >> 9) & 1);
+ 	data = ~(data ^ (data << 1));
+-	axes[0][0] = ((data >> 1) & 1) - ((data >> 9) & 1);
++	axes[0][1] = ((data >> 1) & 1) - ((data >> 9) & 1);
+ 
+ 	return 0;
+ }
+@@ -148,8 +148,8 @@
+ #ifdef MODULE
+ void cleanup_module(void)
+ {
+-	while (js_am_port != NULL) {
+-		if (js_am_port->devs[0] != NULL)
++	while (js_am_port) {
++		if (js_am_port->devs[0])
+ 			js_unregister_device(js_am_port->devs[0]);
+ 		js_am_port = js_unregister_port(js_am_port);
+ 	}
+diff -urN linux-2.2.2/drivers/char/joystick/joy-analog.c linux-2.2.2-joystick/drivers/char/joystick/joy-analog.c
+--- linux-2.2.2/drivers/char/joystick/joy-analog.c	Wed Dec  2 04:05:05 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-analog.c	Mon Mar  8 15:39:55 1999
+@@ -1,7 +1,7 @@
+ /*
+  *  joy-analog.c  Version 1.2
+  *
+- *  Copyright (c) 1996-1998 Vojtech Pavlik
++ *  Copyright (c) 1996-1999 Vojtech Pavlik
+  */
+ 
+ /*
+@@ -30,15 +30,20 @@
+  */
+ 
+ #include <asm/io.h>
++#include <asm/param.h>
++#include <asm/system.h>
++#include <linux/config.h>
+ #include <linux/delay.h>
+ #include <linux/errno.h>
+ #include <linux/ioport.h>
+ #include <linux/joystick.h>
+ #include <linux/kernel.h>
+ #include <linux/module.h>
++#include <linux/sched.h>
+ #include <linux/string.h>
+ 
+-#define JS_AN_MAX_TIME 3000
++#define JS_AN_MAX_TIME		3000	/* 3 ms */
++#define JS_AN_LOOP_TIME		2000	/* 2 t */
+ 
+ static int js_an_port_list[] __initdata = {0x201, 0};
+ static struct js_port* js_an_port __initdata = NULL;
+@@ -46,53 +51,102 @@
+ MODULE_AUTHOR("Vojtech Pavlik <vojtech@ucw.cz>");
+ MODULE_PARM(js_an, "2-24i");
+ 
+-static int js_an[]={-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0};
++static int __initdata js_an[] = { -1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0 };
+ 
+ #include "joy-analog.h"
+ 
++struct js_ax_info {
++        int io;
++	int speed;
++	int loop;
++	int timeout;
++        struct js_an_info an;
++};
++
++/*
++ * Time macros.
++ */
++
++#ifdef __i386__
++#ifdef CONFIG_X86_TSC
++#define GET_TIME(x)	__asm__ __volatile__ ( "rdtsc" : "=a" (x) : : "dx" )
++#define DELTA(x,y)	((x)-(y))
++#define TIME_NAME "TSC"
++#else
++#define GET_TIME(x)	do { outb(0, 0x43); x = inb(0x40); x |= inb(0x40) << 8; } while (0)
++#define DELTA(x,y)	((y)-(x)+((y)<(x)?1193180L/HZ:0))
++#define TIME_NAME "PIT"
++#endif
++#elif __alpha__
++#define GET_TIME(x)	__asm__ __volatile__ ( "rpcc %0" : "=r" (x) )
++#define DELTA(x,y)	((x)-(y))
++#define TIME_NAME "PCC"
++#endif
++
++#ifndef GET_TIME
++#define FAKE_TIME
++static unsigned long js_an_faketime = 0;
++#define GET_TIME(x)     do { x = js_an_faketime++; } while(0)
++#define DELTA(x,y)	((x)-(y))
++#define TIME_NAME "Unreliable"
++#endif
++
+ /*
+  * js_an_read() reads analog joystick data.
+  */
+ 
+ static int js_an_read(void *xinfo, int **axes, int **buttons)
+ {
+-	struct js_an_info *info = xinfo;
++	struct js_ax_info *info = xinfo;
++	struct js_an_info *an = &info->an;
++	int io = info->io;
++	unsigned long flags;
+ 	unsigned char buf[4];
+-	int time[4];
+-	unsigned char u, v, a;
+-	unsigned int t, t1;
++	unsigned int time[4];
++	unsigned char u, v, w;
++	unsigned int p, q, r, s, t;
+ 	int i, j;
+-	int timeout;
+-	int io = info->io;
+ 
+-	timeout = (JS_AN_MAX_TIME * js_time_speed_a) >> 10;
+-
+-	info->buttons = (~inb(io) & JS_AN_BUTTONS_STD) >> 4;
++	an->buttons = (~inb(io) & JS_AN_BUTTONS_STD) >> 4;
+ 
+ 	i = 0;
+-	u = a = ((info->mask[0] | info->mask[1]) & JS_AN_AXES_STD) | (info->extensions & JS_AN_HAT_FCS)
+-	      | ((info->extensions & JS_AN_BUTTONS_PXY_XY) >> 2) | ((info->extensions & JS_AN_BUTTONS_PXY_UV) >> 4);
+-
++	w = ((an->mask[0] | an->mask[1]) & JS_AN_AXES_STD) | (an->extensions & JS_AN_HAT_FCS)
++	  | ((an->extensions & JS_AN_BUTTONS_PXY_XY) >> 2) | ((an->extensions & JS_AN_BUTTONS_PXY_UV) >> 4);
++	p = info->loop;
++	q = info->timeout;
++	
++	__save_flags(flags);
++	__cli();
+ 	outb(0xff,io);
+-	t = js_get_time_a();
++	GET_TIME(r);
++	__restore_flags(flags);
++	t = r;
++	v = w;
+ 	do {
+-		v = inb(io) & a;
+-		t1 = js_get_time_a();
+-		if (u ^ v) {
+-			time[i] = js_delta_a(t1,t);
++		s = t;
++		u = v;
++		__cli();
++		v = inb(io) & w;
++		GET_TIME(t);
++		__restore_flags(flags);
++		if ((u ^ v) && (DELTA(t,s) < p)) {
++			time[i] = t;
+ 			buf[i] = u ^ v;
+-			u = v;
+ 			i++;
+ 		}
+-	} while (v && js_delta_a(t1,t) < timeout);
++	} while (v && (i < 4) && (DELTA(t,r) < q));
+ 
+-	for (--i; i >= 0; i--)
++	v <<= 4;
++
++	for (--i; i >= 0; i--) {
++		v |= buf[i];
+ 		for (j = 0; j < 4; j++)
+-			if (buf[i] & (1 << j)) info->axes[j] = (time[i] << 10) / js_time_speed_a;
++			if (buf[i] & (1 << j)) an->axes[j] = (DELTA(time[i],r) << 10) / info->speed;
++	}
+ 
+-	js_an_decode(info, axes, buttons);
++	js_an_decode(an, axes, buttons);
+ 
+-	return 0;
++	return -(v != w);
+ }
+ 
+ /*
+@@ -116,12 +170,53 @@
+ }
+ 
+ /*
++ * js_an_calibrate_timer() calibrates the timer and computes loop
++ * and timeout values for a joystick port.
++ */
++
++static void __init js_an_calibrate_timer(struct js_ax_info *info)
++{
++	unsigned int i, t, tx, t1, t2, t3;
++	unsigned long flags;
++	int io = info->io;
++
++	save_flags(flags);
++	cli();
++	GET_TIME(t1);
++#ifdef FAKE_TIME
++	js_an_faketime += 830;
++#endif
++	udelay(1000);
++	GET_TIME(t2);
++	GET_TIME(t3);
++	restore_flags(flags);
++
++	info->speed = DELTA(t2, t1) - DELTA(t3, t2);
++
++	tx = 1 << 30;
++
++	for(i = 0; i < 50; i++) {
++		save_flags(flags);
++		cli();
++		GET_TIME(t1);
++		for(t = 0; t < 50; t++) { inb(io); GET_TIME(t2); }
++		GET_TIME(t3);
++		restore_flags(flags);
++		udelay(i);
++		if ((t = DELTA(t2,t1) - DELTA(t3,t2)) < tx) tx = t;
++	}
++
++        info->loop = (JS_AN_LOOP_TIME * t) / 50000;
++	info->timeout = (JS_AN_MAX_TIME * info->speed) / 1000;
++}
++
++/*
+  * js_an_probe() probes for analog joysticks.
+  */
+ 
+ static struct js_port __init *js_an_probe(int io, int mask0, int mask1, struct js_port *port)
+ {
+-	struct js_an_info info;
++	struct js_ax_info info, *ax;
+ 	int i, numdev;
+ 	unsigned char u;
+ 
+@@ -129,7 +224,6 @@
+ 
+ 	if (check_region(io, 1)) return port;
+ 
+-	if (((u = inb(io)) & 3) == 3) return port;
+ 	outb(0xff,io);
+ 	u = inb(io);
+ 	udelay(JS_AN_MAX_TIME);
+@@ -138,21 +232,28 @@
+ 	if (!u) return port;
+ 	if (u & 0xf0) return port;
+ 
+-	if ((numdev = js_an_probe_devs(&info, u, mask0, mask1, port)) <= 0)
++	if ((numdev = js_an_probe_devs(&info.an, u, mask0, mask1, port)) <= 0)
+ 		return port;
+ 
+ 	info.io = io;
++	js_an_calibrate_timer(&info);
++
+ 	request_region(info.io, 1, "joystick (analog)");
+-	port = js_register_port(port, &info, numdev, sizeof(struct js_an_info), js_an_read);
++	port = js_register_port(port, &info, numdev, sizeof(struct js_ax_info), js_an_read);
++	ax = port->info;	
+ 
+ 	for (i = 0; i < numdev; i++)
+-		printk(KERN_INFO "js%d: %s at %#x\n",
+-			js_register_device(port, i, js_an_axes(i, &info), js_an_buttons(i, &info),
+-				js_an_name(i, &info), js_an_open, js_an_close),
+-			js_an_name(i, &info), info.io);
++		printk(KERN_INFO "js%d: %s ["TIME_NAME" timer, %d %sHz clock, %d0 ns res] at %#x\n",
++			js_register_device(port, i, js_an_axes(i, &ax->an), js_an_buttons(i, &ax->an),
++				js_an_name(i, &ax->an), js_an_open, js_an_close),
++			js_an_name(i, &ax->an),
++			ax->speed > 10000 ? (ax->speed + 800) / 1000 : ax->speed,
++			ax->speed > 10000 ? "M" : "k",
++			ax->loop * 100000000 / JS_AN_LOOP_TIME / ax->speed,
++			ax->io);
+ 
+-	js_an_read(port->info, port->axes, port->buttons);
+-	js_an_init_corr(port->info, port->axes, port->corr, 8);
++	js_an_read(ax, port->axes, port->buttons);
++	js_an_init_corr(&ax->an, port->axes, port->corr, 8);
+ 
+ 	return port;
+ }
+@@ -193,11 +294,11 @@
+ void cleanup_module(void)
+ {
+ 	int i;
+-	struct js_an_info *info;
++	struct js_ax_info *info;
+ 
+-	while (js_an_port != NULL) {
++	while (js_an_port) {
+ 		for (i = 0; i < js_an_port->ndevs; i++)
+-			if (js_an_port->devs[i] != NULL)
++			if (js_an_port->devs[i])
+ 				js_unregister_device(js_an_port->devs[i]);
+ 		info = js_an_port->info;
+ 		release_region(info->io, 1);
+diff -urN linux-2.2.2/drivers/char/joystick/joy-analog.h linux-2.2.2-joystick/drivers/char/joystick/joy-analog.h
+--- linux-2.2.2/drivers/char/joystick/joy-analog.h	Fri Oct  9 02:25:16 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-analog.h	Sun Feb 28 00:48:22 1999
+@@ -1,13 +1,13 @@
+ /*
+  *  joy-analog.h  Version 1.2
+  *
+- *  Copyright (c) 1996-1998 Vojtech Pavlik
++ *  Copyright (c) 1996-1999 Vojtech Pavlik
+  */
+ 
+ /*
+  * This file is designed to be included in any joystick driver
+  * that communicates with standard analog joysticks. This currently
+- * is: joy-analog.c, joy-assasin.c, and joy-lightning.c
++ * is: joy-analog.c, joy-assassin.c, and joy-lightning.c
+  */
+ 
+ /*
+@@ -53,7 +53,6 @@
+ } js_an_hat_to_axis[] = {{ 0, 0}, { 0,-1}, { 1, 0}, { 0, 1}, {-1, 0}};
+ 
+ struct js_an_info {
+-	int io;
+ 	unsigned char mask[2];
+ 	unsigned int extensions;
+ 	int axes[4];
+@@ -291,7 +290,7 @@
+ 			js_an_name_buf,
+ 			info->extensions & JS_AN_ANY_CHF ? " CHF" : "",
+ 			info->extensions & JS_AN_HAT_FCS ? " FCS" : "",
+-			info->extensions & JS_AN_BUTTONS_PXY ? " XY-button" : "");
++			info->extensions & JS_AN_BUTTONS_PXY ? " XY/UV" : "");
+ 
+ 	return js_an_name_buf;
+ }
+diff -urN linux-2.2.2/drivers/char/joystick/joy-assasin.c linux-2.2.2-joystick/drivers/char/joystick/joy-assasin.c
+--- linux-2.2.2/drivers/char/joystick/joy-assasin.c	Wed Dec  2 04:05:05 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-assasin.c	Thu Jan  1 01:00:00 1970
+@@ -1,423 +0,0 @@
+-/*
+- *  joy-assasin.c  Version 1.2
+- *
+- *  Copyright (c) 1998 Vojtech Pavlik
+- */
+-
+-/*
+- * This is a module for the Linux joystick driver, supporting
+- * joysticks using FP-Gaming's Assasin 3D protocol.
+- */
+-
+-/*
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 2 of the License, or 
+- * (at your option) any later version.
+- * 
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
+- * 
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+- * 
+- * Should you need to contact me, the author, you can do so either by
+- * e-mail - mail your message to <vojtech@ucw.cz>, or by paper mail:
+- * Vojtech Pavlik, Ucitelska 1576, Prague 8, 182 00 Czech Republic
+- */
+-
+-#include <asm/io.h>
+-#include <asm/system.h>
+-#include <linux/delay.h>
+-#include <linux/errno.h>
+-#include <linux/ioport.h>
+-#include <linux/joystick.h>
+-#include <linux/kernel.h>
+-#include <linux/module.h>
+-#include <linux/string.h>
+-
+-#define JS_AS_MAX_START		250
+-#define JS_AS_MAX_STROBE	50
+-#define JS_AS_MAX_TIME		2400
+-#define JS_AS_MAX_LENGTH	40
+-
+-#define JS_AS_MODE_A3D		1	/* Assasin 3D */
+-#define JS_AS_MODE_PAN		2	/* Panther */
+-#define JS_AS_MODE_OEM		3	/* Panther OEM version */
+-#define JS_AS_MODE_PXL		4	/* Panther XL */
+-
+-MODULE_AUTHOR("Vojtech Pavlik <vojtech@ucw.cz>");
+-MODULE_PARM(js_as, "2-24i");
+-
+-static int js_as[]={-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0};
+-
+-static int js_as_port_list[] __initdata = {0x201, 0};
+-static struct js_port* js_as_port __initdata = NULL;
+-
+-#include "joy-analog.h"
+-
+-struct js_as_info {
+-	int io;
+-	char mode;
+-	char rudder;
+-	struct js_an_info an;
+-};
+-
+-/*
+- * js_as_read_packet() reads an Assasin 3D packet.
+- */
+-
+-static int js_as_read_packet(int io, int length, char *data)
+-{
+-	unsigned char u, v;
+-	int i;
+-	unsigned int t, t1;
+-	unsigned long flags;
+-
+-	int start = (js_time_speed * JS_AS_MAX_START) >> 10;
+-	int strobe = (js_time_speed * JS_AS_MAX_STROBE) >> 10;
+-
+-	i = 0;
+-
+-	__save_flags(flags);
+-	__cli();
+-	outb(0xff,io);
+-
+-	u = inb(io);
+-	t = js_get_time();
+-
+-	do {
+-		v = inb(io);
+-		t1 = js_get_time();
+-	} while (u == v && js_delta(t1, t) < start);
+-
+-	t = t1;
+-
+-	do {
+-		v = inb(io);
+-		t1 = js_get_time();
+-		if ((u ^ v) & u & 0x10) {
+-			data[i++] = v >> 5;
+-			t = t1;
+-		}
+-		u = v;
+-	} while (i < length && js_delta(t1,t) < strobe);
+-
+-	__restore_flags(flags);
+-
+-	return i;
+-}
+-
+-/*
+- * js_as_csum() computes checksum of triplet packet
+- */
+-
+-static int js_as_csum(char *data, int count)
+-{
+-	int i, csum = 0;
+-	for (i = 0; i < count - 2; i++) csum += data[i];
+-	return (csum & 0x3f) != ((data[count - 2] << 3) | data[count - 1]);
+-}
+-
+-/*
+- * js_as_read() reads and analyzes A3D joystick data.
+- */
+-
+-static int js_as_read(void *xinfo, int **axes, int **buttons)
+-{
+-	struct js_as_info *info = xinfo;
+-	char data[JS_AS_MAX_LENGTH];
+-
+-	switch (info->mode) {
+-
+-		case JS_AS_MODE_A3D:
+-		case JS_AS_MODE_OEM:
+-		case JS_AS_MODE_PAN:
+-
+-			if (js_as_read_packet(info->io, 29, data) != 29) return -1;
+-			if (data[0] != info->mode) return -1;
+-			if (js_as_csum(data, 29)) return -1;
+-
+-			axes[0][0] = ((data[5] << 6) | (data[6] << 3) | data[ 7]) - ((data[5] & 4) << 7);
+-			axes[0][1] = ((data[8] << 6) | (data[9] << 3) | data[10]) - ((data[8] & 4) << 7);
+-
+-			buttons[0][0] = (data[2] << 2) | (data[3] >> 1);
+-
+-			info->an.axes[0] = ((char)((data[11] << 6) | (data[12] << 3) | (data[13]))) + 128;
+-			info->an.axes[1] = ((char)((data[14] << 6) | (data[15] << 3) | (data[16]))) + 128;
+-			info->an.axes[2] = ((char)((data[17] << 6) | (data[18] << 3) | (data[19]))) + 128;
+-			info->an.axes[3] = ((char)((data[20] << 6) | (data[21] << 3) | (data[22]))) + 128;
+-
+-			info->an.buttons = ((data[3] << 3) | data[4]) & 0xf;
+-
+-			js_an_decode(&info->an, axes + 1, buttons + 1);
+-
+-			return 0;
+-
+-		case JS_AS_MODE_PXL:
+-
+-			if (js_as_read_packet(info->io, 33, data) != 33) return -1;
+-			if (data[0] != info->mode) return -1;
+-			if (js_as_csum(data, 33)) return -1;
+-
+-			axes[0][0] = ((char)((data[15] << 6) | (data[16] << 3) | (data[17]))) + 128;
+-			axes[0][1] = ((char)((data[18] << 6) | (data[19] << 3) | (data[20]))) + 128;
+-			info->an.axes[0] = ((char)((data[21] << 6) | (data[22] << 3) | (data[23]))) + 128;
+-			axes[0][2] = ((char)((data[24] << 6) | (data[25] << 3) | (data[26]))) + 128;
+-
+-			axes[0][3] = ( data[5]       & 1) - ((data[5] >> 2) & 1);
+-			axes[0][4] = ((data[5] >> 1) & 1) - ((data[6] >> 2) & 1);
+-			axes[0][5] = ((data[4] >> 1) & 1) - ( data[3]       & 1);
+-			axes[0][6] = ((data[4] >> 2) & 1) - ( data[4]       & 1);
+-
+-			axes[0][7] = ((data[ 9] << 6) | (data[10] << 3) | data[11]) - ((data[ 9] & 4) << 7);
+-			axes[0][8] = ((data[12] << 6) | (data[13] << 3) | data[14]) - ((data[12] & 4) << 7);
+-
+-			buttons[0][0] = (data[2] << 8) | ((data[3] & 6) << 5) | (data[7] << 3) | data[8];
+-
+-			if (info->rudder) axes[1][0] = info->an.axes[0];
+-
+-			return 0;
+-
+-		default:
+-			printk("Error.\n");
+-			return -1;
+-	}
+-}
+-
+-/*
+- * js_as_open() is a callback from the file open routine.
+- */
+-
+-static int js_as_open(struct js_dev *jd)
+-{
+-	MOD_INC_USE_COUNT;
+-	return 0;
+-}
+-
+-/*
+- * js_as_close() is a callback from the file release routine.
+- */
+-
+-static int js_as_close(struct js_dev *jd)
+-{
+-	MOD_DEC_USE_COUNT;
+-	return 0;
+-}
+-
+-/*
+- * js_as_pxl_init_corr() initializes the correction values for
+- * the Panther XL.
+- */
+-
+-static void __init js_as_pxl_init_corr(struct js_corr **corr, int **axes)
+-{
+-	int i;
+-
+-	for (i = 0; i < 2; i++) {
+-		corr[0][i].type = JS_CORR_BROKEN;
+-		corr[0][i].prec = 0;
+-		corr[0][i].coef[0] = axes[0][i] - 4;
+-		corr[0][i].coef[1] = axes[0][i] + 4;
+-		corr[0][i].coef[2] = (1 << 29) / (127 - 32);
+-		corr[0][i].coef[3] = (1 << 29) / (127 - 32);
+-	}
+-
+-	corr[0][2].type = JS_CORR_BROKEN;
+-	corr[0][2].prec = 0;
+-	corr[0][2].coef[0] = 127 - 4;
+-	corr[0][2].coef[1] = 128 + 4;
+-	corr[0][2].coef[2] = (1 << 29) / (127 - 6);
+-	corr[0][2].coef[3] = (1 << 29) / (127 - 6);
+-
+-	for (i = 3; i < 7; i++) {
+-		corr[0][i].type = JS_CORR_BROKEN;
+-		corr[0][i].prec = 0;
+-		corr[0][i].coef[0] = 0;
+-		corr[0][i].coef[1] = 0;
+-		corr[0][i].coef[2] = (1 << 29);
+-		corr[0][i].coef[3] = (1 << 29);
+-	}
+-
+-	for (i = 7; i < 9; i++) {
+-		corr[0][i].type = JS_CORR_BROKEN;
+-		corr[0][i].prec = -1;
+-		corr[0][i].coef[0] = 0;
+-		corr[0][i].coef[1] = 0;
+-		corr[0][i].coef[2] = (104 << 14);
+-		corr[0][i].coef[3] = (104 << 14);
+-	}
+-}
+-
+-/*
+- * js_as_as_init_corr() initializes the correction values for
+- * the Panther and Assasin.
+- */
+-
+-static void __init js_as_as_init_corr(struct js_corr **corr)
+-{
+-	int i;
+-
+-	for (i = 0; i < 2; i++) {
+-		corr[0][i].type = JS_CORR_BROKEN;
+-		corr[0][i].prec = -1;
+-		corr[0][i].coef[0] = 0;
+-		corr[0][i].coef[1] = 0;
+-		corr[0][i].coef[2] = (104 << 14);
+-		corr[0][i].coef[3] = (104 << 14);
+-	}
+-}
+-
+-/*
+- * js_as_rudder_init_corr() initializes the correction values for
+- * the Panther XL connected rudder.
+- */
+-
+-static void __init js_as_rudder_init_corr(struct js_corr **corr, int **axes)
+-{
+-	corr[1][0].type = JS_CORR_BROKEN;
+-	corr[1][0].prec = 0;
+-	corr[1][0].coef[0] = axes[1][0] - (axes[1][0] >> 3);
+-	corr[1][0].coef[1] = axes[1][0] + (axes[1][0] >> 3);
+-	corr[1][0].coef[2] = (1 << 29) / (axes[1][0] - (axes[1][0] >> 2) + 1);
+-	corr[1][0].coef[3] = (1 << 29) / (axes[1][0] - (axes[1][0] >> 2) + 1);
+-}
+-
+-/*
+- * js_as_probe() probes for A3D joysticks.
+- */
+-
+-static struct js_port __init *js_as_probe(int io, int mask0, int mask1, struct js_port *port)
+-{
+-	struct js_as_info iniinfo;
+-	struct js_as_info *info = &iniinfo;
+-	char *name;
+-	char data[JS_AS_MAX_LENGTH];
+-	unsigned char u;
+-	int i;
+-	int numdev;
+-
+-	memset(info, 0, sizeof(struct js_as_info));
+-
+-	if (io < 0) return port;
+-
+-	if (check_region(io, 1)) return port;
+-	if (((u = inb(io)) & 3) == 3) return port;
+-	outb(0xff,io);
+-	if (!((inb(io) ^ u) & ~u & 0xf)) return port;
+-
+-	if (js_as_read_packet(io, 1, data) != 1) return port;
+-
+-	if (data[0] && data[0] <= 4) {
+-		info->mode = data[0];
+-		info->io = io;
+-		request_region(io, 1, "joystick (assasin)");
+-		port = js_register_port(port, info, 3, sizeof(struct js_as_info), js_as_read);
+-		info = port->info;
+-	} else {
+-		printk(KERN_WARNING "joy-assasin: unknown joystick device detected "
+-			"(io=%#x, id=%d), contact <vojtech@ucw.cz>\n", io, data[0]);
+-		return port;
+-	}
+-
+-	udelay(JS_AS_MAX_TIME);
+-
+-	if (info->mode == JS_AS_MODE_PXL) {
+-			printk(KERN_INFO "js%d: MadCatz Panther XL at %#x\n",
+-				js_register_device(port, 0, 9, 9, "MadCatz Panther XL", js_as_open, js_as_close),
+-				info->io);
+-			js_as_read(port->info, port->axes, port->buttons);
+-			js_as_pxl_init_corr(port->corr, port->axes);
+-			if (info->an.axes[0] < 254) {
+-			printk(KERN_INFO "js%d: Analog rudder on MadCatz Panther XL\n",
+-				js_register_device(port, 1, 1, 0, "Analog rudder", js_as_open, js_as_close));
+-				info->rudder = 1;
+-				port->axes[1][0] = info->an.axes[0];
+-				js_as_rudder_init_corr(port->corr, port->axes);
+-			}
+-			return port;
+-	}
+-
+-	switch (info->mode) {
+-		case JS_AS_MODE_A3D: name = "FP-Gaming Assasin 3D"; break;
+-		case JS_AS_MODE_PAN: name = "MadCatz Panther"; break;
+-		case JS_AS_MODE_OEM: name = "OEM Assasin 3D"; break;
+-		default: name = "This cannot happen"; break;
+-	}
+-
+-	printk(KERN_INFO "js%d: %s at %#x\n",
+-		js_register_device(port, 0, 2, 3, name, js_as_open, js_as_close),
+-		name, info->io);
+-
+-	js_as_as_init_corr(port->corr);
+-
+-	js_as_read(port->info, port->axes, port->buttons);
+-
+-	for (i = u = 0; i < 4; i++) if (info->an.axes[i] < 254) u |= 1 << i;
+-
+-	if ((numdev = js_an_probe_devs(&info->an, u, mask0, mask1, port)) <= 0)
+-		return port;
+-
+-	for (i = 0; i < numdev; i++)
+-		printk(KERN_INFO "js%d: %s on %s\n",
+-			js_register_device(port, i + 1, js_an_axes(i, &info->an), js_an_buttons(i, &info->an),
+-				js_an_name(i, &info->an), js_as_open, js_as_close),
+-			js_an_name(i, &info->an), name);
+-
+-	js_an_decode(&info->an, port->axes + 1, port->buttons + 1);
+-	js_an_init_corr(&info->an, port->axes + 1, port->corr + 1, 0);
+-
+-	return port;
+-}
+-
+-#ifndef MODULE
+-void __init js_as_setup(char *str, int *ints)
+-{
+-	int i;
+-	for (i = 0; i <= ints[0] && i < 24; i++) js_as[i] = ints[i+1];
+-}
+-#endif
+-
+-#ifdef MODULE
+-int init_module(void)
+-#else
+-int __init js_as_init(void)
+-#endif
+-{
+-	int i;
+-
+-	if (js_as[0] >= 0) {
+-		for (i = 0; (js_as[i*3] >= 0) && i < 8; i++)
+-			js_as_port = js_as_probe(js_as[i*3], js_as[i*3+1], js_as[i*3+2], js_as_port);
+-	} else {
+-		for (i = 0; js_as_port_list[i]; i++) js_as_port = js_as_probe(js_as_port_list[i], 0, 0, js_as_port);
+-	}
+-	if (js_as_port) return 0;
+-
+-#ifdef MODULE
+-	printk(KERN_WARNING "joy-assasin: no joysticks found\n");
+-#endif
+-
+-	return -ENODEV;
+-}
+-
+-#ifdef MODULE
+-void cleanup_module(void)
+-{
+-	int i;
+-	struct js_as_info *info;
+-
+-	while (js_as_port != NULL) {
+-		for (i = 0; i < js_as_port->ndevs; i++)
+-			if (js_as_port->devs[i] != NULL)
+-				js_unregister_device(js_as_port->devs[i]);
+-		info = js_as_port->info;
+-		release_region(info->io, 1);
+-		js_as_port = js_unregister_port(js_as_port);
+-	}
+-
+-}
+-#endif
+diff -urN linux-2.2.2/drivers/char/joystick/joy-assassin.c linux-2.2.2-joystick/drivers/char/joystick/joy-assassin.c
+--- linux-2.2.2/drivers/char/joystick/joy-assassin.c	Thu Jan  1 01:00:00 1970
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-assassin.c	Mon Mar  8 15:40:08 1999
+@@ -0,0 +1,414 @@
++/*
++ *  joy-assassin.c  Version 1.2
++ *
++ *  Copyright (c) 1998-1999 Vojtech Pavlik
++ */
++
++/*
++ * This is a module for the Linux joystick driver, supporting
++ * joysticks using FP-Gaming's Assassin 3D protocol.
++ */
++
++/*
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or 
++ * (at your option) any later version.
++ * 
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ * 
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
++ * 
++ * Should you need to contact me, the author, you can do so either by
++ * e-mail - mail your message to <vojtech@ucw.cz>, or by paper mail:
++ * Vojtech Pavlik, Ucitelska 1576, Prague 8, 182 00 Czech Republic
++ */
++
++#include <asm/io.h>
++#include <asm/system.h>
++#include <linux/delay.h>
++#include <linux/errno.h>
++#include <linux/ioport.h>
++#include <linux/joystick.h>
++#include <linux/kernel.h>
++#include <linux/module.h>
++#include <linux/string.h>
++
++#define JS_AS_MAX_START		400
++#define JS_AS_MAX_STROBE	45
++#define JS_AS_MAX_TIME		3000
++#define JS_AS_MAX_LENGTH	40
++
++#define JS_AS_MODE_A3D		1	/* Assassin 3D */
++#define JS_AS_MODE_PAN		2	/* Panther */
++#define JS_AS_MODE_OEM		3	/* Panther OEM version */
++#define JS_AS_MODE_PXL		4	/* Panther XL */
++
++MODULE_AUTHOR("Vojtech Pavlik <vojtech@ucw.cz>");
++MODULE_PARM(js_as, "2-24i");
++
++static int __initdata js_as[] = { -1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0 };
++
++static int js_as_port_list[] __initdata = {0x201, 0};
++static struct js_port* js_as_port __initdata = NULL;
++
++#include "joy-analog.h"
++
++struct js_as_info {
++	int io;
++	char mode;
++	char rudder;
++	struct js_an_info an;
++};
++
++/*
++ * js_as_read_packet() reads an Assassin 3D packet.
++ */
++
++static int js_as_read_packet(int io, int length, char *data)
++{
++	unsigned char u, v;
++	int i;
++	unsigned int t;
++	unsigned long flags;
++
++	int start = (js_io_speed * JS_AS_MAX_START) >> 10;
++	int strobe = (js_io_speed * JS_AS_MAX_STROBE) >> 10;
++
++	i = 0;
++
++	__save_flags(flags);
++	__cli();
++
++	outb(0xff,io);
++	v = inb(io);
++	t = start;
++
++	while (t > 0 && i < length) {
++		t--;
++		u = v; v = inb(io);
++		if (~v & u & 0x10) {
++			data[i++] = v >> 5;
++			t = strobe;
++		}
++	}
++
++	__restore_flags(flags);
++
++	return i;
++}
++
++/*
++ * js_as_csum() computes checksum of triplet packet
++ */
++
++static int js_as_csum(char *data, int count)
++{
++	int i, csum = 0;
++	for (i = 0; i < count - 2; i++) csum += data[i];
++	return (csum & 0x3f) != ((data[count - 2] << 3) | data[count - 1]);
++}
++
++/*
++ * js_as_read() reads and analyzes A3D joystick data.
++ */
++
++static int js_as_read(void *xinfo, int **axes, int **buttons)
++{
++	struct js_as_info *info = xinfo;
++	char data[JS_AS_MAX_LENGTH];
++
++	switch (info->mode) {
++
++		case JS_AS_MODE_A3D:
++		case JS_AS_MODE_OEM:
++		case JS_AS_MODE_PAN:
++
++			if (js_as_read_packet(info->io, 29, data) != 29) return -1;
++			if (data[0] != info->mode) return -1;
++			if (js_as_csum(data, 29)) return -1;
++
++			axes[0][0] = ((data[5] << 6) | (data[6] << 3) | data[ 7]) - ((data[5] & 4) << 7);
++			axes[0][1] = ((data[8] << 6) | (data[9] << 3) | data[10]) - ((data[8] & 4) << 7);
++
++			buttons[0][0] = (data[2] << 2) | (data[3] >> 1);
++
++			info->an.axes[0] = ((char)((data[11] << 6) | (data[12] << 3) | (data[13]))) + 128;
++			info->an.axes[1] = ((char)((data[14] << 6) | (data[15] << 3) | (data[16]))) + 128;
++			info->an.axes[2] = ((char)((data[17] << 6) | (data[18] << 3) | (data[19]))) + 128;
++			info->an.axes[3] = ((char)((data[20] << 6) | (data[21] << 3) | (data[22]))) + 128;
++
++			info->an.buttons = ((data[3] << 3) | data[4]) & 0xf;
++
++			js_an_decode(&info->an, axes + 1, buttons + 1);
++
++			return 0;
++
++		case JS_AS_MODE_PXL:
++
++			if (js_as_read_packet(info->io, 33, data) != 33) return -1;
++			if (data[0] != info->mode) return -1;
++			if (js_as_csum(data, 33)) return -1;
++
++			axes[0][0] = ((char)((data[15] << 6) | (data[16] << 3) | (data[17]))) + 128;
++			axes[0][1] = ((char)((data[18] << 6) | (data[19] << 3) | (data[20]))) + 128;
++			info->an.axes[0] = ((char)((data[21] << 6) | (data[22] << 3) | (data[23]))) + 128;
++			axes[0][2] = ((char)((data[24] << 6) | (data[25] << 3) | (data[26]))) + 128;
++
++			axes[0][3] = ( data[5]       & 1) - ((data[5] >> 2) & 1);
++			axes[0][4] = ((data[5] >> 1) & 1) - ((data[6] >> 2) & 1);
++			axes[0][5] = ((data[4] >> 1) & 1) - ( data[3]       & 1);
++			axes[0][6] = ((data[4] >> 2) & 1) - ( data[4]       & 1);
++
++			axes[0][7] = ((data[ 9] << 6) | (data[10] << 3) | data[11]) - ((data[ 9] & 4) << 7);
++			axes[0][8] = ((data[12] << 6) | (data[13] << 3) | data[14]) - ((data[12] & 4) << 7);
++
++			buttons[0][0] = (data[2] << 8) | ((data[3] & 6) << 5) | (data[7] << 3) | data[8];
++
++			if (info->rudder) axes[1][0] = info->an.axes[0];
++
++			return 0;
++	}
++	return -1;
++}
++
++/*
++ * js_as_open() is a callback from the file open routine.
++ */
++
++static int js_as_open(struct js_dev *jd)
++{
++	MOD_INC_USE_COUNT;
++	return 0;
++}
++
++/*
++ * js_as_close() is a callback from the file release routine.
++ */
++
++static int js_as_close(struct js_dev *jd)
++{
++	MOD_DEC_USE_COUNT;
++	return 0;
++}
++
++/*
++ * js_as_pxl_init_corr() initializes the correction values for
++ * the Panther XL.
++ */
++
++static void __init js_as_pxl_init_corr(struct js_corr **corr, int **axes)
++{
++	int i;
++
++	for (i = 0; i < 2; i++) {
++		corr[0][i].type = JS_CORR_BROKEN;
++		corr[0][i].prec = 0;
++		corr[0][i].coef[0] = axes[0][i] - 4;
++		corr[0][i].coef[1] = axes[0][i] + 4;
++		corr[0][i].coef[2] = (1 << 29) / (127 - 32);
++		corr[0][i].coef[3] = (1 << 29) / (127 - 32);
++	}
++
++	corr[0][2].type = JS_CORR_BROKEN;
++	corr[0][2].prec = 0;
++	corr[0][2].coef[0] = 127 - 4;
++	corr[0][2].coef[1] = 128 + 4;
++	corr[0][2].coef[2] = (1 << 29) / (127 - 6);
++	corr[0][2].coef[3] = (1 << 29) / (127 - 6);
++
++	for (i = 3; i < 7; i++) {
++		corr[0][i].type = JS_CORR_BROKEN;
++		corr[0][i].prec = 0;
++		corr[0][i].coef[0] = 0;
++		corr[0][i].coef[1] = 0;
++		corr[0][i].coef[2] = (1 << 29);
++		corr[0][i].coef[3] = (1 << 29);
++	}
++
++	for (i = 7; i < 9; i++) {
++		corr[0][i].type = JS_CORR_BROKEN;
++		corr[0][i].prec = -1;
++		corr[0][i].coef[0] = 0;
++		corr[0][i].coef[1] = 0;
++		corr[0][i].coef[2] = (104 << 14);
++		corr[0][i].coef[3] = (104 << 14);
++	}
++}
++
++/*
++ * js_as_as_init_corr() initializes the correction values for
++ * the Panther and Assassin.
++ */
++
++static void __init js_as_as_init_corr(struct js_corr **corr)
++{
++	int i;
++
++	for (i = 0; i < 2; i++) {
++		corr[0][i].type = JS_CORR_BROKEN;
++		corr[0][i].prec = -1;
++		corr[0][i].coef[0] = 0;
++		corr[0][i].coef[1] = 0;
++		corr[0][i].coef[2] = (104 << 14);
++		corr[0][i].coef[3] = (104 << 14);
++	}
++}
++
++/*
++ * js_as_rudder_init_corr() initializes the correction values for
++ * the Panther XL connected rudder.
++ */
++
++static void __init js_as_rudder_init_corr(struct js_corr **corr, int **axes)
++{
++	corr[1][0].type = JS_CORR_BROKEN;
++	corr[1][0].prec = 0;
++	corr[1][0].coef[0] = axes[1][0] - (axes[1][0] >> 3);
++	corr[1][0].coef[1] = axes[1][0] + (axes[1][0] >> 3);
++	corr[1][0].coef[2] = (1 << 29) / (axes[1][0] - (axes[1][0] >> 2) + 1);
++	corr[1][0].coef[3] = (1 << 29) / (axes[1][0] - (axes[1][0] >> 2) + 1);
++}
++
++/*
++ * js_as_probe() probes for A3D joysticks.
++ */
++
++static struct js_port __init *js_as_probe(int io, int mask0, int mask1, struct js_port *port)
++{
++	struct js_as_info iniinfo;
++	struct js_as_info *info = &iniinfo;
++	char *name;
++	char data[JS_AS_MAX_LENGTH];
++	unsigned char u;
++	int i;
++	int numdev;
++
++	memset(info, 0, sizeof(struct js_as_info));
++
++	if (io < 0) return port;
++
++	if (check_region(io, 1)) return port;
++
++	i = js_as_read_packet(io, JS_AS_MAX_LENGTH, data);
++
++	printk("read %d\n", i);
++
++	if (!i) return port;
++	if (js_as_csum(data, i)) return port;
++
++	if (data[0] && data[0] <= 4) {
++		info->mode = data[0];
++		info->io = io;
++		request_region(io, 1, "joystick (assassin)");
++		port = js_register_port(port, info, 3, sizeof(struct js_as_info), js_as_read);
++		info = port->info;
++	} else {
++		printk(KERN_WARNING "joy-assassin: unknown joystick device detected "
++			"(io=%#x, id=%d), contact <vojtech@ucw.cz>\n", io, data[0]);
++		return port;
++	}
++
++	udelay(JS_AS_MAX_TIME);
++
++	if (info->mode == JS_AS_MODE_PXL) {
++			printk(KERN_INFO "js%d: MadCatz Panther XL at %#x\n",
++				js_register_device(port, 0, 9, 9, "MadCatz Panther XL", js_as_open, js_as_close),
++				info->io);
++			js_as_read(port->info, port->axes, port->buttons);
++			js_as_pxl_init_corr(port->corr, port->axes);
++			if (info->an.axes[0] < 254) {
++			printk(KERN_INFO "js%d: Analog rudder on MadCatz Panther XL\n",
++				js_register_device(port, 1, 1, 0, "Analog rudder", js_as_open, js_as_close));
++				info->rudder = 1;
++				port->axes[1][0] = info->an.axes[0];
++				js_as_rudder_init_corr(port->corr, port->axes);
++			}
++			return port;
++	}
++
++	switch (info->mode) {
++		case JS_AS_MODE_A3D: name = "FP-Gaming Assassin 3D"; break;
++		case JS_AS_MODE_PAN: name = "MadCatz Panther"; break;
++		case JS_AS_MODE_OEM: name = "OEM Assassin 3D"; break;
++		default: name = "This cannot happen"; break;
++	}
++
++	printk(KERN_INFO "js%d: %s at %#x\n",
++		js_register_device(port, 0, 2, 3, name, js_as_open, js_as_close),
++		name, info->io);
++
++	js_as_as_init_corr(port->corr);
++
++	js_as_read(port->info, port->axes, port->buttons);
++
++	for (i = u = 0; i < 4; i++) if (info->an.axes[i] < 254) u |= 1 << i;
++
++	if ((numdev = js_an_probe_devs(&info->an, u, mask0, mask1, port)) <= 0)
++		return port;
++
++	for (i = 0; i < numdev; i++)
++		printk(KERN_INFO "js%d: %s on %s\n",
++			js_register_device(port, i + 1, js_an_axes(i, &info->an), js_an_buttons(i, &info->an),
++				js_an_name(i, &info->an), js_as_open, js_as_close),
++			js_an_name(i, &info->an), name);
++
++	js_an_decode(&info->an, port->axes + 1, port->buttons + 1);
++	js_an_init_corr(&info->an, port->axes + 1, port->corr + 1, 0);
++
++	return port;
++}
++
++#ifndef MODULE
++void __init js_as_setup(char *str, int *ints)
++{
++	int i;
++	for (i = 0; i <= ints[0] && i < 24; i++) js_as[i] = ints[i+1];
++}
++#endif
++
++#ifdef MODULE
++int init_module(void)
++#else
++int __init js_as_init(void)
++#endif
++{
++	int i;
++
++	if (js_as[0] >= 0) {
++		for (i = 0; (js_as[i*3] >= 0) && i < 8; i++)
++			js_as_port = js_as_probe(js_as[i*3], js_as[i*3+1], js_as[i*3+2], js_as_port);
++	} else {
++		for (i = 0; js_as_port_list[i]; i++) js_as_port = js_as_probe(js_as_port_list[i], 0, 0, js_as_port);
++	}
++	if (js_as_port) return 0;
++
++#ifdef MODULE
++	printk(KERN_WARNING "joy-assassin: no joysticks found\n");
++#endif
++
++	return -ENODEV;
++}
++
++#ifdef MODULE
++void cleanup_module(void)
++{
++	int i;
++	struct js_as_info *info;
++
++	while (js_as_port) {
++		for (i = 0; i < js_as_port->ndevs; i++)
++			if (js_as_port->devs[i])
++				js_unregister_device(js_as_port->devs[i]);
++		info = js_as_port->info;
++		release_region(info->io, 1);
++		js_as_port = js_unregister_port(js_as_port);
++	}
++
++}
++#endif
+diff -urN linux-2.2.2/drivers/char/joystick/joy-console.c linux-2.2.2-joystick/drivers/char/joystick/joy-console.c
+--- linux-2.2.2/drivers/char/joystick/joy-console.c	Wed Dec  2 04:05:05 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-console.c	Mon Mar  8 15:40:35 1999
+@@ -1,7 +1,8 @@
+ /*
+- * joy-console.c  Version 0.11V
++ *  joy-console.c  Version 0.11V
+  *
+- * Copyright (c) 1998 Andree Borrmann
++ *  Copyright (c) 1998 Andree Borrmann
++ *  Copyright (c) 1999 Vojtech Pavlik
+  */
+ 
+ /*
+@@ -123,16 +124,16 @@
+ {
+ 	int i;
+ 
+-	JS_PAR_DATA_OUT(JS_NES_POWER + JS_NES_CLOCK + JS_NES_LATCH, info->port);
++	JS_PAR_DATA_OUT(JS_NES_POWER | JS_NES_CLOCK | JS_NES_LATCH, info->port);
+ 	udelay(JS_NES_DELAY * 2);
+-	JS_PAR_DATA_OUT(JS_NES_POWER + JS_NES_CLOCK, info->port);
++	JS_PAR_DATA_OUT(JS_NES_POWER | JS_NES_CLOCK, info->port);
+ 
+ 	for (i = 0; i < length; i++) {
+ 		udelay(JS_NES_DELAY);
+ 		JS_PAR_DATA_OUT(JS_NES_POWER, info->port);
+ 		data[i] = JS_PAR_STATUS(info->port) ^ ~JS_PAR_STATUS_INVERT;
+ 		udelay(JS_NES_DELAY);
+-		JS_PAR_DATA_OUT(JS_NES_POWER + JS_NES_CLOCK, info->port);
++		JS_PAR_DATA_OUT(JS_NES_POWER | JS_NES_CLOCK, info->port);
+ 	}
+ }
+ 
+@@ -168,7 +169,7 @@
+  * PSX support
+  */
+ 
+-#define JS_PSX_DELAY	10
++#define JS_PSX_DELAY	15
+ 
+ #define JS_PSX_LENGTH	8
+ 
+@@ -373,9 +374,9 @@
+ 	struct js_console_info *info;
+ 	int i;
+ 
+-	while (js_console_port != NULL) {
++	while (js_console_port) {
+ 		for (i = 0; i < js_console_port->ndevs; i++)
+-			if (js_console_port->devs[i] != NULL)
++			if (js_console_port->devs[i])
+ 				js_unregister_device(js_console_port->devs[i]);
+ 		info = js_console_port->info;
+ #ifdef USE_PARPORT
+@@ -428,11 +429,11 @@
+ 		struct parport *pp;
+ 
+ 		if (config[0] > 0x10)
+-			for (pp=parport_enumerate(); pp != NULL && (pp->base!=config[0]); pp=pp->next);
++			for (pp=parport_enumerate(); pp && (pp->base!=config[0]); pp=pp->next);
+ 		else
+-			for (pp=parport_enumerate(); pp != NULL && (config[0]>0); pp=pp->next) config[0]--;
++			for (pp=parport_enumerate(); pp && (config[0]>0); pp=pp->next) config[0]--;
+ 
+-		if (pp == NULL) {
++		if (!pp) {
+ 			printk(KERN_ERR "joy-console: no such parport\n");
+ 			return port;
+ 		}
+diff -urN linux-2.2.2/drivers/char/joystick/joy-creative.c linux-2.2.2-joystick/drivers/char/joystick/joy-creative.c
+--- linux-2.2.2/drivers/char/joystick/joy-creative.c	Thu Jan  1 01:00:00 1970
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-creative.c	Mon Mar  8 15:40:50 1999
+@@ -0,0 +1,282 @@
++/*
++ *  joy-creative.c  Version 1.2
++ *
++ *  Copyright (c) 1999 Vojtech Pavlik
++ */
++
++/*
++ * This is a module for the Linux joystick driver, supporting
++ * Creative Labs Blaster gamepad family.
++ */
++
++/*
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or 
++ * (at your option) any later version.
++ * 
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ * 
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
++ * 
++ * Should you need to contact me, the author, you can do so either by
++ * e-mail - mail your message to <vojtech@ucw.cz>, or by paper mail:
++ * Vojtech Pavlik, Ucitelska 1576, Prague 8, 182 00 Czech Republic
++ */
++
++#include <asm/io.h>
++#include <asm/system.h>
++#include <linux/errno.h>
++#include <linux/ioport.h>
++#include <linux/joystick.h>
++#include <linux/kernel.h>
++#include <linux/module.h>
++#include <linux/string.h>
++
++#define JS_CR_MAX_STROBE	45
++#define JS_CR_LENGTH		36
++
++#define JS_CR_MODE_BGPC		8
++
++static int js_cr_port_list[] __initdata = {0x201, 0};
++static struct js_port* js_cr_port __initdata = NULL;
++
++struct js_cr_info {
++	int io;
++	unsigned char mode[2];
++};
++
++/*
++ * js_cr_read_packet() reads a Blaster gamepad packet.
++ */
++
++static int js_cr_read_packet(int io, unsigned int *data)
++{
++	unsigned long flags;
++	unsigned char u, v, w;
++	__u64 buf[2];
++	int r[2], t[2];
++	int i, j, ret;
++
++	int strobe = (js_io_speed * JS_CR_MAX_STROBE) >> 10;
++	i = r[0] = r[1] = buf[0] = buf[1] = 0;
++	t[0] = t[1] = strobe;
++	
++	__save_flags(flags);
++	__cli();
++
++	u = inb(io);
++
++	do {
++		t[0]--; t[1]--;
++		v = inb(io);
++		for (i = 0, w = u ^ v; i < 2 && w; i++, w >>= 2)
++			if (w & 0x30) {
++				if ((w & 0x30) < 0x30 && r[i] < JS_CR_LENGTH && t[i] > 0) {
++					buf[i] |= (__u64)((w >> 5) & 1) << r[i]++;
++					t[i] = strobe;
++					u = v;
++				} else t[i] = 0;
++			}
++	} while (t[0] > 0 || t[1] > 0);
++
++	__restore_flags(flags);
++
++
++	ret = 0;
++
++	for (i = 0; i < 2; i++) {
++
++		if (r[i] != JS_CR_LENGTH) continue;
++
++		for (j = 0; j < JS_CR_LENGTH && (buf[i] & 0x04104107f) ^ 0x041041040; j++)
++			buf[i] = (buf[i] >> 1) | ((__u64)(buf[i] & 1) << (JS_CR_LENGTH - 1));
++
++		if (j < JS_CR_LENGTH) ret |= (1 << i);
++
++		data[i] = ((buf[i] >>  7) & 0x000001f) | ((buf[i] >>  8) & 0x00003e0)
++			| ((buf[i] >>  9) & 0x0007c00) | ((buf[i] >> 10) & 0x00f8000)
++			| ((buf[i] >> 11) & 0x1f00000);
++
++	}
++
++	return ret;
++}
++
++/*
++ * js_cr_read() reads and analyzes Blaster gamepad data.
++ */
++
++static int js_cr_read(void *xinfo, int **axes, int **buttons)
++{
++	struct js_cr_info *info = xinfo;
++	unsigned int data[2];
++	int i, r;
++
++	if (!(r = js_cr_read_packet(info->io, data)))
++		return -1;
++
++	for (i = 0; i < 2; i++)
++		if (r & (1 << i)) {
++			switch (info->mode[i]) {
++
++				case JS_CR_MODE_BGPC:
++
++					axes[i][0] = ((data[i] >> 4) & 1) - ((data[i] >> 3) & 1);
++					axes[i][1] = ((data[i] >> 2) & 1) - ((data[i] >> 1) & 1);
++
++					buttons[i][0] = ((data[i] >> 12) & 0x007) | ((data[i] >> 6) & 0x038)
++						      | ((data[i] >>  1) & 0x0c0) | ((data[i] >> 7) & 0x300)
++						      | ((data[i] <<  5) & 0xc00);
++
++					break;
++
++				default:
++					break;
++
++			}
++		}
++
++	return 0;
++}
++
++/*
++ * js_cr_open() is a callback from the file open routine.
++ */
++
++static int js_cr_open(struct js_dev *jd)
++{
++	MOD_INC_USE_COUNT;
++	return 0;
++}
++
++/*
++ * js_cr_close() is a callback from the file release routine.
++ */
++
++static int js_cr_close(struct js_dev *jd)
++{
++	MOD_DEC_USE_COUNT;
++	return 0;
++}
++
++/*
++ * js_cr_init_corr() initializes correction values of
++ * Blaster gamepads.
++ */
++
++static void __init js_cr_init_corr(int mode, struct js_corr *corr)
++{
++	int i;
++
++	switch (mode) {
++
++		case JS_CR_MODE_BGPC:
++
++			for (i = 0; i < 2; i++) {
++				corr[i].type = JS_CORR_BROKEN;
++				corr[i].prec = 0;
++				corr[i].coef[0] = 0;
++				corr[i].coef[1] = 0;
++				corr[i].coef[2] = (1 << 29);
++				corr[i].coef[3] = (1 << 29);
++			}
++
++			break;
++
++	}
++}
++
++/*
++ * js_cr_probe() probes for Blaster gamepads.
++ */
++
++static struct js_port __init *js_cr_probe(int io, struct js_port *port)
++{
++	struct js_cr_info info;
++	char *names[] = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Blaster GamePad Cobra" };
++	char axes[] = { 0, 0, 0, 0, 0, 0, 0, 0, 2 };
++	char buttons[] = { 0, 0, 0, 0, 0, 0, 0, 0, 12 };
++	unsigned int data[2];
++	int i, r;
++
++	if (check_region(io, 1)) return port;
++
++	info.mode[0] = info.mode[1] = 0;
++
++	if (!(r = js_cr_read_packet(io, data)))
++		return port;
++
++	for (i = 0; i < 2; i++) {
++		if (r & (1 << i)) {
++			if (~data[i] & 1) {
++				info.mode[i] = JS_CR_MODE_BGPC;
++			} else {
++				info.mode[i] = (data[i] >> 2) & 7;
++			}
++			if (!names[info.mode[i]]) {
++				printk(KERN_WARNING "joy-creative: Unknown Creative device %d at %#x\n",
++					info.mode[i], io);
++				info.mode[i] = 0;
++			}
++		}
++	}
++
++	if (!info.mode[0] && !info.mode[1]) return port;
++
++	info.io = io;
++
++	request_region(io, 1, "joystick (creative)");
++	port = js_register_port(port, &info, 2, sizeof(struct js_cr_info), js_cr_read);
++
++	for (i = 0; i < 2; i++)
++		if (info.mode[i]) {
++			printk(KERN_INFO "js%d: %s at %#x\n",
++				js_register_device(port, i, axes[info.mode[i]], buttons[info.mode[i]],
++					names[info.mode[i]], js_cr_open, js_cr_close),
++				names[info.mode[i]], io);
++			js_cr_init_corr(info.mode[i], port->corr[i]);
++		}
++
++	return port;
++}
++
++#ifdef MODULE
++int init_module(void)
++#else
++int __init js_cr_init(void)
++#endif
++{
++	int *p;
++
++	for (p = js_cr_port_list; *p; p++) js_cr_port = js_cr_probe(*p, js_cr_port);
++	if (js_cr_port) return 0;
++
++#ifdef MODULE
++	printk(KERN_WARNING "joy-creative: no joysticks found\n");
++#endif
++
++	return -ENODEV;
++}
++
++#ifdef MODULE
++void cleanup_module(void)
++{
++	int i;
++	struct js_cr_info *info;
++
++	while (js_cr_port) {
++		for (i = 0; i < js_cr_port->ndevs; i++)
++			if (js_cr_port->devs[i])
++				js_unregister_device(js_cr_port->devs[i]);
++		info = js_cr_port->info;
++		release_region(info->io, 1);
++		js_cr_port = js_unregister_port(js_cr_port);
++	}
++}
++#endif
+diff -urN linux-2.2.2/drivers/char/joystick/joy-db9.c linux-2.2.2-joystick/drivers/char/joystick/joy-db9.c
+--- linux-2.2.2/drivers/char/joystick/joy-db9.c	Wed Dec  2 04:05:05 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-db9.c	Mon Mar  8 15:41:10 1999
+@@ -1,7 +1,8 @@
+ /*
+- * joy-db9.c  Version 0.5V
++ *  joy-db9.c  Version 0.6V
+  *
+- * Copyright (c) 1998 Andree Borrmann
++ *  Copyright (c) 1998 Andree Borrmann
++ *  Copyright (c) 1999 Vojtech Pavlik
+  */
+ 
+ /*
+@@ -186,11 +187,11 @@
+ 		JS_PAR_CTRL_OUT(JS_DB9_NOSELECT, info->port); /* 3 */
+ 		udelay(JS_GENESIS6_DELAY);
+ 		JS_PAR_CTRL_OUT(JS_DB9_NORMAL, info->port);
++		udelay(JS_GENESIS6_DELAY);
+ 		data=JS_PAR_DATA_IN(info->port);
+ 
+ 		buttons[0][0] |= (data&JS_DB9_LEFT?0:0x10) | (data&JS_DB9_DOWN?0:0x20) | (data&JS_DB9_UP?0:0x40);
+ 
+-		udelay(JS_GENESIS6_DELAY);
+ 		JS_PAR_CTRL_OUT(JS_DB9_NOSELECT, info->port); /* 4 */
+ 		udelay(JS_GENESIS6_DELAY);
+ 		JS_PAR_CTRL_OUT(JS_DB9_NORMAL, info->port);
+@@ -275,7 +276,7 @@
+ {
+ 	struct js_db9_info *info;
+ 
+-	while (js_db9_port != NULL) {
++	while (js_db9_port) {
+ 		js_unregister_device(js_db9_port->devs[0]);
+ 		info = js_db9_port->info;
+ #ifdef USE_PARPORT
+@@ -328,11 +329,11 @@
+ 		struct parport *pp;
+ 
+ 		if (config[0] > 0x10)
+-			for (pp=parport_enumerate(); pp != NULL && (pp->base!=config[0]); pp=pp->next);
++			for (pp=parport_enumerate(); pp && (pp->base!=config[0]); pp=pp->next);
+ 		else
+-			for (pp=parport_enumerate(); pp != NULL && (config[0]>0); pp=pp->next) config[0]--;
++			for (pp=parport_enumerate(); pp && (config[0]>0); pp=pp->next) config[0]--;
+ 
+-		if (pp == NULL) {
++		if (pp) {
+ 			printk(KERN_ERR "joy-db9: no such parport\n");
+ 			return port;
+ 		}
+diff -urN linux-2.2.2/drivers/char/joystick/joy-gravis.c linux-2.2.2-joystick/drivers/char/joystick/joy-gravis.c
+--- linux-2.2.2/drivers/char/joystick/joy-gravis.c	Wed Dec  2 04:05:05 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-gravis.c	Mon Mar  8 15:41:19 1999
+@@ -1,7 +1,7 @@
+ /*
+  *  joy-gravis.c  Version 1.2
+  *
+- *  Copyright (c) 1998 Vojtech Pavlik
++ *  Copyright (c) 1998-1999 Vojtech Pavlik
+  */
+ 
+ /*
+@@ -40,12 +40,12 @@
+ 
+ #define JS_GR_MODE_GPP		1
+ #define JS_GR_LENGTH_GPP	24
+-#define JS_GR_STROBE_GPP	75
++#define JS_GR_STROBE_GPP	200
+ 
+ #define JS_GR_MODE_XT		2
+ #define JS_GR_MODE_BD		3
+ #define JS_GR_LENGTH_XT		4
+-#define JS_GR_STROBE_XT		30
++#define JS_GR_STROBE_XT		64
+ #define JS_GR_MAX_CHUNKS_XT	10	
+ #define JS_GR_MAX_BITS_XT	30	
+ 
+@@ -63,37 +63,37 @@
+ 
+ static int js_gr_gpp_read_packet(int io, int shift, unsigned int *data)
+ {
+-	unsigned int t, t1;
++	unsigned long flags;
+ 	unsigned char u, v;
++	unsigned int t;
+ 	int i;
+-	unsigned long flags;
+ 
+-	int strobe = (js_time_speed * JS_GR_STROBE_GPP) >> 10;
++	int strobe = (js_io_speed * JS_GR_STROBE_GPP) >> 10;
+ 
+ 	i = 0;
+ 	data[0] = 0;
+ 
+ 	__save_flags(flags);
+ 	__cli();
+-	u = inb(io) >> shift;
+-	t = js_get_time();
++
++	v = inb(io) >> shift;
++	t = strobe;
+ 
+ 	do {
+-		v = (inb(io) >> shift) & 3;
+-		t1 = js_get_time();
+-		if ((u ^ v) & u & 1) {
++		t--;
++		u = v; v = (inb(io) >> shift) & 3;
++		if (~v & u & 1) {
+ 			data[0] |= (v >> 1) << i++;
+-			t = t1;
++			t = strobe;
+ 		}
+-		u = v;
+-	} while (i < JS_GR_LENGTH_GPP && js_delta(t1,t) < strobe);
++	} while (i < JS_GR_LENGTH_GPP && t > 0);
+ 
+ 	__restore_flags(flags);
+ 
+ 	if (i < JS_GR_LENGTH_GPP) return -1;
+ 
+ 	for (i = 0; i < JS_GR_LENGTH_GPP && (data[0] & 0xfe4210) ^ 0x7c0000; i++)
+-		data[0] = data[0] >> 1 | (data[0] & 1) << 23;
++		data[0] = data[0] >> 1 | (data[0] & 1) << (JS_GR_LENGTH_GPP - 1);
+ 
+ 	return -(i == JS_GR_LENGTH_GPP);
+ }
+@@ -104,13 +104,13 @@
+ 
+ static int js_gr_xt_read_packet(int io, int shift, unsigned int *data)
+ {
+-	unsigned int t, t1;
+-	unsigned char u, v, w;
+ 	unsigned int i, j, buf, crc;
++	unsigned char u, v, w;
+ 	unsigned long flags;
++	unsigned int t;
+ 	char status;
+ 
+-	int strobe = (js_time_speed * JS_GR_STROBE_XT) >> 10;
++	int strobe = (js_io_speed * JS_GR_STROBE_XT) >> 10;
+ 
+ 	data[0] = data[1] = data[2] = data[3] = 0;
+ 	status = buf = i = j = 0;
+@@ -119,11 +119,11 @@
+ 	__cli();
+ 
+ 	v = w = (inb(io) >> shift) & 3;
+-	t = js_get_time();
++	t = strobe;
+ 
+ 	do {
++		t--;
+ 		u = (inb(io) >> shift) & 3;
+-		t1 = js_get_time();
+ 
+ 		if (u ^ v) {
+ 
+@@ -145,12 +145,12 @@
+ 				i = 0;
+ 			}
+ 
+-			t = t1;
++			t = strobe;
+ 			w = v;
+ 			v = u;
+ 		}
+ 
+-	} while (status != 0xf && i < JS_GR_MAX_BITS_XT && j < JS_GR_MAX_CHUNKS_XT && js_delta(t1,t) < strobe);
++	} while (status != 0xf && i < JS_GR_MAX_BITS_XT && j < JS_GR_MAX_CHUNKS_XT && t > 0);
+ 
+ 	__restore_flags(flags);
+ 
+@@ -320,7 +320,7 @@
+ }
+ 
+ /*
+- * js_gr_probe() probes fro GrIP joysticks.
++ * js_gr_probe() probes for GrIP joysticks.
+  */
+ 
+ static struct js_port __init *js_gr_probe(int io, struct js_port *port)
+@@ -389,9 +389,9 @@
+ 	int i;
+ 	struct js_gr_info *info;
+ 
+-	while (js_gr_port != NULL) {
++	while (js_gr_port) {
+ 		for (i = 0; i < js_gr_port->ndevs; i++)
+-			if (js_gr_port->devs[i] != NULL)
++			if (js_gr_port->devs[i])
+ 				js_unregister_device(js_gr_port->devs[i]);
+ 		info = js_gr_port->info;
+ 		release_region(info->io, 1);
+diff -urN linux-2.2.2/drivers/char/joystick/joy-lightning.c linux-2.2.2-joystick/drivers/char/joystick/joy-lightning.c
+--- linux-2.2.2/drivers/char/joystick/joy-lightning.c	Wed Dec  2 04:05:05 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-lightning.c	Mon Mar  8 15:41:39 1999
+@@ -1,7 +1,7 @@
+ /*
+  *  joy-lightning.c  Version 1.2
+  *
+- *  Copyright (c) 1998 Vojtech Pavlik
++ *  Copyright (c) 1998-1999 Vojtech Pavlik
+  */
+ 
+ /*
+@@ -55,7 +55,7 @@
+ MODULE_AUTHOR("Vojtech Pavlik <vojtech@ucw.cz>");
+ MODULE_PARM(js_l4, "2-24i");
+ 
+-static int js_l4[]={-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0};
++static int __initdata js_l4[] = { -1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0 };
+ 
+ #include "joy-analog.h"
+ 
+@@ -70,11 +70,10 @@
+ 
+ static int js_l4_wait_ready(void)
+ {
+-	unsigned int t, t1, timeout;
+-	timeout = (JS_L4_TIMEOUT * js_time_speed) >> 10;
+-	t = t1 = js_get_time();
+-	while ((inb(JS_L4_PORT) & JS_L4_BUSY) && (js_delta(t1 = js_get_time(), t) < timeout));
+-	return -(js_delta(t1, t) >= timeout);
++	unsigned int t;
++	t = (JS_L4_TIMEOUT * js_io_speed) >> 10;
++	while ((inb(JS_L4_PORT) & JS_L4_BUSY) && t > 0) t--;
++	return -(t<=0);
+ }
+ 
+ /*
+@@ -300,7 +299,7 @@
+ 
+ 		cards[i] = rev; 
+ 
+-		printk(KERN_INFO "js: PDPI Lightning 4 %s card (ports %d-%d) firmware v%d.%d found at %#x\n",
++		printk(KERN_INFO "js: PDPI Lightning 4 %s card (ports %d-%d) firmware v%d.%d at %#x\n",
+ 			i ? "secondary" : "primary", (i << 2), (i << 2) + 3, rev >> 4, rev & 0xf, JS_L4_PORT);
+ 	}
+ 
+@@ -333,7 +332,7 @@
+ 			js_l4_port = js_l4_probe(cards, i, 0, 0, js_l4_port);
+ 	}
+ 
+-	if (js_l4_port == NULL) {
++	if (!js_l4_port) {
+ #ifdef MODULE
+ 		printk(KERN_WARNING "joy-lightning: no joysticks found\n");
+ #endif
+@@ -352,9 +351,9 @@
+ 	int cal[4] = {59, 59, 59, 59};
+ 	struct js_l4_info *info;
+ 
+-	while (js_l4_port != NULL) {
++	while (js_l4_port) {
+ 		for (i = 0; i < js_l4_port->ndevs; i++)
+-			if (js_l4_port->devs[i] != NULL)
++			if (js_l4_port->devs[i])
+ 				js_unregister_device(js_l4_port->devs[i]);
+ 		info = js_l4_port->info;
+ 		js_l4_setcal(info->port, cal);
+diff -urN linux-2.2.2/drivers/char/joystick/joy-logitech.c linux-2.2.2-joystick/drivers/char/joystick/joy-logitech.c
+--- linux-2.2.2/drivers/char/joystick/joy-logitech.c	Wed Dec  2 04:05:05 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-logitech.c	Mon Mar  8 15:41:48 1999
+@@ -1,12 +1,12 @@
+ /*
+  *  joy-logitech.c  Version 1.2
+  *
+- *  Copyright (c) 1998 Vojtech Pavlik
++ *  Copyright (c) 1998-1999 Vojtech Pavlik
+  */
+ 
+ /*
+  * This is a module for the Linux joystick driver, supporting
+- * Logitech Digital joystick family.
++ * Logitech ADI joystick family.
+  */
+ 
+ /*
+@@ -38,113 +38,146 @@
+ #include <linux/kernel.h>
+ #include <linux/module.h>
+ #include <linux/string.h>
++#include <linux/malloc.h>
+ 
+-#define JS_LT_MAX_START		250
+-#define JS_LT_MAX_STROBE	25
+-#define JS_LT_MAX_LENGTH	72
++/*
++ * Times array sizes, flags, ids.
++ */
++
++#define JS_LT_MAX_START		400
++#define JS_LT_MAX_STROBE	45
++
++#define JS_LT_MAX_LENGTH	256
++#define JS_LT_MIN_LENGTH	8
++#define JS_LT_MIN_ID_LENGTH	66
++#define JS_LT_MAX_NAME_LENGTH	16
++
++#define JS_LT_SYNC_DELAY	10000
++#define JS_LT_STATUS_DELAY	10000
++#define JS_LT_EXTRA_DELAY	10000
++
++#define JS_LT_FLAG_CHAIN	0x01
++#define JS_LT_FLAG_HAT		0x04
++#define JS_LT_FLAG_10BIT	0x08
+ 
+-#define JS_LT_MAX_DELAY		12000
++#define JS_LT_ID_TPD		0x01
++#define JS_LT_ID_WGP		0x06
+ 
+-#define JS_LT_MODE_WMED		1
+-#define JS_LT_MODE_CM2		2
+-#define JS_LT_MODE_TPD		3
++/*
++ * Timing sequences for magic commands.
++ */
++
++static int js_lt_seq_digital[] __initdata = { 6000, 11000, 7000, 9000, 0 };
++static int js_lt_seq_analog[] __initdata = { 2000, 3000, 0 };
+ 
+-static int js_lt_seq_init[] __initdata = { 6000, 11000, 7000, 9000, 6000, 11000, 7000, 9000, 0 };
+-static int js_lt_seq_reset[] __initdata = { 2000, 3000, 2000, 3000, 0 };
++/*
++ * Port probing variables.
++ */
+ 
+-static int js_lt_port_list[] __initdata = {0x201, 0};
++static int js_lt_port_list[] __initdata = { 0x201, 0 };
+ static struct js_port* js_lt_port __initdata = NULL;
+ 
++/*
++ * Device names.
++ */
++
++#define JS_LT_MAX_ID		7
++
++static char *js_lt_names[] = {"WingMan Extreme Digital", "ThunderPad Digital", "Sidecar", "CyberMan 2",
++				"WingMan Interceptor", "WingMan Formula", "WingMan GamePad", 
++				  "Unknown Device %#x"};
++
++/*
++ * Hat to axis conversion arrays.
++ */
++
+ static struct {
+ 	int x;
+ 	int y;
+ } js_lt_hat_to_axis[] = {{ 0, 0}, { 0,-1}, { 1,-1}, { 1, 0}, { 1, 1}, { 0, 1}, {-1, 1}, {-1, 0}, {-1,-1}};
+ 
++/*
++ * Per-port information.
++ */
++
+ struct js_lt_info {
+-	int io;
+-	unsigned char mode;
++	int  io;
++	int  length[2];
++	int  ret[2];
++	int  idx[2];
++	unsigned char id[2];
++	char buttons[2];
++	char axes10[2];
++	char axes8[2];
++	char pad[2];
++	char hats[2];
++	char name[2][JS_LT_MAX_NAME_LENGTH];
++	unsigned char data[2][JS_LT_MAX_LENGTH];
+ };
+ 
+ /*
+- * js_lt_read_packet() reads a Logitech packet.
++ * js_lt_read_packet() reads a Logitech ADI packet.
+  */
+ 
+-static int js_lt_read_packet(int io, __u64 *data)
++static void js_lt_read_packet(struct js_lt_info *info)
+ {
+-
+-	static unsigned char buf[JS_LT_MAX_LENGTH];
+-	unsigned char u, v, w, mask = 0;
+-	int i;
++	unsigned char u, v, w;
++	int t[2];
+ 	unsigned long flags;
+-	unsigned int t, t1;
+-
+-	int start = (js_time_speed * JS_LT_MAX_START) >> 10;
+-	int strobe = (js_time_speed * JS_LT_MAX_STROBE) >> 10;
+-
+-	u = inb(io) >> 4;
+-
+-	if (u == 0xc) mask = 0x10;
+-	if (u == 0x0) mask = 0x50;
+-	if (!mask) return 0;
++	int i;
+ 
+-	i = 0;
++	int strobe = (js_io_speed * JS_LT_MAX_STROBE) >> 10;
++	t[0] = t[1] = (js_io_speed * JS_LT_MAX_START) >> 10;
++	i = info->ret[0] = info->ret[1] = info->idx[0] = info->idx[1] = 0;
+ 
+ 	__save_flags(flags);
+ 	__cli();
+ 
+-	outb(0xff,io);
+-
+-	u = inb(io);
+-	t = js_get_time();
+-
+-	if ((u & 0xc) != 0xc) mask = 0x10;
+-
+-	do {
+-		u = inb(io);
+-		t1 = js_get_time();
+-	} while ((((u >> 1) ^ u) & mask) != mask && js_delta(t1,t) < start);
+-
+-	t = t1;
++	outb(0xff, info->io);
++	u = inb(info->io);
+ 
+ 	do {
+-		v = inb(io);
+-		t1 = js_get_time();
+-		w = u ^ v;
+-		if ((((w >> 1) ^ w) & mask) == mask) {
+-			buf[i++] = w;
+-			t = t1;
+-			u = v;
+-		}
+-	} while (i < JS_LT_MAX_LENGTH && js_delta(t1,t) < strobe);
++		t[0]--; t[1]--;
++		v = inb(info->io);
++		for (i = 0, w = u ^ v; i < 2 && w; i++, w >>= 2)
++			if (w & 0x30) {
++				if ((w & 0x30) < 0x30 && info->ret[i] < JS_LT_MAX_LENGTH && t[i] > 0) {
++					info->data[i][info->ret[i]++] = w;
++					t[i] = strobe;
++					u = v;
++				} else t[i] = 0;
++			}
++	} while (t[0] > 0 || t[1] > 0);
+ 
+ 	__restore_flags(flags);
+ 
+-	t = i;
+-	*data = 0;
++	info->ret[0]--;
++	info->ret[1]--;
+ 
+-	if (mask == 0x10) {
+-		for (i = 0; i < t; i++)
+-			*data = ((buf[i] >> 5) & 1) | (*data << 1);
+-		return t;
+-	}
+-	if (mask == 0x50) {
+-		for (i = 0; i < t; i++)
+-			*data = ((__u64)(buf[i] & 0x20) << (t - 5)) | (buf[i] >> 7) | (*data << 1);
+-		return t << 1;
++	if (info->ret[0] > 0 && info->ret[1] > 0 &&
++		~info->data[0][0] & 0x20 && info->data[1][0] & 0x20) {
++
++		for (i = 1; i <= info->ret[1]; i++)
++			info->data[0][info->ret[1] + i] = info->data[1][i];
++	
++		info->ret[0] += info->ret[1];
++		info->ret[1] = -1;
+ 	}
+-	return 0;
++
++	return;
+ }
+ 
+ /*
+- * js_lt_reverse() reverses the order of bits in a byte.
++ * js_lt_get_bits() gathers bits from the data packet.
+  */
+ 
+-static unsigned char js_lt_reverse(unsigned char u)
++static inline int js_lt_get_bits(struct js_lt_info *info, int device, int count)
+ {
+-	u = ((u & 0x0f) << 4) | ((u >> 4) & 0x0f);
+-	u = ((u & 0x33) << 2) | ((u >> 2) & 0x33);
+-	u = ((u & 0x55) << 1) | ((u >> 1) & 0x55);
+-	return u;
++	int bits = 0;
++	int i;
++	if ((info->idx[device] += count) > info->ret[device]) return 0;
++	for (i = 0; i < count; i++) bits |= ((info->data[device][info->idx[device] - i] >> 5) & 1) << i; 
++	return bits;
+ }
+ 
+ /*
+@@ -154,54 +187,52 @@
+ static int js_lt_read(void *xinfo, int **axes, int **buttons)
+ {
+ 	struct js_lt_info *info = xinfo;
+-	__u64 data;
+-	int hat;
+-
+-	switch (info->mode) {
+-
+-		case JS_LT_MODE_TPD:
+-
+-			if (js_lt_read_packet(info->io, &data) != 20) return -1;
+-
+-			axes[0][0] = ((data >> 6) & 1) - ((data >> 4) & 1);
+-			axes[0][1] = ((data >> 5) & 1) - ((data >> 7) & 1);
+-
+-			buttons[0][0] = js_lt_reverse((data & 0x0f) | ((data >> 4) & 0xf0));
++	int i, j, k, l, t;
+ 
+-			return 0;
++	js_lt_read_packet(info);
+ 
+-		case JS_LT_MODE_WMED:
++	for (i = 0; i < 2; i++) {
+ 
+-			if (js_lt_read_packet(info->io, &data) != 42) return -1;
+-			if ((hat = data & 0xf) > 8) return -1;
++		if (!info->length[i]) continue;
++		if (info->length[i] != info->ret[i]) return -1;
+ 
+-			axes[0][0] = (data >> 26) & 0xff;
+-			axes[0][1] = (data >> 18) & 0xff;
+-			axes[0][2] = (data >> 10) & 0xff;
+-			axes[0][3] = js_lt_hat_to_axis[hat].x;
+-			axes[0][4] = js_lt_hat_to_axis[hat].y;
++		if (info->id[i] != (js_lt_get_bits(info, i, 4) 
++					| (js_lt_get_bits(info, i, 4) << 4))) return -1;
++		k = l = 0;
+ 
+-			buttons[0][0] = js_lt_reverse((data >> 2) & 0xfc);
++		for (j = 0; j < info->axes10[i]; j++) 
++			axes[i][k++] = js_lt_get_bits(info, i, 10);
+ 
+-			return 0;
++		for (j = 0; j < info->axes8[i]; j++) 
++			axes[i][k++] = js_lt_get_bits(info, i, 8);
+ 
+-		case JS_LT_MODE_CM2:
++		for (j = 0; j <= (info->buttons[i] - 1) >> 5; j++) buttons[i][j] = 0;
+ 
+-			if (js_lt_read_packet(info->io, &data) != 64) return -1;
++		for (j = 0; j < info->buttons[i] && j < 63; j++) {
++			if (j == info->pad[i]) {
++				t = js_lt_get_bits(info, i, 4);
++				axes[i][k++] = ((t >> 2) & 1) - ( t       & 1);
++				axes[i][k++] = ((t >> 1) & 1) - ((t >> 3) & 1);
++			}
++			buttons[i][l >> 5] |= js_lt_get_bits(info, i, 1) << (l & 0x1f);
++			l++;
++		}
+ 
+-			axes[0][0] = (data >> 48) & 0xff;
+-			axes[0][1] = (data >> 40) & 0xff;
+-			axes[0][2] = (data >> 32) & 0xff;
+-			axes[0][3] = (data >> 24) & 0xff;
+-			axes[0][4] = (data >> 16) & 0xff;
+-			axes[0][5] = (data >>  8) & 0xff;
++		for (j = 0; j < info->hats[i]; j++) {
++			if((t = js_lt_get_bits(info, i, 4)) > 8) return -1;
++			axes[i][k++] = js_lt_hat_to_axis[t].x;
++			axes[i][k++] = js_lt_hat_to_axis[t].y;
++		}
+ 
+-			buttons[0][0] = js_lt_reverse(data & 0xff);
++		if (info->buttons[i] > 63)
++			for (j = 63; j < info->buttons[i]; j++) {
++				buttons[i][l >> 5] |= js_lt_get_bits(info, i, 1) << (l & 0x1f);
++				l++;
++			}
+ 
+-			return 0;
+ 	}
+ 
+-	return -1;
++	return 0;
+ }
+ 
+ /*
+@@ -231,10 +262,18 @@
+ 
+ static void __init js_lt_trigger_sequence(int io, int *seq)
+ {
++	unsigned long flags;
++
++	__save_flags(flags);
++	__cli();
++
+ 	while (*seq) {
+ 		outb(0xff,io);
+ 		udelay(*seq++);
+ 	}
++	outb(0xff,io);
++
++	__restore_flags(flags);
+ }
+ 
+ /*
+@@ -242,33 +281,38 @@
+  * Logitech joysticks.
+  */
+ 
+-static void __init js_lt_init_corr(int num_axes, int mode, int **axes, struct js_corr **corr)
++static void __init js_lt_init_corr(int naxes10, int naxes8, int naxes1, int *axes, struct js_corr *corr)
+ {
+ 	int j;
+-
+-	for (j = 0; j < num_axes; j++) {
+-		corr[0][j].type = JS_CORR_BROKEN;
+-		corr[0][j].prec = 2;
+-		corr[0][j].coef[0] = axes[0][j] - 8;
+-		corr[0][j].coef[1] = axes[0][j] + 8;
+-		corr[0][j].coef[2] = (1 << 29) / (127 - 32);
+-		corr[0][j].coef[3] = (1 << 29) / (127 - 32);
++	
++	if (!naxes8 && (naxes10 == 3)) axes[2] = 512;	/* Throttle fixup */
++	if (!naxes10 && (naxes8 == 3)) axes[2] = 128;
++
++	for (j = 0; j < naxes10; j++) {
++		corr[j].type = JS_CORR_BROKEN;
++		corr[j].prec = 4;
++		corr[j].coef[0] = axes[j] - 8;
++		corr[j].coef[1] = axes[j] + 8;
++		corr[j].coef[2] = (1 << 29) / (256 - 64);
++		corr[j].coef[3] = (1 << 29) / (256 - 64);
+ 	}
+ 
+-	switch (mode) {
+-		case JS_LT_MODE_TPD:  j = 0; break;
+-		case JS_LT_MODE_WMED: j = 3; break;
+-		case JS_LT_MODE_CM2:  j = 6; break;
+-		default:	      j = 0; break;
++	for (; j < naxes8 + naxes10; j++) {
++		corr[j].type = JS_CORR_BROKEN;
++		corr[j].prec = 1;
++		corr[j].coef[0] = axes[j] - 2;
++		corr[j].coef[1] = axes[j] + 2;
++		corr[j].coef[2] = (1 << 29) / (64 - 16);
++		corr[j].coef[3] = (1 << 29) / (64 - 16);
+ 	}
+ 
+-	for (; j < num_axes; j++) {
+-		corr[0][j].type = JS_CORR_BROKEN;
+-		corr[0][j].prec = 0;
+-		corr[0][j].coef[0] = 0;
+-		corr[0][j].coef[1] = 0;
+-		corr[0][j].coef[2] = (1 << 29);
+-		corr[0][j].coef[3] = (1 << 29);
++	for (; j < naxes1 + naxes8 + naxes10; j++) {
++		corr[j].type = JS_CORR_BROKEN;
++		corr[j].prec = 0;
++		corr[j].coef[0] = 0;
++		corr[j].coef[1] = 0;
++		corr[j].coef[2] = (1 << 29);
++		corr[j].coef[3] = (1 << 29);
+ 	}
+ 
+ }
+@@ -280,60 +324,120 @@
+ static struct js_port __init *js_lt_probe(int io, struct js_port *port)
+ {
+ 	struct js_lt_info info;
+-	char *name;
+-	int axes, buttons, i;
+-	__u64 data;
+-	unsigned char u;
++	char name[32];
++	int i, j, t;
+ 
+ 	if (check_region(io, 1)) return port;
+ 
+-	if (((u = inb(io)) & 3) == 3) return port;
+-	outb(0xff,io);
+-	if (!((inb(io) ^ u) & ~u & 0xf)) return port;
++	js_lt_trigger_sequence(io, js_lt_seq_analog);
++	udelay(JS_LT_SYNC_DELAY);
++	js_lt_trigger_sequence(io, js_lt_seq_digital);
++	udelay(JS_LT_STATUS_DELAY);
+ 
+-	if (!(i = js_lt_read_packet(io, &data))) {
+-		udelay(JS_LT_MAX_DELAY);
+-		js_lt_trigger_sequence(io, js_lt_seq_reset);
+-		js_lt_trigger_sequence(io, js_lt_seq_init);
+-		i = js_lt_read_packet(io, &data);
+-	}
++	memset(&info, 0, sizeof(struct js_lt_info));
+ 
+-	switch (i) {
+-		case 0:
+-			return port;
+-		case 20:
+-			info.mode = JS_LT_MODE_TPD;
+-			axes = 2; buttons = 8; name = "Logitech ThunderPad Digital";
+-			break;
+-		case 42:
+-			info.mode = JS_LT_MODE_WMED;
+-			axes = 5; buttons = 6; name = "Logitech WingMan Extreme Digital";
+-			break;
+-		case 64:
+-			info.mode = JS_LT_MODE_CM2;
+-			axes = 6; buttons = 8; name = "Logitech CyberMan 2";
+-			break;
+-		case 72:
+-		case 144:
+-			return port;
+-		default:
+-			printk(KERN_WARNING "joy-logitech: unknown joystick device detected "
+-				"(io=%#x, count=%d, data=0x%08x%08x), contact <vojtech@ucw.cz>\n",
+-				io, i, (int)(data >> 32), (int)(data & 0xffffffff));
+-			return port;
+-	}
++	info.length[0] = info.length[1] = JS_LT_MAX_LENGTH;
+ 
+ 	info.io = io;
++	js_lt_read_packet(&info);
++	udelay(JS_LT_EXTRA_DELAY);
++
++	info.length[0] = info.length[1] = 0;
++
++	for (i = 0; i < 2; i++) {
++
++		if (info.ret[i] < JS_LT_MIN_ID_LENGTH) continue; /* Minimum ID packet length */
++
++		if (info.ret[i] != (t = js_lt_get_bits(&info, i, 10))) {
++			printk(KERN_WARNING "joy-logitech: Wrong ID packet length: reported: %d != read: %d\n",
++				t, info.ret[i]); 
++			continue;
++		}
++
++		info.id[i] = js_lt_get_bits(&info, i, 4) | (js_lt_get_bits(&info, i, 4) << 4);
++
++		t = js_lt_get_bits(&info, i, 4);
++
++		if (t & JS_LT_FLAG_CHAIN) {
++			printk(KERN_WARNING "joy-logitech: Daisy-chained devices not supported yet. Ignoring device.\n");
++			continue;
++		}
++
++		if (t & JS_LT_FLAG_HAT) info.hats[i]++;
++
++		if ((info.length[i] = js_lt_get_bits(&info, i, 10)) >= JS_LT_MAX_LENGTH) {
++			printk(KERN_WARNING "joy-logitech: Expected packet length too long (%d).\n",
++				info.length[i]);
++			continue;
++		}
++
++		if (info.length[i] < JS_LT_MIN_LENGTH) {
++			printk(KERN_WARNING "joy-logitech: Expected packet length too short (%d).\n",
++				info.length[i]);
++			continue;
++		}
++
++		info.axes8[i] = js_lt_get_bits(&info, i, 4);
++		info.buttons[i] = js_lt_get_bits(&info, i, 6);
++
++		if (js_lt_get_bits(&info, i, 6) != 8 && info.hats[i]) {
++			printk(KERN_WARNING "joy-logitech: Other than 8-dir POVs not supported yet.\n");
++			continue;
++		}
++
++		info.buttons[i] += js_lt_get_bits(&info, i, 6);
++		info.hats[i] += js_lt_get_bits(&info, i, 4);
++
++		j = js_lt_get_bits(&info, i, 4);
++
++		if (t & JS_LT_FLAG_10BIT) {
++			info.axes10[i] = info.axes8[i];
++			info.axes8[i] = j;
++		}
++
++		t = js_lt_get_bits(&info, i, 4);
++
++		for (j = 0; j < t; j++)
++			info.name[i][j] = js_lt_get_bits(&info, i, 8);
++		info.name[i][j] = 0;
++
++		switch (info.id[i]) {
++			case JS_LT_ID_TPD:
++				info.pad[i] = 4;
++				info.buttons[i] -= 4;
++				break;
++			case JS_LT_ID_WGP:
++				info.pad[i] = 0;
++				info.buttons[i] -= 4;
++				break;
++			default:
++				info.pad[i] = -1;
++				break;
++		}
++	}
++
++	if (!info.length[0] && !info.length[1])
++		return port;
+ 
+ 	request_region(io, 1, "joystick (logitech)");
+-	port = js_register_port(port, &info, 1, sizeof(struct js_lt_info), js_lt_read);
+-	printk(KERN_INFO "js%d: %s at %#x\n",
+-		js_register_device(port, 0, axes, buttons, name, js_lt_open, js_lt_close), name, io);
+ 
+-	udelay(JS_LT_MAX_DELAY);
++	port = js_register_port(port, &info, 2, sizeof(struct js_lt_info), js_lt_read);
++
++	for (i = 0; i < 2; i++)
++		if (info.length[i] > 0) {
++			sprintf(name, info.id[i] < JS_LT_MAX_ID ? js_lt_names[info.id[i]] : js_lt_names[JS_LT_MAX_ID], info.id[i]); 
++			printk(KERN_INFO "js%d: %s [%s] at %#x\n",
++				js_register_device(port, i,
++					info.axes10[i] + info.axes8[i] + ((info.hats[i] + (info.pad[i] >= 0)) << 1),
++					info.buttons[i], name, js_lt_open, js_lt_close), name, info.name[i], io);
++		}
+ 
+ 	js_lt_read(port->info, port->axes, port->buttons);
+-	js_lt_init_corr(axes, info.mode, port->axes, port->corr);
++
++	for (i = 0; i < 2; i++)
++		if (info.length[i] > 0)
++				js_lt_init_corr(info.axes10[i], info.axes8[i],
++					((info.pad[i] >= 0) + info.hats[i]) << 1, port->axes[i], port->corr[i]);
+ 
+ 	return port;
+ }
+@@ -359,10 +463,13 @@
+ #ifdef MODULE
+ void cleanup_module(void)
+ {
++	int i;
+ 	struct js_lt_info *info;
+ 
+-	while (js_lt_port != NULL) {
+-		js_unregister_device(js_lt_port->devs[0]);
++	while (js_lt_port) {
++		for (i = 0; i < js_lt_port->ndevs; i++)
++			 if (js_lt_port->devs[i])
++				js_unregister_device(js_lt_port->devs[i]);
+ 		info = js_lt_port->info;
+ 		release_region(info->io, 1);
+ 		js_lt_port = js_unregister_port(js_lt_port);
+diff -urN linux-2.2.2/drivers/char/joystick/joy-magellan.c linux-2.2.2-joystick/drivers/char/joystick/joy-magellan.c
+--- linux-2.2.2/drivers/char/joystick/joy-magellan.c	Thu Jan  1 01:00:00 1970
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-magellan.c	Mon Mar  8 15:41:57 1999
+@@ -0,0 +1,394 @@
++/*
++ *  joy-magellan.c  Version 0.1
++ *
++ *  Copyright (c) 1999 Vojtech Pavlik
++ */
++
++/*
++ * This is a module for the Linux joystick driver, supporting
++ * the Magellan and Space Mouse 6dof controllers.
++ */
++
++/*
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or 
++ * (at your option) any later version.
++ * 
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ * 
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
++ * 
++ *  Should you need to contact me, the author, you can do so either by
++ * e-mail - mail your message to <vojtech@ucw.cz>, or by paper mail:
++ * Vojtech Pavlik, Ucitelska 1576, Prague 8, 182 00 Czech Republic
++ */
++
++#include <asm/io.h>
++#include <asm/system.h>
++#include <linux/errno.h>
++#include <linux/joystick.h>
++#include <linux/kernel.h>
++#include <linux/module.h>
++#include <linux/delay.h>
++#include <linux/tty.h>
++
++/*
++ * Constants.
++ */
++
++#define	N_JOYSTICK_MAG		14
++#define JS_MAG_MAX_LENGTH	64
++
++/*
++ * List of Magellans.
++ */
++
++static struct js_port* js_mag_port = NULL;
++
++/*
++ * Per-Magellan data.
++ */
++
++struct js_mag_info {
++	struct tty_struct* tty;
++	struct js_port* port;
++	int idx;
++	unsigned char data[JS_MAG_MAX_LENGTH];
++	unsigned char name[JS_MAG_MAX_LENGTH];
++	char ack;
++	char used;
++};
++
++/*
++ * js_mag_crunch_nibbles() verifies that the bytes sent from the Magellan
++ * have correct upper nibbles for the lower ones, if not, the packet will
++ * be thrown away. It also strips these upper halves to simplify further
++ * processing.
++ */
++
++static int js_mag_crunch_nibbles(unsigned char *data, int count)
++{
++	static unsigned char nibbles[16] = "0AB3D56GH9:K<MN?";
++
++	do {
++		if (data[count] == nibbles[data[count] & 0xf])
++			data[count] = data[count] & 0xf;
++		else
++			return -1;
++	} while (--count);
++
++	return 0;
++}
++
++/*
++ * js_mag_process_packet() decodes packets the driver receives from the
++ * Magellan. It updates the data accordingly, and sets an ACK flag
++ * to the type of last packet received, if received OK.
++ */
++
++static void js_mag_process_packet(struct js_mag_info* info)
++{
++	int i;
++
++	if (!info->idx) return;
++
++	switch (info->data[0]) {
++
++		case 'd':				/* Axis data */
++			if (info->idx != 25) return;
++			if (js_mag_crunch_nibbles(info->data, 24)) return;
++			if (!info->port->devs[0]) return;
++			for (i = 0; i < 6; i++) {
++				info->port->axes[0][i] = 
++					( info->data[(i << 2) + 1] << 12 | info->data[(i << 2) + 2] << 8 |
++					  info->data[(i << 2) + 3] <<  4 | info->data[(i << 2) + 4] )
++					 - 32768;
++			}
++			break;
++
++		case 'e':				/* Error packet */
++			if (info->idx != 4) return;
++			if (js_mag_crunch_nibbles(info->data, 3)) return;
++			switch (info->data[1]) {
++				case 1:
++					printk(KERN_ERR "joy-magellan: Received command error packet. Failing command byte: %c\n",
++						info->data[2] | (info->data[3] << 4));
++					break;
++				case 2:
++					printk(KERN_ERR "joy-magellan: Received framing error packet.\n");
++					break;
++				default:
++					printk(KERN_ERR "joy-magellan: Received unknown error packet.\n");
++			}
++			break;
++
++		case 'k':				/* Button data */
++			if (info->idx != 4) return;
++			if (js_mag_crunch_nibbles(info->data, 3)) return;
++			if (!info->port->devs[0]) return;
++			info->port->buttons[0][0] = (info->data[1] << 1) | (info->data[2] << 5) | info->data[3];
++			break;
++
++		case 'm':				/* Mode */
++			if (info->idx != 2) return;
++			if (js_mag_crunch_nibbles(info->data, 1)) return; 
++			break;
++
++		case 'n':				/* Null radius */
++			if (info->idx != 2) return;
++			if (js_mag_crunch_nibbles(info->data, 1)) return; 
++			break;
++
++		case 'p':				/* Data rate */
++			if (info->idx != 3) return;
++			if (js_mag_crunch_nibbles(info->data, 2)) return;
++			break;
++
++		case 'q':				/* Sensitivity */
++			if (info->idx != 3) return;
++			if (js_mag_crunch_nibbles(info->data, 2)) return; 
++			break;
++
++		case 'v':				/* Version string */
++			info->data[info->idx] = 0;
++			for (i = 1; i < info->idx && info->data[i] == ' '; i++);
++			memcpy(info->name, info->data + i, info->idx - i);
++			break;
++
++		case 'z':				/* Zero position */
++			break;
++
++		default:
++			printk("joy-magellan: Unknown packet %d length %d:", info->data[0], info->idx);
++			for (i = 0; i < info->idx; i++) printk(" %02x", info->data[i]);
++			printk("\n");
++			return;
++	}
++
++	info->ack = info->data[0];
++}
++
++/*
++ * js_mag_command() sends a command to the Magellan, and waits for
++ * acknowledge.
++ */
++
++static int js_mag_command(struct js_mag_info *info, char *command, int timeout)
++{
++	info->ack = 0;
++	if (info->tty->driver.write(info->tty, 0, command, strlen(command)) != strlen(command)) return -1;
++	while (!info->ack && timeout--) mdelay(1);
++	return -(info->ack != command[0]);
++}
++
++/*
++ * js_mag_init() initializes the Magellan to sane state. Also works as
++ * a probe for Magellan existence.
++ */
++
++static int js_mag_init(struct js_mag_info *info)
++{
++
++	if (js_mag_command(info, "vQ\r", 800))	/* Read version */
++		return -1;
++	if (js_mag_command(info, "m3\r", 50))	/* Set full 3d mode */
++		return -1;
++	if (js_mag_command(info, "pBB\r", 50))	/* Set 16 reports/second (max) */
++		return -1;
++	if (js_mag_command(info, "z\r", 50))	/* Set zero position */
++		return -1;
++
++	return 0;
++}
++
++/*
++ * js_mag_read() updates the axis and button data upon startup.
++ */
++
++static int js_mag_read(struct js_mag_info *info)
++{
++	memset(info->port->axes[0],0, sizeof(int) * 6);		/* Axes are 0 after zero postition cmd */ 
++
++	if (js_mag_command(info, "kQ\r", 50))			/* Read buttons */
++		return -1;
++
++	return 0;
++}
++
++/*
++ * js_mag_open() is a callback from the joystick device open routine.
++ */
++
++static int js_mag_open(struct js_dev *jd)
++{
++	struct js_mag_info *info = jd->port->info;
++	info->used++;	
++	MOD_INC_USE_COUNT;
++	return 0;
++}
++
++/*
++ * js_mag_close() is a callback from the joystick device release routine.
++ */
++
++static int js_mag_close(struct js_dev *jd)
++{
++	struct js_mag_info *info = jd->port->info;
++	if (!--info->used) {
++		js_unregister_device(jd->port->devs[0]);
++		js_mag_port = js_unregister_port(jd->port);
++	}
++	MOD_DEC_USE_COUNT;
++	return 0;
++}
++
++/*
++ * js_mag_init_corr() initializes the correction values for the Magellan.
++ * It asumes gain setting of 0, question is, what we should do for higher
++ * gain settings ...
++ */
++
++static void js_mag_init_corr(struct js_corr **corr)
++{
++	int i;
++
++	for (i = 0; i < 6; i++) {
++		corr[0][i].type = JS_CORR_BROKEN;
++		corr[0][i].prec = 0;
++		corr[0][i].coef[0] = 0;
++		corr[0][i].coef[1] = 0;
++		corr[0][i].coef[2] = (1 << 29) / 256;
++		corr[0][i].coef[3] = (1 << 29) / 256;
++	}
++}
++
++/*
++ * js_mag_ldisc_open() is the routine that is called upon setting our line
++ * discipline on a tty. It looks for the Magellan, and if found, registers
++ * it as a joystick device.
++ */
++
++static int js_mag_ldisc_open(struct tty_struct *tty)
++{
++	struct js_mag_info iniinfo;
++	struct js_mag_info *info = &iniinfo;
++
++	info->tty = tty;
++	info->idx = 0;
++	info->used = 1;
++
++	js_mag_port = js_register_port(js_mag_port, info, 1, sizeof(struct js_mag_info), NULL);
++
++	info = js_mag_port->info;
++	info->port = js_mag_port;
++	tty->disc_data = info;
++
++	if (js_mag_init(info)) {
++		js_mag_port = js_unregister_port(info->port);
++		return -ENODEV;
++	}
++
++	printk(KERN_INFO "js%d: Magellan [%s] on %s%d\n",
++		js_register_device(js_mag_port, 0, 6, 9, "Magellan", js_mag_open, js_mag_close),
++		info->name, tty->driver.name, MINOR(tty->device) - tty->driver.minor_start);
++
++
++	js_mag_read(info);
++	js_mag_init_corr(js_mag_port->corr);
++
++	MOD_INC_USE_COUNT;
++
++	return 0;
++}
++
++/*
++ * js_mag_ldisc_close() is the opposite of js_mag_ldisc_open()
++ */
++
++static void js_mag_ldisc_close(struct tty_struct *tty)
++{
++	struct js_mag_info* info = (struct js_mag_info*) tty->disc_data;
++	if (!--info->used) {
++		js_unregister_device(info->port->devs[0]);
++		js_mag_port = js_unregister_port(info->port);
++	}
++	MOD_DEC_USE_COUNT;
++}
++
++/*
++ * js_mag_ldisc_receive() is called by the low level driver when characters
++ * are ready for us. We then buffer them for further processing, or call the
++ * packet processing routine.
++ */
++
++static void js_mag_ldisc_receive(struct tty_struct *tty, const unsigned char *cp, char *fp, int count)
++{
++	struct js_mag_info* info = (struct js_mag_info*) tty->disc_data;
++	int i;
++
++	for (i = 0; i < count; i++)
++		if (cp[i] == '\r') {
++			js_mag_process_packet(info);
++			info->idx = 0;
++		} else {
++			if (info->idx < JS_MAG_MAX_LENGTH)
++				info->data[info->idx++] = cp[i];
++		} 
++}
++
++/*
++ * js_mag_ldisc_room() reports how much room we do have for receiving data.
++ * Although we in fact have infinite room, we need to specify some value
++ * here, so why not the size of our packet buffer. It's big anyway.
++ */
++
++static int js_mag_ldisc_room(struct tty_struct *tty)
++{
++	return JS_MAG_MAX_LENGTH;
++}
++
++/*
++ * The line discipline structure.
++ */
++
++static struct tty_ldisc js_mag_ldisc = {
++        magic:          TTY_LDISC_MAGIC,
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,1,0)
++        name:           "magellan",
++#endif
++	open:		js_mag_ldisc_open,
++	close:		js_mag_ldisc_close,
++	receive_buf:	js_mag_ldisc_receive,
++	receive_room:	js_mag_ldisc_room,
++};
++
++/*
++ * The functions for inserting/removing us as a module.
++ */
++
++#ifdef MODULE
++int init_module(void)
++#else
++int __init js_mag_init(void)
++#endif
++{
++        if (tty_register_ldisc(N_JOYSTICK_MAG, &js_mag_ldisc)) {
++                printk(KERN_ERR "joy-magellan: Error registering line discipline.\n");
++		return -ENODEV;
++	}
++
++	return  0;
++}
++
++#ifdef MODULE
++void cleanup_module(void)
++{
++	tty_register_ldisc(N_JOYSTICK_MAG, NULL);
++}
++#endif
+diff -urN linux-2.2.2/drivers/char/joystick/joy-sidewinder.c linux-2.2.2-joystick/drivers/char/joystick/joy-sidewinder.c
+--- linux-2.2.2/drivers/char/joystick/joy-sidewinder.c	Wed Dec  2 04:05:05 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-sidewinder.c	Mon Mar  8 15:42:06 1999
+@@ -1,7 +1,7 @@
+ /*
+  *  joy-sidewinder.c  Version 1.2
+  *
+- *  Copyright (c) 1998 Vojtech Pavlik
++ *  Copyright (c) 1998-1999 Vojtech Pavlik
+  */
+ 
+ /*
+@@ -39,17 +39,32 @@
+ #include <linux/module.h>
+ #include <linux/string.h>
+ 
+-#define JS_SW_MAX_START		250
+-#define JS_SW_MIN_STROBE	25
+-#define JS_SW_EXT_STROBE	45
+-#define JS_SW_MIN_TIME		1500
+-#define JS_SW_MAX_TIME		4000
+-
+-#define JS_SW_MAX_LENGTH	72
+-
+-#define JS_SW_MODE_3DP		1
+-#define JS_SW_MODE_PP		2
+-#define JS_SW_MODE_GP		3
++/*
++ * These are really magic values. Changing them can make a problem go away,
++ * as well as break everything.
++ */
++
++#define JS_SW_START		400	/* The time we wait for the first bit [400 us] */
++#define JS_SW_STROBE		45	/* Max time per bit in the relaxed case [45 us] */
++#define JS_SW_TIMEOUT		4000	/* Wait for everything to settle [4 ms] */
++#define JS_SW_KICK		45	/* Wait after A0 fall till kick [45 us] */
++#define JS_SW_END		8	/* Number of bits before end of packet to kick */
++#define JS_SW_FAIL		16	/* Number of packet read errors to fail and reinitialize */
++#define JS_SW_BAD		2	/* Number of packet read errors to switch off 3d Pro optimization */
++#define JS_SW_OK		64	/* Number of packet read successes to switch optimization back on */
++#define JS_SW_LENGTH		512	/* Max number of bits in a packet */
++
++/*
++ * SideWinder joystick types ...
++ */
++
++#define JS_SW_TYPE_3DP		1
++#define JS_SW_TYPE_F23		2
++#define JS_SW_TYPE_GP		3
++#define JS_SW_TYPE_PP		4
++#define JS_SW_TYPE_FFP		5
++#define JS_SW_TYPE_FSP		6
++#define JS_SW_TYPE_FFW		7
+ 
+ static int js_sw_port_list[] __initdata = {0x201, 0};
+ static struct js_port* js_sw_port __initdata = NULL;
+@@ -61,208 +76,343 @@
+ 
+ struct js_sw_info {
+ 	int io;
+-	unsigned char mode;
++	int length;
++	int strobe;
++	unsigned char type;
++	unsigned char bits;
+ 	unsigned char number;
+-	unsigned char optimize;
++	unsigned char fail;
++	unsigned char ok;
+ };
+ 
+ /*
+- * js_sw_init_digital() switches a SideWinder into digital mode.
++ * js_sw_read_packet() is a function which reads either a data packet, or an
++ * identification packet from a SideWinder joystick. Better don't try to
++ * understand this, since all the ugliness of the Microsoft Digital
++ * Overdrive protocol is concentrated in this function. If you really want
++ * to know how this works, first go watch a couple horror movies, so that
++ * you are well prepared, read US patent #5628686 and then e-mail me,
++ * and I'll send you an explanation.
++ *					Vojtech <vojtech@ucw.cz>
+  */
+ 
+-static void __init js_sw_init_digital(int io)
++static int js_sw_read_packet(int io, unsigned char *buf, int length, int id)
+ {
+-	unsigned int t;
+-	unsigned int timeout = (js_time_speed * JS_SW_MAX_TIME) >> 10;
+-        int delays[] = {140, 140+726, 140+300, 0};
+-	int i = 0;
+ 	unsigned long flags;
++	int timeout, bitout, sched, i, kick;
++	unsigned char pending, u, v;
++	
++	int start = (js_io_speed * JS_SW_START) >> 10;
++	int strobe = (js_io_speed * JS_SW_STROBE) >> 10;
++
++	i = -id;						/* Don't care about data, only want ID */
++	timeout = id ? (js_io_speed * JS_SW_TIMEOUT) >> 10 : 0;	/* Set up global timeout for ID packet */
++	kick = id ? (js_io_speed * JS_SW_KICK) >> 10 : 0;	/* Set up kick timeout for ID packet */
++	bitout = start;
++	pending = 0;
++	sched = 0;
++
++        __save_flags(flags);					/* Quiet, please */
++        __cli();
++
++	outb(0xff, io);						/* Trigger */
++	v = inb(io);
+ 
+-	__save_flags(flags);
+-	__cli();
+ 	do {
+-		outb(0xff,io);
+-		t = js_get_time();
+-		while ((inb(io) & 1) && (js_delta(js_get_time(),t) < timeout));
+-		udelay(delays[i]);
+-	} while (delays[i++]);
+-	__restore_flags(flags);
++		bitout--;
++		u = v;
++		v = inb(io);
++	} while (!(~v & u & 0x10) && (bitout > 0));		/* Wait for first falling edge on clock */
++
++	if (bitout > 0) bitout = strobe;			/* Extend time if not timed out */
+ 
+-	for (i = 0; i < 4; i++) {
+-		udelay(300);
+-		outb(0xff, io);
++	while ((timeout > 0 || bitout > 0) && (i < length)) {
++
++		timeout--;
++		bitout--;					/* Decrement timers */
++		sched--;
++
++		u = v;
++		v = inb(io);
++
++		if ((~u & v & 0x10) && (bitout > 0)) {		/* Rising edge on clock - data bit */
++			if (i >= 0)				/* Want this data */
++				buf[i] = v >> 5;		/* Store it */
++			i++;					/* Advance index */
++			bitout = strobe;			/* Extend timeout for next bit */
++		} 
++
++		if (kick && (~v & u & 0x01)) {			/* Falling edge on axis */
++			sched = kick;				/* Schedule second trigger */
++			kick = 0;				/* Don't schedule next time on falling edge */
++			pending = 1;				/* Mark schedule */
++		} 
++
++		if (pending && sched < 0 && (i > -JS_SW_END)) {	/* Second trigger time */
++			outb(0xff, io);				/* Trigger */
++			bitout = start;				/* Long bit timeout */
++			pending = 0;				/* Unmark schedule */
++			timeout = 0;				/* Switch from global to bit timeouts */ 
++		}
+ 	}
+ 
+-	return;
++	__restore_flags(flags);					/* Done - relax */
++
++	return i;
+ }
+ 
+ /*
+- * js_sw_read_packet() reads a SideWinder packet.
++ * js_sw_get_bits() and GB() compose bits from the triplet buffer into a __u64.
++ * Parameter 'pos' is bit number inside packet where to start at, 'num' is number
++ * of bits to be read, 'shift' is offset in the resulting __u64 to start at, bits
++ * is number of bits per triplet.
+  */
+ 
+-static int js_sw_read_packet(int io, int l1, int l2, int strobe, __u64 *data)
+-{
+-	static unsigned char buf[JS_SW_MAX_LENGTH];
+-	unsigned char u, v;
+-	int i;
+-	unsigned long flags;
+-	unsigned int t, t1;
+-
+-	int length = l1 < l2 ? l2 : l1;
+-	int start = (js_time_speed * JS_SW_MAX_START) >> 10;
+-	strobe = (js_time_speed * strobe) >> 10;
++#define GB(pos,num,shift) js_sw_get_bits(buf, pos, num, shift, info->bits)
+ 
+-	i = 0;
++static __u64 js_sw_get_bits(unsigned char *buf, int pos, int num, char shift, char bits)
+ 
+-	__save_flags(flags);
+-	__cli();
+-	outb(0xff,io);
++{
++	__u64 data = 0;
++	int tri = pos % bits;						/* Start position */
++	int i   = pos / bits;
++	int bit = shift;
+ 
+-	v = inb(io);
+-	t = js_get_time();
++	while (num--) {
++		data |= (__u64)((buf[i] >> tri++) & 1) << bit++;	/* Transfer bit */
++		if (tri == bits) {
++			i++;						/* Next triplet */
++			tri = 0;
++		}
++	}
+ 
+-	do {
+-		u = v;
+-		v = inb(io);
+-		t1 = js_get_time();
+-	} while (!((u ^ v) & u & 0x10) && js_delta(t1, t) < start);
++	return data;
++}
+ 
+-	t = t1;
++/*
++ * js_sw_init_digital() initializes a SideWinder 3D Pro joystick
++ * into digital mode.
++ */
+ 
+-	do {
+-		v = inb(io);
+-		t1 = js_get_time();
+-		if ((u ^ v) & v & 0x10) {
+-			buf[i++] = v >> 5;
+-			t = t1;
+-		}
+-		u = v;
+-	} while (i < length && js_delta(t1,t) < strobe);
++static void js_sw_init_digital(int io)
++{
++	int seq[] = { 140, 140+726, 140+300, 0 };
++	unsigned long flags;
++	int i, t;
+ 
+-	__restore_flags(flags);
++        __save_flags(flags);
++        __cli();
+ 
+-	*data = 0;
++	i = 0;
++        do {
++                outb(0xff, io);					/* Trigger */
++		t = (js_io_speed * JS_SW_TIMEOUT) >> 10;
++		while ((inb(io) & 1) && t) t--;			/* Wait for axis to fall back to 0 */
++                udelay(seq[i]);					/* Delay magic time */
++        } while (seq[++i]);
+ 
+-	if (i == l1) {
+-		t = i > 64 ? 64 : i;
+-		for (i = 0; i < t; i++)
+-			*data |= (__u64) (buf[i] & 1) << i;
+-		return t;
+-	}
+-	if (i == l2) {
+-		t = i > 22 ? 22 : i;
+-		for (i = 0; i < t; i++)
+-			*data |= (__u64) buf[i] << (3 * i);
+-		return t * 3;
+-	}
++	outb(0xff, io);						/* Last trigger */
+ 
+-	return i;
++	__restore_flags(flags);
+ }
+ 
+ /*
+- * js_sw_parity computes parity of __u64
++ * js_sw_parity() computes parity of __u64
+  */
+ 
+ static int js_sw_parity(__u64 t)
+ {
+-	t ^= t >> 32;
+-	t ^= t >> 16;
+-	t ^= t >> 8;
+-	t ^= t >> 4;
+-	t ^= t >> 2;
+-	t ^= t >> 1;
+-	return t & 1;
++	int x = t ^ (t >> 32);
++	x ^= x >> 16;
++	x ^= x >> 8;
++	x ^= x >> 4;
++	x ^= x >> 2;
++	x ^= x >> 1;
++	return x & 1;
+ }
+ 
+ /*
+- * js_sw_csum() computes checksum of nibbles in __u64
++ * js_sw_ccheck() checks synchronization bits and computes checksum of nibbles.
+  */
+ 
+-static int js_sw_csum(__u64 t)
++static int js_sw_check(__u64 t)
+ {
+ 	char sum = 0;
+-	while (t) {
++
++	if ((t & 0x8080808080808080ULL) ^ 0x80)			/* Sync */
++		return -1;
++
++	while (t) {						/* Sum */
+ 		sum += t & 0xf;
+ 		t >>= 4;
+ 	}
++
+ 	return sum & 0xf;
+ }
+ 
+ /*
+- * js_sw_read() reads and analyzes SideWinder joystick data.
++ * js_sw_parse() analyzes SideWinder joystick data, and writes the results into
++ * the axes and buttons arrays.
+  */
+ 
+-static int js_sw_read(void *xinfo, int **axes, int **buttons)
++static int js_sw_parse(unsigned char *buf, struct js_sw_info *info, int **axes, int **buttons)
+ {
+-	struct js_sw_info *info = xinfo;
+-	__u64 data;
+ 	int hat, i;
+ 
+-	switch (info->mode) {
++	switch (info->type) {
+ 
+-		case JS_SW_MODE_3DP:
++		case JS_SW_TYPE_3DP:
++		case JS_SW_TYPE_F23:
+ 
+-			if (info->optimize) {
+-				i = js_sw_read_packet(info->io, -1, 22, JS_SW_EXT_STROBE, &data);
+-			} else {
+-				i = js_sw_read_packet(info->io, 64, 66, JS_SW_EXT_STROBE, &data);
+-				if (i == 198) info->optimize = 1;
+-			}
+-
+-			if (i < 60) {
+-				js_sw_init_digital(info->io);
+-				info->optimize = 0;
+-				return -1;
+-			}
++			if (js_sw_check(GB(0,64,0)) || (hat = GB(6,1,3) | GB(60,3,0))  > 8) return -1;
+ 
+-			if (((data & 0x8080808080808080ULL) ^ 0x80) || js_sw_csum(data) ||
+-				(hat = ((data >> 3) & 0x08) | ((data >> 60) & 0x07)) > 8) {
+-				info->optimize = 0;
+-				return -1;
+-			}
+-			axes[0][0] = ((data <<  4) & 0x380) | ((data >> 16) & 0x07f);
+-			axes[0][1] = ((data <<  7) & 0x380) | ((data >> 24) & 0x07f);
+-			axes[0][2] = ((data >> 28) & 0x180) | ((data >> 40) & 0x07f);
+-			axes[0][3] = ((data >> 25) & 0x380) | ((data >> 48) & 0x07f);
++			axes[0][0] = GB( 3,3,7) | GB(16,7,0);
++			axes[0][1] = GB( 0,3,7) | GB(24,7,0);
++			axes[0][2] = GB(35,2,7) | GB(40,7,0);
++			axes[0][3] = GB(32,3,7) | GB(48,7,0);
+ 			axes[0][4] = js_sw_hat_to_axis[hat].x;
+ 			axes[0][5] = js_sw_hat_to_axis[hat].y;
+-			buttons[0][0] = ((~data >> 31) & 0x80) | ((~data >> 8) & 0x7f);
++			buttons[0][0] = ~(GB(37,1,8) | GB(38,1,7) | GB(8,7,0));
+ 
+ 			return 0;
+ 
+-		case JS_SW_MODE_PP:
++		case JS_SW_TYPE_GP:
++
++			for (i = 0; i < info->number * 15; i += 15) {
+ 
+-			if (js_sw_read_packet(info->io, 48, 16, JS_SW_EXT_STROBE, &data) != 48) return -1;
+-			if (!js_sw_parity(data) || (hat = (data >> 42) & 0xf) > 8) return -1;
++				if (js_sw_parity(GB(i,15,0))) return -1;
++
++				axes[i][0] = GB(i+3,1,0) - GB(i+2,1,0);
++				axes[i][1] = GB(i+0,1,0) - GB(i+1,1,0);
++				buttons[i][0] = ~GB(i+4,10,0);
++
++			}
++
++			return 0;
+ 
+-			axes[0][0] = (data >>  9) & 0x3ff;
+-			axes[0][1] = (data >> 19) & 0x3ff;
+-			axes[0][2] = (data >> 29) & 0x07f;
+-			axes[0][3] = (data >> 36) & 0x03f;
++		case JS_SW_TYPE_PP:
++		case JS_SW_TYPE_FFP:
++
++			if (!js_sw_parity(GB(0,48,0)) || (hat = GB(42,4,0)) > 8) return -1;
++
++			axes[0][0] = GB( 9,10,0);
++			axes[0][1] = GB(19,10,0);
++			axes[0][2] = GB(29, 7,0);
++			axes[0][3] = GB(36, 6,0);
+ 			axes[0][4] = js_sw_hat_to_axis[hat].x;
+ 			axes[0][5] = js_sw_hat_to_axis[hat].y;
+-			buttons[0][0] = ~data & 0x1ff;
++			buttons[0][0] = ~GB(0,9,0);
+ 
+ 			return 0;
+ 
+-		case JS_SW_MODE_GP:
++		case JS_SW_TYPE_FSP:
+ 
+-			if (js_sw_read_packet(info->io, 15 * info->number, 5 * info->number,
+-				JS_SW_EXT_STROBE, &data) != 15 * info->number) return -1;
+-			if (js_sw_parity(data)) return -1;
+-
+-			for (i = 0; i < info->number; i++) {
+-				axes[i][0] = ((data >> 3) & 1) - ((data >> 2) & 1);
+-				axes[i][1] = ( data       & 1) - ((data >> 1) & 1);
+-				buttons[i][0] = (~data >> 4) & 0x3ff;
+-				data >>= 15;
+-			}
++			if (!js_sw_parity(GB(0,43,0)) || (hat = GB(28,4,0)) > 8) return -1;
++
++			axes[0][0] = GB( 0,10,0);
++			axes[0][1] = GB(16,10,0);
++			axes[0][2] = GB(32, 6,0);
++			axes[0][3] = js_sw_hat_to_axis[hat].x;
++			axes[0][4] = js_sw_hat_to_axis[hat].y;
++			buttons[0][0] = ~(GB(10,6,0) | GB(26,2,6) | GB(38,2,8));
++
++			return 0;
++
++		case JS_SW_TYPE_FFW:
++
++			if (!js_sw_parity(GB(0,31,0))) return -1;
++
++			axes[0][0] = GB( 0,10,0);
++			axes[0][1] = GB(10, 6,0);
++			axes[0][2] = GB(16, 6,0);
++			buttons[0][0] = ~GB(22,8,0);
+ 
+ 			return 0;
++	}
++
++	return -1;
++}
++
++/*
++ * js_sw_read() reads SideWinder joystick data, and reinitializes
++ * the joystick in case of persistent problems. This is the function that is
++ * called from the generic code to poll the joystick.
++ */
++
++static int js_sw_read(void *xinfo, int **axes, int **buttons)
++{
++	struct js_sw_info *info = xinfo;
++	unsigned char buf[JS_SW_LENGTH];
++	int i;
++
++	i = js_sw_read_packet(info->io, buf, info->length, 0);
++
++	if (info->type <= JS_SW_TYPE_F23 && info->length == 66 && i != 66) {	/* Broken packet, try to fix */
++
++		if (i == 64 && !js_sw_check(js_sw_get_bits(buf,0,64,0,1))) {	/* Last init failed, 1 bit mode */
++			printk(KERN_WARNING "joy-sidewinder: Joystick in wrong mode on %#x"
++				" - going to reinitialize.\n", info->io);
++			info->fail = JS_SW_FAIL;				/* Reinitialize */
++			i = 128;						/* Bogus value */
++		}
++
++		if (i < 66 && GB(0,64,0) == GB(i*3-66,64,0))			/* 1 == 3 */
++			i = 66;							/* Everything is fine */
++
++		if (i < 66 && GB(0,64,0) == GB(66,64,0))			/* 1 == 2 */
++			i = 66;							/* Everything is fine */
++
++		if (i < 66 && GB(i*3-132,64,0) == GB(i*3-66,64,0)) {		/* 2 == 3 */
++			memmove(buf, buf + i - 22, 22);				/* Move data */
++			i = 66;							/* Carry on */
++		}
++	}
+ 
+-		default:
+-			return -1;
++	if (i == info->length && !js_sw_parse(buf, info, axes, buttons)) {	/* Parse data */
++
++		info->fail = 0;
++		info->ok++;
++
++		if (info->type <= JS_SW_TYPE_F23 && info->length == 66		/* Many packets OK */
++			&& info->ok > JS_SW_OK) {
++
++			printk(KERN_INFO "joy-sidewinder: No more trouble on %#x"
++				" - enabling optimization again.\n", info->io);
++			info->length = 22;
++		}
++
++		return 0;
+ 	}
++
++	info->ok = 0;
++	info->fail++;
++
++	if (info->type <= JS_SW_TYPE_F23 && info->length == 22			/* Consecutive bad packets */
++			&& info->fail > JS_SW_BAD) {
++
++		printk(KERN_INFO "joy-sidewinder: Many bit errors on %#x"
++			" - disabling optimization.\n", info->io);
++		info->length = 66;
++	}
++
++	if (info->fail < JS_SW_FAIL) return -1;					/* Not enough, don't reinitialize yet */
++
++	printk(KERN_WARNING "joy-sidewinder: Too many bit errors on %#x"
++		" - reinitializing joystick.\n", info->io);
++
++	if (!i && info->type <= JS_SW_TYPE_F23) {				/* 3D Pro can be in analog mode */
++		udelay(3 * JS_SW_TIMEOUT);
++		js_sw_init_digital(info->io);
++	}
++
++	udelay(JS_SW_TIMEOUT);
++	i = js_sw_read_packet(info->io, buf, JS_SW_LENGTH, 0);			/* Read normal data packet */
++	udelay(JS_SW_TIMEOUT);
++	js_sw_read_packet(info->io, buf, JS_SW_LENGTH, i);			/* Read ID packet, this initializes the stick */
++
++	info->fail = JS_SW_FAIL;
++	
++	return -1;
+ }
+ 
+ /*
+@@ -290,7 +440,7 @@
+  * SideWinders.
+  */
+ 
+-static void __init js_sw_init_corr(int num_axes, int mode, int number, struct js_corr **corr)
++static void __init js_sw_init_corr(int num_axes, int type, int number, struct js_corr **corr)
+ {
+ 	int i, j;
+ 
+@@ -305,9 +455,10 @@
+ 			corr[i][j].coef[3] = (1 << 29) / (511 - 32);
+ 		}
+ 
+-		switch (mode) {
++		switch (type) {
+ 
+-			case JS_SW_MODE_3DP:
++			case JS_SW_TYPE_3DP:
++			case JS_SW_TYPE_F23:
+ 
+ 				corr[i][2].type = JS_CORR_BROKEN;
+ 				corr[i][2].prec = 4;
+@@ -320,7 +471,8 @@
+ 
+ 			break;
+ 
+-			case JS_SW_MODE_PP:
++			case JS_SW_TYPE_PP:
++			case JS_SW_TYPE_FFP:
+ 
+ 				corr[i][2].type = JS_CORR_BROKEN;
+ 				corr[i][2].prec = 1;
+@@ -340,13 +492,53 @@
+ 
+ 			break;
+ 
++			case JS_SW_TYPE_FFW:
++
++				corr[i][0].type = JS_CORR_BROKEN;
++				corr[i][0].prec = 2;
++				corr[i][0].coef[0] = 511 - 8;
++				corr[i][0].coef[1] = 512 + 8;
++				corr[i][0].coef[2] = (1 << 29) / (511 - 8);
++				corr[i][0].coef[3] = (1 << 29) / (511 - 8);
++
++				corr[i][1].type = JS_CORR_BROKEN;
++				corr[i][1].prec = 1;
++				corr[i][1].coef[0] = 63;
++				corr[i][1].coef[1] = 63;
++				corr[i][1].coef[2] = (1 << 29) / -63;
++				corr[i][1].coef[3] = (1 << 29) / -63;
++
++				corr[i][2].type = JS_CORR_BROKEN;
++				corr[i][2].prec = 1;
++				corr[i][2].coef[0] = 63;
++				corr[i][2].coef[1] = 63;
++				corr[i][2].coef[2] = (1 << 29) / -63;
++				corr[i][2].coef[3] = (1 << 29) / -63;
++
++				j = 3;
++
++			break;
++
++			case JS_SW_TYPE_FSP:
++				
++				corr[i][2].type = JS_CORR_BROKEN;
++				corr[i][2].prec = 0;
++				corr[i][2].coef[0] = 31 - 2;
++				corr[i][2].coef[1] = 32 + 2;
++				corr[i][2].coef[2] = (1 << 29) / (31 - 2);
++				corr[i][2].coef[3] = (1 << 29) / (31 - 2);
++
++				j = 3;
++
++			break;
++
+ 			default:
+ 
+ 				j = 0;
+ 
+ 		}
+ 
+-		for (; j < num_axes; j++) {
++		for (; j < num_axes; j++) {				/* Hats & other binary axes */
+ 			corr[i][j].type = JS_CORR_BROKEN;
+ 			corr[i][j].prec = 0;
+ 			corr[i][j].coef[0] = 0;
+@@ -358,83 +550,181 @@
+ }
+ 
+ /*
++ * js_sw_print_packet() prints the contents of a SideWinder packet.
++ */
++
++static void js_sw_print_packet(char *name, int length, unsigned char *buf, char bits)
++{
++	int i;
++
++	printk("joy-sidewinder: %s packet, %d bits. [", name, length);
++	for (i = (((length + 3) >> 2) - 1); i >= 0; i--)
++		printk("%x", (int)js_sw_get_bits(buf, i << 2, 4, 0, bits));
++	printk("]\n");
++}
++
++/*
++ * js_sw_3dp_id() translates the 3DP id into a human legible string.
++ * Unfortunately I don't know how to do this for the other SW types.
++ */
++
++static void js_sw_3dp_id(unsigned char *buf, char *comment)
++{
++	int i;
++	char pnp[8], rev[9];
++
++	for (i = 0; i < 7; i++)						/* ASCII PnP ID */
++		pnp[i] = js_sw_get_bits(buf, 24+8*i, 8, 0, 1);
++
++	for (i = 0; i < 8; i++)						/* ASCII firmware revision */
++		rev[i] = js_sw_get_bits(buf, 88+8*i, 8, 0, 1);
++
++	pnp[7] = rev[8] = 0;
++
++	sprintf(comment, " [PnP %d.%02d id %s rev %s]",
++		(int) (js_sw_get_bits(buf, 8, 6, 6, 1) |		/* Two 6-bit values */
++			js_sw_get_bits(buf, 16, 6, 0, 1)) / 100,
++		(int) (js_sw_get_bits(buf, 8, 6, 6, 1) |
++			js_sw_get_bits(buf, 16, 6, 0, 1)) % 100,
++		 pnp, rev);
++}
++
++/*
++ * js_sw_guess_mode() checks the upper two button bits for toggling -
++ * indication of that the joystick is in 3-bit mode. This is documented
++ * behavior for 3DP ID packet, and for example the FSP does this in
++ * normal packets instead. Fun ...
++ */
++
++static int js_sw_guess_mode(unsigned char *buf, int len)
++{
++	int i;
++	unsigned char xor = 0;
++	for (i = 1; i < len; i++) xor |= (buf[i - 1] ^ buf[i]) & 6;
++	return !!xor * 2 + 1;
++}
++
++/*
+  * js_sw_probe() probes for SideWinder type joysticks.
+  */
+ 
+ static struct js_port __init *js_sw_probe(int io, struct js_port *port)
+ {
+ 	struct js_sw_info info;
+-	char *name;
+-	int i, j, axes, buttons;
+-	__u64 data;
++	char *names[] = {NULL, "SideWinder 3D Pro", "Flight2000 F-23", "SideWinder GamePad", "SideWinder Precision Pro",
++			"SideWinder Force Feedback Pro", "SideWinder FreeStyle Pro", "SideWinder Force Feedback Wheel" };
++	char axes[] = { 0, 6, 6, 2, 6, 6, 5, 3 };
++	char buttons[] = { 0, 9, 9, 10, 9, 9, 10, 8 };
++	int i, j, k, l;
++	unsigned char buf[JS_SW_LENGTH];
++	unsigned char idbuf[JS_SW_LENGTH];
+ 	unsigned char u;
++	char comment[40];
++	char m;
+ 
++	comment[0] = 0;
+ 
+ 	if (check_region(io, 1)) return port;
+-	if (((u = inb(io)) & 3) == 3) return port;
+-	outb(0xff,io);
+-	if (!((inb(io) ^ u) & ~u & 0xf)) return port;
+-
+-	i = js_sw_read_packet(io, JS_SW_MAX_LENGTH, -1, JS_SW_EXT_STROBE, &data);
+-
+-	if (!i) {
+-		udelay(JS_SW_MIN_TIME);
+-		js_sw_init_digital(io);
+-		udelay(JS_SW_MAX_TIME);
+-		i = js_sw_read_packet(io, JS_SW_MAX_LENGTH, -1, JS_SW_EXT_STROBE, &data);
+-	}
+-
+-	switch (i) {
+-		case 0:
+-			return port;
+-		case 5:
+-		case 10:
+-		case 15:
+-		case 20:
+-		case 30:
+-		case 45:
+-		case 60:
+-			info.mode = JS_SW_MODE_GP;
+-			outb(0xff,io);							/* Kick into 3-bit mode */
+-			udelay(JS_SW_MAX_TIME);
+-			i = js_sw_read_packet(io, 60, -1, JS_SW_EXT_STROBE, &data);	/* Get total length */
+-			udelay(JS_SW_MIN_TIME);
+-			j = js_sw_read_packet(io, 15, -1, JS_SW_MIN_STROBE, &data);	/* Get subpacket length */
+-			if (!i || !j) {
+-				printk(KERN_WARNING "joy-sidewinder: SideWinder GamePad detected (%d,%d),"
+-							" but not idenfitied.\n", i, j);
+-				return port;
+-			}
+-			info.number = i / j;
+-			axes = 2; buttons = 10; name = "SideWinder GamePad";
+-			break;
+-		case 16:
+-		case 48:
+-			info.mode = JS_SW_MODE_PP; info.number = 1;
+-			axes = 6; buttons = 9; name = "SideWinder Precision Pro";
+-			break;
+-		case 64:
+-		case 66:
+-			info.mode = JS_SW_MODE_3DP; info.number = 1; info.optimize = 0;
+-			axes = 6; buttons = 8; name = "SideWinder 3D Pro";
+-			break;
+-		case 72:
+-			return port;
+-		default:
+-			printk(KERN_WARNING "joy-sidewinder: unknown joystick device detected "
+-				"(io=%#x, count=%d, data=0x%08x%08x), contact <vojtech@ucw.cz>\n",
+-				io, i, (int)(data >> 32), (int)(data & 0xffffffff));
+-			return port;
++
++	outb(0xff,io);							/* Reasonable guess for mode */
++	u = inb(io);
++	udelay(JS_SW_TIMEOUT);
++	u = (inb(io) ^ u) & u;						/* Does the joystick see axis 2 ? */
++
++	if (~u & 1) return port;
++	m = 1 + ((u & 4) >> 1); 
++
++	i = js_sw_read_packet(io, buf, JS_SW_LENGTH, 0);		/* Read normal packet */
++	m |= js_sw_guess_mode(buf, i);					/* Data packet (1-bit) can carry mode info [FSP] */
++	udelay(JS_SW_TIMEOUT);
++
++	if (!i) {							/* No data. 3d Pro analog mode? */
++		js_sw_init_digital(io);					/* Switch to digital */
++		udelay(JS_SW_TIMEOUT);
++		i = js_sw_read_packet(io, buf, JS_SW_LENGTH, 0);	/* Retry reading packet */
++		udelay(JS_SW_TIMEOUT);
++		if (!i) return port;					/* No data -> FAIL */
+ 	}
+ 
+-	info.io = io;
++	j = js_sw_read_packet(io, idbuf, JS_SW_LENGTH, i);		/* Read ID. This initializes the stick */
++	m |= js_sw_guess_mode(idbuf, j);				/* ID packet should carry mode info [3DP] */
++
++	k = JS_SW_FAIL;							/* Try JS_SW_FAIL times */
++	l = 0;
++
++	do {
++		k--;
++		udelay(JS_SW_TIMEOUT);
++		i = js_sw_read_packet(io, buf, JS_SW_LENGTH, 0);	/* Read data packet */
++
++		if (i > l) {						/* Longer? As we can only lose bits, it makes */
++									/* no sense to try detection for a packet shorter */
++			l = i;						/* than the previous one */
++
++			info.number = 1;
++			info.io = io;
++			info.length = i;
++			info.bits = m;
++			info.fail = 0;
++			info.ok = 0;
++			info.type = 0;
++			info.strobe = JS_SW_STROBE;
++
++			switch (i * m) {
++				case 60:
++					info.number++;
++				case 45:				/* Ambiguous packet length */
++					if (j <= 40) {			/* ID length less or eq 40 -> FSP */	
++				case 43:
++						info.type = JS_SW_TYPE_FSP;
++						break;
++					}
++					info.number++;
++				case 30:
++					info.number++;
++				case 15:
++					info.type = JS_SW_TYPE_GP;
++					break;
++				case 33:
++				case 31:
++					info.type = JS_SW_TYPE_FFW;
++					break;
++				case 48:				/* Ambiguous */
++					if (j == 14) {			/* ID lenght 14 -> FFP */
++						info.type = JS_SW_TYPE_FFP;
++						sprintf(comment, "[AC %s]", js_sw_get_bits(idbuf,38,1,0,3) ? "off" : "on");
++					}
++					info.type = JS_SW_TYPE_PP;
++					break;
++				case 198:
++					info.length = 22;
++				case 64:
++					info.type = JS_SW_TYPE_3DP;
++					if (j == 160) js_sw_3dp_id(idbuf, comment);
++					break;
++			}
++		}
++
++	} while (k && !info.type);
++
++	if (!info.type) {
++		printk(KERN_WARNING "joy-sidewinder: unknown joystick device detected "
++			"(io=%#x), contact <vojtech@ucw.cz>\n", io);
++		js_sw_print_packet("ID", j * 3, idbuf, 3);
++		js_sw_print_packet("Data", i * m, buf, m);
++		return port;
++	}
+ 
+ 	request_region(io, 1, "joystick (sidewinder)");
++
+ 	port = js_register_port(port, &info, info.number, sizeof(struct js_sw_info), js_sw_read);
++
+ 	for (i = 0; i < info.number; i++)
+-		printk(KERN_INFO "js%d: %s at %#x\n",
+-			js_register_device(port, i, axes, buttons, name, js_sw_open, js_sw_close), name, io);
+-	js_sw_init_corr(axes, info.mode, info.number, port->corr);
++		printk(KERN_INFO "js%d: %s%s at %#x\n",
++			js_register_device(port, i, axes[info.type], buttons[info.type],
++				names[info.type], js_sw_open, js_sw_close), names[info.type], comment, io);
++
++	js_sw_init_corr(axes[info.type], info.type, info.number, port->corr);
+ 
+ 	return port;
+ }
+@@ -463,9 +753,9 @@
+ 	int i;
+ 	struct js_sw_info *info;
+ 
+-	while (js_sw_port != NULL) {
++	while (js_sw_port) {
+ 		for (i = 0; i < js_sw_port->ndevs; i++)
+-			if (js_sw_port->devs[i] != NULL)
++			if (js_sw_port->devs[i])
+ 				js_unregister_device(js_sw_port->devs[i]);
+ 		info = js_sw_port->info;
+ 		release_region(info->io, 1);
+diff -urN linux-2.2.2/drivers/char/joystick/joy-spaceorb.c linux-2.2.2-joystick/drivers/char/joystick/joy-spaceorb.c
+--- linux-2.2.2/drivers/char/joystick/joy-spaceorb.c	Thu Jan  1 01:00:00 1970
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-spaceorb.c	Sat Feb 27 18:18:42 1999
+@@ -0,0 +1,302 @@
++/*
++ *  joy-spaceorb.c  Version 0.1
++ *
++ *  Copyright (c) 1998 David Thompson
++ *  Copyright (c) 1999 Vojtech Pavlik
++ */
++
++/*
++ * This is a module for the Linux joystick driver, supporting
++ * the SpaceTec SpaceOrb 360 and SpaceBall Avenger 6dof controllers.
++ */
++
++/*
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or 
++ * (at your option) any later version.
++ * 
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY ORBRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ * 
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
++ * 
++ *  Should you need to contact me, the author, you can do so either by
++ * e-mail - mail your message to <vojtech@ucw.cz>, or by paper mail:
++ * Vojtech Pavlik, Ucitelska 1576, Prague 8, 182 00 Czech Republic
++ */
++
++#include <asm/io.h>
++#include <asm/system.h>
++#include <linux/errno.h>
++#include <linux/joystick.h>
++#include <linux/kernel.h>
++#include <linux/module.h>
++#include <linux/tty.h>
++
++/*
++ * Constants.
++ */
++
++#define	N_JOYSTICK_ORB		15
++#define JS_ORB_MAX_LENGTH	64
++
++/*
++ * List of SpaceOrbs.
++ */
++
++static struct js_port* js_orb_port = NULL;
++
++/*
++ * Per-Orb data.
++ */
++
++struct js_orb_info {
++	struct tty_struct* tty;
++	struct js_port* port;
++	int idx;
++	unsigned char data[JS_ORB_MAX_LENGTH];
++	int js;
++	char used;
++};
++
++static unsigned char js_orb_xor[] = "SpaceWare";
++
++static unsigned char *js_orb_errors[] = { "EEPROM storing 0 failed", "Receive queue overflow", "Transmit queue timeout",
++		"Bad packet", "Power brown-out", "EEPROM checksum error", "Hardware fault" }; 
++
++/*
++ * js_orb_process_packet() decodes packets the driver receives from the
++ * SpaceOrb.
++ */
++
++static void js_orb_process_packet(struct js_orb_info* info)
++{
++	int i;
++	int **axes = info->port->axes;
++	int **buttons = info->port->buttons;
++	unsigned char *data = info->data;
++	unsigned char c = 0;
++
++	if (info->idx < 2) return;
++	for (i = 0; i < info->idx; i++) c ^= data[i];
++	if (c) return;
++
++	switch (info->data[0]) {
++
++		case 'R':				/* Reset packet */
++			info->data[info->idx - 1] = 0;
++			for (i = 1; i < info->idx && info->data[i] == ' '; i++);
++			printk(KERN_INFO "js%d: SpaceOrb 360 [%s] on %s%d\n",
++				info->js, info->data + i, info->tty->driver.name,
++				MINOR(info->tty->device) - info->tty->driver.minor_start);
++			break;
++
++		case 'D':				/* Ball + button data */
++			if (info->idx != 12) return;
++			if (!info->port->devs[0]) return;
++			for (i = 0; i < 9; i++) info->data[i+2] ^= js_orb_xor[i]; 
++			axes[0][0] = ( data[2]         << 3) | (data[ 3] >> 4);
++			axes[0][1] = ((data[3] & 0x0f) << 6) | (data[ 4] >> 1);
++			axes[0][2] = ((data[4] & 0x01) << 9) | (data[ 5] << 2) | (data[4] >> 5);
++			axes[0][3] = ((data[6] & 0x1f) << 5) | (data[ 7] >> 2);
++			axes[0][4] = ((data[7] & 0x03) << 8) | (data[ 8] << 1) | (data[7] >> 6);
++			axes[0][5] = ((data[9] & 0x3f) << 4) | (data[10] >> 3);
++			for(i = 0; i < 6; i ++) if (axes[0][i] & 0x200) axes[0][i] -= 1024;
++			buttons[0][0] = data[1];
++			break;
++
++		case 'K':				/* Button data */
++			if (info->idx != 5) return;
++			if (!info->port->devs[0]) return;
++			buttons[0][0] = data[2];
++			break;
++
++		case 'E':				/* Error packet */
++			if (info->idx != 4) return;
++			printk(KERN_ERR "joy-spaceorb: Device error. [ ");
++			for (i = 0; i < 7; i++)
++				if (data[1] & (1 << i))
++					printk("%s ", js_orb_errors[i]);
++			printk("]\n");
++			break;
++
++		case 'N':				/* Null region */
++			if (info->idx != 3) return;
++			break;
++
++		case 'P':				/* Pulse (update) speed */
++			if (info->idx != 4) return;
++			break;
++
++		default:
++			printk("joy-spaceorb: Unknown packet %d length %d:", data[0], info->idx);
++			for (i = 0; i < info->idx; i++) printk(" %02x", data[i]);
++			printk("\n");
++			return;
++	}
++}
++
++/*
++ * js_orb_open() is a callback from the joystick device open routine.
++ */
++
++static int js_orb_open(struct js_dev *jd)
++{
++	struct js_orb_info *info = jd->port->info;
++	info->used++;
++	MOD_INC_USE_COUNT;
++	return 0;
++}
++
++/*
++ * js_orb_close() is a callback from the joystick device release routine.
++ */
++
++static int js_orb_close(struct js_dev *jd)
++{
++	struct js_orb_info *info = jd->port->info;
++	if (!--info->used) {
++		js_unregister_device(jd->port->devs[0]);
++		js_orb_port = js_unregister_port(jd->port);
++	}
++	MOD_DEC_USE_COUNT;
++	return 0;
++}
++
++/*
++ * js_orb_init_corr() initializes the correction values for the SpaceOrb.
++ */
++
++static void __init js_orb_init_corr(struct js_corr **corr)
++{
++	int j;
++
++	for (j = 0; j < 6; j++) {
++		corr[0][j].type = JS_CORR_BROKEN;
++		corr[0][j].prec = 0;
++		corr[0][j].coef[0] = 0 ;
++		corr[0][j].coef[1] = 0 ;
++		corr[0][j].coef[2] = (1 << 29) / 511;
++		corr[0][j].coef[3] = (1 << 29) / 511;
++	}
++}
++
++/*
++ * js_orb_ldisc_open() is the routine that is called upon setting our line
++ * discipline on a tty.
++ */
++
++static int js_orb_ldisc_open(struct tty_struct *tty)
++{
++	struct js_orb_info iniinfo;
++	struct js_orb_info *info = &iniinfo;
++
++	info->tty = tty;
++	info->idx = 0;
++	info->used = 1;
++
++	js_orb_port = js_register_port(js_orb_port, info, 1, sizeof(struct js_orb_info), NULL);
++	
++	info = js_orb_port->info;
++	info->port = js_orb_port;
++	tty->disc_data = info;
++
++	info->js = js_register_device(js_orb_port, 0, 6, 7, "SpaceOrb 360", js_orb_open, js_orb_close);
++
++	js_orb_init_corr(js_orb_port->corr);
++
++	MOD_INC_USE_COUNT;
++
++	return 0;
++}
++
++/*
++ * js_orb_ldisc_close() is the opposite of js_orb_ldisc_open()
++ */
++
++static void js_orb_ldisc_close(struct tty_struct *tty)
++{
++	struct js_orb_info* info = (struct js_orb_info*) tty->disc_data;
++	if (!--info->used) {
++		js_unregister_device(info->port->devs[0]);
++		js_orb_port = js_unregister_port(info->port);
++	}
++	MOD_DEC_USE_COUNT;
++}
++
++/*
++ * js_orb_ldisc_receive() is called by the low level driver when characters
++ * are ready for us. We then buffer them for further processing, or call the
++ * packet processing routine.
++ */
++
++static void js_orb_ldisc_receive(struct tty_struct *tty, const unsigned char *cp, char *fp, int count)
++{
++	struct js_orb_info* info = (struct js_orb_info*) tty->disc_data;
++	int i;
++
++	for (i = 0; i < count; i++) {
++		if (~cp[i] & 0x80) {
++			if (info->idx) js_orb_process_packet(info);
++			info->idx = 0;
++		}
++		if (info->idx < JS_ORB_MAX_LENGTH)
++			info->data[info->idx++] = cp[i] & 0x7f;
++	}
++}
++
++/*
++ * js_orb_ldisc_room() reports how much room we do have for receiving data.
++ * Although we in fact have infinite room, we need to specify some value
++ * here, so why not the size of our packet buffer. It's big anyway.
++ */
++
++static int js_orb_ldisc_room(struct tty_struct *tty)
++{
++	return JS_ORB_MAX_LENGTH;
++}
++
++/*
++ * The line discipline structure.
++ */
++
++static struct tty_ldisc js_orb_ldisc = {
++	magic:		TTY_LDISC_MAGIC,
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,1,0)
++	name:		"spaceorb",
++#endif
++	open:		js_orb_ldisc_open,
++	close:		js_orb_ldisc_close,
++	receive_buf:	js_orb_ldisc_receive,
++	receive_room:	js_orb_ldisc_room,
++};
++
++/*
++ * The functions for inserting/removing us as a module.
++ */
++
++#ifdef MODULE
++int init_module(void)
++#else
++int __init js_orb_init(void)
++#endif
++{
++        if (tty_register_ldisc(N_JOYSTICK_ORB, &js_orb_ldisc)) {
++                printk(KERN_ERR "joy-spaceorb: Error registering line discipline.\n");
++		return -ENODEV;
++	}
++
++	return  0;
++}
++
++#ifdef MODULE
++void cleanup_module(void)
++{
++	tty_register_ldisc(N_JOYSTICK_ORB, NULL);
++}
++#endif
+diff -urN linux-2.2.2/drivers/char/joystick/joy-thrustmaster.c linux-2.2.2-joystick/drivers/char/joystick/joy-thrustmaster.c
+--- linux-2.2.2/drivers/char/joystick/joy-thrustmaster.c	Wed Dec  2 04:05:05 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-thrustmaster.c	Mon Mar  8 16:18:36 1999
+@@ -1,7 +1,7 @@
+ /*
+  *  joy-thrustmaster.c  Version 1.2
+  *
+- *  Copyright (c) 1998 Vojtech Pavlik
++ *  Copyright (c) 1998-1999 Vojtech Pavlik
+  */
+ 
+ /*
+@@ -40,26 +40,13 @@
+ #include <linux/string.h>
+ 
+ #define JS_TM_MAX_START		400
+-#define JS_TM_MAX_STROBE	25
++#define JS_TM_MAX_STROBE	45
+ #define JS_TM_MAX_LENGTH	13
+ 
+ #define JS_TM_MODE_M3DI		1
+ #define JS_TM_MODE_3DRP		3
+-#define JS_TM_MODE_WCS3		4
+ 
+-#define JS_TM_MODE_MAX		5	/* Last mode + 1 */
+-
+-#define JS_TM_BYTE_A0		0
+-#define JS_TM_BYTE_A1		1
+-#define JS_TM_BYTE_A2		3
+-#define JS_TM_BYTE_A3		4
+-#define JS_TM_BYTE_A4		6
+-#define JS_TM_BYTE_A5		7
+-
+-#define JS_TM_BYTE_D0		2
+-#define JS_TM_BYTE_D1		5
+-#define JS_TM_BYTE_D2		8
+-#define JS_TM_BYTE_D3		9
++#define JS_TM_MODE_MAX		4	/* Last mode + 1 */
+ 
+ #define JS_TM_BYTE_ID		10
+ #define JS_TM_BYTE_REV		11
+@@ -68,26 +55,27 @@
+ static int js_tm_port_list[] __initdata = {0x201, 0};
+ static struct js_port* js_tm_port __initdata = NULL;
+ 
++static unsigned char js_tm_byte_a[16] = { 0, 1, 3, 4, 6, 7 };
++static unsigned char js_tm_byte_d[16] = { 2, 5, 8, 9 };
++
+ struct js_tm_info {
+ 	int io;
+ 	unsigned char mode;
+ };
+ 
+-static int js_tm_id_to_def[JS_TM_MODE_MAX] = {0x00, 0x42, 0x00, 0x22, 0x00};
+-
+ /*
+  * js_tm_read_packet() reads a ThrustMaster packet.
+  */
+ 
+ static int js_tm_read_packet(int io, unsigned char *data)
+ {
+-	unsigned int t, t1;
++	unsigned int t;
+ 	unsigned char u, v, error;
+ 	int i, j;
+ 	unsigned long flags;
+ 
+-	int start = (js_time_speed * JS_TM_MAX_START) >> 10;
+-	int strobe = (js_time_speed * JS_TM_MAX_STROBE) >> 10;
++	int start = (js_io_speed * JS_TM_MAX_START) >> 10;
++	int strobe = (js_io_speed * JS_TM_MAX_STROBE) >> 10;
+ 
+ 	error = 0;
+ 	i = j = 0;
+@@ -95,21 +83,14 @@
+ 	__save_flags(flags);
+ 	__cli();
+ 	outb(0xff,io);
+-
+-	t = js_get_time();
++	
++	v = inb(io) >> 4;
++	t = start;
+ 
+ 	do {
+-		u = inb(io);
+-		t1 = js_get_time();
+-	} while ((u & 1) && js_delta(t1, t) < start);
+-
+-	t = t1;
+-	u >>= 4;
+-
+-	do {
+-		v = inb(io) >> 4;
+-		t1 = js_get_time();
+-		if ((u ^ v) & u & 2) {
++		t--;
++		u = v; v = inb(io) >> 4;
++		if (~v & u & 2) {
+ 			if (j) {
+ 				if (j < 9) {				/* Data bit */
+ 					data[i] |= (~v & 1) << (j - 1);
+@@ -124,10 +105,9 @@
+ 				error |= ~v & 1;
+ 				j++;
+ 			}
+-			t = t1;
++			t = strobe;
+ 		}
+-		u = v;
+-	} while (!error && i < JS_TM_MAX_LENGTH && js_delta(t1,t) < strobe);
++	} while (!error && i < JS_TM_MAX_LENGTH && t > 0);
+ 
+ 	__restore_flags(flags);
+ 
+@@ -142,46 +122,38 @@
+ {
+ 	struct js_tm_info *info = xinfo;
+ 	unsigned char data[JS_TM_MAX_LENGTH];
++	int i;
+ 
+-	if (js_tm_read_packet(info->io, data)) {
+-		printk(KERN_WARNING "joy-thrustmaster: failed to read data packet\n");
+-		return -1;
+-	}
+-	if (data[JS_TM_BYTE_ID] != info->mode) {
+-		printk(KERN_WARNING "joy-thrustmaster: ID (%d) != mode (%d)\n",
+-			data[JS_TM_BYTE_ID], info->mode);
+-		return -1;
+-	}
+-	if (data[JS_TM_BYTE_DEF] != js_tm_id_to_def[info->mode]) {
+-		printk(KERN_WARNING "joy-thrustmaster: DEF (%d) != def(mode) (%d)\n",
+-			data[JS_TM_BYTE_DEF], js_tm_id_to_def[info->mode]);
+-		return -1;
+-	}
++	if (js_tm_read_packet(info->io, data)) return -1;
++	if (data[JS_TM_BYTE_ID] != info->mode) return -1;
++
++	for (i = 0; i < data[JS_TM_BYTE_DEF] >> 4; i++) axes[0][i] = data[js_tm_byte_a[i]];
+ 
+ 	switch (info->mode) {
+ 
+ 		case JS_TM_MODE_M3DI:
+ 
+-			axes[0][0] = data[JS_TM_BYTE_A0];
+-			axes[0][1] = data[JS_TM_BYTE_A1];
+-			axes[0][2] = data[JS_TM_BYTE_A2];
+-			axes[0][3] = data[JS_TM_BYTE_A3];
++			axes[0][4] = ((data[js_tm_byte_d[0]] >> 3) & 1) - ((data[js_tm_byte_d[0]] >> 1) & 1);
++			axes[0][5] = ((data[js_tm_byte_d[0]] >> 2) & 1) - ( data[js_tm_byte_d[0]]       & 1);
+ 
+-			axes[0][4] = ((data[JS_TM_BYTE_D0] >> 3) & 1) - ((data[JS_TM_BYTE_D0] >> 1) & 1);
+-			axes[0][5] = ((data[JS_TM_BYTE_D0] >> 2) & 1) - ( data[JS_TM_BYTE_D0]       & 1);
+-
+-			buttons[0][0] = ((data[JS_TM_BYTE_D0] >> 6) & 0x01) | ((data[JS_TM_BYTE_D0] >> 3) & 0x06)
+-				      | ((data[JS_TM_BYTE_D0] >> 4) & 0x08) | ((data[JS_TM_BYTE_D1] >> 2) & 0x30);
++			buttons[0][0] = ((data[js_tm_byte_d[0]] >> 6) & 0x01) | ((data[js_tm_byte_d[0]] >> 3) & 0x06)
++				      | ((data[js_tm_byte_d[0]] >> 4) & 0x08) | ((data[js_tm_byte_d[1]] >> 2) & 0x30);
+ 
+ 			return 0;
+ 
+ 		case JS_TM_MODE_3DRP:
+ 
+-			axes[0][0] = data[JS_TM_BYTE_A0];
+-			axes[0][1] = data[JS_TM_BYTE_A1];
++			buttons[0][0] = (data[js_tm_byte_d[0]] & 0x3f) | ((data[js_tm_byte_d[1]] << 6) & 0xc0)
++				      | (( ((int) data[js_tm_byte_d[0]]) << 2) & 0x300);
++
++			return 0;
++
++		default:
++
++			buttons[0][0] = 0;
+ 
+-			buttons[0][0] = ( data[JS_TM_BYTE_D0]       & 0x3f) | ((data[JS_TM_BYTE_D1] << 6) & 0xc0)
+-				      | (( ((int) data[JS_TM_BYTE_D0]) << 2) & 0x300);
++			for (i = 0; i < (data[JS_TM_BYTE_DEF] & 0xf); i++)
++				buttons[0][0] |= ((int) data[js_tm_byte_d[i]]) << (i << 3);
+ 
+ 			return 0;
+ 
+@@ -252,24 +224,16 @@
+ static struct js_port __init *js_tm_probe(int io, struct js_port *port)
+ {
+ 	struct js_tm_info info;
+-	char *names[JS_TM_MODE_MAX] = { NULL, "ThrustMaster Millenium 3D Inceptor", NULL,
+-						"ThrustMaster Rage 3D Gamepad", "ThrustMaster WCS III" };
+-	char axes[JS_TM_MODE_MAX] = { 0, 6, 0, 2, 0 };
+-	char buttons[JS_TM_MODE_MAX] = { 0, 5, 0, 10, 0 };
+-
++	char *names[JS_TM_MODE_MAX] = { NULL, "ThrustMaster Millenium 3D Inceptor", NULL, "ThrustMaster Rage 3D Gamepad" };
++	char axes[JS_TM_MODE_MAX] = { 0, 6, 0, 2 };
++	char buttons[JS_TM_MODE_MAX] = { 0, 6, 0, 10 };
++	char name[64];
+ 	unsigned char data[JS_TM_MAX_LENGTH];
+-	unsigned char u;
++	unsigned char a, b;
+ 
+ 	if (check_region(io, 1)) return port;
+ 
+-	if (((u = inb(io)) & 3) == 3) return port;
+-	outb(0xff,io);
+-	if (!((inb(io) ^ u) & ~u & 0xf)) return port;
+-
+-	if(js_tm_read_packet(io, data)) {
+-		printk(KERN_WARNING "joy-thrustmaster: probe - can't read packet\n");
+-		return port;
+-	}
++	if(js_tm_read_packet(io, data)) return port;
+ 
+ 	info.io = io;
+ 	info.mode = data[JS_TM_BYTE_ID];
+@@ -277,23 +241,20 @@
+ 	if (!info.mode) return port;
+ 
+ 	if (info.mode >= JS_TM_MODE_MAX || !names[info.mode]) {
+-		printk(KERN_WARNING "joy-thrustmaster: unknown device detected "
+-				    "(io=%#x, id=%d), contact <vojtech@ucw.cz>\n",
+-					io, info.mode);
+-		return port;
+-	}
+-
+-	if (data[JS_TM_BYTE_DEF] != js_tm_id_to_def[info.mode]) {
+-		printk(KERN_WARNING "joy-thrustmaster: wrong DEF (%d) for ID %d - should be %d\n",
+-				data[JS_TM_BYTE_DEF], info.mode, js_tm_id_to_def[info.mode]);
++		a = data[JS_TM_BYTE_DEF] >> 4;
++		b = (data[JS_TM_BYTE_DEF] & 0xf) << 3;
++		sprintf(name, "Unknown %d-axis, %d-button TM device %d", a, b, info.mode);
++	} else {
++		sprintf(name, names[info.mode]);
++		a = axes[info.mode];
++		b = buttons[info.mode];
+ 	}
+ 
+ 	request_region(io, 1, "joystick (thrustmaster)");
+ 	port = js_register_port(port, &info, 1, sizeof(struct js_tm_info), js_tm_read);
+ 	printk(KERN_INFO "js%d: %s revision %d at %#x\n",
+-		js_register_device(port, 0, axes[info.mode], buttons[info.mode],
+-				names[info.mode], js_tm_open, js_tm_close), names[info.mode], data[JS_TM_BYTE_REV], io);
+-	js_tm_init_corr(axes[info.mode], info.mode, port->axes, port->corr);
++		js_register_device(port, 0, a, b, name, js_tm_open, js_tm_close), name, data[JS_TM_BYTE_REV], io);
++	js_tm_init_corr(a, info.mode, port->axes, port->corr);
+ 
+ 	return port;
+ }
+@@ -321,7 +282,7 @@
+ {
+ 	struct js_tm_info *info;
+ 
+-	while (js_tm_port != NULL) {
++	while (js_tm_port) {
+ 		js_unregister_device(js_tm_port->devs[0]);
+ 		info = js_tm_port->info;
+ 		release_region(info->io, 1);
+diff -urN linux-2.2.2/drivers/char/joystick/joy-turbografx.c linux-2.2.2-joystick/drivers/char/joystick/joy-turbografx.c
+--- linux-2.2.2/drivers/char/joystick/joy-turbografx.c	Wed Dec  2 04:05:05 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-turbografx.c	Mon Mar  8 16:18:59 1999
+@@ -1,7 +1,7 @@
+ /*
+  *  joy-turbografx.c  Version 1.2
+  *
+- *  Copyright (c) 1998 Vojtech Pavlik
++ *  Copyright (c) 1998-1999 Vojtech Pavlik
+  */
+ 
+ /*
+@@ -57,7 +57,7 @@
+ #define JS_TG_BUTTON4	0x01
+ #define JS_TG_BUTTON5	0x08
+ 
+-static struct js_port* js_tg_port = NULL;
++static struct js_port* js_tg_port __initdata = NULL;
+ 
+ static int js_tg[] __initdata = { -1, 0, 0, 0, 0, 0, 0, 0 };
+ static int js_tg_2[] __initdata = { -1, 0, 0, 0, 0, 0, 0, 0 };
+@@ -142,9 +142,9 @@
+ 	struct js_tg_info *info;
+ 	int i;
+ 
+-	while (js_tg_port != NULL) {
++	while (js_tg_port) {
+ 		for (i = 0; i < js_tg_port->ndevs; i++)
+-			if (js_tg_port->devs[i] != NULL)
++			if (js_tg_port->devs[i])
+ 				js_unregister_device(js_tg_port->devs[i]);
+ 		info = js_tg_port->info;
+ #ifdef USE_PARPORT
+@@ -195,11 +195,11 @@
+ 		struct parport *pp;
+ 
+ 		if (config[0] > 0x10)
+-			for (pp=parport_enumerate(); pp != NULL && (pp->base!=config[0]); pp=pp->next);
++			for (pp=parport_enumerate(); pp && (pp->base!=config[0]); pp=pp->next);
+ 		else
+-			for (pp=parport_enumerate(); pp != NULL && (config[0]>0); pp=pp->next) config[0]--;
++			for (pp=parport_enumerate(); pp && (config[0]>0); pp=pp->next) config[0]--;
+ 
+-		if (pp == NULL) {
++		if (!pp) {
+ 			printk(KERN_ERR "joy-tg: no such parport\n");
+ 			return port;
+ 		}
+diff -urN linux-2.2.2/drivers/char/joystick/joy-warrior.c linux-2.2.2-joystick/drivers/char/joystick/joy-warrior.c
+--- linux-2.2.2/drivers/char/joystick/joy-warrior.c	Thu Jan  1 01:00:00 1970
++++ linux-2.2.2-joystick/drivers/char/joystick/joy-warrior.c	Sun Feb 28 01:28:47 1999
+@@ -0,0 +1,315 @@
++/*
++ *  joy-warrior.c  Version 0.1
++ *
++ *  Copyright (c) 1998 David Thompson
++ *  Copyright (c) 1999 Vojtech Pavlik
++ */
++
++/*
++ * This is a module for the Linux joystick driver, supporting
++ * the Logitech WingMan Warrior joystick.
++ */
++
++/*
++ * This program is free warftware; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or 
++ * (at your option) any later version.
++ * 
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ * 
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
++ * 
++ *  Should you need to contact me, the author, you can do so either by
++ * e-mail - mail your message to <vojtech@ucw.cz>, or by paper mail:
++ * Vojtech Pavlik, Ucitelska 1576, Prague 8, 182 00 Czech Republic
++ */
++
++#include <asm/io.h>
++#include <asm/system.h>
++#include <linux/errno.h>
++#include <linux/joystick.h>
++#include <linux/kernel.h>
++#include <linux/module.h>
++#include <linux/delay.h>
++#include <linux/tty.h>
++
++/*
++ * Constants.
++ */
++
++#define	N_JOYSTICK_WAR		13
++#define JS_WAR_MAX_LENGTH	16
++
++/*
++ * List of Warriors.
++ */
++
++static struct js_port* js_war_port = NULL;
++
++static char js_war_lengths[] = { 0, 4, 12, 3, 4, 4, 0, 0 }; 
++
++/*
++ * Per-Warrior data.
++ */
++
++struct js_war_info {
++	struct tty_struct* tty;
++	struct js_port* port;
++	int idx;
++	int len;
++	unsigned char data[JS_WAR_MAX_LENGTH];
++	char used;
++};
++
++/*
++ * js_war_process_packet() decodes packets the driver receives from the
++ * Warrior. It updates the data accordingly.
++ */
++
++static void js_war_process_packet(struct js_war_info* info)
++{
++	int **axes = info->port->axes;
++	int **buttons = info->port->buttons;
++	unsigned char *data = info->data;
++	int i;
++
++	if (!info->idx) return;
++
++	switch ((data[0] >> 4) & 7) {
++
++		case 1:					/* Button data */
++			if (!info->port->devs[0]) return;
++			buttons[0][0] = ((data[3] & 0xa) >> 1) | ((data[3] & 0x5) << 1);
++			return;
++		case 2:					/* Static status (Send !S to get one) */
++#if 0
++			printk("joy-warrior: Static status:");
++			for (i = 0; i < 12; i++)
++				printk(" %02x", info->data[i]);
++			printk("\n");
++#endif
++			return;
++		case 3:					/* XY-axis info->data */
++			if (!info->port->devs[0]) return;
++			axes[0][0] = ((data[0] & 8) << 5) - (data[2] | ((data[0] & 4) << 5));
++			axes[0][1] = (data[1] | ((data[0] & 1) << 7)) - ((data[0] & 2) << 7);
++			return;
++			break;
++		case 4:					/* Dynamic status */
++#if 0
++			printk("joy-warrior: Dynamic status:");
++			for (i = 0; i < 4; i++)
++				printk(" %02x", info->data[i]);
++			printk("\n");
++#endif
++			return;
++		case 5:					/* Throttle, spinner, hat info->data */
++			if (!info->port->devs[0]) return;
++			axes[0][2] = (data[1] | ((data[0] & 1) << 7)) - ((data[0] & 2) << 7);
++			axes[0][3] = (data[3] & 2 ? 1 : 0) - (info->data[3] & 1 ? 1 : 0);
++			axes[0][4] = (data[3] & 8 ? 1 : 0) - (info->data[3] & 4 ? 1 : 0);
++			axes[0][5] = (data[2] | ((data[0] & 4) << 5)) - ((data[0] & 8) << 5);
++			return;
++		default:
++			printk("joy-warrior: Unknown packet %d length %d:", (data[0] >> 4) & 7, info->idx);
++			for (i = 0; i < info->idx; i++)
++				printk(" %02x", data[i]);
++			printk("\n");
++			return;
++	}
++}
++
++/*
++ * js_war_open() is a callback from the joystick device open routine.
++ */
++
++static int js_war_open(struct js_dev *jd)
++{
++	struct js_war_info *info = jd->port->info;
++	info->used++;
++	MOD_INC_USE_COUNT;
++	return 0;
++}
++
++/*
++ * js_war_close() is a callback from the joystick device release routine.
++ */
++
++static int js_war_close(struct js_dev *jd)
++{
++	struct js_war_info *info = jd->port->info;
++	if (!--info->used) {
++		js_unregister_device(jd->port->devs[0]);
++		js_war_port = js_unregister_port(jd->port);
++	}
++	MOD_DEC_USE_COUNT;
++	return 0;
++}
++
++/*
++ * js_war_init_corr() initializes the correction values for the Warrior.
++ */
++
++static void __init js_war_init_corr(struct js_corr **corr)
++{
++	int i;
++
++	for (i = 0; i < 6; i++) {
++		corr[0][i].type = JS_CORR_BROKEN;
++		corr[0][i].prec = 0;
++		corr[0][i].coef[0] = -8;
++		corr[0][i].coef[1] = 8;
++		corr[0][i].coef[2] = (1 << 29) / (128 - 64);
++		corr[0][i].coef[3] = (1 << 29) / (128 - 64);
++	}
++
++	corr[0][2].coef[2] = (1 << 29) / (128 - 16);
++	corr[0][2].coef[3] = (1 << 29) / (128 - 16);
++
++	for (i = 3; i < 5; i++) {
++		corr[0][i].coef[0] = 0;
++		corr[0][i].coef[1] = 0;
++		corr[0][i].coef[2] = (1 << 29);
++		corr[0][i].coef[3] = (1 << 29);
++	}
++
++	corr[0][5].prec = -1;
++	corr[0][5].coef[0] = 0;
++	corr[0][5].coef[1] = 0;
++	corr[0][5].coef[2] = (1 << 29) / 128;
++	corr[0][5].coef[3] = (1 << 29) / 128;
++}
++
++/*
++ * js_war_ldisc_open() is the routine that is called upon setting our line
++ * discipline on a tty.
++ */
++
++static int js_war_ldisc_open(struct tty_struct *tty)
++{
++	struct js_war_info iniinfo;
++	struct js_war_info *info = &iniinfo;
++
++	info->tty = tty;
++	info->idx = 0;
++	info->len = 0;
++	info->used = 0;
++
++	js_war_port = js_register_port(js_war_port, info, 1, sizeof(struct js_war_info), NULL);
++
++	info = js_war_port->info;
++	info->port = js_war_port;
++	tty->disc_data = info;
++
++	printk(KERN_INFO "js%d: WingMan Warrior on %s%d\n",
++		js_register_device(js_war_port, 0, 6, 4, "WingMan Warrior", js_war_open, js_war_close),
++		tty->driver.name, MINOR(tty->device) - tty->driver.minor_start);
++
++	js_war_init_corr(js_war_port->corr);
++
++	MOD_INC_USE_COUNT;
++
++	return 0;
++}
++
++/*
++ * js_war_ldisc_close() is the opposite of js_war_ldisc_open()
++ */
++
++static void js_war_ldisc_close(struct tty_struct *tty)
++{
++	struct js_war_info* info = (struct js_war_info*) tty->disc_data;
++	if (!--info->used) {
++		js_unregister_device(info->port->devs[0]);
++		js_war_port = js_unregister_port(info->port);
++	}
++	MOD_DEC_USE_COUNT;
++}
++
++/*
++ * js_war_ldisc_receive() is called by the low level driver when characters
++ * are ready for us. We then buffer them for further processing, or call the
++ * packet processing routine.
++ */
++
++static void js_war_ldisc_receive(struct tty_struct *tty, const unsigned char *cp, char *fp, int count)
++{
++	struct js_war_info* info = (struct js_war_info*) tty->disc_data;
++	int i;
++
++	for (i = 0; i < count; i++) {
++		if (cp[i] & 0x80) {
++			if (info->idx)
++				js_war_process_packet(info);
++			info->idx = 0;
++			info->len = js_war_lengths[(cp[i] >> 4) & 7];
++		}
++
++		if (info->idx < JS_WAR_MAX_LENGTH)
++			info->data[info->idx++] = cp[i];
++
++		if (info->idx == info->len) {
++			if (info->idx)
++				js_war_process_packet(info);	
++			info->idx = 0;
++			info->len = 0;
++		}
++	}
++}
++
++/*
++ * js_war_ldisc_room() reports how much room we do have for receiving data.
++ * Although we in fact have infinite room, we need to specify some value
++ * here, so why not the size of our packet buffer. It's big anyway.
++ */
++
++static int js_war_ldisc_room(struct tty_struct *tty)
++{
++	return JS_WAR_MAX_LENGTH;
++}
++
++/*
++ * The line discipline structure.
++ */
++
++static struct tty_ldisc js_war_ldisc = {
++        magic:          TTY_LDISC_MAGIC,
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,1,0)
++        name:           "warrior",
++#endif
++	open:		js_war_ldisc_open,
++	close:		js_war_ldisc_close,
++	receive_buf:	js_war_ldisc_receive,
++	receive_room:	js_war_ldisc_room,
++};
++
++/*
++ * The functions for inserting/removing us as a module.
++ */
++
++#ifdef MODULE
++int init_module(void)
++#else
++int __init js_war_init(void)
++#endif
++{
++        if (tty_register_ldisc(N_JOYSTICK_WAR, &js_war_ldisc)) {
++                printk(KERN_ERR "joy-warrior: Error registering line discipline.\n");
++		return -ENODEV;
++	}
++
++	return  0;
++}
++
++#ifdef MODULE
++void cleanup_module(void)
++{
++	tty_register_ldisc(N_JOYSTICK_WAR, NULL);
++}
++#endif
+diff -urN linux-2.2.2/drivers/char/joystick/joystick.c linux-2.2.2-joystick/drivers/char/joystick/joystick.c
+--- linux-2.2.2/drivers/char/joystick/joystick.c	Wed Dec  2 04:05:05 1998
++++ linux-2.2.2-joystick/drivers/char/joystick/joystick.c	Mon Mar  8 15:39:31 1999
+@@ -1,7 +1,7 @@
+ /*
+- * joystick.c  Version 1.2
++ *  joystick.c  Version 1.2
+  *
+- * Copyright (c) 1996-1998 Vojtech Pavlik
++ *  Copyright (c) 1996-1999 Vojtech Pavlik
+  */
+ 
+ /*
+@@ -33,7 +33,6 @@
+ #include <asm/io.h>
+ #include <asm/system.h>
+ #include <asm/segment.h>
+-#include <linux/config.h>
+ #include <linux/delay.h>
+ #include <linux/errno.h>
+ #include <linux/joystick.h>
+@@ -74,16 +73,10 @@
+ static int js_use_count = 0;
+ 
+ /*
+- * Exported variables.
++ * Gameport speed.
+  */
+ 
+-unsigned int js_time_speed = 0;
+-js_time_func js_get_time;
+-js_delta_func js_delta;
+-
+-unsigned int js_time_speed_a = 0;
+-js_time_func js_get_time_a;
+-js_delta_func js_delta_a;
++unsigned int js_io_speed = 0;
+ 
+ /*
+  * Module info.
+@@ -93,243 +86,48 @@
+ MODULE_SUPPORTED_DEVICE("js");
+ 
+ /*
+- * js_get_time_*() are different functions to get current time.
+- * js_delta_*() are functions to compute time difference.
+- */
+-
+-#ifdef __i386__
+-
+-static unsigned int js_get_time_rdtsc(void)
+-{
+-	unsigned int x;
+-	__asm__ __volatile__ ( "rdtsc" : "=A" (x) );
+-	return x;
+-}
+-
+-static unsigned int js_get_time_pit(void)
+-{
+-	unsigned long flags;
+-	unsigned int x;
+-
+-	__save_flags(flags);
+-	__cli();
+-	outb(0, 0x43);
+-	x = inb(0x40);
+-	x |= inb(0x40) << 8;
+-	__restore_flags(flags);
+-
+-	return x;
+-}
+-
+-static int js_delta_pit(unsigned int x, unsigned int y)
+-{
+-	return y - x + ( y < x ? 1193180L / HZ : 0 );
+-}
+-
+-static unsigned int js_get_time_counter(void)
+-{
+-	static int time_counter = 0;
+-	return time_counter++;
+-}
+-
+-#else
+-#ifdef __alpha__
+-
+-static unsigned int js_get_time_rpcc(void)
+-{
+-	unsigned int x;
+-	__asm__ __volatile__ ( "rpcc %0" : "=r" (x) );
+-	return x;
+-}
+-
+-#else
+-
+-#ifndef MODULE
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,1,0)
+-static unsigned int js_get_time_system(void)
+-{
+-	static struct timeval js_tv;
+-	get_fast_time(&js_tv);
+-	return js_tv.tv_sec * 1000000L + js_tv.tv_usec;
+-}
+-#endif
+-#endif
+-
+-#endif
+-#endif
+-
+-static int js_delta_normal(unsigned int x, unsigned int y)
+-{
+-	return x - y;
+-}
+-
+-/*
+- * js_calibrate_time() calibrates a given timer.
++ * js_measure_io_speed() measures the gameport i/o speed.
+  */
+ 
+-static int __init js_calibrate_time(js_time_func get_time, js_delta_func delta)
++static int __init js_measure_io_speed(void)
+ {
+-	unsigned int t1, t2, t3;
+-	unsigned long flags;
+-
+-	__save_flags(flags);
+-	__cli();
+-	t1 = get_time();
+-	udelay(1000);
+-	t2 = get_time();
+-	t3 = get_time();
+-	__restore_flags(flags);
+-
+-	return delta(t2, t1) - delta(t3, t2);
+-}
+-
+-/*
+- * js_calibrate_time_counter() calibrates the counter timer, which can't
+- * be calibrated using the above function.
+- */
+-
+ #ifdef __i386__
+ 
+-static int __init js_calibrate_time_counter(void)
+-{
+-	unsigned int i, j, t1, t2, t3;
++#define GET_TIME(x)     do { outb(0, 0x43); x = inb(0x40); x |= inb(0x40) << 8; } while (0)
++#define DELTA(x,y)      ((y)-(x)+((y)<(x)?1193180L/HZ:0))
+ 
+-	j = jiffies; do { inb(0x201); t1 = js_get_time_counter(); } while (j == jiffies);
+-	j = jiffies; do { inb(0x201); t2 = js_get_time_counter(); } while (j == jiffies);
++	unsigned int i, t, t1, t2, t3, tx;
++	unsigned long flags;
+ 
+-	j = (t2 - t1) * HZ / 1000;
++	tx = 1 << 30;
+ 
+-	t1 = js_get_time_pit();
+-	for (i = 0; i < 1000; i++) {
+-		inb(0x201);
+-		js_get_time_counter();
++	for(i = 0; i < 50; i++) {
++		save_flags(flags);	/* Yes, all CPUs */
++		cli();
++		GET_TIME(t1);
++		for(t = 0; t < 50; t++) inb(0x201);
++		GET_TIME(t2);
++		GET_TIME(t3);
++		restore_flags(flags);
++		udelay(i * 10);
++		if ((t = DELTA(t2,t1) - DELTA(t3,t2)) < tx) tx = t;
+ 	}
+-	t2 = js_get_time_pit();
+-	t3 = js_get_time_pit();
+ 
+-	i = 1193180L / (js_delta_pit(t2, t1) - js_delta_pit(t3, t2));
+-
+-	if (DIFF(i,j) > 5)
+-		printk(KERN_WARNING "js: Counter timer calibration unsure,"
+-			" pass1 (0.%d MHz) and pass2 (0.%d MHz) differ.\n", j, i);
+-
+-	return (i + j) >> 1;
+-}
+-
+-#endif
+-
+-/*
+- * js_setup_time chooses the best available timers
+- * on the system and calibrates them.
+- */
+-
+-static int __init js_setup_time(void)
+-{
+-	int t;
+-	char *name, *name_a;
+-
+-	name = "";
+-	name_a = "";
+-	js_time_speed = 0;
+-	js_time_speed_a = 0;
+-
+-#ifdef __i386__
+-
+-	t = js_calibrate_time(js_get_time_pit, js_delta_pit);
+-
+-	if (DIFF(t, 1193) > 5)
+-		printk(KERN_WARNING "js: Measured PIT speed is %d.%03d MHz, but should be 1.193 MHz.\n"
+-		       KERN_WARNING "js: This is probably caused by wrong BogoMIPS value. It is: %ld, should be: %ld.\n",
+-			t / 1000, t % 1000, loops_per_sec / 500000, loops_per_sec / (t * 500000 / 1193));
+-
+-	if (JS_HAS_RDTSC && (t = js_calibrate_time(js_get_time_rdtsc, js_delta_normal)) > 0) {
+-
+-		js_time_speed_a = t;
+-		js_get_time_a = js_get_time_rdtsc;
+-		js_delta_a = js_delta_normal;
+-		js_time_speed = t;
+-		js_get_time = js_get_time_rdtsc;
+-		js_delta = js_delta_normal;
+-		name = "RDTSC";
+-
+-	} else {
+-
+-		js_time_speed_a = t;
+-		js_get_time_a = js_get_time_pit;
+-		js_delta_a = js_delta_pit;
+-		name_a = "PIT";
+-
+-		t = js_calibrate_time_counter();
+-
+-		js_time_speed = t;
+-		js_get_time = js_get_time_counter;
+-		js_delta = js_delta_normal;
+-		name = "counter";
+-
+-	}
++	return 59659 / t;
+ 
+ #else
+-#ifdef __alpha__
+ 
+-	t = js_calibrate_time(js_get_time_rpcc, js_delta_normal);
++	unsigned int j, t = 0;
+ 
+-	js_time_speed_a = t;
+-	js_get_time_a = js_get_time_rpcc;
+-	js_delta_a = js_delta_normal;
+-	js_time_speed = t;
+-	js_get_time = js_get_time_rpcc;
+-	js_delta = js_delta_normal;
+-	name = "RPCC";
++	j = jiffies; while (j == jiffies);
++	j = jiffies; while (j == jiffies) { t++; inb(0x201); }
+ 
+-#else
+-
+-#ifndef MODULE
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,1,0)
+-	t = js_calibrate_time(js_get_time_system, js_delta_normal);
++	return t * HZ / 1000;
+ 
+-	js_time_speed_a = t;
+-	js_get_time_a = js_get_time_system;
+-	js_delta_a = js_delta_normal;
+-	js_time_speed = t;
+-	js_get_time = js_get_time_system;
+-	js_delta = js_delta_normal;
+-	name = "system";
+ #endif
+-#endif
+-
+-#endif
+-#endif
+-
+-	printk(KERN_INFO "js: Version %d.%d.%d ",
+-		JS_VERSION >> 16 & 0xff, JS_VERSION >> 8 & 0xff, JS_VERSION & 0xff);
+ 
+-	if (js_time_speed_a <= 0 || js_time_speed <= 0) {
+-		printk("\n");
+-		return -1;
+-	}
+-
+-	printk("using ");
+-
+-	if (js_time_speed > 10000) {
+-		t = js_time_speed / 1000 + (js_time_speed % 1000 >= 500);
+-		printk("%d MHz ", t);
+-	} else {
+-		t = js_time_speed / 10 + (js_time_speed % 10 >= 5);
+-		printk("%d.%02d MHz ", t / 100, t % 100);
+-	}
+-
+-	if (js_get_time_a != js_get_time) {
+-		t = js_time_speed_a / 10 + (js_time_speed_a % 10 >= 5);
+-		printk("%s timer and %d.%02d MHz %s timer.\n",
+-			name, t / 100, t % 100, name_a);
+-	} else {
+-		printk("%s timer.\n", name);
+-	}
+-
+-	return 0;
+ }
+ 
+-
+ /*
+  * js_correct() performs correction of raw joystick data.
+  */
+@@ -364,7 +162,6 @@
+ 	return (buttons[i >> 5] >> (i & 0x1f)) & 1;
+ }
+ 
+-
+ /*
+  * js_add_event() adds an event to the buffer. This requires additional
+  * queue post-processing done by js_sync_buff.
+@@ -457,14 +254,17 @@
+ 	struct js_dev *curd = js_dev;
+ 	unsigned long flags;
+ 
+-	while (curp != NULL) {
+-		curp->read(curp->info, curp->axes, curp->buttons);
++	while (curp) {
++		if (curp->read) 
++			if (curp->read(curp->info, curp->axes, curp->buttons))
++				curp->fail++;
++		curp->total++;
+ 		curp = curp->next;
+ 	}
+ 
+ 	spin_lock_irqsave(&js_lock, flags);
+ 
+-	while (curd != NULL) {
++	while (curd) {
+ 		if (data) {
+ 			js_process_data(curd);
+ 			js_sync_buff(curd);
+@@ -632,7 +432,7 @@
+ 		}
+ #endif
+ 
+-		curl->startup = 0;
++		curl->startup = jd->num_axes + jd->num_buttons;
+ 		curl->tail = GOB(jd->bhead);
+ 		if (!retval) retval = sizeof(struct JS_DATA_TYPE);
+ 	}
+@@ -644,12 +444,12 @@
+ 	if (orig_tail == jd->tail) {
+ 		new_tail = curl->tail;
+ 		curl = jd->list;
+-		while (curl != NULL && curl->tail != jd->tail) {
++		while (curl && curl->tail != jd->tail) {
+ 			if (ROT(jd->bhead, new_tail, curl->tail) ||
+ 				(jd->bhead == curl->tail)) new_tail = curl->tail;
+ 			curl = curl->next;
+ 		}
+-		if (curl == NULL) jd->tail = new_tail;
++		if (!curl) jd->tail = new_tail;
+ 	}
+ 
+ 	spin_unlock_irqrestore(&js_lock, flags);
+@@ -682,7 +482,8 @@
+ {
+ 	struct js_list *curl = file->private_data;
+ 	if (sel_type == SEL_IN) {
+-		if (GOF(curl->tail) != curl->dev->bhead) return 1;
++		if (GOF(curl->tail) != curl->dev->bhead ||
++			curl->startup < curl->dev->num_axes + curl->dev->num_buttons) return 1;
+ 		select_wait(&curl->dev->wait, wait);
+ 	}
+ 	return 0;
+@@ -867,21 +668,21 @@
+ 
+ 	spin_lock_irqsave(&js_lock, flags);
+ 
+-	while (i > 0 && jd != NULL) {
++	while (i > 0 && jd) {
+ 		jd = jd->next;
+ 		i--;
+ 	}
+ 
+ 	spin_unlock_irqrestore(&js_lock, flags);
+ 
+-	if (jd == NULL) return -ENODEV;
++	if (!jd) return -ENODEV;
+ 
+ 	if ((result = jd->open(jd))) return result;
+ 
+ 	MOD_INC_USE_COUNT;
+ 	if (!js_use_count++) js_do_timer(0);
+ 
+-	if ((new = kmalloc(sizeof(struct js_list), GFP_KERNEL)) != NULL) {
++	if ((new = kmalloc(sizeof(struct js_list), GFP_KERNEL))) {
+ 
+ 		spin_lock_irqsave(&js_lock, flags);
+ 
+@@ -925,11 +726,11 @@
+ 	while (*curp && (*curp != curl)) curp = &((*curp)->next);
+ 	*curp = (*curp)->next;
+ 
+-	if (jd->list != NULL)
++	if (jd->list)
+ 	if (curl->tail == jd->tail) {
+ 		curl = jd->list;
+ 		new_tail = curl->tail;
+-		while (curl != NULL && curl->tail != jd->tail) {
++		while (curl && curl->tail != jd->tail) {
+ 			if (ROT(jd->bhead, new_tail, curl->tail) ||
+ 			       (jd->bhead == curl->tail)) new_tail = curl->tail;
+ 			curl = curl->next;
+@@ -967,7 +768,7 @@
+ 	printk(",--- Dumping Devices:\n");
+ 	printk("| js_dev = %x\n", (int) js_dev);
+ 
+-	while (curd != NULL) {
++	while (curd) {
+ 		printk("|  %s-device %x, next %x axes %d, buttons %d, port %x - %#x\n",
+ 			curd->next ? "|":"`",
+ 			(int) curd, (int) curd->next, curd->num_axes, curd->num_buttons, (int) curd->port, curd->port->io);
+@@ -977,7 +778,7 @@
+ 	printk(">--- Dumping ports:\n");
+ 	printk("| js_port = %x\n", (int) js_port);
+ 
+-	while (curp != NULL) {
++	while (curp) {
+ 		printk("|  %s-port %x, next %x, io %#x, devices %d\n",
+ 			curp->next ? "|":"`",
+ 			(int) curp, (int) curp->next, curp->io, curp->ndevs);
+@@ -1009,7 +810,7 @@
+ 	int i;
+ 	unsigned long flags;
+ 
+-	if ((all = kmalloc(sizeof(struct js_port) + 4 * devs * sizeof(void*) + infos, GFP_KERNEL)) == NULL)
++	if (!(all = kmalloc(sizeof(struct js_port) + 4 * devs * sizeof(void*) + infos, GFP_KERNEL)))
+ 		return NULL;
+ 
+ 	curp = all;
+@@ -1018,6 +819,8 @@
+ 	curp->prev = port;
+ 	curp->read = read;
+ 	curp->ndevs = devs;
++	curp->fail = 0;
++	curp->total = 0;
+ 
+ 	curp->devs = all += sizeof(struct js_port);
+ 	for (i = 0; i < devs; i++) curp->devs[i] = NULL;
+@@ -1035,7 +838,7 @@
+ 
+ 	spin_lock_irqsave(&js_lock, flags);
+ 
+-	while (*ptrp != NULL) ptrp=&((*ptrp)->next);
++	while (*ptrp) ptrp=&((*ptrp)->next);
+ 	*ptrp = curp;
+ 
+ 	spin_unlock_irqrestore(&js_lock, flags);
+@@ -1051,7 +854,9 @@
+ 
+ 	spin_lock_irqsave(&js_lock, flags);
+ 
+-	while (*curp != NULL && (*curp != port)) curp = &((*curp)->next);
++	printk("js: There were %d failures out of %d read attempts.\n", port->fail, port->total);
++
++	while (*curp && (*curp != port)) curp = &((*curp)->next);
+ 	*curp = (*curp)->next;
+ 
+ 	spin_unlock_irqrestore(&js_lock, flags);
+@@ -1071,9 +876,9 @@
+ 	int i = 0;
+ 	unsigned long flags;
+ 
+-	if ((all = kmalloc(sizeof(struct js_dev) + 2 * axes * sizeof(int) +
++	if (!(all = kmalloc(sizeof(struct js_dev) + 2 * axes * sizeof(int) +
+ 			2 * (((buttons - 1) >> 5) + 1) * sizeof(int) +
+-			axes * sizeof(struct js_corr) + strlen(name) + 1, GFP_KERNEL)) == NULL)
++			axes * sizeof(struct js_corr) + strlen(name) + 1, GFP_KERNEL)))
+ 		return -1;
+ 
+ 	curd = all;
+@@ -1107,7 +912,7 @@
+ 
+ 	spin_lock_irqsave(&js_lock, flags);
+ 
+-	while (*ptrd != NULL) { ptrd=&(*ptrd)->next; i++; }
++	while (*ptrd) { ptrd=&(*ptrd)->next; i++; }
+ 	*ptrd = curd;
+ 
+ 	spin_unlock_irqrestore(&js_lock, flags);	
+@@ -1122,7 +927,7 @@
+ 
+ 	spin_lock_irqsave(&js_lock, flags);
+ 
+-	while (*curd != NULL && (*curd != dev)) curd = &((*curd)->next);
++	while (*curd && (*curd != dev)) curd = &((*curd)->next);
+ 	*curd = (*curd)->next;
+ 
+ 	spin_unlock_irqrestore(&js_lock, flags);	
+@@ -1158,9 +963,10 @@
+ int __init js_init(void)
+ #endif
+ {
+-	int result;
++	js_io_speed = js_measure_io_speed();
+ 
+-	js_setup_time();
++	printk(KERN_INFO "js: Version %d.%d.%d using %d kHz gameport.\n",
++		JS_VERSION >> 16 & 0xff, JS_VERSION >> 8 & 0xff, JS_VERSION & 0xff, js_io_speed);
+ 
+ 	if (register_chrdev(JOYSTICK_MAJOR, "js", &js_fops)) {
+ 		printk(KERN_ERR "js: unable to get major %d for joystick\n", JOYSTICK_MAJOR);
+@@ -1177,44 +983,58 @@
+ 	js_comp_glue.JS_TIMEOUT = JS_DEF_TIMEOUT;
+ 	js_comp_glue.JS_TIMELIMIT = JS_DEF_TIMELIMIT;
+ 
+-#ifdef MODULE
+-	result = 0;
+-#else
+-	result = -ENODEV;
++#ifndef MODULE
+ #ifdef CONFIG_JOY_LIGHTNING
+-	if (!js_l4_init()) result = 0;
++	js_l4_init();
+ #endif
+ #ifdef CONFIG_JOY_SIDEWINDER
+-	if (!js_sw_init()) result = 0;
++	js_sw_init();
+ #endif
+-#ifdef CONFIG_JOY_ASSASIN
+-	if (!js_as_init()) result = 0;
++#ifdef CONFIG_JOY_ASSASSIN
++	js_as_init();
+ #endif
+ #ifdef CONFIG_JOY_LOGITECH
+-	if (!js_lt_init()) result = 0;
++	js_lt_init();
+ #endif
+ #ifdef CONFIG_JOY_THRUSTMASTER
+-	if (!js_tm_init()) result = 0;
++	js_tm_init();
+ #endif
+ #ifdef CONFIG_JOY_GRAVIS
+-	if (!js_gr_init()) result = 0;
++	js_gr_init();
++#endif
++#ifdef CONFIG_JOY_CREATIVE
++	js_cr_init();
+ #endif
+ #ifdef CONFIG_JOY_ANALOG
+-	if (!js_an_init()) result = 0;
++	js_an_init();
+ #endif
+ #ifdef CONFIG_JOY_CONSOLE
+-	if (!js_console_init()) result = 0;
++	js_console_init();
+ #endif
+ #ifdef CONFIG_JOY_DB9
+-	if (!js_db9_init()) result = 0;
++	js_db9_init();
++#endif
++#ifdef CONFIG_JOY_TURBOGRAFX
++	js_tg_init();
+ #endif
+ #ifdef CONFIG_JOY_AMIGA
+-	if (!js_am_init()) result = 0;
++	js_am_init();
++#endif
++#ifdef CONFIG_JOY_MAGELLAN
++	js_mag_init();
++#endif
++#ifdef CONFIG_JOY_WARRIOR
++	js_war_init();
++#endif
++#ifdef CONFIG_JOY_SPACEORB
++	js_orb_init();
++#endif
++#ifdef CONFIG_JOY_KEYBOARD
++	js_key_init();
+ #endif
+-	if (result) printk(KERN_ERR "js: no joysticks found\n");
+ #endif
+ 
+-	return result;
++	return 0;
+ }
+ 
+ /*
+@@ -1229,3 +1049,4 @@
+ 		printk(KERN_ERR "js: can't unregister device\n");
+ }
+ #endif
++
+diff -urN linux-2.2.2/include/linux/joystick.h linux-2.2.2-joystick/include/linux/joystick.h
+--- linux-2.2.2/include/linux/joystick.h	Thu Jan 28 21:42:21 1999
++++ linux-2.2.2-joystick/include/linux/joystick.h	Mon Mar  8 14:31:56 1999
+@@ -4,7 +4,7 @@
+ /*
+  * /usr/include/linux/joystick.h  Version 1.2
+  *
+- * Copyright (C) 1996-1998 Vojtech Pavlik
++ * Copyright (C) 1996-1999 Vojtech Pavlik
+  */
+ 
+ /*
+@@ -34,7 +34,7 @@
+  * Version
+  */
+ 
+-#define JS_VERSION		0x01020d
++#define JS_VERSION		0x01020e
+ 
+ /*
+  * Types and constants for reading from /dev/js
+@@ -140,24 +140,13 @@
+ #error "You need to use at least 2.0 Linux kernel."
+ #endif
+ 
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,1,0)
+-#define JS_HAS_RDTSC (current_cpu_data.x86_capability & 0x10)
+-#include <linux/init.h>
+-#else
+-#ifdef MODULE
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,0,35)
+-#define JS_HAS_RDTSC (x86_capability & 0x10)
+-#else
+-#define JS_HAS_RDTSC 0
+-#endif
+-#else
+-#define JS_HAS_RDTSC (x86_capability & 0x10)
+-#endif
++#if LINUX_VERSION_CODE < KERNEL_VERSION(2,1,0)
+ #define __initdata
+ #define __init
+ #define __cli cli
+ #define __save_flags(flags) save_flags(flags)
+ #define __restore_flags(flags)	restore_flags(flags)
++#define mdelay(x) udelay(1000*x)
+ #define spin_lock_irqsave(x, flags) do { save_flags(flags); cli(); } while (0)
+ #define spin_unlock_irqrestore(x, flags) restore_flags(flags)
+ #define spin_lock_init(x) do { } while (0)
+@@ -167,6 +156,13 @@
+ #define MODULE_PARM(x,y)
+ #define MODULE_SUPPORTED_DEVICE(x)
+ #define signal_pending(x) (((x)->signal) & ~((x)->blocked))
++#ifdef CONFIG_M686
++#define CONFIG_X86_TSC
++#elif CONFIG_M586
++#define CONFIG_X86_TSC
++#endif
++#else
++#include <linux/init.h>
+ #endif
+ 
+ /*
+@@ -204,8 +200,6 @@
+ struct js_dev;
+ 
+ typedef int (*js_read_func)(void *info, int **axes, int **buttons);
+-typedef unsigned int (*js_time_func)(void);
+-typedef int (*js_delta_func)(unsigned int x, unsigned int y);
+ typedef int (*js_ops_func)(struct js_dev *dev);
+ 
+ struct js_data {
+@@ -249,19 +243,15 @@
+ 	struct js_corr **corr;
+ 	void *info;
+ 	int ndevs;
++	int fail;
++	int total;
+ };
+ 
+ /*
+  * Sub-module interface
+  */
+ 
+-extern unsigned int js_time_speed;
+-extern js_time_func js_get_time;
+-extern js_delta_func js_delta;
+-
+-extern unsigned int js_time_speed_a;
+-extern js_time_func js_get_time_a;
+-extern js_delta_func js_delta_a;
++extern unsigned int js_io_speed;
+ 
+ extern struct js_port *js_register_port(struct js_port *port, void *info,
+ 	int devs, int infos, js_read_func read);
+@@ -277,6 +267,7 @@
+ 
+ extern int js_init(void);
+ extern int js_am_init(void);
++extern int js_key_init(void);
+ extern int js_an_init(void);
+ extern int js_as_init(void);
+ extern int js_console_init(void);
+diff -urN linux-2.2.2/init/main.c linux-2.2.2-joystick/init/main.c
+--- linux-2.2.2/init/main.c	Mon Mar  8 14:49:30 1999
++++ linux-2.2.2-joystick/init/main.c	Mon Mar  8 14:49:31 1999
+@@ -108,7 +108,7 @@
+ #ifdef CONFIG_JOY_ANALOG
+ extern void js_an_setup(char *str, int *ints);
+ #endif
+-#ifdef CONFIG_JOY_ASSASIN
++#ifdef CONFIG_JOY_ASSASSIN
+ extern void js_as_setup(char *str, int *ints);
+ #endif
+ #ifdef CONFIG_JOY_CONSOLE
+@@ -603,7 +603,7 @@
+ #ifdef CONFIG_JOY_ANALOG
+ 	{ "js_an=", js_an_setup },
+ #endif
+-#ifdef CONFIG_JOY_ASSASIN
++#ifdef CONFIG_JOY_ASSASSIN
+ 	{ "js_as=", js_as_setup },
+ #endif
+ #ifdef CONFIG_JOY_CONSOLE
+diff -urN linux-2.2.2/kernel/ksyms.c linux-2.2.2-joystick/kernel/ksyms.c
+--- linux-2.2.2/kernel/ksyms.c	Mon Mar  8 14:49:30 1999
++++ linux-2.2.2-joystick/kernel/ksyms.c	Mon Mar  8 14:49:32 1999
+@@ -397,3 +397,12 @@
+ 
+ /* library functions */
+ EXPORT_SYMBOL(strnicmp);
++
++/* joysticks */
++#ifdef CONFIG_JOYSTICK
++EXPORT_SYMBOL(js_io_speed);
++EXPORT_SYMBOL(js_register_port);
++EXPORT_SYMBOL(js_unregister_port);
++EXPORT_SYMBOL(js_register_device);
++EXPORT_SYMBOL(js_unregister_device);
++#endif

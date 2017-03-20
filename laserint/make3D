@@ -1,0 +1,45 @@
+#!/bin/tcsh -f
+
+
+
+echo "################ (0) Build large vrml file"
+
+\cp -f laserint.wrl.4 laserint.wrl.4.tmp
+\cp -f laserint.wrl.3 laserint.wrl.3.tmp
+\cp -f laserint.wrl.2 laserint.wrl.2.tmp
+\cp -f laserint.wrl.1 laserint.wrl.1.tmp
+
+cat laserint.wrl.1.tmp laserint.wrl.3.tmp laserint.wrl.2.tmp laserint.wrl.4.tmp > laserint.wrl
+
+vrweb132 laserint.wrl&
+
+exit
+
+echo "################ (1) Compose"
+
+cp  laserint.smf.2 laserint.smf.2.tmp
+cat laserint.smf.1 laserint.smf.2.tmp > laserint-tmp1.smf
+
+set p = `wc laserint.smf.1 | gawk '{print $1}'`
+echo -n "Number of Vertices: "
+echo $p
+
+
+
+echo "################ (5) Simplification"
+
+`echo $p | gawk '{print "/usr1/thrun/qslim-2.0/tools/qslim/qslim laserint-tmp1.smf -t " $1/20 " -M vrml -o laserint-tmp1.wrl"}'`
+
+echo "################ (6) Post-Procssing"
+
+cat laserint-tmp1.wrl |  gawk '{print $0; if (i!=1) print "Material { diffuseColor 0 0 1 }\nRotation { rotation 1 0 0 -1.5708 }"; i=1}' > laserintnew.wrl
+
+
+echo "################ (7) Cleaning Up"
+
+\rm -f laserint-tmp1.wrl laserint-tmp1.smf laserint.smf.2.tmp
+
+echo "################ (8) Display"
+
+/usr1/thrun/bin/vrweb132 laserintnew.wrl&
+

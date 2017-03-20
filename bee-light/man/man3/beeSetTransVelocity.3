@@ -1,0 +1,71 @@
+.TH BEESETTRANSVELOCITY 3 "April 2, 1999" "BeeSoft Light" "BeeSoft Light"
+.SH NAME
+beeSetTransVelocity, beeSetRotVelocity \- set the velocity of a BeeSoft Light robot 
+
+.SH SYNOPSIS
+.B #include <bee.h>
+
+.BI "bool beeSetTransVelocity(float " velocity ");"
+
+.BI "bool beeSetRotVelocity(float " velocity ");"
+
+.SH DESCRIPTION
+.B "beeSetTransVelocity()"
+sets the translation velocity of a BeeSoft Light robot.  
+The 
+.I "velocity" 
+argument specifies the velocity to set. The measure of velocity is 
+centimeter per second. Positive value means forward velocity, while negative 
+value means backward velocity. Programmer can then use 
+.B "beeTranslatePositive()"  
+or 
+.B "beeTranslateNegative()" 
+to move the robot. It will keep moving with the velocity. The velocity
+will decrease to zero when it meets an obstacle and stops. 
+
+.B "beeSetRotVelocity()"
+sets the rotation velocity of a BeeSoft Light robot.  
+The 
+.I "velocity" 
+argument specifies the velocity to set. The measure of velocity is 
+degree per second. Positive value means clockwise velocity, while negative 
+value means counterclockwise velocity. Programmer can then use 
+.B "beeRotatePositive()"  
+or 
+.B "beeRotateNegative()" 
+to rotate the robot. It will keep rotating with the velocity. The velocity
+will decrease to zero in next 
+.BR "beeStop()". 
+
+.SH "RETURN VALUE"
+On success, the function will return TRUE.  On error, FALSE is 
+returned.
+
+.SH NOTES
+The function hides the details of the message pass among 
+BeeSoft Light servers. However, you should at least runs 
+.B "tcxServer" 
+and
+.B "colliServer" 
+first. Your shell should set environment variable 
+.B "TCXHOST" 
+to the host name which run 
+.BR "tcxServer". 
+You should also invoke function 
+.B "beeInitialize()" 
+before 
+.B "beeSetTransVelocity()" 
+or
+.B "beeSetRotVelocity()"
+function in your program. Otherwise, 
+the movement can not be executed and the function will return FALSE.
+
+
+.SH SEE ALSO
+.BR "beeTranslatePositive" (3),    
+.BR "beeTranslateNegative" (3),    
+.BR "beeRotPositive" (3),  
+.BR "beeRotNegative", (3),
+.BR "beeInitialize" (3),
+.BR "beeStop" (3). 
+

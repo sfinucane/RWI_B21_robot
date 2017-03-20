@@ -1,0 +1,34 @@
+robotDetect HowTo
+  (hkr)
+------------------------------------
+
+Since QuickCam has a LPT-interface, BOTH cameraServer and 
+robotDetect MUST be owned by root. After compiling dont
+forget to:
+
+su
+chown root cameraServer robotDetect
+chmod 4711 cameraServer robotDetect
+
+
+If you want to see grabbed camera pictures, run X -bpp 8 (xstdcmap
+-best as well). Else use option -nodisplay for BOTH cameraServer and
+robotDetect.
+
+valid robotNames: {marion, robin} Both cameraServer and robotDetect
+MUST run be run on the robot and not remotely, because they
+communicate via shm.
+
+Because of file system export restrictions, BOTH cameraServer
+and robotDetect MUST be run from root shells. This might seems
+odd at first, but just do it!
+
+cd /home12/hannes/bee/bin
+tcxServer
+pioneer -robot [name] (setenv TCXHOST [name]!!!!)
+cameraServer -robot [name] (su, setenv DISPLAY yourhost:0.0)
+laserServer -pioneer -robot [name]
+/project1/mercator/presentations/navigation-98-11-24/bin/colliServer -pioneer +l
+laserServer -robot [name]
+robotDetect -robot [name] (su)
+

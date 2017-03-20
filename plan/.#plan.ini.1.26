@@ -1,0 +1,53 @@
+
+
+
+robot_specifications->global_mapsize_x             4000
+robot_specifications->global_mapsize_y             4000
+
+robot_specifications->resolution                   10
+robot_specifications->robot_size                   30
+robot_specifications->max_security_dist            50
+robot_specifications->autoshift                    1
+robot_specifications->autoshift_for_maps           1
+robot_specifications->autoshift_for_rob_pos        0
+robot_specifications->autoshift_distance           600
+robot_specifications->autoshift_safety_margin      200
+robot_specifications->average_value                0.9
+robot_specifications->collision_threshold          0.65
+robot_specifications->costs_exponent               0.4
+robot_specifications->min_base                     200.0
+robot_specifications->max_base                     2000.0
+robot_specifications->map_update_frequency         3
+robot_specifications->max_adjust_angle             20
+
+robot_specifications->exploration_circle_size      150.0
+robot_specifications->border_to_interior           300.0
+robot_specifications->exterior_factor              0.3
+	
+### junk
+# robot_specifications->max_security_dist 200
+
+robot_specifications->max_bounding_box_size       850000000.0
+
+
+
+
+robot_specifications->min_mapvalue_along_path      0.0
+
+#
+# distance with which we'd like to get to a goal point
+#
+
+robot_specifications->max_approach_distance        100.0
+robot_specifications->max_goal_distance            100.0
+robot_specifications->max_final_approach_distance  100.0
+
+
+
+robot_specifications->X_window_size   80.0
+robot_specifications->generate_actions_continuously 1
+
+
+robot_specifications->wait_for_initial_map 1
+robot_specifications->wait_for_initial_corr 1
+# robot_specifications->initial_map_file_name wean.map
